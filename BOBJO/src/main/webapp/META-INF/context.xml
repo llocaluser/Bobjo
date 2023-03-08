@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+ <Resource
+  name="jdbc/bobjo"
+  auth="Container"
+  type="javax.sql.DataSource"
+  driverClassName="com.mysql.cj.jdbc.Driver"
+  username="class6_221128_team2"
+  password="1234"
+  url="jdbc:mysql://db.itwillbs.dev:3306/class6_221128_team2"
+  maxWait="5000"
+ />
+</Context>
