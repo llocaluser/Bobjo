@@ -134,7 +134,7 @@
             <h6>
               ${dto.addr }
             </h6>
-            <a href="#">
+            <a href="./StoreInfo.st?store_no=${dto.store_no }">
               상세 정보
             </a>
           </div>

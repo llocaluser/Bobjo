@@ -29,7 +29,7 @@ public class StoreDAO {
 			pstmt.setString(6, dto.getClose());
 			pstmt.setInt(7, dto.getTotal_tables());
 			pstmt.setInt(8, dto.getMax_rsrv());
-			pstmt.setString(9, dto.getExstra_info());
+			pstmt.setString(9, dto.getExtra_info());
 			pstmt.setString(10, dto.getStore_content());
 			pstmt.setString(11, dto.getStore_img());
 			pstmt.setString(12, dto.getRefund_policy());
@@ -92,4 +92,40 @@ public class StoreDAO {
 		
 		return list;
 	}
+	
+	// 특정 가게 조회
+		public StoreDTO getStore(int store_no) {
+			StoreDTO dto = null;
+			try {
+				con = ConnectionManager.getConnection();
+				sql = "select * from bobjo_store where store_no=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, store_no);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					dto = new StoreDTO();
+					
+					dto.setStore_no(rs.getInt("store_no"));
+					dto.setAddr(rs.getString("addr"));
+					dto.setAddr_details(rs.getString("addr_details"));
+					dto.setTel(rs.getString("tel"));
+					dto.setOpen(rs.getString("open"));
+					dto.setClose(rs.getString("close"));
+					dto.setRefund_policy(rs.getString("refund_policy"));
+					dto.setTotal_tables(rs.getInt("total_tables"));
+					dto.setMax_rsrv(rs.getInt("max_rsrv"));
+					dto.setExtra_info(rs.getString("extra_info"));
+					dto.setStore_category(rs.getString("store_category"));
+					dto.setStore_content(rs.getString("store_content"));
+				}
+				System.out.println(" DAO : 가게 정보 조회성공!");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				ConnectionManager.closeConnection(rs, pstmt, con);
+			}
+			return dto;
+		}
+		// 특정 가게 조회
 }

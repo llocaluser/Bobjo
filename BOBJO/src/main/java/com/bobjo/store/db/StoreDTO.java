@@ -13,7 +13,7 @@ public class StoreDTO {
 	private String close;
 	private int total_tables;
 	private int max_rsrv;
-	private String exstra_info;
+	private String extra_info;
 	private String store_content;
 	private String store_img;
 	private String refund_policy;
