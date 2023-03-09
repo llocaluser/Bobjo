@@ -35,6 +35,7 @@
 
 <!--                 수정                              -->
 <style type="text/css">
+<style type="text/css">
 a{
 color: black;
 }
@@ -160,6 +161,7 @@ button.btn1{
 	margin-left : 40px 
 
 }
+
 
 
 
