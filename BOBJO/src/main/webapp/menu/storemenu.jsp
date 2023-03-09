@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -35,63 +36,31 @@
 
 <!--                 수정                              -->
 <style type="text/css">
-<style type="text/css">
-a{
-color: black;
-}
-
-
-
-
 .global-navigation li {
 	background-color: #fff;
 	border-bottom: 1px solid #d8d8d8;
 	float: left;
 	display: block;
-	width: 25%;
-	height: 80px;
+	width: 188px;
+	height: 65px;
 	margin: 0;
 	padding: 0;
 	border: 0;
 	padding: 18px 0 15px;
-	color: black;
+	color: #333;
 	vertical-align: baseline;
-	font-size: 24px;
+	border-bottom: 7px solid #e51f00;
+	font: inherit;
+	font-size: 18px;
 	font-weight: bold;
 	text-align: center;
-    }
-    .global-navigation li:hover{
-    color: blue;
-    background : beige;
-	border-bottom: 7px solid #e51f00;
-	
-    
-    }
-    li.-current{
-    color: blue;
-    background : beige;
-	border-bottom: 7px solid #e51f00;
-    
-    }
-    
-    .main -left price-jpy{
-    background : beige;
-    }
-
-#h2{
-font-size: 3rem;
+	line-height: 1.33;
 }
 
 .container {
 	*zoom: 1;
-	width: 1250px;
+	width: 940px;
 	margin: 0 auto;
-	margin-left: 16.666667%;
-}
-
-
-table tr{
-    background : beige;
 }
 
 .row {
@@ -134,12 +103,69 @@ ol, ul {
 	margin-bottom: 10px;
 }
 
-
-.menu-icon, .price-icon, .tel-icon, .hours-icon, .location-icon {
-width: 20px; 
-height: 20px;
+.icon-list .michelin-pc {
+	display: inline-block;
+	margin-left: 0;
+	border-radius: 2px;
+	background-color: #ad001e;
+	text-indent: 0;
 }
 
+.icon-list .michelin-pc__url {
+	text-decoration: none;
+}
+
+.icon-list .michelin-pc__container, .icon-list .michelin-pc__container--non-img
+	{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.icon-list .michelin-pc__container {
+	padding: 3px 8px 3px 0;
+}
+
+.icon-list .michelin-pc__container--non-img {
+	padding: 3px 8px;
+}
+
+.icon-list .michelin-pc__box {
+	width: 54px;
+	text-align: center;
+}
+
+.icon-list .michelin-pc__img {
+	height: 16px;
+	vertical-align: middle;
+}
+
+.icon-list .michelin-pc__text {
+	color: #fff;
+	font-size: 10px;
+	line-height: 1.4;
+	word-wrap: break-word;
+}
+
+.menu-icon {
+	background: url('../img/storenum.png') 0 -2224px;
+	display: inline-block;
+	vertical-align: middle;
+	vertical-align: auto;
+	zoom: 1;
+	display: inline;
+	height: 18px;
+	width: 18px;
+}
+
+.icon-list li {
+	text-indent: -28px;
+	margin-left: 28px;
+	margin-bottom: 8px;
+}
 
 .contact_form-container {
 	display: flex;
@@ -149,27 +175,11 @@ height: 20px;
 	display: list-item;
 }
 
-button.btn1:hover {
-	color: blue;
-	background : beige;
-	font: bold;
-	font-size: 20px;
+btn1 {
+	background: yellow;
+	color: yellow;
 }
-button.btn1{
-	font: bold;
-	font-size: 20px;
-	margin-left : 40px 
-
-}
-
-
-
-
-
-
-
 </style>
-
 
 <!--                 수정                              -->
 
@@ -179,8 +189,8 @@ button.btn1{
 	<div class="hero_area">
 		<!-- header section strats -->
 		<div class="brand_box">
-			<a class="navbar-brand" href="../mainContent/index.html"> 
-			<span>BobJo! </span>
+			<a class="navbar-brand" href="../mainContent/index.html"> <span>BobJo!
+			</span>
 			</a>
 		</div>
 		<!-- end header section -->
@@ -237,7 +247,7 @@ button.btn1{
 				<div class="offset-lg-2 col-md-10 offset-md-1">
 					<div class="heading_container">
 						<hr>
-						<h2 id="h2">가게이름</h2>
+						<h2>가게이름</h2>
 					</div>
 				</div>
 			</div>
@@ -250,21 +260,21 @@ button.btn1{
 								<div>
 									<div class="-item-rect -item-right -col6of12">
 										<ul class="icon-list -space sentence">
-											<li><span><img src="../img/blackbell.png" class="menu-icon"></span> 가게주메뉴 카테고리</li>
+											<li><span class="menu-icon"></span> 가게주메뉴 카테고리</li>
 
-											<li><span ><img src="../img/money.png" class="price-icon"></span> 가격대</li>
+											<li><span class="price-icon"></span> 가격대</li>
 
-											<li><span ><img src="../img/phone.png" class="tel-icon"></span> 가게전화번호</li>
+											<li><span class="tel-icon"></span> 가게전화번호</li>
 
-											<li><span ><img src="../img/watch.png" class="hours-icon"></span>영업시간 Dinner: 17:00 -
+											<li><span class="hours-icon"></span>영업시간 Dinner: 17:00 -
 												22:30 Saturday &amp; Sunday &amp; Holiday Lunch: 11:30 -
 												16:00 , Dinner: 17:00 - 22:30</li>
 
-											<li><span></span><img src="../img/house.png" class="location-icon"></span> 주소 <br>상세주소</li>
+											<li><span class="location-icon"></span> 주소 <br>상세주소</li>
 										</ul>
 									</div>
 									<div>
-									  	<button class="btn1">
+										<button name="btn1">
 											<a href="##"> 예약하기 
 										</button>
 									</div>
@@ -277,7 +287,7 @@ button.btn1{
 							<div class="map-responsive">
 								<iframe
 									src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=
-									아이티윌"
+									서울"
 									width="600" height="300" frameborder="0"
 									style="border: 0; width: 100%; height: 100%" allowfullscreen></iframe>
 							</div>
@@ -293,16 +303,18 @@ button.btn1{
 	<div class="global-navigation">
 		<div class="container">
 			<ul>
-				<li class="-current"><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
+				<li class="-current"><a
+					href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
 				<li class="-current"><a href="./StoreMenu.me">메뉴</a></li>
 				<li class="-current"><a href="#">사진</a></li>
 				<li class="-current"><a href="#">리뷰</a></li>
-
 			</ul>
 
 		</div>
 	</div>
 
+	<br>
+	<br>
 	<!--   중간 머릿말   -->
 
 	<!-- 내용넣기 시작  -->
@@ -312,60 +324,10 @@ button.btn1{
 			<div class="main -left price-jpy">
 				<div id="restaurantdetail" class="cassette triple-spacing"
 					itemscope="" itemtype="http://schema.org/Restaurant">
-					<table class="table sentence">
-						<colgroup>
-							<col width="30%">
-							<col width="70%">
-						</colgroup>
-						<tbody>
-							<tr>
-								<th>주소</th>
-								<td>${dto.addr }</td>
-							</tr>
-
-							<tr>
-								<th>상세주소</th>
-								<td>${dto.addr_details }</td>
-							</tr>
-
-							<tr>
-								<th>가게전화번호</th>
-								<td>${dto.tel }</td>
-							</tr>
-
-							<tr>
-								<th>영업시간</th>
-								<td>${dto.open }</td>
-							</tr>
-
-							<tr>
-								<th>휴무일</th>
-								<td>${dto.close }</td>
-							</tr>
-							<tr>
-								<th>환불규정</th>
-								<td>${dto.refund_policy }</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- /cassette -->
-
-				<div itemscope="" itemtype="http://schema.org/priceCurrency">
-					<meta itemprop="priceCurrency" content="JPY">
-				</div>
-
-				<div itemprop="geo" itemscope=""
-					itemtype="http://schema.org/GeoCoordinates">
-					<meta itemprop="latitude" content="35.6909232">
-					<meta itemprop="longitude" content="139.7019808">
-				</div>
-
-				<div class="cassette triple-spacing">
-					<div class="">
-						<h2 class="jumbo spacing-and-a-half -item-left">좌석/시설 정보</h2>
+					<div class="-in">
+						<br>
+						<h2 class="jumbo spacing-and-a-half -item-left">추천 메뉴</h2>
 					</div>
-
 					<table class="table sentence">
 						<colgroup>
 							<col width="30%">
@@ -373,87 +335,76 @@ button.btn1{
 						</colgroup>
 						<tbody>
 							<tr>
-								<th>테이블 수</th>
-								<td>${dto.total_tables }</td>
-							</tr>
-							<tr>
-								<th>최대예약인원</th>
-								<td>${dto.max_rsrv }</td>
-							</tr>
-							<tr>
-								<th>편의시설</th>
-								<td>${dto.extra_info }</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- /cassette -->
-				<div class="cassette triple-spacing">
-					<div class="">
-						<h2 class="jumbo spacing-and-a-half -item-left">메뉴/서비스 관련정보</h2>
-					</div>
-
-					<table class="table sentence">
-						<colgroup>
-							<col width="30%">
-							<col width="70%">
-						</colgroup>
-						<tbody>
-							<tr>
-								<th>카테고리</th>
-								<td>${dto.store_category }</td>
-							</tr>
-							<tr>
-								<th id="infectionprevention">
-									<p>감염예방</p>
-								</th>
+								<td><a> <img src="./img/pasta.jpg" width="100%"
+										height="100%">
+								</a></td>
 								<td>
-									<div class="sanitary -pc">
-										<div class="sanitary-item">
-											<img
-												src="https://gurunavi.com/imgs/sanitary/inside_disinfection.svg"
-												alt="Dining rooms and equipments disinfected" width="50"
-												height="50"> <img
-												src="https://gurunavi.com/imgs/sanitary/seat_disinfection.svg"
-												alt="Tables disinfected between guests" width="50"
-												height="50"> <img
-												src="https://gurunavi.com/imgs/sanitary/antiseptic_solution.svg"
-												alt="Sanitizers available to guests and staff" width="50"
-												height="50"> <img
-												src="https://gurunavi.com/imgs/sanitary/ventilation.svg"
-												alt="Ventilation for dining room" width="50" height="50">
-											<img
-												src="https://gurunavi.com/imgs/sanitary/seat_spacing.svg"
-												alt="Socially distanced dining tables and chairs" width="50"
-												height="50">
+									<div class="-item-right -col6of12 -in-vertical">
+
+										<div class="row">
+											<div class="-item-right -col8of16">
+												<div class="right-spacing">
+													<div class="spacing">
+														<h3 class="huge abit-spacing">메뉴명</h3>
+													</div>
+												</div>
+											</div>
 										</div>
-										<div class="sanitary-item">
-											<img
-												src="https://gurunavi.com/imgs/sanitary/contactless_payment.svg"
-												alt="Contactless payment" width="50" height="50"> <img
-												src="https://gurunavi.com/imgs/sanitary/face_masks_required_for_staff.svg"
-												alt="Face masks required for staff" width="50" height="50">
-											<img
-												src="https://gurunavi.com/imgs/sanitary/handwash_gargling.svg"
-												alt="Wash hands, sanitizing, and gargling required for staff"
-												width="50" height="50"> <img
-												src="https://gurunavi.com/imgs/sanitary/regular_temperature_checks_for_staff.svg"
-												alt="Regular temperature checks for staff" width="50"
-												height="50">
+
+										<div class="row -wide-bottom">
+											<div class="-item-left -col3of12">
+												<div class="panel -light-silver -in">
+													<ul class="spacing-list small">
+														<li><b class="b">메뉴설명 : ㄴㅁㅇㄻㄴㅇㄹ</b></li>
+														<li><b class="b">카테고리 : ㄴㅁㅇㄻㄴㅇㄹㄴㅁㅇㄹ</b></li>
+														<li><b class="b">가격 : ㄴㅁㅇㄻㄴㅇㄹ</b></li>
+													</ul>
+												</div>
+											</div>
 										</div>
+									</div>
 								</td>
 							</tr>
 							<tr>
-								<th>식당소개</th>
-								<td>${dto.store_content }</td>
+								<td><a> <img src="./img/sushi.jpg" width="100%"
+										height="100%">
+								</a></td>
+								<td>
+									<div class="-item-right -col6of12 -in-vertical">
+
+										<div class="row">
+											<div class="-item-right -col8of16">
+												<div class="right-spacing">
+													<div class="spacing">
+														<h3 class="huge abit-spacing">메뉴명</h3>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="row -wide-bottom">
+											<div class="-item-left -col3of12">
+												<div class="panel -light-silver -in">
+													<ul class="spacing-list small">
+														<li><b class="b">메뉴설명 : ㄴㅁㅇㄻㄴㅇㄹ</b></li>
+														<li><b class="b">카테고리 : ㄴㅁㅇㄻㄴㅇㄹㄴㅁㅇㄹ</b></li>
+														<li><b class="b">가격 : ㄴㅁㅇㄻㄴㅇㄹ</b></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
 							</tr>
 						</tbody>
 					</table>
-
 				</div>
+				<!-- /cassette -->
+
 			</div>
 		</div>
 	</div>
+
 
 	<!-- 내용넣기 끝  -->
 
