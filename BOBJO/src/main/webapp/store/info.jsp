@@ -303,9 +303,9 @@ btn1 {
 		<div class="container">
 			<ul>
 				<li class="-current"><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
-				<li><a href="#">메뉴</a></li>
-				<li><a href="#">사진</a></li>
-				<li><a href="#">리뷰</a></li>
+				<li class="-current"><a href="./StoreMenu.me">메뉴</a></li>
+				<li class="-current"><a href="#">사진</a></li>
+				<li class="-current"><a href="#">리뷰</a></li>
 
 			</ul>
 
