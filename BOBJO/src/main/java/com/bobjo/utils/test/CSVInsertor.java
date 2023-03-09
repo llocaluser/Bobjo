@@ -26,7 +26,7 @@ public class CSVInsertor {
 			pstmt.setString(6, dto.getClose());
 			pstmt.setInt(7, dto.getTotal_tables());
 			pstmt.setInt(8, dto.getMax_rsrv());
-			pstmt.setString(9, dto.getExstra_info());
+			pstmt.setString(9, dto.getExtra_info());
 			pstmt.setString(10, dto.getStore_content());
 			pstmt.setString(11, dto.getStore_img());
 			pstmt.setString(12, dto.getRefund_policy());

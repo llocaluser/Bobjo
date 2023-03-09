@@ -22,16 +22,16 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
 
 <!-- bootstrap core css -->
-<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
 
 <!-- fonts style -->
 <link
 	href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Dosis:400,600,700|Poppins:400,600,700&display=swap"
 	rel="stylesheet" />
 <!-- Custom styles for this template -->
-<link href="../css/style.css" rel="stylesheet" />
+<link href="./css/style.css" rel="stylesheet" />
 <!-- responsive style -->
-<link href="../css/responsive.css" rel="stylesheet" />
+<link href="./css/responsive.css" rel="stylesheet" />
 
 <!--                 수정                              -->
 <style type="text/css">
@@ -177,8 +177,8 @@ button.btn1{
 	<div class="hero_area">
 		<!-- header section strats -->
 		<div class="brand_box">
-			<a class="navbar-brand" href="../mainContent/index.html"> <span>
-					BobJo! </span>
+			<a class="navbar-brand" href="../mainContent/index.html"> 
+			<span>BobJo! </span>
 			</a>
 		</div>
 		<!-- end header section -->
@@ -228,11 +228,6 @@ button.btn1{
 
 
 	<!-- contact section -->
-
-
-
-
-
 
 	<section class="contact_section layout_padding">
 		<div class="container-fluid">
@@ -296,7 +291,7 @@ button.btn1{
 	<div class="global-navigation">
 		<div class="container">
 			<ul>
-				<li class="-current"><a href="#">가게상세정보</a></li>
+				<li class="-current"><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
 				<li><a href="#">메뉴</a></li>
 				<li><a href="#">사진</a></li>
 				<li><a href="#">리뷰</a></li>
@@ -313,13 +308,8 @@ button.btn1{
 	<div class="contents pale-colored">
 		<div class="container">
 			<div class="main -left price-jpy">
-
-
-
-
 				<div id="restaurantdetail" class="cassette triple-spacing"
 					itemscope="" itemtype="http://schema.org/Restaurant">
-					
 					<table class="table sentence">
 						<colgroup>
 							<col width="30%">
@@ -328,69 +318,31 @@ button.btn1{
 						<tbody>
 							<tr>
 								<th>주소</th>
-								<td></td>
+								<td>${dto.addr }</td>
 							</tr>
 
 							<tr>
 								<th>상세주소</th>
-								<td>
-									<p class="sentence spacing"></p>
-									<div class="spacing">
-
-										<a itemprop="map"
-											href="https://gurunavi.com/en/ghy4600/mp/rst/" id="info-map">
-											<p class="figure">
-												<img
-													src="//maps.googleapis.com/maps/api/staticmap?markers=icon:http%3A%2F%2Fr.gnst.jp%2Fc%2Fr%2Fmarker_ns.png%7C35.6909232,139.7019808&amp;size=450x120&amp;zoom=16&amp;client=gme-gnavi&amp;language=en&amp;signature=hrYNHf-giNXekpCtOGNx906v_IE="
-													width="450" height="120" alt="Map" title="Map">
-											</p>
-										</a>
-									</div>
-									<ul class="horizontal-list">
-										<li class="sentence"><a
-											href="https://gurunavi.com/en/ghy4600/mp/rst/">Larger Map</a>
-										</li>
-										<li class="sentence"><a
-											href="https://gurunavi.com/en/ghy4600/mp/print/rst/"
-											target="_blank" rel="noopener noreferrer">Print Preview</a></li>
-										<li class="sentence"></li>
-										<li class="sentence">*For accuracy, please use the
-											Japanese address when using a map application.</li>
-									</ul>
-								</td>
+								<td>${dto.addr_details }</td>
 							</tr>
 
 							<tr>
 								<th>가게전화번호</th>
-								<td>Keio New Line Shinjuku Station 2-minute walk</td>
+								<td>${dto.tel }</td>
 							</tr>
 
 							<tr>
 								<th>영업시간</th>
-								<td>No Parking</td>
+								<td>${dto.open }</td>
 							</tr>
 
 							<tr>
 								<th>휴무일</th>
-								<td><span itemprop="telephone"> +81-3-5366-7178 </span></td>
+								<td>${dto.close }</td>
 							</tr>
-							<tr>
-								<th>결제방법</th>
-								<td>Monday - Friday Dinner: 17:00 - 22:30<br> Saturday
-									&amp; Sunday &amp; Holiday Lunch: 11:30 - 16:00 , Dinner: 17:00
-									- 22:30
-								</td>
-							</tr>
-
-
 							<tr>
 								<th>환불규정</th>
-								<td>&lt;Cards Accepted&gt;<br> VISA, MasterCard, JCB,
-									American Express, Diners Club, MUFG, UC, DC, NICOS, UFJ, SAISON
-									<br> &lt;Electronic Money / Other Payment Methods&gt;<br>
-									Suica, PASMO, ICOCA, iD, Edy, QUICPay＋, LINE Pay, WeChat Pay,
-									Alipay
-								</td>
+								<td>${dto.refund_policy }</td>
 							</tr>
 						</tbody>
 					</table>
@@ -420,16 +372,15 @@ button.btn1{
 						<tbody>
 							<tr>
 								<th>테이블 수</th>
-								<td>106</td>
+								<td>${dto.total_tables }</td>
 							</tr>
 							<tr>
 								<th>최대예약인원</th>
-								<td>Smoking is prohibited inside the store. Smoking is
-									allowed outside and outside the store</td>
+								<td>${dto.max_rsrv }</td>
 							</tr>
 							<tr>
 								<th>편의시설</th>
-								<td>au, SoftBank, NTT DoCoMo</td>
+								<td>${dto.extra_info }</td>
 							</tr>
 						</tbody>
 					</table>
@@ -447,14 +398,12 @@ button.btn1{
 						</colgroup>
 						<tbody>
 							<tr>
-								<th>메뉴</th>
-								<td>All you can drink menu</td>
+								<th>카테고리</th>
+								<td>${dto.store_category }</td>
 							</tr>
 							<tr>
 								<th id="infectionprevention">
-									<p>감염예방</p> <a href="/en/site/faq/infection-prevention/"
-									target="_blank">FAQ</a>
-									<p class="small">Updated on August 20, 2022</p>
+									<p>감염예방</p>
 								</th>
 								<td>
 									<div class="sanitary -pc">
@@ -493,15 +442,8 @@ button.btn1{
 								</td>
 							</tr>
 							<tr>
-								<th>정보</th>
-								<td>
-									<p>The shop might decline diners if they feel sick.</p>
-									<p>May ask customers temperature checks for entering a
-										restaurant.</p>
-									<p>May restrict number of guests during peak hours.</p>
-									<p>The shop might ask diners to wear masks except when
-										drinking or eating.</p>
-								</td>
+								<th>식당소개</th>
+								<td>${dto.store_content }</td>
 							</tr>
 						</tbody>
 					</table>

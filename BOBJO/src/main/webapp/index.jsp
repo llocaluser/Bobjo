@@ -8,7 +8,9 @@
 </head>
 <body>
 <%
- response.sendRedirect("./SampleTest1.sa");
+ // response.sendRedirect("./SampleTest1.sa");
+ response.sendRedirect("./StoreList.st");
+
 %>
 </body>
 </html>
