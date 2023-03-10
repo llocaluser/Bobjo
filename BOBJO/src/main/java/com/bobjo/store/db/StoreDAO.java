@@ -52,7 +52,7 @@ public class StoreDAO {
 			con = ConnectionManager.getConnection();
 			
 			StringBuilder sqlBuilder = new StringBuilder();
-			sqlBuilder.append("select s.store_no,s.store_name,s.addr,s.store_img,s.store_category,r.score ");
+			sqlBuilder.append("select s.store_no,s.store_name,substring_index(s.addr,' ',2) addr,substring_index(s.store_img,',',1) store_img,s.store_category,r.score ");
 			sqlBuilder.append("from bobjo_store s left join (select store_no, round(avg(score),1) score from bobjo_review group by store_no) r ");
 			sqlBuilder.append("on s.store_no = r.store_no ");
 			sqlBuilder.append("where s.store_name like ? ");
