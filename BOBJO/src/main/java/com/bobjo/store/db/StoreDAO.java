@@ -45,7 +45,48 @@ public class StoreDAO {
 		}
 	}
 	
-	public List getStoreList(String srch_location, String srch_category, String srch_text) {
+	// 검색된 컨텐츠 수 조회
+	public int getStoreListSize(String srch_location, String srch_category, String srch_text) {
+		int totalPage = 0;
+		
+		try {
+			con = ConnectionManager.getConnection();
+			
+			StringBuilder sqlBuilder = new StringBuilder();
+			sqlBuilder.append("select count(*) ");
+			sqlBuilder.append("from bobjo_store ");
+			sqlBuilder.append("where store_name like ? ");
+
+			if(!srch_location.equals("")) {
+				sqlBuilder.append("and substring_index(substring_index(addr,' ',2),' ',-1) in(");
+				sqlBuilder.append(srch_location);
+				sqlBuilder.append(") ");
+			}
+			if(!srch_category.equals("")) {
+				sqlBuilder.append("and store_category in(");
+				sqlBuilder.append(srch_category);
+				sqlBuilder.append(") ");
+			}
+			
+			pstmt = con.prepareStatement(sqlBuilder.toString());
+			pstmt.setString(1, "%"+srch_text+"%");
+
+			rs = pstmt.executeQuery();
+			rs.next();
+			totalPage = rs.getInt(1);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(rs, pstmt, con);
+		}
+		
+		return totalPage;
+	}
+	// 검색된 컨텐츠 수 조회
+	
+	// 검색 리스트 조회
+	public List getStoreList(int pageNum, int pageSize, String srch_location, String srch_category, String srch_text) {
 		List list = new ArrayList<>();
 		
 		try {
@@ -68,8 +109,12 @@ public class StoreDAO {
 				sqlBuilder.append(") ");
 			}
 			
+			sqlBuilder.append("limit ? offset ? ");
+			
 			pstmt = con.prepareStatement(sqlBuilder.toString());
 			pstmt.setString(1, "%"+srch_text+"%");
+			pstmt.setInt(2, pageSize);
+			pstmt.setInt(3, (pageNum-1)*pageSize);
 
 			rs = pstmt.executeQuery();
 			
@@ -92,6 +137,7 @@ public class StoreDAO {
 		
 		return list;
 	}
+	// 검색 리스트 조회
 	
 	// 특정 가게 조회
 		public StoreDTO getStore(int store_no) {
@@ -128,4 +174,6 @@ public class StoreDAO {
 			return dto;
 		}
 		// 특정 가게 조회
+
+		
 }

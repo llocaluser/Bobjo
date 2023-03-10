@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}" />
-<c:set var="realPath" value="/src/main/webapp" />
-<c:set var="root" value="${root}${realPath }" />
 <!DOCTYPE html>
 <html>
 
@@ -37,6 +35,7 @@
 <!--   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script> -->
   <script type="text/javascript" src="${root }/js/bootstrap.js"></script>
   <script type="text/javascript" src="${root }/js/custom.js"></script>
+ 
 </head>
 
 <body class="sub_page">
@@ -65,7 +64,9 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="d-flex  flex-column flex-lg-row align-items-center">
               <form action="./StoreList.st" method="post" class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
-              <input type="hidden" name="srch_location" value="${srch_location }"> 
+              <input type="hidden" name="pageNum" value="${pageNum }">
+              <input type="hidden" name="pageSize" value="12">
+              <input type="hidden" name="srch_location" value="${srch_location }">
               <input type="hidden" name="srch_category" value="${srch_category }"> 
               <ul class="navbar-nav  ">
                 <li class="nav-item active">
@@ -107,7 +108,7 @@
 
   <!-- end nav section -->
 
-  <!-- fruit section -->
+  <!-- list section -->
 
   <section class="fruit_section layout_padding">
     <div class="container">
@@ -145,10 +146,64 @@
       </c:forEach>
   
       </div>
+      <div class="fruit_container_end"></div>
     </div>
+    
+    
   </section>
 
-  <!-- end fruit section -->
+  <!-- end list section -->
+
+  <!-- infinite scroll -->
+  <script type="text/javascript">
+  	let pageNum = 1;
+  	let pageSize = 12;
+  	let isLoad = false;
+  	
+	function infiniteScroll () {
+		const pagination = document.querySelector('.fruit_container_end'); // 리스트 엔드 포인트
+		const fullContent = document.querySelector('.fruit_container'); // 리스트 컨테이너
+		const screenHeight = screen.height; // 화면 크기
+		
+		document.addEventListener('scroll',OnScroll,{passive:true}) // 스크롤 이벤트 리스너
+		function OnScroll () { //스크롤 이벤트 함수
+			const fullHeight = fullContent.clientHeight; //  리스트 컨테이너 높이   
+			const scrollPosition = pageYOffset; // 현재 스크롤 위치
+			if (fullHeight-screenHeight/2 <= scrollPosition && !isLoad) {
+				isLoad = true;
+				getList(); // 컨텐츠를 추가하는 함수
+			}
+		}
+	}
+	infiniteScroll();
+	
+	function getList() {
+		$.ajax({
+			url:"./StoreListAjax.st",
+			type:"post",
+			data:{
+				pageNum:$("input[name=pageNum]").val(),
+				pageSize:$("input[name=pageSize]").val(),
+				srch_location:$("input[name=srch_location]").val(),
+				srch_category:$("input[name=srch_category]").val(),
+				srch_text:$("input[name=srch_text]").val()
+				},
+// 			dataType:"요청한 데이터타입(html,xml,json,text)",
+			success:function(data) {
+				$('.fruit_container').append(data);
+				if(Number($("input[name=pageNum]").val())*Number($("input[name=pageSize]").val()) < ${totalPage}) {
+					isLoad = false;
+					$("input[name=pageNum]").val(Number($("input[name=pageNum]").val())+1);
+				}
+			},
+			error:function(data){
+				console.log(data);
+				console.log("ajax err");
+			}
+		});
+	}
+  </script>
+  <!-- infinite scroll -->
 
 
   <!-- info section -->
