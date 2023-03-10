@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}" />
+<c:set var="realPath" value="/src/main/webapp" />
+<c:set var="root" value="${root}${realPath }" />
 <!DOCTYPE html>
 <html>
 
@@ -31,10 +33,10 @@
   <!-- responsive style -->
   <link href="${root }/css/responsive.css" rel="stylesheet" />
   
-<!--   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
 <!--   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script> -->
-  <script type="text/javascript" src="js/bootstrap.js"></script>
-  <script type="text/javascript" src="js/custom.js"></script>
+  <script type="text/javascript" src="${root }/js/bootstrap.js"></script>
+  <script type="text/javascript" src="${root }/js/custom.js"></script>
 </head>
 
 <body class="sub_page">
@@ -121,7 +123,7 @@
       <div class="fruit_container">
       <c:forEach var="dto" items="${list }">
       	<div class="box">
-          <img src="./images/${dto.store_img }" alt="${dto.store_name }">
+          <img src="${root }/images/${dto.store_img }" alt="${dto.store_name }">
           <div class="link_box">
             <h5>
               ${dto.store_name }
@@ -162,7 +164,7 @@
         <div class="row">
           <div class="col-md-4">
             <a href="">
-              <img src="images/location.png" alt="">
+              <img src="${root }/images/location.png" alt="">
               <span>
                 Passages of Lorem Ipsum available
               </span>
@@ -170,7 +172,7 @@
           </div>
           <div class="col-md-4">
             <a href="">
-              <img src="images/call.png" alt="">
+              <img src="${root }/images/call.png" alt="">
               <span>
                 Call : +012334567890
               </span>
@@ -178,7 +180,7 @@
           </div>
           <div class="col-md-4">
             <a href="">
-              <img src="images/mail.png" alt="">
+              <img src="${root }/images/mail.png" alt="">
               <span>
                 demo@gmail.com
               </span>
@@ -201,22 +203,22 @@
           <div class="info_social">
             <div>
               <a href="">
-                <img src="images/facebook-logo-button.png" alt="">
+                <img src="${root }/images/facebook-logo-button.png" alt="">
               </a>
             </div>
             <div>
               <a href="">
-                <img src="images/twitter-logo-button.png" alt="">
+                <img src="${root }/images/twitter-logo-button.png" alt="">
               </a>
             </div>
             <div>
               <a href="">
-                <img src="images/linkedin.png" alt="">
+                <img src="${root }/images/linkedin.png" alt="">
               </a>
             </div>
             <div>
               <a href="">
-                <img src="images/instagram.png" alt="">
+                <img src="${root }/images/instagram.png" alt="">
               </a>
             </div>
           </div>
