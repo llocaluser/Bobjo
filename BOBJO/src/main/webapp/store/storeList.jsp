@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 
@@ -21,14 +22,14 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="${root }/css/bootstrap.css" />
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Dosis:400,600,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
   <!-- Custom styles for this template -->
-  <link href="./css/style.css" rel="stylesheet" />
+  <link href="${root }/css/style.css" rel="stylesheet" />
   <!-- responsive style -->
-  <link href="./css/responsive.css" rel="stylesheet" />
+  <link href="${root }/css/responsive.css" rel="stylesheet" />
   
 <!--   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script> -->
 <!--   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script> -->
@@ -84,10 +85,10 @@
               </form>
 				<script type="text/javascript">
 					function openLocation() {    
-						window.open("/BOBJO/popuppage/store_search_location.jsp", "search_location", "width=570, height=350, resizable = no, scrollbars = no, location = no");
+						window.open("${root }/popuppage/store_search_location.jsp", "search_location", "width=570, height=350, resizable = no, scrollbars = no, location = no");
 					}
 					function openCategory() {    
-						window.open("/BOBJO/popuppage/store_search_category.jsp", "search_location", "width=570, height=350, resizable = no, scrollbars = no, location = no");
+						window.open("${root }/popuppage/store_search_category.jsp", "search_location", "width=570, height=350, resizable = no, scrollbars = no, location = no");
 					}
 					function resetValue() {
 						document.getElementsByName("srch_location")[0].value = "";
