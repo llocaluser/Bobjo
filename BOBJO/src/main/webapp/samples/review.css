@@ -174,9 +174,7 @@ h3 {
 }
 
 .star {
-	height: 1rem;
-	width: 1rem;
-	margin-right: 4px;
+	width: 30%;
 }
 
 .star>i {
