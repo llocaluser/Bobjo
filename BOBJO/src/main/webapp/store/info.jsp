@@ -235,7 +235,7 @@ button.btn1{
 				<div class="offset-lg-2 col-md-10 offset-md-1">
 					<div class="heading_container">
 						<hr>
-						<h2 id="h2">가게이름</h2>
+						<h2 id="h2">${dto.store_name }</h2>
 					</div>
 				</div>
 			</div>
