@@ -9,15 +9,16 @@
 <style type="text/css">
 
     </style>
-    <link rel="stylesheet" type="text/css" href="../samples/review.css">
+    <link rel="stylesheet" type="text/css" href="../review/review.css">
     <script src="https://code.jquery.com/jquery-3.6.3.js" 
 	integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 	<script type="text/javascript">
+		var store_no = "${store_no}";
 		function sortReview(){
 			var sort = $("#selectbox option:selected").val();
-			if(sort == high) location.href='review.jsp?sort=high';
-			else if(sort == low) location.href='review.jsp?sort=low';
-			else if(sort == recent) location.href='review.jsp?sort=recent';
+			if(sort == high) location.href='review.jsp?store_no='+store_no+'sort=high';
+			else if(sort == low) location.href='review.jsp?store_no='+store_no+'sort=low';
+			else if(sort == recent) location.href='review.jsp?store_no='+store_no+'sort=recent';
 			return;
 		}
 	</script>
@@ -54,8 +55,8 @@
                                 <i class="star_icon">없</i>
                             </div>
                         </div> -->
-                        <div class="score">평균 4.7점</div>
-                        총 N명 참여
+                        <div class="score">평균 ${AVG }점</div>
+                        총 ${Count }명 참여
                     </section>
                     <p class="review_desc">설명</p>
                     <p class="review_desc2">허위 리뷰 처벌 조항</p>
@@ -133,23 +134,23 @@
                         	<c:if test="${list.score eq 5.0 }">
                         		<img class="star" src="./img/star.png">
                         	</c:if>
-                            <!-- <div class="div_star">
-                                <div class="star">
-                                    <i class="star_icon">별</i>
-                                </div>
-                                <div class="star">
-                                    <i class="star_icon">별</i>
-                                </div>
-                                <div class="star">
-                                    <i class="star_icon">별</i>
-                                </div>
-                                <div class="star">
-                                    <i class="star_icon">반</i>
-                                </div>
-                                <div class="star">
-                                    <i class="star_icon">없</i>
-                                </div>
-                            </div> -->
+                            <div class="div_star">
+                            <c:forEach var="i" begin="1" end="5">
+                            <c:choose>
+            					<c:when test="${i <= score}">
+            					<div class="star">
+                					<i class="star_icon"><img src="./img/star.jpg" alt="별"></i>
+                				</div>
+            					</c:when>
+            					<c:when test="${i-0.5 == score}">
+					                <i class="star"><img src="./img/half.jpg" alt="반 별"></i>
+					            </c:when>
+					            <c:otherwise>
+					                <i class="star"><img src="./img/empty.jpg" alt="빈 별"></i>
+					            </c:otherwise>
+					        </c:choose>
+                            </c:forEach>
+                            </div>
                             <p class="review_day">${list.reg_date }</p>
                         </section>
                         <div class="topmargin">
@@ -165,7 +166,14 @@
             </c:forEach>
             <br>
             <section class="reg">
-            	<button class="btn_reg font_norm">리뷰 등록</button>
+            <c:if test="${sessionContext.m_id eq ReviewList.m_id }">
+            	<button class="btn_reg font_norm">
+            		<a href="./ReviewMod.rv?store_no=${list.store_no }">리뷰 수정</a>
+            	</button>
+            </c:if>
+            	<button class="btn_reg font_norm">
+            		<a href="./ReviewReg.rv?store_no=${list.store_no }">리뷰 등록</a>
+            	</button>
             </section>
             <br><br>
             <c:if test="${pageCount > 10 }">
@@ -177,37 +185,45 @@
                     <!-- 필요하면 맨 앞으로 버튼 or 1 ... (현재 페이지) -->
                     <!-- Prev 버튼 -->
                     <div class="page_div_l">
-                        <a href="#" class="btn font_arr">
-                            <div>Prev</div>
-                        </a>
+                    <c:if test="${startPage > pageBlock }">
+                    <a href="./ReviewList.rv?pageNum=${startPage-pageBlock }" class="btn font_arr">
+                        <div>Prev</div>
+                    </a>
+                    </c:if>
                     </div>
                     <!-- 1~10 페이지 -->
                     <ul class="pagelist">
+                    <c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
+                    <c:choose>
                         <li class="pagel">
                             <span class="btn font_arr">
-                                <a href="#">1</a>
+                            <c:when test="${i eq currentPage }">
+                    			<strong>${i }</strong>
+                    		</c:when>
+                    		<c:when test="${i eq startPage }">
+                    			<a href="./ReviewList.rv?pageNum=${i }">${i }</a>
+                    		</c:when>
+                    		<c:when test="${i eq endPage }">
+                    			<a href="./ReviewList.rv?pageNum=${i }">${i }</a>
+                    		</c:when>
+                    	<c:when test="${i lt currentPage-pageBlock or i gt currentPage+pageBlock }">
+                    	<c:if test="${i eq startPage+1 or i eq endPage-1}">...</c:if>
+                    	</c:when>
+                    	<c:otherwise>
+                            <a href="./ReviewList.rv?pageNum=${i }">${i }</a>
+                        </c:otherwise>
                             </span>
                         </li>
-                        <li class="pagel">
-                            <span class="btn font_arr">
-                                <a href="#">2</a>
-                            </span>
-                        </li>
-                        <li class="pagel">
-                            <span class="btn font_arr">
-                                <a href="#">3</a>
-                            </span>
-                        </li>
-                        <li class="pagel">
-                            <span class="btn font_arr">
-                                <a href="#">4</a>
-                            </span>
-                        </li>
+                        
+                    </c:choose>
+                    </c:forEach>
                     </ul>
                     <div class="page_div_l">
-                        <a href="#" class="btn font_arr">
-                            <div>Next</div>
-                        </a>
+                    <c:if test="${pageCount > endPage }">
+                    <a href="./ReviewList.rv?pageNum=${startPage+pageBlock }" class="btn font_arr">
+                        <div>Next</div>
+                    </a>
+                    </c:if>
                     </div>
                     <!-- 필요하면 맨 뒤로 버튼 or (현재 페이지) ... (마지막 페이지) -->
                 </div>
