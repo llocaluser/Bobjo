@@ -105,6 +105,7 @@ public class StoreDAO {
 				if (rs.next()) {
 					dto = new StoreDTO();
 					
+					dto.setStore_name(rs.getString("store_name"));
 					dto.setStore_no(rs.getInt("store_no"));
 					dto.setAddr(rs.getString("addr"));
 					dto.setAddr_details(rs.getString("addr_details"));

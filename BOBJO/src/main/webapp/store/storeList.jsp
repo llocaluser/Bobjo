@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}" />
-<c:set var="realPath" value="/src/main/webapp" />
-<c:set var="root" value="${root}${realPath }" />
+
 <!DOCTYPE html>
 <html>
 
