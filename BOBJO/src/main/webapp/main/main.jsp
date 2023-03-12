@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <!-- https://fonts.google.com/ -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/templatemo-video-catalog.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/templatemo-video-catalog.css">
 <!--
 
 TemplateMo 552 Video Catalog
@@ -24,12 +24,12 @@ https://templatemo.com/tm-552-video-catalog
 <body>
     <div class="tm-page-wrap mx-auto">
         <div style="text-align: right">
-        	<c:if test="${member == null }">
-        	<a class="nav-link tm-nav-link" href="#" style="display: inline;">로그인</a>
-         	<a class="nav-link tm-nav-link" href="#" style="display: inline;">회원가입</a>
+        	<c:if test="${m_id == null }">
+        	<a class="nav-link tm-nav-link" href="./MemberLogin.me" style="display: inline;">로그인</a>
+         	<a class="nav-link tm-nav-link" href="./MemberJoin.me" style="display: inline;">회원가입</a>
          	</c:if>
-         	<c:if test="${member != null }">
-        	<a class="nav-link tm-nav-link" href="#" style="display: inline;">로그아웃</a>
+         	<c:if test="${m_id != null }">
+        	<a class="nav-link tm-nav-link" href="./MemberLogoutAction.me" style="display: inline;">로그아웃</a>
          	<a class="nav-link tm-nav-link" href="#" style="display: inline;">마이페이지</a>
          	</c:if>
      	</div>

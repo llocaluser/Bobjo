@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bobjo.basicform.action.ActionForward;
 import com.bobjo.basicform.controller.BasicFrontController;
 
-@WebServlet("*.me")
+@WebServlet("*.nu")
 public class MenuFrontController extends BasicFrontController {
 
 	@Override

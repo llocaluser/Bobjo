@@ -20,6 +20,14 @@ public class StoreFrontController extends BasicFrontController {
 				e.printStackTrace();
 			}
 		}
+		else if(command.equals("/StoreListAjax.st")) {
+			action = new StoreListAjaxAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		else if(command.equals("/StoreInfo.st")) {
 			action = new StoreInfoAction();
 			try {
