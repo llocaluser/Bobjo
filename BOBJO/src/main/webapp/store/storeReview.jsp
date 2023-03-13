@@ -22,16 +22,16 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
 
 <!-- bootstrap core css -->
-<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
 
 <!-- fonts style -->
 <link
 	href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Dosis:400,600,700|Poppins:400,600,700&display=swap"
 	rel="stylesheet" />
 <!-- Custom styles for this template -->
-<link href="../css/style.css" rel="stylesheet" />
+<link href="./css/style.css" rel="stylesheet" />
 <!-- responsive style -->
-<link href="../css/responsive.css" rel="stylesheet" />
+<link href="./css/responsive.css" rel="stylesheet" />
 
 <!--                 수정                              -->
 <style type="text/css">
@@ -154,7 +154,7 @@ ol, ul {
 
 
 .menu-icon {
-	background: url('../img/storenum.png') 0 -2224px;
+	background: url('./img/storenum.png') 0 -2224px;
 	display: inline-block;
 	vertical-align: middle;
 	vertical-align: auto;
@@ -193,7 +193,7 @@ color: yellow;
 	<div class="hero_area">
 		<!-- header section strats -->
 		<div class="brand_box">
-			<a class="navbar-brand" href="../mainContent/index.html"> <span>
+			<a class="navbar-brand" href="./mainContent/index.html"> <span>
 					BobJo! </span>
 			</a>
 		</div>
@@ -217,16 +217,16 @@ color: yellow;
 						<div class="d-flex  flex-column flex-lg-row align-items-center">
 							<ul class="navbar-nav  ">
 								<li class="nav-item active"><a class="nav-link"
-									href="../mainContent/index.html"> <span class="sr-only">(current)</span></a>
+									href="./mainContent/index.html"> <span class="sr-only">(current)</span></a>
 								</li>
 								<li class="nav-item"><a class="nav-link"
-									href="../mainContent/about.html"> </a></li>
+									href="./mainContent/about.html"> </a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="../mainContent/fruit.html"> </a></li>
+									href="./mainContent/fruit.html"> </a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="../mainContent/testimonial.html"></a></li>
+									href="./mainContent/testimonial.html"></a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="../mainContent/contact.html"></a></li>
+									href="./mainContent/contact.html"></a></li>
 								
 								
 							</ul>
@@ -351,17 +351,17 @@ color: yellow;
 			<div class="info_contact">
 				<div class="row">
 					<div class="col-md-4">
-						<a href=""> <img src="../images/location.png" alt=""> <span>
+						<a href=""> <img src="./images/location.png" alt=""> <span>
 								Passages of Lorem Ipsum available </span>
 						</a>
 					</div>
 					<div class="col-md-4">
-						<a href=""> <img src="../images/call.png" alt=""> <span>
+						<a href=""> <img src="./images/call.png" alt=""> <span>
 								Call : +012334567890 </span>
 						</a>
 					</div>
 					<div class="col-md-4">
-						<a href=""> <img src="../images/mail.png" alt=""> <span>
+						<a href=""> <img src="./images/mail.png" alt=""> <span>
 								demo@gmail.com </span>
 						</a>
 					</div>
@@ -379,21 +379,21 @@ color: yellow;
 				<div class="col-md-4 col-lg-3">
 					<div class="info_social">
 						<div>
-							<a href=""> <img src="../images/facebook-logo-button.png"
+							<a href=""> <img src="./images/facebook-logo-button.png"
 								alt="">
 							</a>
 						</div>
 						<div>
-							<a href=""> <img src="../images/twitter-logo-button.png"
+							<a href=""> <img src="./images/twitter-logo-button.png"
 								alt="">
 							</a>
 						</div>
 						<div>
-							<a href=""> <img src="../images/linkedin.png" alt="">
+							<a href=""> <img src="./images/linkedin.png" alt="">
 							</a>
 						</div>
 						<div>
-							<a href=""> <img src="../images/instagram.png" alt="">
+							<a href=""> <img src="./images/instagram.png" alt="">
 							</a>
 						</div>
 					</div>
@@ -416,9 +416,9 @@ color: yellow;
 	<!-- footer section -->
 
 
-	<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="../js/bootstrap.js"></script>
-	<script type="text/javascript" src="../js/custom.js"></script>
+	<script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="./js/bootstrap.js"></script>
+	<script type="text/javascript" src="./js/custom.js"></script>
 
 </body>
 

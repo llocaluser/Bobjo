@@ -61,8 +61,15 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="d-flex  flex-column flex-lg-row align-items-center">
+<<<<<<< HEAD
               <form action="./StoreList.st" method="post" class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
               <input type="hidden" name="srch_location" value="${srch_location }"> 
+=======
+              <form action="./StoreList.st" method="post" class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0" name="srch_frm">
+              <input type="hidden" name="pageNum" value="${pageNum }">
+              <input type="hidden" name="pageSize" value="12">
+              <input type="hidden" name="srch_location" value="${srch_location }">
+>>>>>>> branch 'master' of https://github.com/localuser96/Bobjo.git
               <input type="hidden" name="srch_category" value="${srch_category }"> 
               <ul class="navbar-nav  ">
                 <li class="nav-item active">
@@ -80,6 +87,14 @@
                 <li class="nav-item">
                  <input type="button" value="검색 조건 초기화" onclick="resetValue();">
                 </li>
+                <li class="nav-item">
+                 <select name="order_standard" onchange="javascript:srch_frm.submit();">
+                 	<option value="">정렬</option>
+                 	<option value="score" <c:if test='${order_standard eq "score" }' >selected</c:if>>별점 높은 순</option>
+                 	<option value="cnt" <c:if test='${order_standard eq "cnt" }' >selected</c:if>>방문자 많은 순</option>
+<%--                  	<option value="2" <c:if test='${order_standard == 2 }' >selected</c:if>>가까운 거리 순</option> --%>
+                 </select>
+                </li>
               </ul>
               </form>
 				<script type="text/javascript">
@@ -93,6 +108,7 @@
 						document.getElementsByName("srch_location")[0].value = "";
 						document.getElementsByName("srch_category")[0].value = "";
 						document.getElementsByName("srch_text")[0].value = "";
+						document.getElementsByName("order_standard")[0][0].selected = true;
 					}
 				</script>
             </div>
@@ -145,7 +161,62 @@
     </div>
   </section>
 
+<<<<<<< HEAD
   <!-- end fruit section -->
+=======
+  <!-- end list section -->
+
+  <!-- infinite scroll -->
+  <script type="text/javascript">
+  	let pageNum = 1;
+  	let pageSize = 12;
+  	let isLoad = false;
+  	
+	function infiniteScroll () {
+		const pagination = document.querySelector('.fruit_container_end'); // 리스트 엔드 포인트
+		const fullContent = document.querySelector('.fruit_container'); // 리스트 컨테이너
+		const screenHeight = screen.height; // 화면 크기
+		
+		document.addEventListener('scroll',OnScroll,{passive:true}) // 스크롤 이벤트 리스너
+		function OnScroll () { //스크롤 이벤트 함수
+			const fullHeight = fullContent.clientHeight; //  리스트 컨테이너 높이   
+			const scrollPosition = pageYOffset; // 현재 스크롤 위치
+			if (fullHeight-screenHeight/2 <= scrollPosition && !isLoad) {
+				isLoad = true;
+				getList(); // 컨텐츠를 추가하는 함수
+			}
+		}
+	}
+	infiniteScroll();
+	
+	function getList() {
+		$.ajax({
+			url:"./StoreListAjax.st",
+			type:"post",
+			data:{
+				pageNum:$("input[name=pageNum]").val(),
+				pageSize:$("input[name=pageSize]").val(),
+				srch_location:$("input[name=srch_location]").val(),
+				srch_category:$("input[name=srch_category]").val(),
+				srch_text:$("input[name=srch_text]").val()
+				},
+// 			dataType:"요청한 데이터타입(html,xml,json,text)",
+			success:function(data) {
+				$('.fruit_container').append(data);
+				$("input[name=pageNum]").val(Number($("input[name=pageNum]").val())+1);
+				if(Number($("input[name=pageNum]").val())*Number($("input[name=pageSize]").val()) < ${totalPage}) {
+					isLoad = false;
+				}
+			},
+			error:function(data){
+				console.log(data);
+				console.log("ajax err");
+			}
+		});
+	}
+  </script>
+  <!-- infinite scroll -->
+>>>>>>> branch 'master' of https://github.com/localuser96/Bobjo.git
 
 
   <!-- info section -->

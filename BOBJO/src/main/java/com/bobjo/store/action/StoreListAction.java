@@ -16,17 +16,20 @@ public class StoreListAction implements Action {
 		
 		int pageNum = 1;
 		int pageSize = 12;
-		String srch_location = request.getParameter("srch_location") == null ? "" : request.getParameter("srch_location");
-		String srch_category = request.getParameter("srch_category") == null ? "" : request.getParameter("srch_category");
-		String srch_text = request.getParameter("srch_text") == null ? "" : request.getParameter("srch_text");
+		String[] srch_data = new String[4];
+		srch_data[0] = request.getParameter("srch_location") == null ? "" : request.getParameter("srch_location");
+		srch_data[1] = request.getParameter("srch_category") == null ? "" : request.getParameter("srch_category");
+		srch_data[2] = request.getParameter("srch_text") == null ? "" : request.getParameter("srch_text");
+		srch_data[3] = request.getParameter("order_standard") == null ? "" : request.getParameter("order_standard");
 		
 		StoreDAO dao = new StoreDAO();
-		request.setAttribute("list",  dao.getStoreList(pageNum, pageSize, srch_location, srch_category, srch_text));
+		request.setAttribute("list",  dao.getStoreList(pageNum, pageSize, srch_data));
 		request.setAttribute("pageNum", pageNum);
-		request.setAttribute("totalPage", dao.getStoreListSize(srch_location, srch_category, srch_text));
-		request.setAttribute("srch_location", srch_location);
-		request.setAttribute("srch_category", srch_category);
-		request.setAttribute("srch_text", srch_text);
+		request.setAttribute("totalPage", dao.getStoreListSize(srch_data));
+		request.setAttribute("srch_location", srch_data[0]);
+		request.setAttribute("srch_category", srch_data[1]);
+		request.setAttribute("srch_text", srch_data[2]);
+		request.setAttribute("order_standard", srch_data[3]);
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("./store/storeList.jsp");

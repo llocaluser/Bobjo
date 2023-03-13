@@ -1,29 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-
-    </style>
-    <link rel="stylesheet" type="text/css" href="../review/review.css">
+    <link rel="stylesheet" type="text/css" href="./review/review.css">
+    <link rel="stylesheet" type="text/css" href="./review/modal.css">
     <script src="https://code.jquery.com/jquery-3.6.3.js" 
 	integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		var store_no = "${store_no}";
+		var pageNum = "${pageNum}";
 		function sortReview(){
 			var sort = $("#selectbox option:selected").val();
-			if(sort == high) location.href='review.jsp?store_no='+store_no+'sort=high';
-			else if(sort == low) location.href='review.jsp?store_no='+store_no+'sort=low';
-			else if(sort == recent) location.href='review.jsp?store_no='+store_no+'sort=recent';
+			if(sort == high) {
+				location.href='review.jsp?store_no='+store_no+'pageNum='+pageNum+'sort=high';
+			}
+			else if(sort == low) {
+				location.href='review.jsp?store_no='+store_no+'pageNum='+pageNum+'sort=low';
+			}
+			else if(sort == recent) {
+				location.href='review.jsp?store_no='+store_no+'pageNum='+pageNum+'sort=recent';
+			}
 			return;
 		}
+		
+		function report(){
+    		var report = confirm("리뷰글을 신고하시겠습니까?");
+    		if(report){
+    			alert("신고되었습니다");
+    		}else{
+    			return false;
+    		}
+    		return true;
+    	}
 	</script>
 </head>
 <body>
+    
+    <br><br>
 <div class="sub_sector">
         <section class="sect">
             <header class="title">
@@ -37,29 +55,13 @@
 
                     <!-- 평균 평점 -->
                     <section class="score font_arr">
-                    <!-- <img class="star" src="./img/star.png"> -->
-                        <!-- <div class="div_star">
-                            <div class="star">
-                                <i class="star_icon">별</i>
-                            </div>
-                            <div class="star">
-                                <i class="star_icon">별</i>
-                            </div>
-                            <div class="star">
-                                <i class="star_icon">별</i>
-                            </div>
-                            <div class="star">
-                                <i class="star_icon">별</i>
-                            </div>
-                            <div class="star">
-                                <i class="star_icon">없</i>
-                            </div>
-                        </div> -->
                         <div class="score">평균 ${AVG }점</div>
                         총 ${Count }명 참여
                     </section>
-                    <p class="review_desc">설명</p>
-                    <p class="review_desc2">허위 리뷰 처벌 조항</p>
+                    <p class="review_desc">
+                    	${store_name } 방문 고객님들의 리뷰입니다
+                    </p>
+                    <p class="review_desc2">허위 사실 기재, 타인에 대한 비방 시 법적 조치가 이루어질 수 있습니다</p>
                 </article>
                 <article class="score_section article_font">
                     <ol class="ol_graph">
@@ -108,15 +110,28 @@
                     <select class="select_sort" id="selectbox" 
                     onchange="location.href='./ReviewList.rv?sort='+this.value">
                     
-                    	<option value="none" selected disabled style="display:none">
+                    	<option value="none" disabled style="display:none">
                     	정렬 기준
                     	</option>
-                        <option value="high">별점 높은 순</option>
-                        <option value="low">별점 낮은 순</option>
-                        <option value="recent">최신순</option>
+                        <option value="high" 
+                        <c:if test="${sort eq 'high' }">
+                        selected
+                        </c:if>
+                        >별점 높은 순</option>
+                        <option value="low" 
+                        <c:if test="${sort eq 'low' }">
+                        selected
+                        </c:if>
+                        >별점 낮은 순</option>
+                        <option value="recent" 
+                        <c:if test="${sort eq 'recent' }">
+                        selected
+                        </c:if>
+                        >최신순</option>
                     </select>
                 </div>
             </div><br>
+            
             <!-- 리뷰내용 -->
             <c:forEach var="list" items="${ReviewList }">
             <ol class="reviewslist">
@@ -124,29 +139,34 @@
                     <!-- 사진, 이름 섹션 -->
                     <section class="section_profile">
                         <div class="div_img">
-                            ${list.review_img }
+	                        <a href="./img/${list.review_img }">
+	                            <img class="profile" src="./img/${list.review_img }" alt="프로필">
+	                        </a><br><br>
                         </div>
                         <p class="desc font_arr">${list.m_id }</p>
                     </section>
                     <!-- 평점, 작성일자, 내용 섹션 -->
                     <section class="section_review">
                         <section class="section_review_head font_arr">
-                        	<c:if test="${list.score eq 5.0 }">
-                        		<img class="star" src="./img/star.png">
-                        	</c:if>
                             <div class="div_star">
                             <c:forEach var="i" begin="1" end="5">
                             <c:choose>
-            					<c:when test="${i <= score}">
+            					<c:when test="${i <= list.score}">
             					<div class="star">
-                					<i class="star_icon"><img src="./img/star.jpg" alt="별"></i>
+                					<i class="star_icon">
+                						<img class="star" src="./img/star.jpg" alt="별">
+                					</i>
                 				</div>
             					</c:when>
-            					<c:when test="${i-0.5 == score}">
-					                <i class="star"><img src="./img/half.jpg" alt="반 별"></i>
+            					<c:when test="${i-0.5 == list.score}">
+					                <i class="star">
+					                	<img class="star" src="./img/half.jpg" alt="반 별">
+					                </i>
 					            </c:when>
 					            <c:otherwise>
-					                <i class="star"><img src="./img/empty.jpg" alt="빈 별"></i>
+					                <i class="star">
+					                	<img class="star" src="./img/empty.jpg" alt="빈 별">
+					                </i>
 					            </c:otherwise>
 					        </c:choose>
                             </c:forEach>
@@ -157,7 +177,13 @@
                             <span class="review_content">${list.content }</span>
                         </div>
                         <div class="rightsort">
-                            <button class="btn_report font_arr">신고하기</button>
+                        	<button class="btn_reg font_norm">
+	            				<a href="./ReviewModform.rv?store_no=${list.store_no }
+			            		&list=${list}">리뷰 수정</a>
+			            	</button>
+                            <button type="button" class="btn_report font_arr" onclick="report();">
+                            	신고하기
+                            </button>
                         </div>
                     </section>
                 </li>
@@ -166,18 +192,17 @@
             </c:forEach>
             <br>
             <section class="reg">
-            <c:if test="${sessionContext.m_id eq ReviewList.m_id }">
+            <%-- <c:if test="${sessionContext.m_id eq ReviewList.m_id }">
             	<button class="btn_reg font_norm">
-            		<a href="./ReviewMod.rv?store_no=${list.store_no }">리뷰 수정</a>
+            		<a href="./ReviewMod.rv?store_no=${ReviewList[0].store_no }">리뷰 수정</a>
             	</button>
-            </c:if>
+            </c:if> --%>
+            	
             	<button class="btn_reg font_norm">
-            		<a href="./ReviewReg.rv?store_no=${list.store_no }">리뷰 등록</a>
+            		<a href="./ReviewRegform.rv?store_no=${ReviewList[0].store_no }">리뷰 등록</a>
             	</button>
             </section>
             <br><br>
-            <c:if test="${pageCount > 10 }">
-            
             
             <!-- 페이지 -->
             <footer class="page">
@@ -185,53 +210,47 @@
                     <!-- 필요하면 맨 앞으로 버튼 or 1 ... (현재 페이지) -->
                     <!-- Prev 버튼 -->
                     <div class="page_div_l">
-                    <c:if test="${startPage > pageBlock }">
-                    <a href="./ReviewList.rv?pageNum=${startPage-pageBlock }" class="btn font_arr">
-                        <div>Prev</div>
+                    <c:if test="${startPage > 1 }">
+                    <a href="./ReviewList.rv?pageNum=1" class="btn font_arr">
+                        1
                     </a>
                     </c:if>
                     </div>
-                    <!-- 1~10 페이지 -->
                     <ul class="pagelist">
                     <c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
-                    <c:choose>
-                        <li class="pagel">
-                            <span class="btn font_arr">
-                            <c:when test="${i eq currentPage }">
-                    			<strong>${i }</strong>
-                    		</c:when>
-                    		<c:when test="${i eq startPage }">
-                    			<a href="./ReviewList.rv?pageNum=${i }">${i }</a>
-                    		</c:when>
-                    		<c:when test="${i eq endPage }">
-                    			<a href="./ReviewList.rv?pageNum=${i }">${i }</a>
-                    		</c:when>
-                    	<c:when test="${i lt currentPage-pageBlock or i gt currentPage+pageBlock }">
-                    	<c:if test="${i eq startPage+1 or i eq endPage-1}">...</c:if>
-                    	</c:when>
-                    	<c:otherwise>
-                            <a href="./ReviewList.rv?pageNum=${i }">${i }</a>
-                        </c:otherwise>
-                            </span>
-                        </li>
-                        
-                    </c:choose>
-                    </c:forEach>
+                    
+                    <li class="pagel">
+                    <c:if test="${startPage > 1 && i eq pageNum-2}">
+                    	<span class="btn font_arr" style="border:none">
+                    	...
+                    	</span>
+                    </c:if>
+                    	<span class="btn font_arr">
+                    		<a href="./ReviewList.rv?pageNum=${i }">${i }</a>
+                    	</span>
+                    <c:if test="${endPage < pageSize && i eq pageNum+2 }">
+                    	<span class="btn font_arr" style="border:none">
+                    	...
+                    	</span>
+                    </c:if>
+                    </li>
+                    
+					</c:forEach>
                     </ul>
                     <div class="page_div_l">
-                    <c:if test="${pageCount > endPage }">
-                    <a href="./ReviewList.rv?pageNum=${startPage+pageBlock }" class="btn font_arr">
-                        <div>Next</div>
+                    <c:if test="${endPage < pageSize }">
+                    <a href="./ReviewList.rv?pageNum=${pageSize }" class="btn font_arr">
+                        <div>${pageSize }</div>
                     </a>
                     </c:if>
                     </div>
-                    <!-- 필요하면 맨 뒤로 버튼 or (현재 페이지) ... (마지막 페이지) -->
+                    
                 </div>
             </footer>
-            </c:if>
             
             
         </section>
     </div>
+    
 </body>
 </html>

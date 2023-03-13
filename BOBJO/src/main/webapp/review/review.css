@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .star_icon {
 	/* 리뷰 별 url 삽입 */
 	
@@ -174,7 +175,7 @@ h3 {
 }
 
 .star {
-	width: 30%;
+	width: 28px;
 }
 
 .star>i {
@@ -199,6 +200,11 @@ h3 {
 	padding: 0.875rem 32px 0.875rem 8px;
 	resize: vertical;
 	width: 100%;
+}
+
+.skip{
+	padding:0;
+	display: list-item;
 }
 
 .left {
@@ -288,9 +294,17 @@ li {
 	margin: 0;
 }
 
+.profile{
+	
+    flex-shrink: 0;
+    height: 80px;
+    margin: 0 8px 8px;
+    width: 96px;
+}
+
 a {
 	text-decoration: none;
-	background-color: initial;
+	color: #2d333f;
 }
 
 .rightsort {
