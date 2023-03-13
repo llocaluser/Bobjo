@@ -63,7 +63,7 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="d-flex  flex-column flex-lg-row align-items-center">
-              <form action="./StoreList.st" method="post" class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+              <form action="./StoreList.st" method="post" class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0" name="srch_frm">
               <input type="hidden" name="pageNum" value="${pageNum }">
               <input type="hidden" name="pageSize" value="12">
               <input type="hidden" name="srch_location" value="${srch_location }">
@@ -84,6 +84,14 @@
                 <li class="nav-item">
                  <input type="button" value="검색 조건 초기화" onclick="resetValue();">
                 </li>
+                <li class="nav-item">
+                 <select name="order_standard" onchange="javascript:srch_frm.submit();">
+                 	<option value="">정렬</option>
+                 	<option value="score" <c:if test='${order_standard eq "score" }' >selected</c:if>>별점 높은 순</option>
+                 	<option value="cnt" <c:if test='${order_standard eq "cnt" }' >selected</c:if>>방문자 많은 순</option>
+<%--                  	<option value="2" <c:if test='${order_standard == 2 }' >selected</c:if>>가까운 거리 순</option> --%>
+                 </select>
+                </li>
               </ul>
               </form>
 				<script type="text/javascript">
@@ -97,6 +105,7 @@
 						document.getElementsByName("srch_location")[0].value = "";
 						document.getElementsByName("srch_category")[0].value = "";
 						document.getElementsByName("srch_text")[0].value = "";
+						document.getElementsByName("order_standard")[0][0].selected = true;
 					}
 				</script>
             </div>
@@ -191,9 +200,9 @@
 // 			dataType:"요청한 데이터타입(html,xml,json,text)",
 			success:function(data) {
 				$('.fruit_container').append(data);
+				$("input[name=pageNum]").val(Number($("input[name=pageNum]").val())+1);
 				if(Number($("input[name=pageNum]").val())*Number($("input[name=pageSize]").val()) < ${totalPage}) {
 					isLoad = false;
-					$("input[name=pageNum]").val(Number($("input[name=pageNum]").val())+1);
 				}
 			},
 			error:function(data){

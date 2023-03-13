@@ -16,11 +16,13 @@ public class StoreListAjaxAction implements Action {
 		
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"))+1;
 		int pageSize = 12;
-		String srch_location = request.getParameter("srch_location") == null ? "" : request.getParameter("srch_location");
-		String srch_category = request.getParameter("srch_category") == null ? "" : request.getParameter("srch_category");
-		String srch_text = request.getParameter("srch_text") == null ? "" : request.getParameter("srch_text");
+		String[] srch_data = new String[4];
+		srch_data[0] = request.getParameter("srch_location") == null ? "" : request.getParameter("srch_location");
+		srch_data[1] = request.getParameter("srch_category") == null ? "" : request.getParameter("srch_category");
+		srch_data[2] = request.getParameter("srch_text") == null ? "" : request.getParameter("srch_text");
+		srch_data[3] = request.getParameter("order_standard") == null ? "" : request.getParameter("order_standard");
 		
-		request.setAttribute("list",  new StoreDAO().getStoreList(pageNum, pageSize, srch_location, srch_category, srch_text));
+		request.setAttribute("list",  new StoreDAO().getStoreList(pageNum, pageSize, srch_data));
 
 		ActionForward forward = new ActionForward();
 		forward.setPath("./store/storeListAjax.jsp");
