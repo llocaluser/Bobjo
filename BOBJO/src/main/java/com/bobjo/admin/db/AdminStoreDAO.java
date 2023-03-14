@@ -1,4 +1,4 @@
-package com.bobjo.store.db;
+package com.bobjo.admin.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,9 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bobjo.store.db.StoreDTO;
 import com.bobjo.utils.db.ConnectionManager;
 
-public class StoreDAO {
+public class AdminStoreDAO {
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
@@ -45,14 +46,7 @@ public class StoreDAO {
 	}
 	
 	// 검색된 컨텐츠 수 조회
-	/**
-	 * 
-	 * @param srch_data[0] == srch_location
-	 * @param srch_data[1] == srch_category
-	 * @param srch_data[2] == srch_text
-	 * @return int
-	 */
-	public int getStoreListSize(String[] srch_data) {
+	public int getStoreListSize(String srch_location, String srch_category, String srch_text) {
 		int totalPage = 0;
 		
 		try {
@@ -63,19 +57,19 @@ public class StoreDAO {
 			sqlBuilder.append("from bobjo_store ");
 			sqlBuilder.append("where store_name like ? ");
 
-			if(!srch_data[0].equals("")) {
-				sqlBuilder.append("and substring_index(substring_index(s.addr,' ',2),' ',-1) in(");
-				sqlBuilder.append(srch_data[0]);
+			if(!srch_location.equals("")) {
+				sqlBuilder.append("and substring_index(substring_index(addr,' ',2),' ',-1) in(");
+				sqlBuilder.append(srch_location);
 				sqlBuilder.append(") ");
 			}
-			if(!srch_data[1].equals("")) {
-				sqlBuilder.append("and s.store_category in(");
-				sqlBuilder.append(srch_data[1]);
+			if(!srch_category.equals("")) {
+				sqlBuilder.append("and store_category in(");
+				sqlBuilder.append(srch_category);
 				sqlBuilder.append(") ");
 			}
 			
 			pstmt = con.prepareStatement(sqlBuilder.toString());
-			pstmt.setString(1, "%"+srch_data[2]+"%");
+			pstmt.setString(1, "%"+srch_text+"%");
 
 			rs = pstmt.executeQuery();
 			rs.next();
@@ -92,17 +86,7 @@ public class StoreDAO {
 	// 검색된 컨텐츠 수 조회
 	
 	// 검색 리스트 조회
-	/**
-	 * 
-	 * @param pageNum
-	 * @param pageSize
-	 * @param srch_data[0] == srch_location
-	 * @param srch_data[1] == srch_category
-	 * @param srch_data[2] == srch_text
-	 * @param srch_data[3] == order_standard
-	 * @return List
-	 */
-	public List getStoreList(int pageNum, int pageSize, String[] srch_data) {
+	public List getStoreList(int pageNum, int pageSize, String srch_location, String srch_category, String srch_text) {
 		List list = new ArrayList<>();
 		
 		try {
@@ -110,30 +94,25 @@ public class StoreDAO {
 			
 			StringBuilder sqlBuilder = new StringBuilder();
 			sqlBuilder.append("select s.store_no,s.store_name,substring_index(s.addr,' ',2) addr,substring_index(s.store_img,',',1) store_img,s.store_category,r.score ");
-			sqlBuilder.append("from bobjo_store s left join (select store_no, round(avg(score),1) score, count(*) cnt from bobjo_review group by store_no) r ");
+			sqlBuilder.append("from bobjo_store s left join (select store_no, round(avg(score),1) score from bobjo_review group by store_no) r ");
 			sqlBuilder.append("on s.store_no = r.store_no ");
 			sqlBuilder.append("where s.store_name like ? ");
 
-			if(!srch_data[0].equals("")) {
+			if(!srch_location.equals("")) {
 				sqlBuilder.append("and substring_index(substring_index(s.addr,' ',2),' ',-1) in(");
-				sqlBuilder.append(srch_data[0]);
+				sqlBuilder.append(srch_location);
 				sqlBuilder.append(") ");
 			}
-			if(!srch_data[1].equals("")) {
+			if(!srch_category.equals("")) {
 				sqlBuilder.append("and s.store_category in(");
-				sqlBuilder.append(srch_data[1]);
+				sqlBuilder.append(srch_category);
 				sqlBuilder.append(") ");
-			}
-			if(!srch_data[3].equals("")) {
-				sqlBuilder.append("order by r.");
-				sqlBuilder.append(srch_data[3]);
-				sqlBuilder.append(" desc ");
 			}
 			
 			sqlBuilder.append("limit ? offset ? ");
 			
 			pstmt = con.prepareStatement(sqlBuilder.toString());
-			pstmt.setString(1, "%"+srch_data[2]+"%");
+			pstmt.setString(1, "%"+srch_text+"%");
 			pstmt.setInt(2, pageSize);
 			pstmt.setInt(3, (pageNum-1)*pageSize);
 
