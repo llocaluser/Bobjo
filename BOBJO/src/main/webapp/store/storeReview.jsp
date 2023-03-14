@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -36,62 +35,34 @@
 
 <!--                 수정                              -->
 <style type="text/css">
-a{
-color: black;
-}
-
-
-
-
 .global-navigation li {
 	background-color: #fff;
 	border-bottom: 1px solid #d8d8d8;
 	float: left;
 	display: block;
-	width: 25%;
-	height: 80px;
+	width: 188px;
+	height: 65px;
 	margin: 0;
 	padding: 0;
 	border: 0;
 	padding: 18px 0 15px;
-	color: black;
+	color: #333;
 	vertical-align: baseline;
-	font-size: 24px;
+	border-bottom: 7px solid #e51f00;
+	font: inherit;
+	font-size: 18px;
 	font-weight: bold;
 	text-align: center;
-    }
-    .global-navigation li:hover{
-    color: blue;
-    background : beige;
-	border-bottom: 7px solid #e51f00;
+	line-height: 1.33;
 	
-    
-    }
-    li.-current{
-    color: blue;
-    background : beige;
-	border-bottom: 7px solid #e51f00;
-    
-    }
-    
-    .main -left price-jpy{
-    background : beige;
-    }
-
-#h2{
-font-size: 3rem;
 }
+
+
 
 .container {
 	*zoom: 1;
-	width: 1250px;
+	width: 940px;
 	margin: 0 auto;
-	margin-left: 16.666667%;
-}
-
-
-table tr{
-    background : beige;
 }
 
 .row {
@@ -117,29 +88,87 @@ ol, ul {
 }
 
 .icon-list li {
+  text-indent: -28px;
+  margin-left: 28px;
+  margin-bottom: 8px;
+}
+
+.icon-list li [class*="icon"] {
+  margin-right: 10px;
+}
+
+.icon-list li:last-child {
+  margin-bottom: 0;
+}
+
+.icon-list.-space {
+  margin-bottom: 10px;
+}
+
+.icon-list .michelin-pc {
+  display: inline-block;
+  margin-left: 0;
+  border-radius: 2px;
+  background-color: #ad001e;
+  text-indent: 0;
+}
+
+.icon-list .michelin-pc__url {
+  text-decoration: none;
+}
+
+.icon-list .michelin-pc__container,
+.icon-list .michelin-pc__container--non-img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.icon-list .michelin-pc__container {
+  padding: 3px 8px 3px 0;
+}
+
+.icon-list .michelin-pc__container--non-img {
+  padding: 3px 8px;
+}
+
+.icon-list .michelin-pc__box {
+  width: 54px;
+  text-align: center;
+}
+
+.icon-list .michelin-pc__img {
+  height: 16px;
+  vertical-align: middle;
+}
+
+.icon-list .michelin-pc__text {
+  color: #fff;
+  font-size: 10px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+
+.menu-icon {
+	background: url('./img/storenum.png') 0 -2224px;
+	display: inline-block;
+	vertical-align: middle;
+	vertical-align: auto;
+	zoom: 1;
+	display: inline;
+	height: 18px;
+	width: 18px;
+}
+
+.icon-list li {
 	text-indent: -28px;
 	margin-left: 28px;
 	margin-bottom: 8px;
 }
-
-.icon-list li [class*="icon"] {
-	margin-right: 10px;
-}
-
-.icon-list li:last-child {
-	margin-bottom: 0;
-}
-
-.icon-list.-space {
-	margin-bottom: 10px;
-}
-
-
-.menu-icon, .price-icon, .tel-icon, .hours-icon, .location-icon {
-width: 20px; 
-height: 20px;
-}
-
 
 .contact_form-container {
 	display: flex;
@@ -149,57 +178,12 @@ height: 20px;
 	display: list-item;
 }
 
-button.btn1:hover {
-	color: blue;
-	background : beige;
-	font: bold;
-	font-size: 20px;
+btn1{
+background: yellow;
+color: yellow;
 }
-button.btn1{
-	font: bold;
-	font-size: 20px;
-	margin-left : 40px 
-
-}
-
-
-.container-menu {
-   width : 1250px;
-   margin: 0 30% 30px 15%;
-   background: beige;
-}
-.row-col5 {
-display: flex;
-border-style: double ;
-}
-
-
-
-.-item-left-col3of12 {
-padding: 0 0 0 10px;
-margin: 10px;
-}
-
-
-.-item-right-col6of12-in-vertical {
-flex-wrap : wrap;
-padding: 0 0 0 40px;
-border-style:double;
-border-right: 10px; 
-border-top: 10px; 
-border-bottom: 10px; 
-}
-.-item-left-col9of16 {
-padding-left: 10px; 
-}
-
-.-item-right-col3of16 {
-padding-right: 20px; 
-}
-
 
 </style>
-
 
 <!--                 수정                              -->
 
@@ -209,8 +193,8 @@ padding-right: 20px;
 	<div class="hero_area">
 		<!-- header section strats -->
 		<div class="brand_box">
-			<a class="navbar-brand" href="./mainContent/index.html"> 
-			<span>BobJo! </span>
+			<a class="navbar-brand" href="./mainContent/index.html"> <span>
+					BobJo! </span>
 			</a>
 		</div>
 		<!-- end header section -->
@@ -243,12 +227,12 @@ padding-right: 20px;
 									href="./mainContent/testimonial.html"></a></li>
 								<li class="nav-item"><a class="nav-link"
 									href="./mainContent/contact.html"></a></li>
-
-
+								
+								
 							</ul>
-
-
-
+							
+							
+							
 						</div>
 					</div>
 				</nav>
@@ -261,13 +245,18 @@ padding-right: 20px;
 
 	<!-- contact section -->
 
+
+
+
+
+
 	<section class="contact_section layout_padding">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="offset-lg-2 col-md-10 offset-md-1">
 					<div class="heading_container">
 						<hr>
-						<h2 id="h2">가게이름</h2>
+						<h2>가게이름</h2>
 					</div>
 				</div>
 			</div>
@@ -280,34 +269,43 @@ padding-right: 20px;
 								<div>
 									<div class="-item-rect -item-right -col6of12">
 										<ul class="icon-list -space sentence">
-											<li><span><img src="./img/blackbell.png" class="menu-icon"></span> 가게주메뉴 카테고리</li>
+											<li><span class="menu-icon"></span> 
+											가게주메뉴 카테고리
+											</li>
 
-											<li><span ><img src="./img/money.png" class="price-icon"></span> 가격대</li>
+											<li><span class="price-icon"></span> 
+											가격대 
+											</li>
 
-											<li><span ><img src="./img/phone.png" class="tel-icon"></span> 가게전화번호</li>
+											<li><span class="tel-icon"></span> 
+											가게전화번호
+											</li>
 
-											<li><span ><img src="./img/watch.png" class="hours-icon"></span>영업시간 Dinner: 17:00 -
-												22:30 Saturday &amp; Sunday &amp; Holiday Lunch: 11:30 -
-												16:00 , Dinner: 17:00 - 22:30</li>
+											<li><span class="hours-icon"></span>영업시간
+											Dinner: 17:00 - 22:30 Saturday &amp; Sunday &amp; Holiday
+											Lunch: 11:30 - 16:00 , Dinner: 17:00 - 22:30</li>
 
-											<li><span></span><img src="./img/house.png" class="location-icon"></span> 주소 <br>상세주소</li>
+											<li><span class="location-icon"></span> 주소
+												<br>상세주소</li>
 										</ul>
 									</div>
 									<div>
-									  	<button class="btn1">
+										<button name="btn1">
 											<a href="##"> 예약하기 
 										</button>
 									</div>
 								</div>
 							</div>
 						</form>
+						
+						
 					</div>
 					<div class="col-md-6 px-0">
 						<div class="map_container">
 							<div class="map-responsive">
 								<iframe
 									src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=
-									아이티윌"
+									서울"
 									width="600" height="300" frameborder="0"
 									style="border: 0; width: 100%; height: 100%" allowfullscreen></iframe>
 							</div>
@@ -323,11 +321,10 @@ padding-right: 20px;
 	<div class="global-navigation">
 		<div class="container">
 			<ul>
-				<li><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
-				<li class="-current"><a href="setting.menu.html">메뉴</a></li>
-				<li><a href="setting.img.html">사진</a></li>
-				<li><a href="setting.review.html">리뷰</a></li>
-
+				<li class="-current"><a href="#">가게상세정보</a></li>
+				<li><a href="#">메뉴</a></li>
+				<li><a href="#">사진</a></li>
+				<li><a href="#">리뷰</a></li>
 
 			</ul>
 
@@ -337,87 +334,10 @@ padding-right: 20px;
 	<!--   중간 머릿말   -->
 
 	<!-- 내용넣기 시작  -->
-	<br>
-	<br>
-	<br>
-	<br>
+
+	<br><br>
 	
-	
-	<div class="main -left price-jpy">
-	<div class="container-menu">
-		<h2 class="jumbospacing-and-a-half">추천 메뉴</h2>
-		
-	    <c:forEach var="i" begin="0" end="menuList.size()-1" step="1" items="${menuList}">
-			<div class="row-col5">
-				<div class="-item-left-col3of12">
-					<div class="figure -fit-220">
-						<a
-							href="https://gurunavi.com/ko/k774003/imgs/s_cm_01_011.jpg?dt=1678084632"
-							class="cboxElement"> <img
-							src="https://gurunavi.com/ko/k774003/imgs/t_cm_01_011.jpg?dt=1678084632"
-							width="220" alt="${menuList[i].menu_no }" title="그 외 고기 구이, 곱창류"> <span
-							class="-closeup"></span>
-						</a>
-					</div>
-				</div>
-				<div class="-item-right-col6of12-in-vertical">
-
-					<div class="row">
-						<div class="-item-right-col8of16">
-							<div class="right-spacing">
-								<div class="spacing">
-									<div class="small">${menuList[i].Menu_no}</div>
-
-									<h3 class="huge abit-spacing">${dto.getMenu_name}</h3>
-
-								</div>
-								<div class="cx">
-									<div class="label -gold spacing right-spacing">추천 메뉴</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="row -wide-bottom">
-						<div class="-item-left-col3of12">
-							<div class="panel-light-silver -in">
-								<ul class="spacing-list small">
-									<li><b class="b">메뉴정보 : </b> ${dto.getMenu_info}</li>
-								</ul> 
-							</div>
-						</div>
-
-						<div class="-item-right -col3of12">
-							<div class="right-spacing">
-								<ul class="menu-like-list small">
-									<li><span class="-value"> ${dto.getPrice}원 </span></li>
-								</ul>
-								<p class="text-right small">세금 포함</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	    </c:forEach>
-		<div class="cassette triple-spacing">
-			<div class="row-col5">
-				<div class="-item-left-col9of16">
-					<p class="small">*여기에는 대표적인 식자재만을 한정해 기재하고 있으며, 그 밖의 재료가 사용되는
-						경우도 있습니다.또한 시기적 요인과 식자재 입하 상황에 따라 메뉴와 요리 종류가 변경될 수 있으므로 양해해 주시기
-						바랍니다.</p>
-					<p class="small">*사진은 샘플입니다.</p>
-					<p class="small">*실제 표시된 가격과 다른 경우가 있습니다.</p>
-				</div>
-				<div class="-item-right-col3of16">
-					<p class="text-right small">* 금액은 한국 원 (\)</p>
-				</div>
-			</div>
-		</div>
-</div>
-
-	
-
+	<jsp:include page="../review/review.jsp"/>
 
 	<!-- 내용넣기 끝  -->
 
@@ -431,17 +351,17 @@ padding-right: 20px;
 			<div class="info_contact">
 				<div class="row">
 					<div class="col-md-4">
-						<a href=""> <img src="../images/location.png" alt=""> <span>
+						<a href=""> <img src="./images/location.png" alt=""> <span>
 								Passages of Lorem Ipsum available </span>
 						</a>
 					</div>
 					<div class="col-md-4">
-						<a href=""> <img src="../images/call.png" alt=""> <span>
+						<a href=""> <img src="./images/call.png" alt=""> <span>
 								Call : +012334567890 </span>
 						</a>
 					</div>
 					<div class="col-md-4">
-						<a href=""> <img src="../images/mail.png" alt=""> <span>
+						<a href=""> <img src="./images/mail.png" alt=""> <span>
 								demo@gmail.com </span>
 						</a>
 					</div>
@@ -459,21 +379,21 @@ padding-right: 20px;
 				<div class="col-md-4 col-lg-3">
 					<div class="info_social">
 						<div>
-							<a href=""> <img src="../images/facebook-logo-button.png"
+							<a href=""> <img src="./images/facebook-logo-button.png"
 								alt="">
 							</a>
 						</div>
 						<div>
-							<a href=""> <img src="../images/twitter-logo-button.png"
+							<a href=""> <img src="./images/twitter-logo-button.png"
 								alt="">
 							</a>
 						</div>
 						<div>
-							<a href=""> <img src="../images/linkedin.png" alt="">
+							<a href=""> <img src="./images/linkedin.png" alt="">
 							</a>
 						</div>
 						<div>
-							<a href=""> <img src="../images/instagram.png" alt="">
+							<a href=""> <img src="./images/instagram.png" alt="">
 							</a>
 						</div>
 					</div>
@@ -496,9 +416,9 @@ padding-right: 20px;
 	<!-- footer section -->
 
 
-	<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="../js/bootstrap.js"></script>
-	<script type="text/javascript" src="../js/custom.js"></script>
+	<script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="./js/bootstrap.js"></script>
+	<script type="text/javascript" src="./js/custom.js"></script>
 
 </body>
 

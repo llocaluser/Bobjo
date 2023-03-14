@@ -85,7 +85,7 @@
                  <input type="button" value="검색 조건 초기화" onclick="resetValue();">
                 </li>
                 <li class="nav-item">
-                 <select name="order_standard" onchange="javascript:srch_frm.submit();">
+                 <select name="order_standard" onchange="srch_frm.submit();">
                  	<option value="">정렬</option>
                  	<option value="score" <c:if test='${order_standard eq "score" }' >selected</c:if>>별점 높은 순</option>
                  	<option value="cnt" <c:if test='${order_standard eq "cnt" }' >selected</c:if>>방문자 많은 순</option>
@@ -195,10 +195,12 @@
 				pageSize:$("input[name=pageSize]").val(),
 				srch_location:$("input[name=srch_location]").val(),
 				srch_category:$("input[name=srch_category]").val(),
-				srch_text:$("input[name=srch_text]").val()
+				srch_text:$("input[name=srch_text]").val(),
+				order_standard:$("select[name=order_standard]").val()
 				},
 // 			dataType:"요청한 데이터타입(html,xml,json,text)",
 			success:function(data) {
+				
 				$('.fruit_container').append(data);
 				$("input[name=pageNum]").val(Number($("input[name=pageNum]").val())+1);
 				if(Number($("input[name=pageNum]").val())*Number($("input[name=pageSize]").val()) < ${totalPage}) {
