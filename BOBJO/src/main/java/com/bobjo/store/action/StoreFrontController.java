@@ -36,7 +36,14 @@ public class StoreFrontController extends BasicFrontController {
 				e.printStackTrace();
 			}
 		}
-		
+		else if (command.equals("/StoreImg.st")) {
+			action = new StoreImgAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 	}

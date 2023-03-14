@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-
 <head>
 <!-- Basic -->
 <meta charset="utf-8" />
@@ -35,15 +35,16 @@
 
 <!--                 수정                              -->
 <style type="text/css">
-
-
-
-a{
-color: black;
+a {
+	color: black;
 }
 
-
-
+.row-col4 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
 
 .global-navigation li {
 	background-color: #fff;
@@ -61,27 +62,26 @@ color: black;
 	font-size: 24px;
 	font-weight: bold;
 	text-align: center;
-    }
-    .global-navigation li:hover{
-    color: blue;
-    background : beige;
-	border-bottom: 7px solid #e51f00;
-	
-    
-    }
-    li.-current{
-    color: blue;
-    background : beige;
-	border-bottom: 7px solid #e51f00;
-    
-    }
-    
-    .main -left price-jpy{
-    background : beige;
-    }
+}
 
-#h2{
-font-size: 3rem;
+.global-navigation li:hover {
+	color: blue;
+	background: beige;
+	border-bottom: 7px solid #e51f00;
+}
+
+li.-current {
+	color: blue;
+	background: beige;
+	border-bottom: 7px solid #e51f00;
+}
+
+.main -left price-jpy {
+	background: beige;
+}
+
+#h2 {
+	font-size: 3rem;
 }
 
 .container {
@@ -91,9 +91,8 @@ font-size: 3rem;
 	margin-left: 16.666667%;
 }
 
-
-table tr{
-    background : beige;
+table tr {
+	background: beige;
 }
 
 .row {
@@ -136,12 +135,10 @@ ol, ul {
 	margin-bottom: 10px;
 }
 
-
 .menu-icon, .price-icon, .tel-icon, .hours-icon, .location-icon {
-width: 20px; 
-height: 20px;
+	width: 20px;
+	height: 20px;
 }
-
 
 .contact_form-container {
 	display: flex;
@@ -153,25 +150,24 @@ height: 20px;
 
 button.btn1:hover {
 	color: blue;
-	background : beige;
+	background: beige;
 	font: bold;
 	font-size: 20px;
 }
-button.btn1{
+
+button.btn1 {
 	font: bold;
 	font-size: 20px;
-	margin-left : 40px 
-
+	margin-left: 40px
 }
 
-
-
-
-
-
-
+.row-col4 img {
+	vertical-align: super;
+	border-style: double;
+	width: 260px;
+	height: 200px;
+}
 </style>
-
 
 <!--                 수정                              -->
 
@@ -181,8 +177,8 @@ button.btn1{
 	<div class="hero_area">
 		<!-- header section strats -->
 		<div class="brand_box">
-			<a class="navbar-brand" href="../mainContent/index.html"> 
-			<span>BobJo! </span>
+			<a class="navbar-brand" href="../mainContent/index.html"> <span>
+					BobJo! </span>
 			</a>
 		</div>
 		<!-- end header section -->
@@ -232,6 +228,11 @@ button.btn1{
 
 
 	<!-- contact section -->
+
+
+
+
+
 
 	<section class="contact_section layout_padding">
 		<div class="container-fluid">
@@ -293,18 +294,25 @@ button.btn1{
 
 	<!--   중간 머릿말   -->
 	<div class="global-navigation">
-		<div class="container">
-			<ul>
-				<li class="-current"><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
-				<li ><a href="./StoreMenu.me">메뉴</a></li>
-				<li ><a href="./StoreImg.st?store_no=${dto.store_no }">사진</a></li>
-				<li ><a href="#">리뷰</a></li>
+		<div class="screen-full">
+			<div class="container">
+				<ul>
+					<li><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
+					<li><a href="setting.menu.html">메뉴</a></li>
+					<li class="-current"><a
+						href="./StoreImg.st?store_no=${dto.store_no }">사진</a></li>
+					<li><a href="setting.review.html">리뷰</a></li>
 
-			</ul>
 
+				</ul>
+
+			</div>
 		</div>
 	</div>
-
+	<br>
+	<br>
+	<br>
+	<br>
 	<!--   중간 머릿말   -->
 
 	<!-- 내용넣기 시작  -->
@@ -312,150 +320,42 @@ button.btn1{
 	<div class="contents pale-colored">
 		<div class="container">
 			<div class="main -left price-jpy">
-				<div id="restaurantdetail" class="cassette triple-spacing"
-					itemscope="" itemtype="http://schema.org/Restaurant">
-					<table class="table sentence">
-						<colgroup>
-							<col width="30%">
-							<col width="70%">
-						</colgroup>
-						<tbody>
-							<tr>
-								<th>주소</th>
-								<td>${dto.addr }</td>
-							</tr>
+				<div class="cassette">
+					<h2 class="jumbo spacing-and-a-half"></h2>
 
-							<tr>
-								<th>상세주소</th>
-								<td>${dto.addr_details }</td>
-							</tr>
-
-							<tr>
-								<th>가게전화번호</th>
-								<td>${dto.tel }</td>
-							</tr>
-
-							<tr>
-								<th>영업시간</th>
-								<td>${dto.open }</td>
-							</tr>
-
-							<tr>
-								<th>휴무일</th>
-								<td>${dto.close }</td>
-							</tr>
-							<tr>
-								<th>환불규정</th>
-								<td>${dto.refund_policy }</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- /cassette -->
-
-				<div itemscope="" itemtype="http://schema.org/priceCurrency">
-					<meta itemprop="priceCurrency" content="JPY">
-				</div>
-
-				<div itemprop="geo" itemscope=""
-					itemtype="http://schema.org/GeoCoordinates">
-					<meta itemprop="latitude" content="35.6909232">
-					<meta itemprop="longitude" content="139.7019808">
-				</div>
-
-				<div class="cassette triple-spacing">
-					<div class="">
-						<h2 class="jumbo spacing-and-a-half -item-left">좌석/시설 정보</h2>
+					<div class="panel">
+						<div class="row-col4">
+							<c:set var="imgList" value="${dto.store_img.split(',') }"/>
+							<c:forEach var="img" items="${imgList }">  
+							<div class="-item"> 
+								<div class="-out-side">
+									<div class="figure -fit-165">
+										<a href="//localhost:8080/BOBJO/images/${img}"
+											class="cboxElement"> <img
+											src="./images/${img}" width="165" height="165">
+										</a>
+									</div>
+								</div>
+								
+							</div>
+							</c:forEach>
+						</div>
 					</div>
 
-					<table class="table sentence">
-						<colgroup>
-							<col width="30%">
-							<col width="70%">
-						</colgroup>
-						<tbody>
-							<tr>
-								<th>테이블 수</th>
-								<td>${dto.total_tables }</td>
-							</tr>
-							<tr>
-								<th>최대예약인원</th>
-								<td>${dto.max_rsrv }</td>
-							</tr>
-							<tr>
-								<th>편의시설</th>
-								<td>${dto.extra_info }</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- /cassette -->
-				<div class="cassette triple-spacing">
-					<div class="">
-						<h2 class="jumbo spacing-and-a-half -item-left">메뉴/서비스 관련정보</h2>
-					</div>
-
-					<table class="table sentence">
-						<colgroup>
-							<col width="30%">
-							<col width="70%">
-						</colgroup>
-						<tbody>
-							<tr>
-								<th>카테고리</th>
-								<td>${dto.store_category }</td>
-							</tr>
-							<tr>
-								<th id="infectionprevention">
-									<p>감염예방</p>
-								</th>
-								<td>
-									<div class="sanitary -pc">
-										<div class="sanitary-item">
-											<img
-												src="https://gurunavi.com/imgs/sanitary/inside_disinfection.svg"
-												alt="Dining rooms and equipments disinfected" width="50"
-												height="50"> <img
-												src="https://gurunavi.com/imgs/sanitary/seat_disinfection.svg"
-												alt="Tables disinfected between guests" width="50"
-												height="50"> <img
-												src="https://gurunavi.com/imgs/sanitary/antiseptic_solution.svg"
-												alt="Sanitizers available to guests and staff" width="50"
-												height="50"> <img
-												src="https://gurunavi.com/imgs/sanitary/ventilation.svg"
-												alt="Ventilation for dining room" width="50" height="50">
-											<img
-												src="https://gurunavi.com/imgs/sanitary/seat_spacing.svg"
-												alt="Socially distanced dining tables and chairs" width="50"
-												height="50">
-										</div>
-										<div class="sanitary-item">
-											<img
-												src="https://gurunavi.com/imgs/sanitary/contactless_payment.svg"
-												alt="Contactless payment" width="50" height="50"> <img
-												src="https://gurunavi.com/imgs/sanitary/face_masks_required_for_staff.svg"
-												alt="Face masks required for staff" width="50" height="50">
-											<img
-												src="https://gurunavi.com/imgs/sanitary/handwash_gargling.svg"
-												alt="Wash hands, sanitizing, and gargling required for staff"
-												width="50" height="50"> <img
-												src="https://gurunavi.com/imgs/sanitary/regular_temperature_checks_for_staff.svg"
-												alt="Regular temperature checks for staff" width="50"
-												height="50">
-										</div>
-								</td>
-							</tr>
-							<tr>
-								<th>식당소개</th>
-								<td>${dto.store_content }</td>
-							</tr>
-						</tbody>
-					</table>
-
+					<div class="panel -silver"></div>
 				</div>
 			</div>
+			<div class="aside -right">
+				<!-- /cassette -->
+				<!-- /cassette -->
+			</div>
 		</div>
+		<!-- /container -->
 	</div>
+
+
+
+
 
 	<!-- 내용넣기 끝  -->
 
@@ -464,7 +364,7 @@ button.btn1{
 	<section class="info_section layout_padding">
 		<div class="container">
 			<div class="info_logo">
-				<h2>bob jo!</h2>
+				<h2>BOBJO</h2>
 			</div>
 			<div class="info_contact">
 				<div class="row">
