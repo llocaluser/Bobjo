@@ -68,8 +68,42 @@ public class MemberFrontController extends BasicFrontController {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
+		  }
+	    } 	
+	    else if(command.equals("/MemberMypage.me")) {
+	      System.out.println("MemberMypage.me 호출");
+	      
+	      // 패턴1
+	      forward = new ActionForward();
+	      forward.setPath("./member/myPage.jsp");
+	      forward.setRedirect(false);
+	   }
+	    else if(command.equals("/MemberDeleteAction.me")) {
+	    	System.out.println("MemberDeleteAction.me 호출");
+	    	
+	    	//패턴3
+	    	action = new MemberDeleteAction();
+	    	try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-	    
+	    }
+	    else if(command.equals("/MemberDeleteProAction.me")) {
+	    	System.out.println("MemberDeleteProAction.me 호출");
+	    	
+	    	// 패턴2
+	    	action = new MemberDeleteProAction();
+	    	try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    	
+	    }
+		
+		
+		
 	    	
 	    }
 	
@@ -78,4 +112,3 @@ public class MemberFrontController extends BasicFrontController {
 	
 	
 	}
-}

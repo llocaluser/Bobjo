@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.bobjo.utils.db.ConnectionManager;
+import com.mysql.cj.Session;
 
 public class MemberDAO {
 	private Connection con = null;
@@ -83,6 +84,80 @@ public class MemberDAO {
 		return result;
 	}
 	//로그인 - loginMember(dto)
+	
+	//회원탈퇴 - deleteMember(dto)
+	public int deleteMember(MemberDTO dto) {
+		int result = 1;
+		
+		try {
+			con = ConnectionManager.getConnection();
+			
+			sql = "select pw from bobjo_member where m_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getM_id());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(dto.getPw().equals(rs.getString("pw"))) {
+					sql = "delete from bobjo_member where m_id=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, dto.getM_id());
+					
+					pstmt.executeUpdate();
+					
+					result = 1;
+				}else {
+					result = 0;
+				}
+			}else {
+				result = -1;
+			}
+			System.out.println("회원 삭제 결과 : "+result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(rs, pstmt, con);
+		}
+		
+		return result;
+	}
+    //회원탈퇴 - deleteMember(dto)
+	
+	// 회원 정보 조회
+		public MemberDTO getMemberInfo(String m_id) {
+			MemberDTO dto = null;
+
+			try {
+				con = ConnectionManager.getConnection();
+				
+				// 3. SQL 작성(select) & pstmt 객체
+				sql = "select m_id from bobjo_member where m_id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, m_id);
+				
+				// 4. SQL 실행
+				rs = pstmt.executeQuery();
+
+				// 5. 데이터 처리
+				// 화면에 출력X -> 출력정보 저장 (리턴)
+				if (rs.next()) {
+					dto = new MemberDTO();
+
+					dto.setM_id("m_id");
+				}
+
+				System.out.println(" DAO : 회원정보 조회 성공! ");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				ConnectionManager.closeConnection(rs, pstmt, con);
+			}
+
+			return dto;
+		}
+		// 회원 정보 조회
 	
 	
 	
