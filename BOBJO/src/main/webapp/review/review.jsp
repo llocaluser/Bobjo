@@ -181,6 +181,13 @@
 	            				<a href="./ReviewModform.rv?store_no=${list.store_no }
 			            		&list=${list}">리뷰 수정</a>
 			            	</button>
+			            	<%-- <c:if test="${sessionContext.m_id ne null }">
+				            <c:if test="${sessionContext.m_id eq ReviewList.m_id }">
+				            	<button class="btn_reg font_norm">
+				            		<a href="./ReviewMod.rv?store_no=${ReviewList[0].store_no }">리뷰 수정</a>
+				            	</button>
+				            </c:if>
+				            </c:if> --%>
                             <button type="button" class="btn_report font_arr" onclick="report();">
                             	신고하기
                             </button>
@@ -192,12 +199,6 @@
             </c:forEach>
             <br>
             <section class="reg">
-            <%-- <c:if test="${sessionContext.m_id eq ReviewList.m_id }">
-            	<button class="btn_reg font_norm">
-            		<a href="./ReviewMod.rv?store_no=${ReviewList[0].store_no }">리뷰 수정</a>
-            	</button>
-            </c:if> --%>
-            	
             	<button class="btn_reg font_norm">
             		<a href="./ReviewRegform.rv?store_no=${ReviewList[0].store_no }">리뷰 등록</a>
             	</button>
@@ -225,9 +226,11 @@
                     	...
                     	</span>
                     </c:if>
+                    <a href="./ReviewList.rv?pageNum=${i }">
                     	<span class="btn font_arr">
-                    		<a href="./ReviewList.rv?pageNum=${i }">${i }</a>
+                    		${i }
                     	</span>
+                    </a>
                     <c:if test="${endPage < pageSize && i eq pageNum+2 }">
                     	<span class="btn font_arr" style="border:none">
                     	...

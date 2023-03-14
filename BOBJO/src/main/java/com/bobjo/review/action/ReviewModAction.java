@@ -1,5 +1,7 @@
 package com.bobjo.review.action;
 
+import java.io.File;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,7 +29,8 @@ public class ReviewModAction implements Action {
 		ReviewDTO dto = new ReviewDTO();
 		
 		String savePath = request.getServletContext().getRealPath("img");
-		 
+		String absolutePath = new File(savePath).getAbsolutePath();
+		System.out.println(absolutePath);
 		// 파일 크기 15MB로 제한
 		int sizeLimit = 1024*1024*15;
 		
@@ -38,9 +41,26 @@ public class ReviewModAction implements Action {
 						"utf-8",
 						new DefaultFileRenamePolicy());
 		
+		
+		System.out.println(multi.getParameter("review_no"));
+		System.out.println(multi.getParameter("store_no"));
+		System.out.println(multi.getParameter("content"));
+		System.out.println(multi.getParameter("score"));
+		System.out.println(multi.getParameter("review_img"));
+		
+		
+		String review_img = request.getParameter("review_img") == null ? 
+				multi.getFilesystemName("review_img") : request.getParameter("review_img");
+		
+		System.out.println(review_img);
+		System.out.println(request.getParameter("review_img"));
+		System.out.println(multi.getFilesystemName("review_img"));
+		System.out.println(multi.getParameter("review_img"));
+		
+		
 		dto.setContent(multi.getParameter("content"));
 		dto.setScore(Float.parseFloat(multi.getParameter("score")));
-		dto.setReview_img(multi.getFilesystemName("review_img"));
+		dto.setReview_img(review_img);
 		dto.setReview_no(Integer.parseInt(multi.getParameter("review_no")));
 		
 		dao.modifyReview(dto);

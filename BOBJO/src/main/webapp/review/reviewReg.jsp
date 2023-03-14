@@ -8,15 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<form action="./ReviewReg.rv" method="post" enctype="multipart/form-data">
 		<input type="text" name="store_no" value="${store_no }" hidden>
 		리뷰 내용 <input type="text" name="content"> <br>
-		점수 <select>
+		점수 <select name="score">
 			<c:forEach var="i" begin="0" end="5">
-				<option value="${i}">${i}</option>
+				<option name="score" value="${i}">${i}</option>
 				<c:if test="${i ne 5}">
-					<option value="${i + 0.5}">${i + 0.5}</option>
+					<option name="score" value="${i + 0.5}">${i + 0.5}</option>
 				</c:if>
 			</c:forEach>
 		</select><br>
