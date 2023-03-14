@@ -86,7 +86,7 @@
          
        </section>
       <div id="result-fail"></div>
-       <input type="submit" value="회원가입">
+          <button id="submit" type="submit">가입하기</button>
        </div>
      </div> 
 </form>        
