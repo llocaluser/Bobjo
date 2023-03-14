@@ -21,4 +21,7 @@ public class StoreDTO {
 	private String m_id;
 	
 	private double score;
+	private int minPrice;
+	private int maxPrice;
+	
 }
