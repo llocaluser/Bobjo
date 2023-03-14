@@ -37,6 +37,13 @@ a{
 color: black;
 }
 
+.row-col4 {
+display:flex;
+flex-direction: row;
+flex-wrap : wrap ;
+justify-content:space-around;
+
+}
 
 
 
@@ -93,7 +100,6 @@ table tr{
 
 .row {
 	*zoom: 1;
-	justify-content:space-around;
 }
 
 ol, ul {
@@ -159,12 +165,13 @@ button.btn1{
 	margin-left : 40px 
 
 }
-.row -col4 {
-justify-content:space-around;
 
+.row-col4 img { 
+vertical-align: super;
+border-style: double;
+    width: 260px;
+    height: 200px;
 }
-
-
 
 
 
@@ -302,17 +309,18 @@ justify-content:space-around;
 		<div class="screen-full">
 		<div class="container">
 			<ul>
-				<li><a href="#">가게상세정보</a></li>
-				<li><a href="#">메뉴</a></li>
-				<li class="-current"><a href="#">사진</a></li>
-				<li><a href="#">리뷰</a></li>
+				<li><a href="info.jsp">가게상세정보</a></li>
+				<li><a href="setting.menu.html">메뉴</a></li>
+				<li class="-current"><a href="setting.img.html">사진</a></li>
+				<li><a href="setting.review.html">리뷰</a></li>
+
 
 			</ul>
 
 		</div>
 		</div>
 	</div>
-<br><br><br><br><br>
+<br><br><br><br>
 	<!--   중간 머릿말   -->
 
 	<!-- 내용넣기 시작  -->
@@ -326,7 +334,8 @@ justify-content:space-around;
     </h2>
 
         <div class="panel">
-        <div class="row -col4">                    <div class="-item">
+        <div class="row-col4">                    
+        <div class="-item">
                         <div class="-out-side">
                             <div class="figure -fit-165">
                                 <a href="//rimage.gnst.jp/rest/img/3f11rnt30000/s_006h.jpg" class="cboxElement">
@@ -358,7 +367,7 @@ justify-content:space-around;
                             </div>
                         </div>
                     </div>
-        </div><div class="row -col4">                    <div class="-item">
+        </div><div class="row-col4">                    <div class="-item">
                         <div class="-out-side">
                             <div class="figure -fit-165">
                                 <a href="//rimage.gnst.jp/rest/img/3f11rnt30000/s_00c5.jpg" class="cboxElement">
@@ -390,7 +399,7 @@ justify-content:space-around;
                             </div>
                         </div>
                     </div>
-        </div><div class="row -col4">                    <div class="-item">
+        </div><div class="row-col4">                    <div class="-item">
                         <div class="-out-side">
                             <div class="figure -fit-165">
                                 <a href="//rimage.gnst.jp/rest/img/3f11rnt30000/s_00ce.jpg" class="cboxElement">
@@ -422,7 +431,7 @@ justify-content:space-around;
                             </div>
                         </div>
                     </div>
-        </div><div class="row -col4">                    <div class="-item">
+        </div><div class="row-col4">                    <div class="-item">
                         <div class="-out-side">
                             <div class="figure -fit-165">
                                 <a href="//rimage.gnst.jp/rest/img/3f11rnt30000/s_0nau.jpg" class="cboxElement">
@@ -566,4 +575,3 @@ justify-content:space-around;
 </body>
 
 </html>
-

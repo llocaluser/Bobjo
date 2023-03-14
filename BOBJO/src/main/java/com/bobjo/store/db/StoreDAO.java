@@ -172,6 +172,7 @@ public class StoreDAO {
 				if (rs.next()) {
 					dto = new StoreDTO();
 					
+					dto.setStore_name(rs.getString("store_name"));
 					dto.setStore_no(rs.getInt("store_no"));
 					dto.setAddr(rs.getString("addr"));
 					dto.setAddr_details(rs.getString("addr_details"));
@@ -185,6 +186,14 @@ public class StoreDAO {
 					dto.setStore_category(rs.getString("store_category"));
 					dto.setStore_content(rs.getString("store_content"));
 				}
+				sql = "select min(price), max(price) from bobjo_menu where store_no=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, store_no);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					dto.setMinPrice(rs.getInt(1));
+					dto.setMaxPrice(rs.getInt(2));
+				}
 				System.out.println(" DAO : 가게 정보 조회성공!");
 
 			} catch (Exception e) {
@@ -195,6 +204,49 @@ public class StoreDAO {
 			return dto;
 		}
 		// 특정 가게 조회
+		
+		// 사진 보기
+				public StoreDTO getImg(int store_no) {
+					StoreDTO dto = null;
+					try {
+						con = ConnectionManager.getConnection();
+						sql = "select store_img,store_no,store_name,addr,addr_details,tel,open,close,store_category "
+								+ "  from bobjo_store where store_no =?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setInt(1, store_no);
+						rs = pstmt.executeQuery();
+						if (rs.next()) {
+							dto = new StoreDTO();
+							dto.setStore_img(rs.getString(1));
+							
+							dto.setStore_no(rs.getInt(2));
+							dto.setStore_name(rs.getString(3));
+							dto.setAddr(rs.getString(4));
+							dto.setAddr_details(rs.getString(5));
+							dto.setTel(rs.getString(6));
+							dto.setOpen(rs.getString(7));
+							dto.setClose(rs.getString(8));
+							dto.setStore_category(rs.getString(9));
+						}
+						sql = "select min(price), max(price) from bobjo_menu where store_no=?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setInt(1, store_no);
+						rs = pstmt.executeQuery();
+						if (rs.next()) {
+							dto.setMinPrice(rs.getInt(1));
+							dto.setMaxPrice(rs.getInt(2));
+						}
+						System.out.println(" DAO : 상품 사진 조회 !");
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						ConnectionManager.closeConnection(rs, pstmt, con);
+					}
+
+					return dto;
+				}
+				// 사진 보기 
 
 		
 }
