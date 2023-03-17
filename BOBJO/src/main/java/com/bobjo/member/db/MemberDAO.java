@@ -124,7 +124,7 @@ public class MemberDAO {
 	}
     //회원탈퇴 - deleteMember(dto)
 	
-	// 회원 정보 조회
+	// 회원 정보 조회 - getMemberInfo(String m_id)
 		public MemberDTO getMemberInfo(String m_id) {
 			MemberDTO dto = null;
 
@@ -132,7 +132,7 @@ public class MemberDAO {
 				con = ConnectionManager.getConnection();
 				
 				// 3. SQL 작성(select) & pstmt 객체
-				sql = "select m_id from bobjo_member where m_id=?";
+				sql = "select m_id,m_name,phone,nickname,email,alcohol_level from bobjo_member where m_id=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, m_id);
 				
@@ -143,8 +143,12 @@ public class MemberDAO {
 				// 화면에 출력X -> 출력정보 저장 (리턴)
 				if (rs.next()) {
 					dto = new MemberDTO();
-
-					dto.setM_id("m_id");
+					dto.setM_id(rs.getString("m_id"));
+					dto.setM_name(rs.getString("m_name"));
+					dto.setPhone(rs.getString("phone"));
+					dto.setNickname(rs.getString("nickname"));
+					dto.setEmail(rs.getString("email"));
+					dto.setAlcohol_level(rs.getString("alcohol_level"));	
 				}
 
 				System.out.println(" DAO : 회원정보 조회 성공! ");
@@ -157,7 +161,88 @@ public class MemberDAO {
 
 			return dto;
 		}
-		// 회원 정보 조회
+		// 회원 정보 조회 - getMemberInfo(String m_id)
+		
+		// 회원정보 수정 -  updateMember(dto)
+		public int updateMember(MemberDTO dto) {
+			int result = -1;
+			try {
+				//1.2 디비연결
+				con = ConnectionManager.getConnection();
+				//3. sql 구문 & pstmt
+				sql = "select pw from bobjo_member where m_id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, dto.getM_id());
+				
+				//4. sql 실행
+				rs = pstmt.executeQuery();
+				
+				//5. 데이터처리 (수정)
+				if(rs.next()) {
+					
+					if(dto.getPw().equals(rs.getString("pw"))) {
+						//3 sql (수정)
+						sql = "update bobjo_member set phone=?,nickname=?,email=?,alcohol_level=? where m_id=?";
+						pstmt = con.prepareStatement(sql);
+						
+						pstmt.setString(1, dto.getPhone());
+						pstmt.setString(2, dto.getNickname());
+						pstmt.setString(3, dto.getEmail());
+						pstmt.setString(4, dto.getAlcohol_level());
+						pstmt.setString(5, dto.getM_id());
+						
+						result = pstmt.executeUpdate();
+						
+					}else {
+						result = 0;
+					}
+					
+				}else {
+					result = -1;
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+		    } finally {
+				ConnectionManager.closeConnection(rs, pstmt, con);
+			}
+			return result;
+		}	
+		// 회원정보 수정 -  updateMember(dto)
+		
+		// 아이디 정보 조회 - getFindID
+		 public MemberDTO getFindID(String m_name, String email) {
+			 MemberDTO dto = null;
+			  try {
+				  // 1.2. 디비연결
+				 con = ConnectionManager.getConnection();
+				 
+				 // 3. sql 작성 & pstmt
+				 sql = "select m_id from bobjo_member where m_name=? and email=?";
+				 pstmt = con.prepareStatement(sql);
+				 pstmt.setString(1, dto.getM_name());
+				 pstmt.setString(2, dto.getEmail());
+				 
+				// 4. SQL 실행
+				rs = pstmt.executeQuery();
+				
+				// 5. 데이터 처리
+				// 화면에 출력X -> 출력정보 저장 (리턴)
+				if (rs.next()) {
+					dto = new MemberDTO();
+					dto.setM_name("m_name");
+					dto.setEmail("email");
+				}
+
+				System.out.println(" DAO : 회원아이디 조회 성공! ");			 
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				ConnectionManager.closeConnection(rs, pstmt, con);
+			}
+			 return dto;
+		 }
+		// 아이디 정보 조회 - getFindID
 	
 	
 	
