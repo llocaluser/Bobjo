@@ -15,9 +15,13 @@ public class MemberDTO {
     private String ceo_num;
     private String alcohol_level;
     private int level;
+
+    
+	}
+	
     
     
 	
 	
 
-}
+

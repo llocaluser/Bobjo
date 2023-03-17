@@ -51,6 +51,14 @@ public class MemberFrontController extends BasicFrontController {
 				e.printStackTrace();
 			}    	
 	    }
+	    else if(command.equals("/Main.me")) {
+	    	System.out.println("Main.me 호출");
+	    	
+	    	// 패턴1
+	    	forward = new ActionForward();
+			forward.setPath("./main/main.jsp");
+			forward.setRedirect(false);
+	    }
 	    else if(command.equals("/MemberLogoutAction.me")) {
 	    	System.out.println("MemberLogoutAction.me");
 	    	
@@ -92,23 +100,53 @@ public class MemberFrontController extends BasicFrontController {
 				e.printStackTrace();
 			}
 	    }
-	    
-		
-		
-		
-		
+	    else if(command.equals("/MemberUpdateAction.me")) {
+	    	System.out.println("MemberUpdateAction.me 호출 ");
 	    	
-	    
-		
-		
-		
-		
+	    	// 패턴3
+	    	action = new MemberUpdateAction();
+	    	try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }
+	    else if(command.equals("/MemberUpdateProAction.me")) {
+	    	System.out.println("MemberUpdateProAction.me 호출");
+	    	
+	    	// 패턴2
+	    	action = new MemberUpdateProAction();
+	    	try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }
+	    else if(command.equals("/MemberFindid.me")) {
+	    	System.out.println("MemberFindid.me 호출");
+	    	
+	    	// 패턴1
+			forward = new ActionForward();
+			forward.setPath("./member/findidMember.jsp");
+			forward.setRedirect(false);
+	  }
+	    else if(command.equals("/MemberFindidAction.me")) {
+	    	System.out.println("MemberFindidAction.me 호출");
+	    	
+	    	// 패턴3
+	    	action = new MemberFindIdAction();
+	    	try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }
 		
 //		Main.me 수정
 	    else if(command.equals("/Main.me")) {
 	    	System.out.println("Main.me 호출");
 	    	
-//	    	 패턴1
+//	    패턴1
 	    	action = new MainAction();
 	    	try {
 	    		forward = action.execute(request, response);
@@ -116,10 +154,15 @@ public class MemberFrontController extends BasicFrontController {
 	    		e.printStackTrace();
 	    	}
 	    }
-	
-	
+	    	
+	   
 	
 	
 	
 	}
+	
+	
+	
+	
+	
 	}

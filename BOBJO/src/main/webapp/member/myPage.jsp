@@ -70,9 +70,9 @@
                        </c:if>
                            
                             <div class="sb-sidenav-menu-heading">계정</div>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="./MemberUpdateAction.me">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                회원정보수정
+                                내정보수정
                             </a>
                             <a class="nav-link" href="./MemberDeleteAction.me">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -106,7 +106,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Static Navigation</h1>
+                        <h1 class="mt-4">${m_id }님</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                             <li class="breadcrumb-item active">Static Navigation</li>
