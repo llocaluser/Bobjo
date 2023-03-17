@@ -12,5 +12,4 @@ public class MenuDTO {
 	private String menu_img;
 	private int store_no;
 	private String menu_category;
-	
 }	
