@@ -98,7 +98,7 @@ public class MemberFrontController extends BasicFrontController {
 		
 		
 	    	
-	    }
+	    
 		
 		
 		
@@ -121,4 +121,5 @@ public class MemberFrontController extends BasicFrontController {
 	
 	
 	
+	}
 	}
