@@ -99,8 +99,9 @@ public class MemberFrontController extends BasicFrontController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	    	
 	    }
+	    
+		
 		
 		
 		
