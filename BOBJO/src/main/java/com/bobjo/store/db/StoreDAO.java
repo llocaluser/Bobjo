@@ -248,5 +248,84 @@ public class StoreDAO {
 				}
 				// 사진 보기 
 
+				// 다빈, 가게 목록 조회
+				public List<StoreDTO> CeoStoreList(String id){
+					List<StoreDTO> cStoreList = new ArrayList<>();
+					try {
+						// 1.2 디비 연결
+						con = ConnectionManager.getConnection();
+						// 3. sql 작성
+						sql = "select * from bobjo_store where m_id=?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setString(1, id);
+						// 4. sql 실행
+						rs = pstmt.executeQuery();
+						// 5. 데이터 처리 (rs -> DTO -> List)
+						while(rs.next()) {
+							StoreDTO dto = new StoreDTO();
+							dto.setStore_name(rs.getString("store_name"));
+							dto.setStore_no(rs.getInt("store_no"));
+							dto.setAddr(rs.getString("addr"));
+							dto.setAddr_details(rs.getString("addr_details"));
+							dto.setTel(rs.getString("tel"));
+							dto.setOpen(rs.getString("open"));
+							dto.setClose(rs.getString("close"));
+							dto.setRefund_policy(rs.getString("refund_policy"));
+							dto.setTotal_tables(rs.getInt("total_tables"));
+							dto.setMax_rsrv(rs.getInt("max_rsrv"));
+							dto.setExtra_info(rs.getString("extra_info"));
+							dto.setStore_category(rs.getString("store_category"));
+							dto.setStore_content(rs.getString("store_content"));
+							dto.setStore_img(rs.getString("store_img"));
+							
+							cStoreList.add(dto);
+						}
+						System.out.println(" DAO : 상품목록 조회 성공! ");
+		
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						ConnectionManager.closeConnection(rs, pstmt, con);
+					}
+					return cStoreList;
+				}
+				// 가게 수정 - 다빈
+				public void updateStore(StoreDTO dto) {
+					
+					try {
+						con = ConnectionManager.getConnection();
+						sql = "update bobjo_store set store_name=?,addr=?,addr_details=?,tel=?,open=?,"
+								+ " close=?,total_tables=?,max_rsrv=?,extra_info=?,store_content=?,"
+								+ " store_img=?,refund_policy=?,store_category=?"
+								+ "where store_no=?";
+						pstmt = con.prepareStatement(sql);
+						// ? 14개
+						pstmt.setString(1, dto.getStore_name());
+						pstmt.setString(2, dto.getAddr());
+						pstmt.setString(3, dto.getAddr_details());
+						pstmt.setString(4, dto.getTel());
+						pstmt.setString(5, dto.getOpen());
+						pstmt.setString(6, dto.getClose());
+						pstmt.setInt(7, dto.getTotal_tables());
+						pstmt.setInt(8, dto.getMax_rsrv());
+						pstmt.setString(9, dto.getExtra_info());
+						pstmt.setString(10, dto.getStore_content());
+						pstmt.setString(11, dto.getStore_img());
+						pstmt.setString(12, dto.getRefund_policy());
+						pstmt.setString(13, dto.getStore_category());
+						pstmt.setInt(14, dto.getStore_no());
+						
+						pstmt.executeUpdate();
+						
+						System.out.println(" DAO : 가게정보 수정완료!");
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						ConnectionManager.closeConnection(rs, pstmt, con);
+					}
+				}
+				// 가게 수정 
+		
 		
 }

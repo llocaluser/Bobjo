@@ -20,8 +20,8 @@ public class MemberDAO {
 			// 1,2 디비연결
 			con = ConnectionManager.getConnection();
 			// 3 sql 작성 & pstmt 객체
-			sql = "insert into bobjo_member(m_id,pw,m_name,phone,nickname,email,alcohol_level) "
-					+ " values(?,?,?,?,?,?,?)";
+			sql = "insert into bobjo_member(m_id,pw,m_name,phone,nickname,email,alcohol_level,ceo_num) "
+					+ " values(?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			
 			// ???
@@ -32,6 +32,7 @@ public class MemberDAO {
 			pstmt.setString(5, dto.getNickname());
 			pstmt.setString(6, dto.getEmail());
 			pstmt.setString(7, dto.getAlcohol_level());
+			pstmt.setString(8, dto.getCeo_num());
 			
 			// 4 sql 실행		
 			pstmt.executeUpdate();
@@ -158,6 +159,34 @@ public class MemberDAO {
 			return dto;
 		}
 		// 회원 정보 조회
+
+		// 0316-다빈 로그인 세션?
+		public MemberDTO loginCeo(String m_id) {
+			MemberDTO dto = null;
+			try {
+				con = ConnectionManager.getConnection();
+				// 3. SQL 작성(select) & pstmt 객체
+				sql = "select ceo_num,alcohol_level from bobjo_member where m_id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, m_id);
+				// 4. SQL 실행
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					dto = new MemberDTO();
+					dto.setCeo_num(rs.getString("ceo_num"));
+					dto.setAlcohol_level(rs.getString("alcohol_level"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				ConnectionManager.closeConnection(rs, pstmt, con);
+			}
+				
+			return dto;
+		}
+		// 로그인 세션?
+
+		
 	
 	
 	
