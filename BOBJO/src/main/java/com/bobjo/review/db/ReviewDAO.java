@@ -148,13 +148,12 @@ public class ReviewDAO {
 		int result;
 		try {
 			conn = ConnectionManager.getConnection();
-			sql = "UPDATE BOBJO_REVIEW SET CONTENT = ?, SCORE = ?, REVIEW_IMG = ?"
+			sql = "UPDATE BOBJO_REVIEW SET CONTENT = ?, SCORE = ?"
 					+ " WHERE REVIEW_NO = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getContent());
 			pstmt.setFloat(2, dto.getScore());
-			pstmt.setString(3, dto.getReview_img());
-			pstmt.setInt(4, dto.getReview_no());
+			pstmt.setInt(3, dto.getReview_no());
 			
 			result = pstmt.executeUpdate();
 			

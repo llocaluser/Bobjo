@@ -13,8 +13,12 @@
  // response.sendRedirect("./MemberLogin.me");
   
 
+   response.sendRedirect("./StoreList.st");
+    /* response.sendRedirect("./Main.me");   */
 //  response.sendRedirect("./StoreList.st");
-   response.sendRedirect("./Main.me"); 
+
+
+//  response.sendRedirect("./StoreList.st");
 
 
 
@@ -22,6 +26,7 @@
   /* response.sendRedirect("./Main.me"); */
 
 /*   response.sendRedirect("./Main.me"); */
+
  
 
 %>

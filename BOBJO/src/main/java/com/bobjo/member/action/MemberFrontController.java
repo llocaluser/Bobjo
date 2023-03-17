@@ -142,6 +142,18 @@ public class MemberFrontController extends BasicFrontController {
 			}
 	    }
 		
+//		Main.me 수정
+	    else if(command.equals("/Main.me")) {
+	    	System.out.println("Main.me 호출");
+	    	
+//	    패턴1
+	    	action = new MainAction();
+	    	try {
+	    		forward = action.execute(request, response);
+	    	} catch (Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    }
 	    	
 	   
 	

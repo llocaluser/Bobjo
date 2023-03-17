@@ -135,7 +135,7 @@ ol, ul {
 }
 
 
-.menu-icon, .price-icon, .tel-icon, .hours-icon, .location-icon {
+.menu-icon, .price-icon, .tel-icon, .hours-icon, .location-icon, .plus, .minus {
 width: 20px; 
 height: 20px;
 }
@@ -162,10 +162,16 @@ button.btn1{
 
 }
 
+.basket-container{
+display:flex;
+justify-content: space-between;
+margin: 20px 50px 0 200px; 
+width: 300px;
+}
 
 .container-menu {
    width : 1250px;
-   margin: 0 30% 30px 15%;
+   margin: -16px 30% 30px 15%;
    background: beige;
 }
 .row-col5 {
@@ -180,6 +186,16 @@ padding: 0 0 0 10px;
 margin: 10px;
 }
 
+.-item-right-col3of12 {
+margin: 10px;
+flex-direction: row;
+width: 100px;
+
+}
+.menu-like-listsmall li{
+
+}
+
 
 .-item-right-col6of12-in-vertical {
 flex-wrap : wrap;
@@ -188,6 +204,8 @@ border-style:double;
 border-right: 10px; 
 border-top: 10px; 
 border-bottom: 10px; 
+width: 500px;
+
 }
 .-item-left-col9of16 {
 padding-left: 10px; 
@@ -197,8 +215,62 @@ padding-left: 10px;
 padding-right: 20px; 
 }
 
+.row-wide-bottom {
+display: flex;
+justify-content:space-between;
+}
+
+button.basket{
+ width: 100px;
+ height: 80px;
+  border-radius: 8px
+ 
+}
+
+.menu_count{
+width: 100px;
+ height: 30px;
+ display: flex;
+}
+
+.basketList li {
+box-sizing: border-box;
+background-color: #fff;
+	border-bottom: 1px solid #d8d8d8;
+	float: left;
+	display: table-row;
+	width: 10%;
+	height: auto;
+	margin: 0;
+	padding: 10px 30px ;
+	border: 0;
+	padding: 18px 0 15px;
+	color: black;
+	vertical-align: baseline;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+
+}
+
+.listStyle{
+list-style-position: inside;
+
+}
+.menu_header{
+padding-top: 10px;
+}
+
+
+
+
+
+
+
+
 
 </style>
+
 
 
 <!--                 수정                              -->
@@ -267,7 +339,7 @@ padding-right: 20px;
 				<div class="offset-lg-2 col-md-10 offset-md-1">
 					<div class="heading_container">
 						<hr>
-						<h2 id="h2">가게이름</h2>
+						<h2 id="h2">${dto.store_name }</h2>
 					</div>
 				</div>
 			</div>
@@ -280,22 +352,22 @@ padding-right: 20px;
 								<div>
 									<div class="-item-rect -item-right -col6of12">
 										<ul class="icon-list -space sentence">
-											<li><span><img src="./img/blackbell.png" class="menu-icon"></span> 가게주메뉴 카테고리</li>
+											<li><span><img src="./img/blackbell.png" class="menu-icon"></span> ${dto.store_category }</li>
 
-											<li><span ><img src="./img/money.png" class="price-icon"></span> 가격대</li>
+											<li><span ><img src="./img/money.png" class="price-icon"></span> 가격대 ${dto.minPrice } ~ ${dto.maxPrice }</li>
 
-											<li><span ><img src="./img/phone.png" class="tel-icon"></span> 가게전화번호</li>
+											<li><span ><img src="./img/phone.png" class="tel-icon"></span> ${dto.tel }</li>
 
-											<li><span ><img src="./img/watch.png" class="hours-icon"></span>영업시간 Dinner: 17:00 -
-												22:30 Saturday &amp; Sunday &amp; Holiday Lunch: 11:30 -
-												16:00 , Dinner: 17:00 - 22:30</li>
+											<li><span ><img src="./img/watch.png" class="hours-icon"></span>OPEN : ${dto.open } <br>
+																											CLOSE : ${dto.close }</li>
 
-											<li><span></span><img src="./img/house.png" class="location-icon"></span> 주소 <br>상세주소</li>
+											<li><span></span><img src="./img/house.png" class="location-icon"></span> 주소 : ${dto.addr } <br>
+																												상세주소 : ${dto.addr_details }</li>
 										</ul>
 									</div>
 									<div>
 									  	<button class="btn1">
-											<a href="##"> 예약하기 
+											<a href="./ReservationAction.re"> 예약하기 
 										</button>
 									</div>
 								</div>
@@ -316,16 +388,34 @@ padding-right: 20px;
 				</div>
 			</div>
 		</div>
+		<!-- 장바구니 구현 -->
+		<div class="basket_list">
+		<div class="container">
+		<ul>
+		<li> 메뉴사진 </li>
+		<li> 메뉴명 </li> 
+		<li> 가격 </li> 
+		<li> 갯수 </li> 
+		
+		
+		</ul>
+		</div>
+		
+		
+		</div>
+		
+		
+		<!-- 장바구니 구현 -->
 	</section>
 	<!-- end contact section -->
 
 	<!--   중간 머릿말   -->
 	<div class="global-navigation">
 		<div class="container">
-			<ul>
+			<ul class="listStyle">
 				<li><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
-				<li class="-current"><a href="setting.menu.html">메뉴</a></li>
-				<li><a href="setting.img.html">사진</a></li>
+				<li class="-current"><a href="./StoreMenu.nu?store_no=${dto.store_no }">메뉴</a></li>
+				<li><a href="./StoreImg.st?store_no=${dto.store_no }">사진</a></li>
 				<li><a href="setting.review.html">리뷰</a></li>
 
 
@@ -345,9 +435,8 @@ padding-right: 20px;
 	
 	<div class="main -left price-jpy">
 	<div class="container-menu">
-		<h2 class="jumbospacing-and-a-half">추천 메뉴</h2>
-		
-	    <c:forEach var="i" begin="0" end="menuList.size()-1" step="1" items="${menuList}">
+		<h2 class="menu_header">추천 메뉴</h2>
+	    <c:forEach var="i" begin="0" end="${menuList.size()-1}" step="1">
 			<div class="row-col5">
 				<div class="-item-left-col3of12">
 					<div class="figure -fit-220">
@@ -366,9 +455,9 @@ padding-right: 20px;
 						<div class="-item-right-col8of16">
 							<div class="right-spacing">
 								<div class="spacing">
-									<div class="small">${menuList[i].Menu_no}</div>
+									<div class="small">${menuList[i].menu_no}</div>
 
-									<h3 class="huge abit-spacing">${dto.getMenu_name}</h3>
+									<h3 class="huge abit-spacing">${menuList[i].menu_name}</h3>
 
 								</div>
 								<div class="cx">
@@ -378,28 +467,41 @@ padding-right: 20px;
 						</div>
 					</div>
 
-					<div class="row -wide-bottom">
+					<div class="row-wide-bottom">
 						<div class="-item-left-col3of12">
 							<div class="panel-light-silver -in">
 								<ul class="spacing-list small">
-									<li><b class="b">메뉴정보 : </b> ${dto.getMenu_info}</li>
+									<li><b class="b">메뉴정보 : </b><br> ${menuList[i].menu_info}</li>
 								</ul> 
 							</div>
 						</div>
-
-						<div class="-item-right -col3of12">
+					
+						<div class="-item-right-col3of12">
 							<div class="right-spacing">
-								<ul class="menu-like-list small">
-									<li><span class="-value"> ${dto.getPrice}원 </span></li>
+								<ul class="menu-like-listsmall">
+									<li><span class="-value"> ${menuList[i].price}원 </span></li>
 								</ul>
 								<p class="text-right small">세금 포함</p>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	    </c:forEach>
+				<div class="basket-container">
+				<div class="prod-quantity__form">
+		       			 <div style="display:table-cell;vertical-align:top;">
+		      	 		 <input type="text" name="menu_amount" value="1" class="menu_count" maxlength="10" min="1">
+        				</div>
+        				<div> 
+        				<p>${menuList[i].price}</p>
+        				</div>
+    			</div>
+				
+				<div>
+				<button class="basket" type="submit" onclick="getMenu_amount()">장바구니에 담기</button>
+				</div>
+				</div>
+				</div>
+	         </c:forEach>
 		<div class="cassette triple-spacing">
 			<div class="row-col5">
 				<div class="-item-left-col9of16">
@@ -414,7 +516,8 @@ padding-right: 20px;
 				</div>
 			</div>
 		</div>
-</div>
+			</div>
+		</div>
 
 	
 

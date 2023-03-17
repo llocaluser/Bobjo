@@ -20,7 +20,7 @@ public class MenuFrontController extends BasicFrontController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		
+			
 		}
 		
 

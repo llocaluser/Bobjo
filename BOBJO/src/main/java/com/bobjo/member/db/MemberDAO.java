@@ -3,7 +3,10 @@ package com.bobjo.member.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.bobjo.store.db.StoreDTO;
 import com.bobjo.utils.db.ConnectionManager;
 import com.mysql.cj.Session;
 
@@ -20,8 +23,8 @@ public class MemberDAO {
 			// 1,2 디비연결
 			con = ConnectionManager.getConnection();
 			// 3 sql 작성 & pstmt 객체
-			sql = "insert into bobjo_member(m_id,pw,m_name,phone,nickname,email,alcohol_level) "
-					+ " values(?,?,?,?,?,?,?)";
+			sql = "insert into bobjo_member(m_id,pw,m_name,phone,nickname,email,alcohol_level,ceo_num) "
+					+ " values(?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			
 			// ???
@@ -32,6 +35,7 @@ public class MemberDAO {
 			pstmt.setString(5, dto.getNickname());
 			pstmt.setString(6, dto.getEmail());
 			pstmt.setString(7, dto.getAlcohol_level());
+			pstmt.setString(8, dto.getCeo_num());
 			
 			// 4 sql 실행		
 			pstmt.executeUpdate();
@@ -84,6 +88,7 @@ public class MemberDAO {
 		return result;
 	}
 	//로그인 - loginMember(dto)
+
 	
 	//회원탈퇴 - deleteMember(dto)
 	public int deleteMember(MemberDTO dto) {
@@ -161,6 +166,7 @@ public class MemberDAO {
 
 			return dto;
 		}
+
 		// 회원 정보 조회 - getMemberInfo(String m_id)
 		
 		// 회원정보 수정 -  updateMember(dto)
@@ -243,9 +249,80 @@ public class MemberDAO {
 			 return dto;
 		 }
 		// 아이디 정보 조회 - getFindID
+
+		// 회원 정보 조회
+
+		// 0316-다빈 로그인 세션?
+		public MemberDTO loginCeo(String m_id) {
+			MemberDTO dto = null;
+			try {
+				con = ConnectionManager.getConnection();
+				// 3. SQL 작성(select) & pstmt 객체
+				sql = "select ceo_num,alcohol_level from bobjo_member where m_id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, m_id);
+				// 4. SQL 실행
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					dto = new MemberDTO();
+					dto.setCeo_num(rs.getString("ceo_num"));
+					dto.setAlcohol_level(rs.getString("alcohol_level"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				ConnectionManager.closeConnection(rs, pstmt, con);
+			}
+				
+			return dto;
+		}
+		// 로그인 세션?
+
+		
+
 	
 	
 	
 	
 
+	// 메인페이지 추천식당 받기
+	public List<StoreDTO> getStoreList() {
+		List<StoreDTO> list = new ArrayList<>();
+		StoreDTO dto;
+		
+		try {
+			con = ConnectionManager.getConnection();
+			sql = "SELECT STORE_NAME, STORE_CONTENT, STORE_IMG FROM BOBJO_STORE "
+					+ "WHERE STORE_NO IN (SELECT STORE_NO "
+					+ "FROM BOBJO_RESERVATION "
+					+ "GROUP BY STORE_NO "
+					+ "ORDER BY COUNT(STORE_NO) DESC LIMIT 10)";
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				dto = new StoreDTO();
+				
+				dto.setStore_name(rs.getString(1));
+				dto.setStore_content(rs.getString(2));
+				dto.setStore_img(rs.getString(3));
+				
+				list.add(dto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(rs, pstmt, con);
+		}
+		
+		return list;
+	}
+	// 메인페이지 추천식당 받기
+	
 }
+
+
+
+
