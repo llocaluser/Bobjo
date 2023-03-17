@@ -11,6 +11,8 @@ public class ReviewRegformAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		String store_no = request.getParameter("store_no");
+		request.setAttribute("store_no", store_no);
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("./review/reviewReg.jsp");

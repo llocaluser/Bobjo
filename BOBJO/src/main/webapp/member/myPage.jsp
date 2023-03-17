@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
     <head>
@@ -43,6 +44,8 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
+                        
+                        <c:if test="${ceo_num == null }">
                             <div class="sb-sidenav-menu-heading">마이페이지</div>
                             <a class="nav-link" href="index.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -64,6 +67,7 @@
                              <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages"> </nav>
                             </div>
+                       </c:if>
                            
                             <div class="sb-sidenav-menu-heading">계정</div>
                             <a class="nav-link" href="charts.html">
@@ -74,6 +78,23 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 회원탈퇴
                             </a>
+                            
+                            <c:if test="${ceo_num != null }">
+	                               <div class="sb-sidenav-menu-heading">사업주</div>
+	                            <a class="nav-link" href="./CeoAddStore.st">
+	                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+	                                가게등록
+	                            </a>
+	                            <a class="nav-link" href="./CeoStoreList.st">
+	                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+	                               	가게리스트
+	                            </a>
+	                            <a class="nav-link" href="#">
+	                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+	                                가게정보수정
+	                            </a>
+                            </c:if>
+                            
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

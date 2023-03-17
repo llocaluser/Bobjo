@@ -13,8 +13,17 @@
  // response.sendRedirect("./MemberLogin.me");
   
 
+<<<<<<< HEAD
    response.sendRedirect("./StoreList.st");
     /* response.sendRedirect("./Main.me");   */
+=======
+//  response.sendRedirect("./StoreList.st");
+   response.sendRedirect("./Main.me");
+
+
+//  response.sendRedirect("./StoreList.st");
+   response.sendRedirect("./Main.me"); 
+>>>>>>> branch 'master' of https://github.com/ho-sea/Bobjo.git
 
 
 
@@ -22,6 +31,7 @@
   /* response.sendRedirect("./Main.me"); */
 
 /*   response.sendRedirect("./Main.me"); */
+
  
 
 %>

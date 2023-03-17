@@ -1,148 +1,99 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+   
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Î°úÍ∑∏Ïù∏ Ìèº</title>
+    <style>
+        @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+	
+	html {
+		height: 100%;
+	}
+	
+	body {
+	    width:100%;
+	    height:100%;
+	    margin: 0;
+  		padding-top: 200px;
+  		padding-bottom: 40px;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+	}
+	
+    .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+	}
 
-<style type="text/css">
+    #btn-Yes{
+        background-color: #e4932b;
+        border: none;
+    }
+	
+	.login .form-control {
+  		position: relative;
+  		height: auto;
+  		-webkit-box-sizing: border-box;
+     	-moz-box-sizing: border-box;
+        	 box-sizing: border-box;
+  		padding: 10px;
+  		font-size: 16px;
+	}
+    .checkbox{
+        margin-right: 20px;
+        text-align: right;
+    }
+    .card-title{
+        margin-left: 30px;
+    }
 
-  body{
-    background-color:#FAFAFA;
-    margin: 0px;
-    color: #262626;
-    box-sizing: border-box;
-}
+    .links{
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    a{
+    	color: #f58b34; text-decoration: none;
+    }
+    .check{
+    	color : red;
+    }
+	
+    </style>
+  </head>
 
-a{
-    text-decoration: none;
-    color:#262626;
-}
+  <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
 
-.login_wrapper{
-    position:absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width:350px;
-    height:380px;
-    top:50%;
-    left:50%;
-    margin: -175px 0px 0px -190px;
-    background-color:white;
-    border: 1px solid #DBDBDB;
-}
+	<div class="card align-middle" style="width:25rem;">
+		<div class="card-title" style="margin-top:30px;">
+           
+			<h2 class="card-title" style="color:#f58b34; text-align:left;"> Î°úÍ∑∏Ïù∏ </h2>
+		</div>
+      <form action="./MemberLoginAction.me" class="login" method="POST">
+		<div class="card-body">
+        <input type="text" name="m_id" id="Id" class="form-control" placeholder="ÏïÑÏù¥Îîî" autofocus required><BR>
+        <input type="password" name="pw" id="Pw" class="form-control" placeholder="ÎπÑÎ∞ÄÎ≤àÌò∏"  required><br>
+         <p id="check" class="check">${login_msg}</p><br/>
+        <input id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" value="Î°ú Í∑∏ Ïù∏">
+      </form>
+   
+		</div>
+        <div class="links">
+            <a href="./MemberFindIdAction.me">ÏïÑÏù¥Îîî Ï∞æÍ∏∞</a> | <a href="memberPw">ÎπÑÎ∞ÄÎ≤àÌò∏ Ï∞æÍ∏∞</a> | <a href="./MemberJoin.me">ÌöåÏõêÍ∞ÄÏûÖ</a>
 
-.login_logo{
-    margin :30px 0 30px 0;
-    color:#262626;
-    font-family: 'Lobster', cursive;
-    font-size: 40px;
-    font-weight: 100px;
-}
-
-.login_form{
-    display:flex;
-    flex-direction: column;
-    width:280px;
-    margin-top:10px;
-}
-
-.login_text{
-    width:100%;
-    height:40px;
-    margin: 3px 0 3px 0 ;
-    padding: 0 10px 0 10px;
-    background-color:#FAFAFA;
-    border: 1px solid #DBDBDB;
-    border-radius: 3px;
-}
-
-.login_text:focus{
-    outline: 1px solid #a8a8a8;
-}
-
-.login_text::placeholder{
-    color:#8E8E8E;
-}
-
-.login_text::value{
-    color:#262626;
-}
-
-.login_btn{
-    width:100%;
-    height:33px;
-    margin: 10px 0 5px 0;
-    color:white;
-    background-color: #C0DFFD;
-    border-radius: 5px;
-    border-style: none;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.login_bottom{
-    margin-top: 20px;
-    color:#01376A;
-    font-size: 13px;
-}
-  
-
-
-</style>
-
- 
-</head>
-<body>
-
-     <article>
-        <div class = "login_wrapper">
-            <div class="login_logo">login</div>
-            <form action="./MemberLoginAction.me" method="post" class="login_form">
-                <input id="LOGIN_ID" class = "login_text" type="text" name="m_id" placeholder="æ∆¿Ãµ">
-                <input  id="LOGIN_PW" class = "login_text" type="password" name="pw" placeholder="∫Òπ–π¯»£">
-                <input id="LOGIN_BTN" class = "login_btn" type="submit" value="∑Œ±◊¿Œ">
-                
-   <a href="javascript:kakaoLogin();"><img src="./img/kakao_login.png" alt="ƒ´ƒ´ø¿∞Ë¡§ ∑Œ±◊¿Œ" style="height: 60px;"/></a>
-
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script>
-        window.Kakao.init('d48f63d9da5135c15efac2ae7eb8b7e4');
-
-        function kakaoLogin() {
-            window.Kakao.Auth.login({
-                scope: 'profile_nickname, account_email', //µø¿««◊∏Ò ∆‰¿Ã¡ˆø° ¿÷¥¬ ∞≥¿Œ¡§∫∏ ∫∏»£ ≈◊¿Ã∫Ì¿« »∞º∫»≠µ» ID∞™¿ª ≥÷Ω¿¥œ¥Ÿ.
-                success: function(response) {
-                    console.log(response) // ∑Œ±◊¿Œ º∫∞¯«œ∏È πﬁæ∆ø¿¥¬ µ•¿Ã≈Õ
-                    window.Kakao.API.request({ // ªÁøÎ¿⁄ ¡§∫∏ ∞°¡Æø¿±‚ 
-                        url: '/v2/user/me',
-                        success: (res) => {
-                            const kakao_account = res.kakao_account;
-                            console.log(kakao_account)
-                        }
-                    });
-                    // window.location.href='/ex/kakao_login.html' //∏Æ¥Ÿ¿Ã∑∫∆Æ µ«¥¬ ƒ⁄µÂ
-                },
-                fail: function(error) {
-                    console.log(error);
-                }
-            });
-        }
-    </script> 
-                             
-            </form>
-            <a class = "login_bottom" href="" >∫Òπ–π¯»£∏¶ ¿ÿ¿∏ºÃ≥™ø‰?</a>
         </div>
-    </article>
-
- 
- 
- 
-
-
-
-</body>
+	</div>
+   
+  </body>
 </html>

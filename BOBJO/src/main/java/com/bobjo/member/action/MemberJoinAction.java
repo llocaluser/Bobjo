@@ -30,7 +30,8 @@ public class MemberJoinAction implements Action {
 		  dto.setNickname(request.getParameter("nickname"));
 		  dto.setEmail(request.getParameter("email"));
 		  dto.setAlcohol_level(request.getParameter("alcohol_level"));
-		
+		  dto.setCeo_num(request.getParameter("ceo_num").equals("")?null:request.getParameter("ceo_num"));
+		  
 		  System.out.println("M :" + dto.toString());  
 		  
 		  // DB 저장
