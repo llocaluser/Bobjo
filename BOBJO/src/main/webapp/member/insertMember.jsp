@@ -13,6 +13,19 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
   <link rel="stylesheet" href="./css/main.css">
   <script defer src="./js/main.js"></script>
+  
+  <script type="text/javascript">
+	  function showCeoNoInput() {
+		  const ceoCheck = document.getElementById("ceoCheck");
+		  const ceoNoInput = document.getElementById("info_ceoNum");
+	
+		  if (ceoCheck.checked) {
+		    ceoNoInput.style.display = "block";
+		  } else {
+		    ceoNoInput.style.display = "none";
+		  }
+		}
+  </script>
 
 </head>
 <body>
@@ -82,11 +95,22 @@
           <input type="radio" name="level" value="3level"> 3level
           <input type="radio" name="level" value="4level"> 4level
           <input type="radio" name="level" value="5level"> 5level      
-       </div>   
-         
-       </section>
+       </div>
+
+		<div class="info" id="info_ceoNum" style="display: none;">
+			<input class="box" type="text" placeholder="사업자 등록번호 입력 (10자리)"
+				name="ceo_num" maxlength="10"/>
+			<div class="error-msg"></div>
+		</div>
+		<div class="info">
+			<input type="checkbox" id="ceoCheck" name="ceoCheck"
+				onchange="showCeoNoInput()" /> <label for="ceoCheck">사업자
+				여부</label>
+		</div>
+
+				</section>
       <div id="result-fail"></div>
-       <input type="submit" value="회원가입">
+          <button id="submit" type="submit">가입하기</button>
        </div>
      </div> 
 </form>        

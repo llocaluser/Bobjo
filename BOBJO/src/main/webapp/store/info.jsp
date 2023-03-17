@@ -35,6 +35,9 @@
 
 <!--                 수정                              -->
 <style type="text/css">
+
+
+
 a{
 color: black;
 }
@@ -166,6 +169,7 @@ button.btn1{
 
 
 
+
 </style>
 
 
@@ -248,17 +252,17 @@ button.btn1{
 								<div>
 									<div class="-item-rect -item-right -col6of12">
 										<ul class="icon-list -space sentence">
-											<li><span><img src="../img/blackbell.png" class="menu-icon"></span> 가게주메뉴 카테고리</li>
+											<li><span><img src="./img/blackbell.png" class="menu-icon"></span> ${dto.store_category }</li>
 
-											<li><span ><img src="../img/money.png" class="price-icon"></span> 가격대</li>
+											<li><span ><img src="./img/money.png" class="price-icon"></span> 가격대 ${dto.minPrice } ~ ${dto.maxPrice }</li>
 
-											<li><span ><img src="../img/phone.png" class="tel-icon"></span> 가게전화번호</li>
+											<li><span ><img src="./img/phone.png" class="tel-icon"></span> ${dto.tel }</li>
 
-											<li><span ><img src="../img/watch.png" class="hours-icon"></span>영업시간 Dinner: 17:00 -
-												22:30 Saturday &amp; Sunday &amp; Holiday Lunch: 11:30 -
-												16:00 , Dinner: 17:00 - 22:30</li>
+											<li><span ><img src="./img/watch.png" class="hours-icon"></span>OPEN : ${dto.open } <br>
+																											CLOSE : ${dto.close }</li>
 
-											<li><span></span><img src="../img/house.png" class="location-icon"></span> 주소 <br>상세주소</li>
+											<li><span></span><img src="./img/house.png" class="location-icon"></span> 주소 : ${dto.addr } <br>
+																												상세주소 : ${dto.addr_details }</li>
 										</ul>
 									</div>
 									<div>
@@ -292,9 +296,9 @@ button.btn1{
 		<div class="container">
 			<ul>
 				<li class="-current"><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
-				<li><a href="#">메뉴</a></li>
-				<li><a href="#">사진</a></li>
-				<li><a href="#">리뷰</a></li>
+				<li ><a href="./StoreMenu.nu">메뉴</a></li>
+				<li ><a href="./StoreImg.st?store_no=${dto.store_no }">사진</a></li>
+				<li ><a href="#">리뷰</a></li>
 
 			</ul>
 

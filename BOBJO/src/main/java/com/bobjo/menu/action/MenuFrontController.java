@@ -13,13 +13,14 @@ public class MenuFrontController extends BasicFrontController {
 	@Override
 	protected void setActionForward(String command, HttpServletRequest request, HttpServletResponse response) {
 		
-		if(command.equals("/StoreMenu.me")) {
+		if(command.equals("/StoreMenu.nu")) {
 			action = new StoreMenuAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		
 		}
 		
 

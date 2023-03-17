@@ -8,8 +8,10 @@ import javax.servlet.http.HttpSession;
 
 import com.bobjo.basicform.action.Action;
 import com.bobjo.basicform.action.ActionForward;
+import com.bobjo.member.db.MemberDAO;
+import com.bobjo.member.db.MemberDTO;
 
-public class MemberLogoutAction implements Action{
+public class MemberDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -18,20 +20,27 @@ public class MemberLogoutAction implements Action{
 		
 		// 세션제어
 		HttpSession session = request.getSession();
-		session.invalidate();
-		
-		// 2. 컨트롤러 사용 X (JS)
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
+		String m_id = (String)session.getAttribute("m_id");
 				
-			out.write("<script>");
-			out.write(" alert('로그아웃 성공!'); ");
-			out.write(" location.href='./Main.me'; ");
-			out.write("</script>");
-			out.close();		
-				
-			return null;
+	    ActionForward forward = new ActionForward();
+		if(m_id == null) {
+		  forward.setPath("./MemberLogin.me");
+		  forward.setRedirect(true);
+		  return forward;				
+	
+		}	  
+		  
+    
+		MemberDAO dao = new MemberDAO();
+		MemberDTO dto = dao.getMemberInfo(m_id);
 			
-	}
+		request.setAttribute("dto", dto); 
+			
+		forward.setPath("./member/deletetMember.jsp");
+		forward.setRedirect(false);
+			
+		return forward;
+		}
 
-}
+	}		  
+

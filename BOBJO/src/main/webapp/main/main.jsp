@@ -11,6 +11,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
      
+
+    <title>BOBJO</title>
     <link rel="stylesheet" href="fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <!-- https://fonts.google.com/ -->
@@ -37,6 +39,18 @@ https://templatemo.com/tm-552-video-catalog
      	
      	<!-- 헤더 -->
      	
+
+    <div class="tm-page-wrap mx-auto">
+        <div style="text-align: right">
+        	<c:if test="${m_id == null }">
+        	<a class="nav-link tm-nav-link" href="./MemberLogin.me" style="display: inline;">로그인</a>
+         	<a class="nav-link tm-nav-link" href="./MemberJoin.me" style="display: inline;">회원가입</a>
+         	</c:if>
+         	<c:if test="${m_id != null }">
+        	<a class="nav-link tm-nav-link" href="./MemberLogoutAction.me" style="display: inline;">로그아웃</a>
+         	<a class="nav-link tm-nav-link" href="./MemberMypage.me" style="display: inline;">마이페이지</a>
+         	</c:if>
+     	</div>
         <div class="position-relative">
             <div class="position-absolute tm-site-header">
                 <div class="container-fluid position-relative">

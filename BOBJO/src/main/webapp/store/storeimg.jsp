@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-
 <head>
 <!-- Basic -->
 <meta charset="utf-8" />
@@ -36,12 +35,16 @@
 
 <!--                 수정                              -->
 <style type="text/css">
-a{
-color: black;
+a {
+	color: black;
 }
 
-
-
+.row-col4 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
 
 .global-navigation li {
 	background-color: #fff;
@@ -59,27 +62,26 @@ color: black;
 	font-size: 24px;
 	font-weight: bold;
 	text-align: center;
-    }
-    .global-navigation li:hover{
-    color: blue;
-    background : beige;
-	border-bottom: 7px solid #e51f00;
-	
-    
-    }
-    li.-current{
-    color: blue;
-    background : beige;
-	border-bottom: 7px solid #e51f00;
-    
-    }
-    
-    .main -left price-jpy{
-    background : beige;
-    }
+}
 
-#h2{
-font-size: 3rem;
+.global-navigation li:hover {
+	color: blue;
+	background: beige;
+	border-bottom: 7px solid #e51f00;
+}
+
+li.-current {
+	color: blue;
+	background: beige;
+	border-bottom: 7px solid #e51f00;
+}
+
+.main -left price-jpy {
+	background: beige;
+}
+
+#h2 {
+	font-size: 3rem;
 }
 
 .container {
@@ -89,9 +91,8 @@ font-size: 3rem;
 	margin-left: 16.666667%;
 }
 
-
-table tr{
-    background : beige;
+table tr {
+	background: beige;
 }
 
 .row {
@@ -134,12 +135,10 @@ ol, ul {
 	margin-bottom: 10px;
 }
 
-
 .menu-icon, .price-icon, .tel-icon, .hours-icon, .location-icon {
-width: 20px; 
-height: 20px;
+	width: 20px;
+	height: 20px;
 }
-
 
 .contact_form-container {
 	display: flex;
@@ -151,55 +150,24 @@ height: 20px;
 
 button.btn1:hover {
 	color: blue;
-	background : beige;
+	background: beige;
 	font: bold;
 	font-size: 20px;
 }
-button.btn1{
+
+button.btn1 {
 	font: bold;
 	font-size: 20px;
-	margin-left : 40px 
-
+	margin-left: 40px
 }
 
-
-.container-menu {
-   width : 1250px;
-   margin: 0 30% 30px 15%;
-   background: beige;
+.row-col4 img {
+	vertical-align: super;
+	border-style: double;
+	width: 260px;
+	height: 200px;
 }
-.row-col5 {
-display: flex;
-border-style: double ;
-}
-
-
-
-.-item-left-col3of12 {
-padding: 0 0 0 10px;
-margin: 10px;
-}
-
-
-.-item-right-col6of12-in-vertical {
-flex-wrap : wrap;
-padding: 0 0 0 40px;
-border-style:double;
-border-right: 10px; 
-border-top: 10px; 
-border-bottom: 10px; 
-}
-.-item-left-col9of16 {
-padding-left: 10px; 
-}
-
-.-item-right-col3of16 {
-padding-right: 20px; 
-}
-
-
 </style>
-
 
 <!--                 수정                              -->
 
@@ -209,8 +177,8 @@ padding-right: 20px;
 	<div class="hero_area">
 		<!-- header section strats -->
 		<div class="brand_box">
-			<a class="navbar-brand" href="./mainContent/index.html"> 
-			<span>BobJo! </span>
+			<a class="navbar-brand" href="../mainContent/index.html"> <span>
+					BobJo! </span>
 			</a>
 		</div>
 		<!-- end header section -->
@@ -233,16 +201,16 @@ padding-right: 20px;
 						<div class="d-flex  flex-column flex-lg-row align-items-center">
 							<ul class="navbar-nav  ">
 								<li class="nav-item active"><a class="nav-link"
-									href="./mainContent/index.html"> <span class="sr-only">(current)</span></a>
+									href="../mainContent/index.html"> <span class="sr-only">(current)</span></a>
 								</li>
 								<li class="nav-item"><a class="nav-link"
-									href="./mainContent/about.html"> </a></li>
+									href="../mainContent/about.html"> </a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="./mainContent/fruit.html"> </a></li>
+									href="../mainContent/fruit.html"> </a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="./mainContent/testimonial.html"></a></li>
+									href="../mainContent/testimonial.html"></a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="./mainContent/contact.html"></a></li>
+									href="../mainContent/contact.html"></a></li>
 
 
 							</ul>
@@ -261,13 +229,18 @@ padding-right: 20px;
 
 	<!-- contact section -->
 
+
+
+
+
+
 	<section class="contact_section layout_padding">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="offset-lg-2 col-md-10 offset-md-1">
 					<div class="heading_container">
 						<hr>
-						<h2 id="h2">가게이름</h2>
+						<h2 id="h2">${dto.store_name }</h2>
 					</div>
 				</div>
 			</div>
@@ -280,17 +253,17 @@ padding-right: 20px;
 								<div>
 									<div class="-item-rect -item-right -col6of12">
 										<ul class="icon-list -space sentence">
-											<li><span><img src="./img/blackbell.png" class="menu-icon"></span> 가게주메뉴 카테고리</li>
+											<li><span><img src="./img/blackbell.png" class="menu-icon"></span> ${dto.store_category }</li>
 
-											<li><span ><img src="./img/money.png" class="price-icon"></span> 가격대</li>
+											<li><span ><img src="./img/money.png" class="price-icon"></span> 가격대 ${dto.minPrice } ~ ${dto.maxPrice }</li>
 
-											<li><span ><img src="./img/phone.png" class="tel-icon"></span> 가게전화번호</li>
+											<li><span ><img src="./img/phone.png" class="tel-icon"></span> ${dto.tel }</li>
 
-											<li><span ><img src="./img/watch.png" class="hours-icon"></span>영업시간 Dinner: 17:00 -
-												22:30 Saturday &amp; Sunday &amp; Holiday Lunch: 11:30 -
-												16:00 , Dinner: 17:00 - 22:30</li>
+											<li><span ><img src="./img/watch.png" class="hours-icon"></span>OPEN : ${dto.open } <br>
+																											CLOSE : ${dto.close }</li>
 
-											<li><span></span><img src="./img/house.png" class="location-icon"></span> 주소 <br>상세주소</li>
+											<li><span></span><img src="./img/house.png" class="location-icon"></span> 주소 : ${dto.addr } <br>
+																												상세주소 : ${dto.addr_details }</li>
 										</ul>
 									</div>
 									<div>
@@ -321,102 +294,67 @@ padding-right: 20px;
 
 	<!--   중간 머릿말   -->
 	<div class="global-navigation">
-		<div class="container">
-			<ul>
-				<li><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
-				<li class="-current"><a href="setting.menu.html">메뉴</a></li>
-				<li><a href="setting.img.html">사진</a></li>
-				<li><a href="setting.review.html">리뷰</a></li>
+		<div class="screen-full">
+			<div class="container">
+				<ul>
+					<li><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
+					<li><a href="setting.menu.html">메뉴</a></li>
+					<li class="-current"><a
+						href="./StoreImg.st?store_no=${dto.store_no }">사진</a></li>
+					<li><a href="setting.review.html">리뷰</a></li>
 
 
-			</ul>
+				</ul>
 
+			</div>
 		</div>
 	</div>
-
+	<br>
+	<br>
+	<br>
+	<br>
 	<!--   중간 머릿말   -->
 
 	<!-- 내용넣기 시작  -->
-	<br>
-	<br>
-	<br>
-	<br>
-	
-	
-	<div class="main -left price-jpy">
-	<div class="container-menu">
-		<h2 class="jumbospacing-and-a-half">추천 메뉴</h2>
-		
-	    <c:forEach var="i" begin="0" end="menuList.size()-1" step="1" items="${menuList}">
-			<div class="row-col5">
-				<div class="-item-left-col3of12">
-					<div class="figure -fit-220">
-						<a
-							href="https://gurunavi.com/ko/k774003/imgs/s_cm_01_011.jpg?dt=1678084632"
-							class="cboxElement"> <img
-							src="https://gurunavi.com/ko/k774003/imgs/t_cm_01_011.jpg?dt=1678084632"
-							width="220" alt="${menuList[i].menu_no }" title="그 외 고기 구이, 곱창류"> <span
-							class="-closeup"></span>
-						</a>
-					</div>
-				</div>
-				<div class="-item-right-col6of12-in-vertical">
 
-					<div class="row">
-						<div class="-item-right-col8of16">
-							<div class="right-spacing">
-								<div class="spacing">
-									<div class="small">${menuList[i].Menu_no}</div>
+	<div class="contents pale-colored">
+		<div class="container">
+			<div class="main -left price-jpy">
+				<div class="cassette">
+					<h2 class="jumbo spacing-and-a-half"></h2>
 
-									<h3 class="huge abit-spacing">${dto.getMenu_name}</h3>
-
+					<div class="panel">
+						<div class="row-col4">
+							<c:set var="imgList" value="${dto.store_img.split(',') }"/>
+							<c:forEach var="img" items="${imgList }">  
+							<div class="-item"> 
+								<div class="-out-side">
+									<div class="figure -fit-165">
+										<a href="//localhost:8080/BOBJO/images/${img}"
+											class="cboxElement"> <img
+											src="./images/${img}" width="165" height="165">
+										</a>
+									</div>
 								</div>
-								<div class="cx">
-									<div class="label -gold spacing right-spacing">추천 메뉴</div>
-								</div>
+								
 							</div>
+							</c:forEach>
 						</div>
 					</div>
 
-					<div class="row -wide-bottom">
-						<div class="-item-left-col3of12">
-							<div class="panel-light-silver -in">
-								<ul class="spacing-list small">
-									<li><b class="b">메뉴정보 : </b> ${dto.getMenu_info}</li>
-								</ul> 
-							</div>
-						</div>
-
-						<div class="-item-right -col3of12">
-							<div class="right-spacing">
-								<ul class="menu-like-list small">
-									<li><span class="-value"> ${dto.getPrice}원 </span></li>
-								</ul>
-								<p class="text-right small">세금 포함</p>
-							</div>
-						</div>
-					</div>
+					<div class="panel -silver"></div>
 				</div>
 			</div>
-		</div>
-	    </c:forEach>
-		<div class="cassette triple-spacing">
-			<div class="row-col5">
-				<div class="-item-left-col9of16">
-					<p class="small">*여기에는 대표적인 식자재만을 한정해 기재하고 있으며, 그 밖의 재료가 사용되는
-						경우도 있습니다.또한 시기적 요인과 식자재 입하 상황에 따라 메뉴와 요리 종류가 변경될 수 있으므로 양해해 주시기
-						바랍니다.</p>
-					<p class="small">*사진은 샘플입니다.</p>
-					<p class="small">*실제 표시된 가격과 다른 경우가 있습니다.</p>
-				</div>
-				<div class="-item-right-col3of16">
-					<p class="text-right small">* 금액은 한국 원 (\)</p>
-				</div>
+			<div class="aside -right">
+				<!-- /cassette -->
+				<!-- /cassette -->
 			</div>
 		</div>
-</div>
+		<!-- /container -->
+	</div>
 
-	
+
+
 
 
 	<!-- 내용넣기 끝  -->
@@ -426,7 +364,7 @@ padding-right: 20px;
 	<section class="info_section layout_padding">
 		<div class="container">
 			<div class="info_logo">
-				<h2>NiNom</h2>
+				<h2>BOBJO</h2>
 			</div>
 			<div class="info_contact">
 				<div class="row">
@@ -442,7 +380,7 @@ padding-right: 20px;
 					</div>
 					<div class="col-md-4">
 						<a href=""> <img src="../images/mail.png" alt=""> <span>
-								demo@gmail.com </span>
+								bobjo@gmail.com </span>
 						</a>
 					</div>
 				</div>
