@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-${review_img }
 <form action="./ReviewMod.rv" method="post" enctype="multipart/form-data">
 		<input type="text" name="store_no" value="${store_no }" hidden>
 		<input type="text" name="review_no" value="${review_no }" hidden>
@@ -23,9 +22,10 @@ ${review_img }
 				</c:if>
 			</c:forEach>
 		</select><br>
-		리뷰 이미지 <input type="file" name="review_img" 
+		
+		<%-- 리뷰 이미지 <input type="file" name="review_img" 
 		value="${review_img }"
-		><br>
+		hidden><br>
 		
 		
 		
@@ -33,8 +33,7 @@ ${review_img }
 	        var input = document.querySelector('input[type=file]');
 	        var reviewImg = "${review_img}";
 	        input.value = "../img/" + reviewImg;
-	    </script>
-	    
+	    </script> --%>
 	    
 	    
 		<input type="submit" value="리뷰 수정">

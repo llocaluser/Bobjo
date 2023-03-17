@@ -3,7 +3,10 @@ package com.bobjo.member.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.bobjo.store.db.StoreDTO;
 import com.bobjo.utils.db.ConnectionManager;
 
 public class MemberDAO {
@@ -83,9 +86,45 @@ public class MemberDAO {
 		return result;
 	}
 	//로그인 - loginMember(dto)
-	
-	
-	
-	
 
+	
+	
+	
+	
+	// 메인페이지 추천식당 받기
+	public List<StoreDTO> getStoreList() {
+		List<StoreDTO> list = new ArrayList<>();
+		StoreDTO dto;
+		
+		try {
+			con = ConnectionManager.getConnection();
+			sql = "SELECT STORE_NAME, STORE_CONTENT, STORE_IMG FROM BOBJO_STORE "
+					+ "WHERE STORE_NO IN (SELECT STORE_NO "
+					+ "FROM BOBJO_RESERVATION "
+					+ "GROUP BY STORE_NO "
+					+ "ORDER BY COUNT(STORE_NO) DESC LIMIT 10)";
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				dto = new StoreDTO();
+				
+				dto.setStore_name(rs.getString(1));
+				dto.setStore_content(rs.getString(2));
+				dto.setStore_img(rs.getString(3));
+				
+				list.add(dto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(rs, pstmt, con);
+		}
+		
+		return list;
+	}
+	// 메인페이지 추천식당 받기
+	
 }

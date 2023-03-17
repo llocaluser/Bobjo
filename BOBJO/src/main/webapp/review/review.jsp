@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link rel="stylesheet" type="text/css" href="./review/review.css">
+    <link rel="stylesheet" type="text/css" href="./css/review.css">
     <link rel="stylesheet" type="text/css" href="./review/modal.css">
     <script src="https://code.jquery.com/jquery-3.6.3.js" 
 	integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
@@ -40,7 +40,6 @@
 	</script>
 </head>
 <body>
-    
     <br><br>
 <div class="sub_sector">
         <section class="sect">
@@ -110,7 +109,7 @@
                     <select class="select_sort" id="selectbox" 
                     onchange="location.href='./ReviewList.rv?sort='+this.value">
                     
-                    	<option value="none" disabled style="display:none">
+                    	<option value="none" selected disabled style="display:none">
                     	정렬 기준
                     	</option>
                         <option value="high" 
@@ -177,17 +176,12 @@
                             <span class="review_content">${list.content }</span>
                         </div>
                         <div class="rightsort">
-                        	<button class="btn_reg font_norm">
-	            				<a href="./ReviewModform.rv?store_no=${list.store_no }
-			            		&list=${list}">리뷰 수정</a>
-			            	</button>
-			            	<%-- <c:if test="${sessionContext.m_id ne null }">
-				            <c:if test="${sessionContext.m_id eq ReviewList.m_id }">
+				            <c:if test="${sessionScope.m_id eq list.m_id }">
 				            	<button class="btn_reg font_norm">
-				            		<a href="./ReviewMod.rv?store_no=${ReviewList[0].store_no }">리뷰 수정</a>
+				            		<a href="./ReviewModform.rv?store_no=${list.store_no }
+				            		&list=${list}">리뷰 수정</a>
 				            	</button>
 				            </c:if>
-				            </c:if> --%>
                             <button type="button" class="btn_report font_arr" onclick="report();">
                             	신고하기
                             </button>
