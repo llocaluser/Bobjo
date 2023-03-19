@@ -80,6 +80,10 @@
 	font-weight: 300;
 }
 
+#move-btn{
+	margin: -80px;
+}
+
 @keyframes openModal{
 	from {
 		opacity: 0;

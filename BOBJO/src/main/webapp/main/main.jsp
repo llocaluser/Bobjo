@@ -41,16 +41,6 @@ https://templatemo.com/tm-552-video-catalog
      	
 
     <div class="tm-page-wrap mx-auto">
-        <div style="text-align: right">
-        	<c:if test="${m_id == null }">
-        	<a class="nav-link tm-nav-link" href="./MemberLogin.me" style="display: inline;">로그인</a>
-         	<a class="nav-link tm-nav-link" href="./MemberJoin.me" style="display: inline;">회원가입</a>
-         	</c:if>
-         	<c:if test="${m_id != null }">
-        	<a class="nav-link tm-nav-link" href="./MemberLogoutAction.me" style="display: inline;">로그아웃</a>
-         	<a class="nav-link tm-nav-link" href="./MemberMypage.me" style="display: inline;">마이페이지</a>
-         	</c:if>
-     	</div>
         <div class="position-relative">
             <div class="position-absolute tm-site-header">
                 <div class="container-fluid position-relative">
@@ -111,6 +101,8 @@ https://templatemo.com/tm-552-video-catalog
 			
 			<!-- 가게 이름 -->
 			<input type="text" placeholder="가게 이름">
+			<svg id="move-btn" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/>
+			</svg>
 			<!-- 가게 이름 -->
 			<!-- <button>찾기</button> -->
 			</form>
@@ -121,6 +113,53 @@ https://templatemo.com/tm-552-video-catalog
 			<path d="M443.6,387.1L312.4,255.4l131.5-130c5.4-5.4,5.4-14.2,0-19.6l-37.4-37.6c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4  L256,197.8L124.9,68.3c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4L68,105.9c-5.4,5.4-5.4,14.2,0,19.6l131.5,130L68.4,387.1  c-2.6,2.6-4.1,6.1-4.1,9.8c0,3.7,1.4,7.2,4.1,9.8l37.4,37.6c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1L256,313.1l130.7,131.1  c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1l37.4-37.6c2.6-2.6,4.1-6.1,4.1-9.8C447.7,393.2,446.2,389.7,443.6,387.1z"/></svg>
 		</div>
 	</div>
+	
+	
+	
+	
+	<!-- API Test Code -->
+	
+<!-- Add a div to hold the map -->
+<div id="map"></div>
+
+<!-- Add a div to hold the static map image -->
+<div id="static-map"></div>
+
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=z0ZtWBY91E7ZvPB33PLtbQrOOngArUAmKIiHN9aN"></script>
+<script type="text/javascript">
+  // Create a map object with the desired location and zoom level
+  var map = new naver.maps.Map('map', {
+    center: new naver.maps.LatLng(37.5665, 126.9780),
+    zoom: 12
+  });
+
+  // Get the bounding box of the map
+  var bounds = map.getBounds();
+
+  // Generate a static map image with administrative boundaries
+  var staticMapUrl = 'https://navermaps.github.io/maps.js/docs/img/example/staticmap/staticmap_boundary.png?' +
+                     'w=800&h=600&bounds=' + bounds.toString();
+
+  // Set the static map image as the background of the static map div
+  var staticMapDiv = document.getElementById('static-map');
+  staticMapDiv.style.backgroundImage = 'url(' + staticMapUrl + ')';
+</script>
+
+	
+	<!-- API Test Code -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<!-- 모달창 -->
                     
