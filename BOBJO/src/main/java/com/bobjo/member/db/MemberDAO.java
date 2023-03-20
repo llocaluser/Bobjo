@@ -296,7 +296,7 @@ public class MemberDAO {
 					+ "WHERE STORE_NO IN (SELECT STORE_NO "
 					+ "FROM BOBJO_RESERVATION "
 					+ "GROUP BY STORE_NO "
-					+ "ORDER BY COUNT(STORE_NO) DESC LIMIT 10)";
+					+ "ORDER BY COUNT(STORE_NO) DESC) LIMIT 10";
 			pstmt = con.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
@@ -316,7 +316,7 @@ public class MemberDAO {
 		} finally {
 			ConnectionManager.closeConnection(rs, pstmt, con);
 		}
-		
+		System.out.println("list:" + list);
 		return list;
 	}
 	// 메인페이지 추천식당 받기

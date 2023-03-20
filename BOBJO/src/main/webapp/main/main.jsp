@@ -6,9 +6,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
     <title>SulJo</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
      
 
@@ -21,6 +30,11 @@
     <link rel="stylesheet" href="./css/mainpage.css">
     <link rel="stylesheet" href="./css/modal.css">
     
+    <!-- Custom styles for this template -->
+  <link href="./css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="./css/responsive.css" rel="stylesheet" />
+    
 <!--
 
 TemplateMo 552 Video Catalog
@@ -28,6 +42,29 @@ TemplateMo 552 Video Catalog
 https://templatemo.com/tm-552-video-catalog
 
 -->
+
+
+<!-- 지형지도 -->
+<script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .seoul-district {
+            fill: #ccc;
+            stroke: #333;
+            stroke-width: 1;
+        }
+
+.seoul-district {
+  fill: #ddd;
+  stroke: #fff;
+  stroke-width: 1px;
+}
+        
+    </style>
+<!-- 지형지도 -->
+    
+    
+    
 </head>
 
 <body>
@@ -65,7 +102,7 @@ https://templatemo.com/tm-552-video-catalog
                 </div>
             </div>
 		  	<c:set var="ran"><%= (int)Math.ceil(Math.random()*6) %></c:set>
-            <div id="tm-video-container">
+            <div id="tm-video-container" style="background-color:white;">
                 <video autoplay muted loop id="tm-video">
                     <!-- <source src="video/sunset-timelapse-video.mp4" type="video/mp4"> -->
                         <source src="./video/cook${ran }.mp4" type="video/mp4">
@@ -83,25 +120,25 @@ https://templatemo.com/tm-552-video-catalog
 		<div class="search">
 			<div class="search_box">
 			<span id="modal-title">나만의 가게를 찾아 지금 예약하세요</span>
-			<form action="/StoreListAction">
+			<form onsubmit="searchStore();">
 			<!-- 지역 검색 -->
 			<span id="map-search"> 지역 검색창 (누르면 이동) </span>
 			<!-- 지역 검색 -->
 			<!-- 음식 카테고리 -->
-			<select>
-				<option>한식</option>
-				<option>일식</option>
-				<option>중식</option>
-				<option>양식</option>
-				<option>면</option>
-				<option>탕</option>
+			<select id="menu-category">
+				<option value="한식">한식</option>
+				<option value="일식">일식</option>
+				<option value="중식">중식</option>
+				<option value="양식">양식</option>
+				<option value="기타">기타</option>
 			</select>
 			<!-- 음식 카테고리 -->
 			
 			
 			<!-- 가게 이름 -->
-			<input type="text" placeholder="가게 이름">
-			<svg id="move-btn" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/>
+			<input id="store-name" type="text" placeholder="가게 이름">
+			<svg onclick="searchStore();" id="move-btn" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/>
+			
 			</svg>
 			<!-- 가게 이름 -->
 			<!-- <button>찾기</button> -->
@@ -120,10 +157,10 @@ https://templatemo.com/tm-552-video-catalog
 	<!-- API Test Code -->
 	
 <!-- Add a div to hold the map -->
-<div id="map"></div>
+<!-- <div id="map"></div> -->
 
 <!-- Add a div to hold the static map image -->
-<div id="static-map"></div>
+<!-- <div id="static-map"></div>
 
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=z0ZtWBY91E7ZvPB33PLtbQrOOngArUAmKIiHN9aN"></script>
 <script type="text/javascript">
@@ -143,10 +180,14 @@ https://templatemo.com/tm-552-video-catalog
   // Set the static map image as the background of the static map div
   var staticMapDiv = document.getElementById('static-map');
   staticMapDiv.style.backgroundImage = 'url(' + staticMapUrl + ')';
-</script>
+</script> -->
 
 	
 	<!-- API Test Code -->
+	
+	
+	
+	
 	
 	
 	
@@ -201,14 +242,103 @@ https://templatemo.com/tm-552-video-catalog
 		
 		
 	
-	/* 지역 이동 */
-	
-	const move = document.querySelector('#map-search')
-		
-		
-		
 	</script>
         
+
+
+
+<!-- 지역 이동 -->
+<div id="map">
+    <script src="./file/TL_SCCO_SIG.json"></script>
+    <object id="seoul" type="image/svg+xml" data="./file/SEOUL_SIG.html" 
+    style="width: 840px; height: 700px;"></object>
+    
+    <article id="seoul-district">
+    	ㅁㄴㅇㄹ
+    </article>
+</div>
+    <script>
+        // Wait for SVG and JSON to load before proceeding
+        $(document).ready(function () {
+            let svgDoc = document.getElementById("seoul").contentDocument;
+            let pathElements = svgDoc.getElementsByTagName("path");
+
+            // Load the JSON file and process it
+            d3.json("TL_SCCO_SIG.json").then(function (json) {
+                let seoulDistricts = [];
+
+                // Find the Seoul districts in the JSON file
+                json.features.forEach(function (feature) {
+                    if (feature.properties.SIG_CD.startsWith("11")) {
+                        seoulDistricts.push(feature);
+                    }
+                });
+
+                // Find the corresponding path element in the SVG file for each district
+                seoulDistricts.forEach(function (feature) {
+                    let sigKorNm = feature.properties.SIG_KOR_NM;
+                    let sigCd = feature.properties.SIG_CD;
+                    let pathElement = Array.from(pathElements).find(function (element) {
+                        return element.id === sigCd;
+                    });
+
+                    // Draw the district on the SVG map
+                    d3.select(pathElement)
+                        .attr("class", "seoul-district")
+                        .attr("data-name", sigKorNm);
+                });
+            });
+        });
+    </script>
+
+
+
+<script>
+
+/* 지역 이동 */
+
+const move = document.querySelector('#map-search');
+const category = document.querySelector('#menu-category');
+const name = document.querySelector('#store-name');	
+const back = document.querySelector("map-return");
+const map = document.querySelector('#map');
+const elementsToHide = document.querySelectorAll(":not(#map)");
+const seoul = document.querySelector('#seoul');
+
+
+
+
+move.addEventListener('click', () => {
+	/* elementsToHide.forEach(function(event){
+		event.style.display = 'none';
+	}); */
+	map.style.display = 'inline-flex';
+	document.documentElement.classList.add("no-scroll");
+});
+
+/* back.addEventLisstener('click' () => {
+	move.classList.remove("active");
+	document.documentElement.classList.remove("no-scroll");
+}); */
+
+seoul.addEventListener("wheel", function(event) {
+	if (move.classList.contains("active")) {
+		event.preventDefault();
+	}
+});
+
+
+function searchStore(){
+	location.href="./StoreList.st?srch_location='+move.value+'srch_category='+category.value+'srch_text='+name.value'";
+}
+
+</script>
+
+<!-- 지역 이동 -->
+
+
+
+
 
         <div class="container-fluid" style="position:relative;z-index:-1;">
             <div id="content" class="mx-auto tm-content-container">
@@ -217,137 +347,45 @@ https://templatemo.com/tm-552-video-catalog
                         <div class="col-12">
                             <h2 class="tm-page-title mb-4">추천 식당</h2>
                             <div class="tm-categories-container mb-5">
-                                <h3 class="tm-text-primary tm-categories-text">Categories:</h3>
+                                <!-- <h3 class="tm-text-primary tm-categories-text">Categories:</h3>
                                 <ul class="nav tm-category-list">
                                     <li class="nav-item tm-category-item"><a href="#" class="nav-link tm-category-link active">전체</a></li>
                                     <li class="nav-item tm-category-item"><a href="#" class="nav-link tm-category-link">예약 순</a></li>
                                     <li class="nav-item tm-category-item"><a href="#" class="nav-link tm-category-link">Nature</a></li>
                                     <li class="nav-item tm-category-item"><a href="#" class="nav-link tm-category-link">Actions</a></li>
                                     <li class="nav-item tm-category-item"><a href="#" class="nav-link tm-category-link">Featured</a></li>
-                                </ul>
+                                </ul> -->
                             </div>        
                         </div>
                     </div>
-                    
+                    <%-- ${storeList } --%>
                     <div class="row tm-catalog-item-list">
+                    <c:forEach var="i" items="${storeList }">
                         <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
+                     
                             <div class="position-relative tm-thumbnail-container">
-                                <img src="img/res_img/restaurant1.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
+                                <img src="img/res_img/${i.store_img }" alt="Image" class="img-fluid tm-catalog-item-img">    
                                 <a href="video-page.html" class="position-absolute tm-img-overlay">
                                     <i class="fas fa-play tm-overlay-icon"></i>
                                 </a>
                             </div>    
                             <div class="p-4 tm-bg-gray tm-catalog-item-description">
-                                <h3 class="tm-text-primary mb-3 tm-catalog-item-title">식당1</h3>
-                                <p class="tm-catalog-item-text">식당
-                                    <span class="tm-text-secondary">소개</span> 
-                                    문구</p>
+                                <h3 class="tm-text-primary mb-3 tm-catalog-item-title">${i.store_name }</h3>
+                                <p class="tm-catalog-item-text">${i.store_content }
+                                    <!-- <span class="tm-text-secondary">소개</span> 
+                                    문구 -->안녕</p>
                             </div>
+                            
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
-                            <div class="position-relative tm-thumbnail-container">
-                                <img src="img/res_img/restaurant2.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
-                                <a href="video-page.html" class="position-absolute tm-img-overlay">
-                                    <i class="fas fa-play tm-overlay-icon"></i>
-                                </a>
-                            </div>
-                            <div class="p-4 tm-bg-gray tm-catalog-item-description">
-                                <h3 class="tm-text-primary mb-3 tm-catalog-item-title">식당2</h3>
-                                <p class="tm-catalog-item-text">실험
-                                    <span class="tm-text-secondary">출력</span></p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
-                            <div class="position-relative tm-thumbnail-container">
-                                <img src="img/res_img/restaurant3.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
-                                <a href="video-page.html" class="position-absolute tm-img-overlay">
-                                    <i class="fas fa-play tm-overlay-icon"></i>
-                                </a>
-                            </div>                            
-                            <div class="p-4 tm-bg-gray tm-catalog-item-description">
-                                <h3 class="tm-text-primary mb-3 tm-catalog-item-title">식당3</h3>
-                                <p class="tm-catalog-item-text">식당소개글</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
-                            <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-04.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
-                                <a href="video-page.html" class="position-absolute tm-img-overlay">
-                                    <i class="fas fa-play tm-overlay-icon"></i>
-                                </a>
-                            </div>    
-                            <div class="p-4 tm-bg-gray tm-catalog-item-description">
-                                <h3 class="tm-text-primary mb-3 tm-catalog-item-title">Nam tincidunt consectetur</h3>
-                                <p class="tm-catalog-item-text">You can apply this template for your commercial CMS theme. Nam sem leo, imperdiet non lacinia eget, volutpat ac massa. Donec mattis in velit quis commodo. Cras nec rutrum arcu.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
-                            <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-05.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
-                                <a href="video-page.html" class="position-absolute tm-img-overlay">
-                                    <i class="fas fa-play tm-overlay-icon"></i>
-                                </a>
-                            </div>
-                            <div class="p-4 tm-bg-gray tm-catalog-item-description">
-                                <h3 class="tm-text-primary mb-3 tm-catalog-item-title">Praesent posuere rhoncus</h3>
-                                <p class="tm-catalog-item-text">Duis vulputate nisl metus, eget dapibus nunc ultricies id. Ut augue mauris, varius quis nulla non, sollicitudin consectetur nisl. Donec eget arcu placerat, ullamcorper.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
-                            <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-06.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
-                                <a href="video-page.html" class="position-absolute tm-img-overlay">
-                                    <i class="fas fa-play tm-overlay-icon"></i>
-                                </a>
-                            </div>                            
-                            <div class="p-4 tm-bg-gray tm-catalog-item-description">
-                                <h3 class="tm-text-primary mb-3 tm-catalog-item-title">Turpis massa aliquam</h3>
-                                <p class="tm-catalog-item-text">Nunc neque risus, ultrices sed luctus at, iaculis at arcu. Pellentesque rutrum velit nec sapien ullamcorper ultrices. Vestibulum lectus risus, laoreet pretium ipsum</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
-                            <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-07.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
-                                <a href="video-page.html" class="position-absolute tm-img-overlay">
-                                    <i class="fas fa-play tm-overlay-icon"></i>
-                                </a>
-                            </div>    
-                            <div class="p-4 tm-bg-gray tm-catalog-item-description">
-                                <h3 class="tm-text-primary mb-3 tm-catalog-item-title">Class aptent taciti sociosqu</h3>
-                                <p class="tm-catalog-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus bibendum orci sit amet dignissim rhoncus. Pellentesque pretium faucibus vestibulum.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
-                            <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-08.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
-                                <a href="video-page.html" class="position-absolute tm-img-overlay">
-                                    <i class="fas fa-play tm-overlay-icon"></i>
-                                </a>
-                            </div>
-                            <div class="p-4 tm-bg-gray tm-catalog-item-description">
-                                <h3 class="tm-text-primary mb-3 tm-catalog-item-title">Donec ac nisl ul elit</h3>
-                                <p class="tm-catalog-item-text">Suspendisse in odio congue, lobortis metus sed, venenatis nisl. In dapibus et massa feugiat facilisis. Maecenas venenatis aliquet nulla, a tincidunt erat suscipit eget.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
-                            <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-09.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
-                                <a href="video-page.html" class="position-absolute tm-img-overlay">
-                                    <i class="fas fa-play tm-overlay-icon"></i>
-                                </a>
-                            </div>                            
-                            <div class="p-4 tm-bg-gray tm-catalog-item-description">
-                                <h3 class="tm-text-primary mb-3 tm-catalog-item-title">Sed mattis nisi erat</h3>
-                                <p class="tm-catalog-item-text">Integer ultricies mi eu aliquet cursus. Nam sem leo, imperdiet non lacinia eget, volutpat ac massa. Donec mattis in velit quis commodo. Cras nec rutrum arcu.</p>
-                            </div>
-                        </div>
+                    </c:forEach>
+                        
                     </div>
-
-
+                    
+                    
 
 
                     <!-- Catalog Paging Buttons -->
-                    <div>
+                    <!-- <div>
                         <ul class="nav tm-paging-links">
                             <li class="nav-item active"><a href="#" class="nav-link tm-paging-link">1</a></li>
                             <li class="nav-item"><a href="#" class="nav-link tm-paging-link">2</a></li>
@@ -355,7 +393,7 @@ https://templatemo.com/tm-552-video-catalog
                             <li class="nav-item"><a href="#" class="nav-link tm-paging-link">4</a></li>
                             <li class="nav-item"><a href="#" class="nav-link tm-paging-link">></a></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </main>
 			</div>
 		</div>
@@ -425,6 +463,99 @@ https://templatemo.com/tm-552-video-catalog
             });
         })
     </script>
+    
+    
+    
+    
+    <div class="footer">
+    <!-- info section -->
+
+  <section class="info_section layout_padding" style="display:flex;">
+    <div class="container">
+      <div class="info_logo">
+        <h2>
+          BOBJO
+        </h2>
+      </div>
+      <div class="info_contact">
+        <div class="row">
+          <div class="col-md-4">
+            <a href="">
+              <img src="./images/location.png" alt="">
+              <span>
+                Passages of Lorem Ipsum available
+              </span>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="">
+              <img src="./images/call.png" alt="">
+              <span>
+                Call : +012334567890
+              </span>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="">
+              <img src="./images/mail.png" alt="">
+              <span>
+                demo@gmail.com
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-lg-9">
+          <div class="info_form">
+            <form action="">
+              <input type="text" placeholder="Enter your email">
+              <button>
+                subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <div class="info_social">
+            <div>
+              <a href="">
+                <img src="./images/facebook-logo-button.png" alt="">
+              </a>
+            </div>
+            <div>
+              <a href="">
+                <img src="./images/twitter-logo-button.png" alt="">
+              </a>
+            </div>
+            <div>
+              <a href="">
+                <img src="./images/linkedin.png" alt="">
+              </a>
+            </div>
+            <div>
+              <a href="">
+                <img src="./images/instagram.png" alt="">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- end info section -->
+
+					<!-- footer section -->
+					  <section class="container-fluid footer_section">
+					    <p>
+					      &copy; <span id="displayYear"></span> All Rights Reserved By
+					      <a href="https://html.design/">Free Html Templates</a>
+					    </p>
+					  </section>
+					  <!-- footer section -->
+					  </div>
 </body>
 
 </html>

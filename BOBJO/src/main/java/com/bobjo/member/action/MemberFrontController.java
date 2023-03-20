@@ -51,14 +51,14 @@ public class MemberFrontController extends BasicFrontController {
 				e.printStackTrace();
 			}    	
 	    }
-	    else if(command.equals("/Main.me")) {
-	    	System.out.println("Main.me 호출");
-	    	
-	    	// 패턴1
-	    	forward = new ActionForward();
-			forward.setPath("./main/main.jsp");
-			forward.setRedirect(false);
-	    }
+//	    else if(command.equals("/Main.me")) {
+//	    	System.out.println("Main.me 호출");
+//	    	
+//	    	// 패턴1
+//	    	forward = new ActionForward();
+//			forward.setPath("./main/main.jsp");
+//			forward.setRedirect(false);
+//	    }
 	    else if(command.equals("/MemberLogoutAction.me")) {
 	    	System.out.println("MemberLogoutAction.me");
 	    	
@@ -160,9 +160,4 @@ public class MemberFrontController extends BasicFrontController {
 	
 	
 	}
-	
-	
-	
-	
-	
-	}
+}

@@ -43,7 +43,7 @@
     width: 200px;
 }
 
-.search input{
+#store-name{
 	outline: none;
 	border: none;
     width: 600px;
@@ -58,11 +58,38 @@
 	
 }
 
+input:-webkit-autofill {
+   -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
 #map-search{
 	display: inline-flex;
     width: 500px;
     height: 40px;
     border: 1px solid black;
+    cursor: pointer;
+}
+
+#map{
+	display:none;
+	position:absolute;
+	background-color:#eaeaea;
+	width:2000px;
+	height:2000px;
+	top:0;
+	z-index:1002 !important;
+}
+
+#map.active{
+	display:block;
+}
+
+#seoul-district{
+	margin: 40px 0 0 20px;
+}
+
+html.no-scroll{
+	overflow:hidden;
 }
 
 #close-btn{
@@ -81,7 +108,9 @@
 }
 
 #move-btn{
-	margin: -80px;
+	margin-left: -80px;
+	margin-right: 60px;
+	cursor: pointer;
 }
 
 @keyframes openModal{
