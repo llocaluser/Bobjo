@@ -14,7 +14,7 @@ public class StoreListAjaxAction implements Action {
 		String[] classPath = this.getClass().getName().split("\\.");
 		System.out.println(" M :  "+classPath[classPath.length-1]+"_execute() 호출! ");
 		
-		int pageNum = Integer.parseInt(request.getParameter("pageNum"))+1;
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		int pageSize = 12;
 		String[] srch_data = new String[4];
 		srch_data[0] = request.getParameter("srch_location") == null ? "" : request.getParameter("srch_location");

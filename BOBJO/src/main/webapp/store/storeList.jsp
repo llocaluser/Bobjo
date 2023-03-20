@@ -32,17 +32,26 @@
   <link href="${root }/css/responsive.css" rel="stylesheet" />
   
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
-<!--   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script> -->
-  <script type="text/javascript" src="${root }/js/bootstrap.js"></script>
+<%--   <script type="text/javascript" src="${root }/js/bootstrap.js"></script> --%>
   <script type="text/javascript" src="${root }/js/custom.js"></script>
  
+ <style type="text/css">
+ .box img {
+ 	width: 100%;
+ 	height: 100%;
+ }
+ .container-fluid {
+ 	width: 80%;
+ 	margin: auto;
+ }
+ </style>
 </head>
 
 <body class="sub_page">
   <div class="hero_area">
     <!-- header section strats -->
     <div class="brand_box">
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="${root }/Main.me">
         <span>
           BOBJO
         </span>
@@ -64,8 +73,6 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="d-flex  flex-column flex-lg-row align-items-center">
               <form action="./StoreList.st" method="post" class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0" name="srch_frm">
-              <input type="hidden" name="pageNum" value="${pageNum }">
-              <input type="hidden" name="pageSize" value="12">
               <input type="hidden" name="srch_location" value="${srch_location }">
               <input type="hidden" name="srch_category" value="${srch_category }"> 
               <ul class="navbar-nav  ">
@@ -133,7 +140,7 @@
       <div class="fruit_container">
       <c:forEach var="dto" items="${list }">
       	<div class="box">
-          <img src="${root }/images/${dto.store_img }" alt="${dto.store_name }">
+          <img src="${root }/images/${dto.store_img }" onerror="this.onerror=null; this.src='${root }/images/no_img.PNG';">
           <div class="link_box">
             <h5>
               ${dto.store_name }
@@ -166,9 +173,9 @@
   <!-- infinite scroll -->
   <script type="text/javascript">
   	let pageNum = 1;
-  	let pageSize = 12;
-  	let isLoad = false;
+  	let hasNext = pageNum < ${totalPage};
   	
+  	// 스크롤 페이징
 	function infiniteScroll () {
 		const pagination = document.querySelector('.fruit_container_end'); // 리스트 엔드 포인트
 		const fullContent = document.querySelector('.fruit_container'); // 리스트 컨테이너
@@ -178,41 +185,40 @@
 		function OnScroll () { //스크롤 이벤트 함수
 			const fullHeight = fullContent.clientHeight; //  리스트 컨테이너 높이   
 			const scrollPosition = pageYOffset; // 현재 스크롤 위치
-			if (fullHeight-screenHeight/2 <= scrollPosition && !isLoad) {
-				isLoad = true;
-				getList(); // 컨텐츠를 추가하는 함수
+			if (hasNext && fullHeight-screenHeight/2 <= scrollPosition) {
+				hasNext = false;
+				getList(); // 리스트 추가하는 함수
 			}
 		}
 	}
 	infiniteScroll();
+	// 스크롤 페이징
 	
+	// 리스트 추가로 가져오기
 	function getList() {
 		$.ajax({
 			url:"./StoreListAjax.st",
 			type:"post",
 			data:{
-				pageNum:$("input[name=pageNum]").val(),
-				pageSize:$("input[name=pageSize]").val(),
+				pageNum:++pageNum,
 				srch_location:$("input[name=srch_location]").val(),
 				srch_category:$("input[name=srch_category]").val(),
 				srch_text:$("input[name=srch_text]").val(),
 				order_standard:$("select[name=order_standard]").val()
 				},
-// 			dataType:"요청한 데이터타입(html,xml,json,text)",
 			success:function(data) {
-				
 				$('.fruit_container').append(data);
-				$("input[name=pageNum]").val(Number($("input[name=pageNum]").val())+1);
-				if(Number($("input[name=pageNum]").val())*Number($("input[name=pageSize]").val()) < ${totalPage}) {
-					isLoad = false;
-				}
 			},
 			error:function(data){
 				console.log(data);
 				console.log("ajax err");
 			}
 		});
+		
+		hasNext = pageNum < ${totalPage};
 	}
+	// 리스트 추가로 가져오기
+
   </script>
   <!-- infinite scroll -->
 

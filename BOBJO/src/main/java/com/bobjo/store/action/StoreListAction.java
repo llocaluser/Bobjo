@@ -24,8 +24,7 @@ public class StoreListAction implements Action {
 		
 		StoreDAO dao = new StoreDAO();
 		request.setAttribute("list",  dao.getStoreList(pageNum, pageSize, srch_data));
-		request.setAttribute("pageNum", pageNum);
-		request.setAttribute("totalPage", dao.getStoreListSize(srch_data));
+		request.setAttribute("totalPage", dao.getTotalPage(srch_data, pageSize));
 		request.setAttribute("srch_location", srch_data[0]);
 		request.setAttribute("srch_category", srch_data[1]);
 		request.setAttribute("srch_text", srch_data[2]);
