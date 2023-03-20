@@ -52,7 +52,7 @@ public class StoreDAO {
 	 * @param srch_data[2] == srch_text
 	 * @return int
 	 */
-	public int getStoreListSize(String[] srch_data) {
+	public int getTotalPage(String[] srch_data, int pageSize) {
 		int totalPage = 0;
 		
 		try {
@@ -79,7 +79,7 @@ public class StoreDAO {
 
 			rs = pstmt.executeQuery();
 			rs.next();
-			totalPage = rs.getInt(1);
+			totalPage = rs.getInt(1)%pageSize == 0 ? rs.getInt(1)/pageSize : rs.getInt(1)/pageSize + 1;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -136,7 +136,7 @@ public class StoreDAO {
 			pstmt.setString(1, "%"+srch_data[2]+"%");
 			pstmt.setInt(2, pageSize);
 			pstmt.setInt(3, (pageNum-1)*pageSize);
-
+			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {

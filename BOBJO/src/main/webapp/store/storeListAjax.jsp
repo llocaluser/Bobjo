@@ -2,12 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html>
-<html>
-      <div class="fruit_container">
       <c:forEach var="dto" items="${list }">
       	<div class="box">
-          <img src="${root }/images/${dto.store_img }" alt="${dto.store_name }">
+          <img src="${root }/images/${dto.store_img }" onerror="this.onerror=null; this.src='${root }/images/no_img.PNG';">
           <div class="link_box">
             <h5>
               ${dto.store_name }
@@ -27,6 +24,3 @@
           </div>
         </div>
       </c:forEach>
-      </div>
-
-</html>
