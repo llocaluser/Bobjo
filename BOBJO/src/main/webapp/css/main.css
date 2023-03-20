@@ -32,6 +32,11 @@ button:hover {
   background-color: rgb(125, 114, 245);
 }
 
+.footer{
+	width:100%;
+	padding: 90px 0;
+}
+
 .info {
   margin-bottom: 22px;
 }
