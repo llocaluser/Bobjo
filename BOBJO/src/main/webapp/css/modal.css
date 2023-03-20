@@ -84,6 +84,10 @@ input:-webkit-autofill {
 	display:block;
 }
 
+#menu-category{
+	padding-left: 24px;
+}
+
 #seoul-district{
 	margin: 40px 0 0 20px;
 }
@@ -99,6 +103,15 @@ html.no-scroll{
 	right:2rem;
 	position:absolute;
 	cursor: pointer;
+}
+
+#img-gps{
+	margin-right: -50px;
+}
+
+#svg-category{
+	margin-right: -50px;
+	position: relative;
 }
 
 #modal-title{

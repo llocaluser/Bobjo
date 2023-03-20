@@ -24,6 +24,10 @@
     opacity: 1;
     transition: opacity .4s ease-in-out;
 }
+section .container{
+	flex-direction: column;
+}
+
 #logo{
 	width: 120px;
 	/* margin-left: 24px;
