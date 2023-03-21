@@ -1,3 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 <style>
 .OUTLINE {
     stroke-linejoin:round;
@@ -97,6 +104,9 @@
     alignment-baseline: middle;
 }
 </style>
+</head>
+<body>
+
 <svg id="seoul-svg" style='background:#eaeaea;overflow:visible' height="656" width="800" xmlns="http://www.w3.org/2000/svg">
 <defs>
     <filter id="dropshadow">
@@ -170,20 +180,38 @@
 
 <script type="text/javascript">
 const SD = document.querySelector('svg');
+// const map1 = opener.opener.document.querySelector('#map');
 
 SD.addEventListener('click', (e) => {
-	console.log('클릭됐음');
-	var id = "L" + e.target.id;
+	var id = e.target.id.length == 7 ? "L" + e.target.id : e.target.id;
     var district = document.getElementById(id);
     var changeText = document.getElementById('map-district');
     if(district != null && id != "map") {
-    	changeText.textContent = district.textContent;
+    	const disVal = district.textContent;
+    	console.log(disVal);
     }
-    closeMapSearch;
 });
 
-function closeMapSearch(){
-	map.style.display = 'none';
-	document.documentElement.classList.remove("no-scroll");
-}
+
+
+var xhr = new XMLHttpRequest();
+
+// Set the HTTP method and URL
+xhr.open('POST', 'main.jsp', true);
+
+// Set the request header
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+// Define a callback function to handle the response
+xhr.onreadystatechange = function() {
+  if (xhr.readyState == 4 && xhr.status == 200) {
+    console.log(xhr.responseText);
+  }
+};
+
+// Send the request with the value as a parameter
+xhr.send('disVal=' + encodeURIComponent(disVal));
 </script>
+
+</body>
+</html>

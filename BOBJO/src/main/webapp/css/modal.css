@@ -74,10 +74,12 @@ input:-webkit-autofill {
 	display:none;
 	position:absolute;
 	background-color:#eaeaea;
-	width:2000px;
-	height:2000px;
+	width:3000px;
+	height:3000px;
 	top:0;
+	left:0;
 	z-index:1002 !important;
+	animation: openMapSearch 0.5s ease forwards;
 }
 
 #map.active{
@@ -94,6 +96,20 @@ input:-webkit-autofill {
 
 html.no-scroll{
 	overflow:hidden;
+}
+
+#seoul{
+	margin-left: 480px;
+    margin-top: 100px;
+}
+
+#back-arrow{
+	width: 64px;
+    height: 64px;
+    top: 24px;
+    left: 24px;
+    position: absolute;
+    cursor: pointer;
 }
 
 #close-btn{
@@ -127,6 +143,15 @@ html.no-scroll{
 }
 
 @keyframes openModal{
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes openMapSearch{
 	from {
 		opacity: 0;
 	}
