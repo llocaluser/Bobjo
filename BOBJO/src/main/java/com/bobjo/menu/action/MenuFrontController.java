@@ -20,7 +20,22 @@ public class MenuFrontController extends BasicFrontController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+		}
+		else if(command.equals("/CeoMenuAdd.nu")) {
+			action = new CeoMenuAddAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/CeoMenuAddAction.nu")) {
+			action = new CeoMenuAddProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 
