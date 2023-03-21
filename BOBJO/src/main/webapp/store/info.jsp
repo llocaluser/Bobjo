@@ -297,6 +297,9 @@ button.btn1{
 			<ul>
 				<li class="-current"><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
 
+
+
+
 				<li ><a href="./StoreMenu.nu?store_no=${dto.store_no }">메뉴</a></li>
 
 				<li ><a href="./StoreImg.st?store_no=${dto.store_no }">사진</a></li>

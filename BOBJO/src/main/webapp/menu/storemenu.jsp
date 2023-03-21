@@ -33,15 +33,13 @@
 <link href="./css/style.css" rel="stylesheet" />
 <!-- responsive style -->
 <link href="./css/responsive.css" rel="stylesheet" />
-
-<!--                 수정                              -->
+<!-- JQuery CDN -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+<!--                 수     정                      -->
 <style type="text/css">
 a{
 color: black;
 }
-
-
-
 
 .global-navigation li {
 	background-color: #fff;
@@ -145,6 +143,9 @@ height: 20px;
 	display: flex;
 }
 
+.listStyle{
+list-style-position: inside;
+}
 .offset-lg-2 col-md-10 offset-md-1 {
 	display: list-item;
 }
@@ -161,13 +162,24 @@ button.btn1{
 	margin-left : 40px 
 
 }
-
-.basket-container{
+ /*  list에서 바스켓으로 보내는 장치에 대한 css  */
+.basketadd-container{
 display:flex;
 justify-content: space-between;
-margin: 20px 50px 0 200px; 
+margin: 60px 50px 0 200px; 
 width: 300px;
 }
+.basket_info1{
+margin-top: 25
+
+px; 
+font-size: 16px; 
+
+}
+
+
+
+ /*  list에서 바스켓으로 보내는 장치에 대한 css  */
 
 .container-menu {
    width : 1250px;
@@ -184,15 +196,13 @@ border-style: double ;
 .-item-left-col3of12 {
 padding: 0 0 0 10px;
 margin: 10px;
+width: 280px;
 }
 
 .-item-right-col3of12 {
 margin: 10px;
 flex-direction: row;
 width: 100px;
-
-}
-.menu-like-listsmall li{
 
 }
 
@@ -222,17 +232,19 @@ justify-content:space-between;
 
 button.basket{
  width: 100px;
- height: 80px;
+ height: 60px;
   border-radius: 8px
  
 }
 
 .menu_count{
-width: 100px;
+width: 70px;
  height: 30px;
  display: flex;
 }
 
+
+/*  바스켓설정   */
 .basketList li {
 box-sizing: border-box;
 background-color: #fff;
@@ -253,24 +265,119 @@ background-color: #fff;
 
 }
 
-.listStyle{
-list-style-position: inside;
 
-}
+
 .menu_header{
 padding-top: 10px;
 }
 
 
+.basket_con li{
+float: left;
+}
+.basket_con{
+margin: 20px 0 -50px;
+border: 1px solid black;
+
+width: auto;
+height: 200px;
+}
+.basket_title{
+width: 700px;
+height: 200px;
+
+}
+.basket_list{
+margin: 0;
+padding: 0;
+}
+.add_info_menu button:hover{
+background: black;
+}
+
+.minus_btn{
+width: 30px;
+height: 30px;
+background-image:url("./img/minus.png") ;
+
+}
+.plus_btn{
+width: 30px;
+height: 30px;
+background-image:url("./img/plus.png") ;
+}
 
 
+ /* 리스트 바스켓설정  */
+.basket_list li{
+padding: 5px 10px ;
+background: beige;
+border: 1px solid black; 
+margin: 0;
+}
+li.basket_menu_name{
+width: 390px;
+}
+li.basket_menu_price{
+width: 200px;
+}
+li.basket_menu_amount{
+width: 107px;
+}
+    /* 바스켓 안 리스트 설정  */
+.basket_list2{
+padding: 0;
+margin: 0;
+}
+.basket_list2 li{
+height: 50px;
+border: 1px dotted black;
+background: none;
+}
+li.basket_menu_nameli{
+padding: 10px;
+width: 390px;
+}
+li.basket_menu_priceli{
+padding: 10px;
+width: 200px;
+}
+li.basket_menu_amountli{
+padding: 10px;
+width: 107px;
+}
+.menu_sum{
+margin-top: 10px;
+}
 
-
-
-
+/*  바스켓설정   */
 
 </style>
 
+<script type="text/javascript">
+
+function getMenu_amount2() {
+	var amount = document.getElementById("menu_amount").value;
+	return amount;
+}
+
+
+function plusAmount() { 
+	var amount = document.getElementById("menu_amount").value++;
+	
+}
+
+function minusAmount() { 
+	var amount = document.getElementById("menu_amount").value--;
+	if (amount < 2){
+		alert("갯수는 1개 이상만 가능합니다.");
+		document.getElementById("menu_amount").value = 1;
+	}
+	
+}
+
+
+</script>
 
 
 <!--                 수정                              -->
@@ -367,7 +474,7 @@ padding-top: 10px;
 									</div>
 									<div>
 									  	<button class="btn1">
-											<a href="./ReservationAction.re"> 예약하기 
+											<a href="./ReservationAction.re"> 예약하기 </a>
 										</button>
 									</div>
 								</div>
@@ -389,19 +496,25 @@ padding-top: 10px;
 			</div>
 		</div>
 		<!-- 장바구니 구현 -->
-		<div class="basket_list">
+		<div class="basket_list_con">
 		<div class="container">
-		<ul>
-		<li> 메뉴사진 </li>
-		<li> 메뉴명 </li> 
-		<li> 가격 </li> 
-		<li> 갯수 </li> 
-		
-		
+		<div class="basket_title">
+		<div class="basket_con">
+		<ul class="basket_list">
+		<li class="basket_menu_name"> 메뉴명 </li> 
+		<li class="basket_menu_price"> 가격 </li> 
+		<li class="basket_menu_amount"> 갯수 </li> 
 		</ul>
+	<%-- 	<c:forEach var= i> --%>
+		<ul class="basket_list2">
+		<li class="basket_menu_nameli"> 메뉴명 </li> 
+		<li class="basket_menu_priceli"> 가격 </li> 
+		<li class="basket_menu_amountli"> 갯수 </li> 
+		</ul>
+	<%-- 	</c:forEach> --%>
 		</div>
-		
-		
+		</div>
+		</div>
 		</div>
 		
 		
@@ -431,8 +544,7 @@ padding-top: 10px;
 	<br>
 	<br>
 	<br>
-	
-	
+		
 	<div class="main -left price-jpy">
 	<div class="container-menu">
 		<h2 class="menu_header">추천 메뉴</h2>
@@ -444,7 +556,7 @@ padding-top: 10px;
 							href="https://gurunavi.com/ko/k774003/imgs/s_cm_01_011.jpg?dt=1678084632"
 							class="cboxElement"> <img
 							src="https://gurunavi.com/ko/k774003/imgs/t_cm_01_011.jpg?dt=1678084632"
-							width="220" alt="${menuList[i].menu_no }" title="그 외 고기 구이, 곱창류"> <span
+							width="220" alt="" title="${i+1}"> <span
 							class="-closeup"></span>
 						</a>
 					</div>
@@ -455,7 +567,7 @@ padding-top: 10px;
 						<div class="-item-right-col8of16">
 							<div class="right-spacing">
 								<div class="spacing">
-									<div class="small">${menuList[i].menu_no}</div>
+									<div class="small">${i+1}</div>
 
 									<h3 class="huge abit-spacing">${menuList[i].menu_name}</h3>
 
@@ -486,22 +598,45 @@ padding-top: 10px;
 						</div>
 					</div>
 				</div>
-				<div class="basket-container">
-				<div class="prod-quantity__form">
-		       			 <div style="display:table-cell;vertical-align:top;">
-		      	 		 <input type="text" name="menu_amount" value="1" class="menu_count" maxlength="10" min="1">
+				<div class="basketadd-container">
+				<div class="add_info_menu">
+		       			 <div style="display:flex;vertical-align:top;">
+			      	 		 <input type="button" class="plus_btn" onclick="plusAmount()">
+			      	 		 <input type="number" id="menu_amount" value="1" class="menu_count" maxlength="10" min="1">
+			      	 		 <input type="button" class="minus_btn"  onclick="minusAmount()">
         				</div>
-        				<div> 
-        				<p>${menuList[i].price}</p>
+        				<div class="basket_info1"> 
+        				<p class="menu_sum">합계 : ${menuList[i].price}원</p>
         				</div>
     			</div>
 				
+				
 				<div>
-				<button class="basket" type="submit" onclick="getMenu_amount()">장바구니에 담기</button>
+				<button class="basket" onclick="getMenu_amount(${menuList[i].menu_no});" >
+				장바구니에 담기</button>
 				</div>
 				</div>
 				</div>
 	         </c:forEach>
+
+		         <script type="text/javascript">
+	         
+	         function getMenu_amount(menu_no) { 
+	        		var amount = document.getElementById("menu_amount").value; 
+	        		if (amount < 1){ 
+	        			alert("갯수는 1개 이상만 가능합니다."); 
+	        			document.getElementById("menu_amount").value = 1; 
+	        		}else if(amount >100){ 
+	        			alert("장난치지마십쇼!!");
+	        			document.getElementById("menu_amount").value = 1; 
+	        		}else{
+	        			alert(menu_no);
+						alert(amount);
+	        		}
+	        		
+     	}
+ </script>
+
 		<div class="cassette triple-spacing">
 			<div class="row-col5">
 				<div class="-item-left-col9of16">
@@ -529,22 +664,22 @@ padding-top: 10px;
 	<section class="info_section layout_padding">
 		<div class="container">
 			<div class="info_logo">
-				<h2>NiNom</h2>
+				<h2>BobJo!</h2>
 			</div>
 			<div class="info_contact">
 				<div class="row">
 					<div class="col-md-4">
-						<a href=""> <img src="../images/location.png" alt=""> <span>
+						<a href=""> <img src="./images/location.png" alt=""> <span>
 								Passages of Lorem Ipsum available </span>
 						</a>
 					</div>
 					<div class="col-md-4">
-						<a href=""> <img src="../images/call.png" alt=""> <span>
+						<a href=""> <img src="./images/call.png" alt=""> <span>
 								Call : +012334567890 </span>
 						</a>
 					</div>
 					<div class="col-md-4">
-						<a href=""> <img src="../images/mail.png" alt=""> <span>
+						<a href=""> <img src="./images/mail.png" alt=""> <span>
 								demo@gmail.com </span>
 						</a>
 					</div>
@@ -562,21 +697,21 @@ padding-top: 10px;
 				<div class="col-md-4 col-lg-3">
 					<div class="info_social">
 						<div>
-							<a href=""> <img src="../images/facebook-logo-button.png"
+							<a href=""> <img src="./images/facebook-logo-button.png"
 								alt="">
 							</a>
 						</div>
 						<div>
-							<a href=""> <img src="../images/twitter-logo-button.png"
+							<a href=""> <img src="./images/twitter-logo-button.png"
 								alt="">
 							</a>
 						</div>
 						<div>
-							<a href=""> <img src="../images/linkedin.png" alt="">
+							<a href=""> <img src="./images/linkedin.png" alt="">
 							</a>
 						</div>
 						<div>
-							<a href=""> <img src="../images/instagram.png" alt="">
+							<a href=""> <img src="./images/instagram.png" alt="">
 							</a>
 						</div>
 					</div>
@@ -599,9 +734,9 @@ padding-top: 10px;
 	<!-- footer section -->
 
 
-	<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="../js/bootstrap.js"></script>
-	<script type="text/javascript" src="../js/custom.js"></script>
+	<script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="./js/bootstrap.js"></script>
+	<script type="text/javascript" src="./js/custom.js"></script>
 
 </body>
 
