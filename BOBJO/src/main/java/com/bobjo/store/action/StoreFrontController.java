@@ -75,6 +75,14 @@ public class StoreFrontController extends BasicFrontController {
 				e.printStackTrace();
 			}
 		}
+		else if(command.equals("/CeoStoreDelete.st")) {
+			action = new CeoStoreDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 				
 		
 				

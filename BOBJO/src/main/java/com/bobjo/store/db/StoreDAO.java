@@ -326,6 +326,25 @@ public class StoreDAO {
 					}
 				}
 				// 가게 수정 
+				
+				// 다빈 - 가게 삭제
+				public void deleteStore(int store_no) {
+					try {
+						con = ConnectionManager.getConnection();
+						sql = "delete from bobjo_store where store_no=?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setInt(1, store_no);
+						pstmt.executeUpdate();
+						
+						System.out.println(" DAO : 가게 삭제 완료 !");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						ConnectionManager.closeConnection(rs, pstmt, con);
+					}
+				}
+				
+				// 가게 삭제
 		
 		
 }

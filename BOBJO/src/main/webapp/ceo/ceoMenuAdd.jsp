@@ -213,7 +213,7 @@ img {
 								<th>주소</th>
 								<th>전화번호</th>
 								<th>카테고리</th>
-								<th>메뉴등록/수정/삭제</th>
+								<th>메뉴등록</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -230,86 +230,40 @@ img {
 									<td>${dto.tel }</td>
 									<td>${dto.store_category }</td>
 									<td>
-										<button class="btn-modify" onclick="location.href='./CeoStoreList.st?store_no=${dto.store_no}'">수정</button>
-										<button class="btn-delete" onclick="location.href='./CeoStoreDelete.st?store_no=${dto.store_no}'">삭제</button>
+										<button class="btn-modify" onclick="location.href='#'">메뉴등록</button>
 									</td>
 							</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-					<c:if test="${cdto.store_no != null }">
-					   <h1 style="text-align: center;">식당 수정</h1>
-						<form method="post" action="./CeoStoreUpdate.st?store_no=${cdto.store_no }" enctype="multipart/form-data">
-							
-							<label for="store_name">식당 이름</label>
-							<input type="text" id="store_name" name="store_name" required value="${cdto.store_name }"><br>
+<%-- 					<c:if test="${cdto.store_no != null }"> --%>
+					   <h1 style="text-align: center;">메뉴 등록</h1>
+						<form method="post" action="./CeoMenuAddAction.nu?store_no=${cdto.store_no }" enctype="multipart/form-data">
 					
-							<label for="addr">주소</label>
-							<input type="text" id="addr" name="addr" required value="${cdto.addr }"><br>
+							<label for="addr">메뉴 이름</label>
+							<input type="text" id="menu_name" name="menu_name" ><br>
 					
-							<label for="addr_details">상세 주소</label>
-							<input type="text" id="addr_details" name="addr_details" value="${cdto.addr_details }"><br>
+							<label for="addr_details">가격</label>
+							<input type="text" id="price" name="price" ><br>
 					
-							<label for="tel">전화번호</label>
-							<input type="text" id="tel" name="tel" required value="${cdto.tel }"><br>
+							<label for="tel">메뉴 설명</label>
+							<input type="text" id="menu_info" name="menu_info" ><br>
 					
-							<label for="open">영업 시간</label>
-							<input type="text" id="open" name="open" required value="${cdto.open }"><br>
+								<label for="store_img">사진</label>
+							<input type="file" id="menu_img" name="menu_img" ><br>
 					
-							<label for="close">정기 휴일</label>
-							<input type="text" id="close" name="close" required value="${cdto.close }"><br>
 					
-							<label for="total_tables">총 좌석 수</label>
-							<input type="number" id="total_tables" name="total_tables" min="0" required value="${cdto.total_tables }"><br>
-					
-							<label for="max_rsrv">최대 예약 인원</label>
-							<input type="number" id="max_rsrv" name="max_rsrv" min="1" required value="${cdto.max_rsrv }"><br>
-					
-							<label for="extra_info">편의 시설</label>
-							<input type="text" id="extra_info" name="extra_info" value="${cdto.extra_info }"><br>
-					
-							<label for="store_content">식당 소개</label>
-							<textarea id="store_content" name="store_content" required >${cdto.store_content }</textarea><br>
-					
-							<label for="store_img">사진</label>
-							<input type="file" id="store_img" name="store_img" value="${cdto.store_img.split(',')[0] }"><br>
-					
-							<label for="refund_policy">환불 규정</label>
-							<textarea id="refund_policy" name="refund_policy" >${cdto.refund_policy }</textarea><br>
-					
-							<label for="store_category">카테고리</label>
+							<label for="total_tables">카테고리</label>
 							<select id="store_category" name="store_category" required>
-						
-								<option value="한식" 
-								<c:if test="${cdto.store_category eq '한식' }">
-								selected
-								</c:if>
-								>한식</option>
-							
-								<option value="일식"
-								<c:if test="${cdto.store_category eq '일식' }">
-								selected
-								</c:if>
-								>일식</option>
-								<option value="중식"
-								<c:if test="${cdto.store_category eq '중식' }">
-								selected
-								</c:if>
-								>중식</option>
-								<option value="양식"
-								<c:if test="${cdto.store_category eq '양식' }">
-								selected
-								</c:if>
-								>양식</option>
-								<option value="기타"
-								<c:if test="${cdto.store_category eq '기타' }">
-								selected
-								</c:if>
-								>기타</option>
-							</select><br>
-							<button type="submit">수정하기</button>
+							<option value="한식" >한식</option>
+							<option value="일식" >일식</option>
+							<option value="중식" >중식</option>
+							<option value="양식" >양식</option>
+							<option value="기타" >기타</option>
+							</select> <br>
+							<button type="submit">메뉴 등록하기</button>
 						</form>
-					</c:if>
+<%-- 					</c:if> --%>
 						
 				</div>
 			</main>

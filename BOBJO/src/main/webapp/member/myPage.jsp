@@ -89,9 +89,9 @@
 	                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
 	                               	가게리스트
 	                            </a>
-	                            <a class="nav-link" href="#">
+	                            <a class="nav-link" href="./CeoMenuAdd.nu">
 	                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-	                                가게정보수정
+	                                메뉴등록
 	                            </a>
                             </c:if>
                             
