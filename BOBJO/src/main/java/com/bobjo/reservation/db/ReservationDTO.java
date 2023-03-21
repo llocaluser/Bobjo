@@ -12,8 +12,9 @@ public class ReservationDTO {
 	private String people_num;
 	private Date reg_date;
 	private int pay_no;
-	private String cancel;
-	private String menu_name;
+	private String status;
+	private String rsrv_msg;
+	private String menu_id;
 	private int menu_amount;
 	
 		
