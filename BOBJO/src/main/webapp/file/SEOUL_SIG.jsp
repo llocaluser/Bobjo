@@ -188,29 +188,14 @@ SD.addEventListener('click', (e) => {
     var changeText = document.getElementById('map-district');
     if(district != null && id != "map") {
     	const disVal = district.textContent;
+    	window.parent.disVal = disVal;
     	console.log(disVal);
     }
 });
 
 
 
-var xhr = new XMLHttpRequest();
 
-// Set the HTTP method and URL
-xhr.open('POST', 'main.jsp', true);
-
-// Set the request header
-xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-// Define a callback function to handle the response
-xhr.onreadystatechange = function() {
-  if (xhr.readyState == 4 && xhr.status == 200) {
-    console.log(xhr.responseText);
-  }
-};
-
-// Send the request with the value as a parameter
-xhr.send('disVal=' + encodeURIComponent(disVal));
 </script>
 
 </body>

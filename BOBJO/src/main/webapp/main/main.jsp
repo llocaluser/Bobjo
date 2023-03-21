@@ -347,19 +347,12 @@ const paths = document.querySelectorAll('path');
 const texts = document.querySelectorAll('text');
 
 
+var disVal = '${ disVal} ';
+var changeText = document.getElementById('map-district');
+if(disVal.length < 10 && disVal != null){
+	changeText.textContent = disVal;
+}
 
-
-
-SD.addEventListener('click', (e) => {
-	console.log('클릭됐음');
-	var id = "L" + e.target.id;
-    var district = document.getElementById(id);
-    var changeText = document.getElementById('map-district');
-    if(district != null && id != "map") {
-    	changeText.textContent = district.textContent;
-    }
-    closeMapSearch;
-});
 
 function closeMapSearch(){
 	map.style.display = 'none';
