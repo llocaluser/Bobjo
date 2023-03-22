@@ -104,14 +104,38 @@ https://templatemo.com/tm-552-video-catalog
                     
                 </div>
             </div>
-		  	<c:set var="ran"><%= (int)Math.ceil(Math.random()*6) %></c:set>
-            <div id="tm-video-container" style="background-color:white;">
-                <video autoplay muted loop id="tm-video">
-                    <!-- <source src="video/sunset-timelapse-video.mp4" type="video/mp4"> -->
-                        <source src="./video/cook${ran }.mp4" type="video/mp4">
-                </video>    
-            </div>
-            
+		  	<c:set var="currentVideo"><%= "cook" + (int)Math.ceil(Math.random()*6) %></c:set>
+			<div id="tm-video-container" style="background-color:white;">
+			    <video autoplay muted loop id="tm-video">
+			        <source id="video-source" src="./video/${currentVideo}.mp4" type="video/mp4">
+			    </video>
+			</div>
+			
+			<script>
+			    var video = document.getElementById('tm-video');
+			    var source = document.getElementById('video-source');
+			    var currentVideo = "${currentVideo}";
+			    var timer;
+			
+			    function playNextVideo() {
+			        clearInterval(timer);
+			        currentVideo = "cook" + Math.ceil(Math.random()*6);
+			        source.setAttribute('src', './video/' + currentVideo + '.mp4');
+			        video.load();
+			        video.play();
+			        timer = setInterval(playNextVideo, 30000);
+			    }
+			
+			    timer = setInterval(playNextVideo, 30000);
+			
+			    video.addEventListener('ended', function() {
+			        clearInterval(timer);
+			        source.setAttribute('src', './video/' + currentVideo + '.mp4');
+			        video.load();
+			        timer = setInterval(playNextVideo, 30000);
+			        video.play();
+			    }, false);
+			</script>
             <i id="tm-video-control-button" class="fas fa-pause"></i>
         </div>
     </div>    
