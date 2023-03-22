@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="./css/mainpage.css">
     <link rel="stylesheet" href="./css/modal.css">
     
+    
     <!-- Custom styles for this template -->
   <link href="./css/style.css" rel="stylesheet" />
   <!-- responsive style -->
@@ -122,10 +123,16 @@ https://templatemo.com/tm-552-video-catalog
 			<span id="modal-title">나만의 가게를 찾아 지금 예약하세요</span>
 			<form onsubmit="searchStore();">
 			<!-- 지역 검색 -->
-			<span id="map-search"> 지역 검색창 (누르면 이동) </span>
+			<img id="img-gps" src="./img/map.png" alt="gps">
+			<span id="map-search">
+				<div id="map-district" style="margin-left:50px;">지역 검색창 (누르면 이동)</div>
+			</span>
 			<!-- 지역 검색 -->
 			<!-- 음식 카테고리 -->
+			<svg id="svg-category" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M19.188 0c-1.557 0-3.858 7.004-4.66 14h2.467v8.5c0 .931.785 1.5 1.5 1.5h.001c.828 0 1.5-.672 1.5-1.5.002-5.037.009-20.254-.001-21.649-.003-.494-.36-.851-.807-.851m-.191 1.333l-.001 21.167c0 .276-.225.5-.501.5-.157 0-.5-.126-.5-.5v-9.498h-2.334c.8-5.889 2.397-10.348 3.336-11.669m-8.443-1.333h-.887l.675 6.002-1.341-.002-.003-6h-1l.001 6h-1.003l.002-6h-1l-.005 6h-1.291l.597-5.998-.909-.002s-.611 5.038-.863 7.575c-.088.889.391 1.762 1.09 2.322.943.756 1.383.982 1.383 1.673v10.93c0 .828.666 1.5 1.497 1.5.832 0 1.504-.672 1.504-1.5v-10.925c0-.702.433-.918 1.382-1.669.713-.564 1.22-1.454 1.121-2.356-.275-2.545-.95-7.55-.95-7.55m-.117 7c.076.658.27 1.375-.674 2.122-.95.753-1.762 1.216-1.762 2.453v10.925c0 .276-.226.5-.504.5-.279 0-.497-.224-.497-.5v-10.93c0-1.222-.819-1.699-1.757-2.453-.911-.73-.719-1.475-.652-2.117h5.846z" fill="#030405"/>
+			</svg>
 			<select id="menu-category">
+				<option value="카테고리" selected hidden>카테고리</option>
 				<option value="한식">한식</option>
 				<option value="일식">일식</option>
 				<option value="중식">중식</option>
@@ -249,47 +256,63 @@ https://templatemo.com/tm-552-video-catalog
 
 <!-- 지역 이동 -->
 <div id="map">
+	<img id="back-arrow" src="./img/back-arrow.png">
     <script src="./file/TL_SCCO_SIG.json"></script>
-    <object id="seoul" type="image/svg+xml" data="./file/SEOUL_SIG.html" 
+    <object id="seoul" type="image/svg+xml" data="./file/SEOUL_SIG.jsp" 
     style="width: 840px; height: 700px;"></object>
     
-    <article id="seoul-district">
-    	ㅁㄴㅇㄹ
-    </article>
 </div>
-    <script>
-        // Wait for SVG and JSON to load before proceeding
-        $(document).ready(function () {
-            let svgDoc = document.getElementById("seoul").contentDocument;
-            let pathElements = svgDoc.getElementsByTagName("path");
 
-            // Load the JSON file and process it
-            d3.json("TL_SCCO_SIG.json").then(function (json) {
-                let seoulDistricts = [];
 
-                // Find the Seoul districts in the JSON file
-                json.features.forEach(function (feature) {
-                    if (feature.properties.SIG_CD.startsWith("11")) {
-                        seoulDistricts.push(feature);
-                    }
+
+<!-- 팝업 -->
+
+<!-- <div id="map1">
+	<img id="back-arrow" src="./img/back-arrow.png">
+    <script src="./file/TL_SCCO_SIG.json"></script>
+    <object id="seoul" type="image/svg+xml" data="./file/SEOUL_SIG.jsp" 
+    style="width: 840px; height: 700px;"></object>
+    
+</div> -->
+
+<!-- 팝업 -->
+
+
+
+<!-- <script>
+    // Wait for SVG to load before proceeding
+    document.getElementById("seoul").addEventListener("load", function () {
+        let svgDoc = document.getElementById("seoul").contentDocument;
+        let pathElements = svgDoc.getElementsByTagName("path");
+
+        // Load the JSON file and process it
+        d3.json("TL_SCCO_SIG.json").then(function (json) {
+            let seoulDistricts = [];
+
+            // Find the Seoul districts in the JSON file
+            json.features.forEach(function (feature) {
+                if (feature.properties.SIG_CD.startsWith("11")) {
+                    seoulDistricts.push(feature);
+                }
+            });
+
+            // Find the corresponding path element in the SVG file for each district
+            seoulDistricts.forEach(function (feature) {
+                let sigKorNm = feature.properties.SIG_KOR_NM;
+                let sigCd = feature.properties.SIG_CD;
+                let pathElement = Array.from(pathElements).find(function (element) {
+                    return element.id === sigCd;
                 });
 
-                // Find the corresponding path element in the SVG file for each district
-                seoulDistricts.forEach(function (feature) {
-                    let sigKorNm = feature.properties.SIG_KOR_NM;
-                    let sigCd = feature.properties.SIG_CD;
-                    let pathElement = Array.from(pathElements).find(function (element) {
-                        return element.id === sigCd;
-                    });
-
-                    // Draw the district on the SVG map
-                    d3.select(pathElement)
-                        .attr("class", "seoul-district")
-                        .attr("data-name", sigKorNm);
-                });
+                // Draw the district on the SVG map
+                d3.select(pathElement)
+                    .attr("class", "seoul-district")
+                    .attr("data-name", sigKorNm);
             });
         });
-    </script>
+    });
+</script> -->
+
 
 
 
@@ -300,26 +323,18 @@ https://templatemo.com/tm-552-video-catalog
 const move = document.querySelector('#map-search');
 const category = document.querySelector('#menu-category');
 const name = document.querySelector('#store-name');	
-const back = document.querySelector("map-return");
 const map = document.querySelector('#map');
 const elementsToHide = document.querySelectorAll(":not(#map)");
 const seoul = document.querySelector('#seoul');
+const goback = document.querySelector('#back-arrow');
+const SD = document.querySelector('svg');
 
 
 
 
-move.addEventListener('click', () => {
-	/* elementsToHide.forEach(function(event){
-		event.style.display = 'none';
-	}); */
-	map.style.display = 'inline-flex';
-	document.documentElement.classList.add("no-scroll");
-});
+move.addEventListener('click', openMapSearch);
 
-/* back.addEventLisstener('click' () => {
-	move.classList.remove("active");
-	document.documentElement.classList.remove("no-scroll");
-}); */
+goback.addEventListener('click', closeMapSearch);
 
 seoul.addEventListener("wheel", function(event) {
 	if (move.classList.contains("active")) {
@@ -328,9 +343,32 @@ seoul.addEventListener("wheel", function(event) {
 });
 
 
+const paths = document.querySelectorAll('path');
+const texts = document.querySelectorAll('text');
+
+
+var disVal = '${ disVal} ';
+var changeText = document.getElementById('map-district');
+if(disVal.length < 10 && disVal != null){
+	changeText.textContent = disVal;
+}
+
+
+function closeMapSearch(){
+	map.style.display = 'none';
+	document.documentElement.classList.remove("no-scroll");
+}
+
+function openMapSearch(){
+	map.style.display = 'inline-flex';
+	document.documentElement.classList.add("no-scroll");
+}
+
 function searchStore(){
 	location.href="./StoreList.st?srch_location='+move.value+'srch_category='+category.value+'srch_text='+name.value'";
 }
+
+
 
 </script>
 
@@ -470,7 +508,7 @@ function searchStore(){
     <div class="footer">
     <!-- info section -->
 
-  <section class="info_section layout_padding" style="display:flex;">
+  <section class="info_section layout_padding" style="display:flex; padding:50px">
     <div class="container">
       <div class="info_logo">
         <h2>
