@@ -14,14 +14,23 @@ public class ReservationFrontController extends BasicFrontController {
 	protected void setActionForward(String command, 
 			HttpServletRequest request, HttpServletResponse response) {
 	
-	      if(command.equals("/ReservationAction.re")) {
+		if(command.equals("/ReservationAction.re")) {
+			System.out.println("C :"+command+" 호출");
 			action = new ReservationAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-					
+		}
+		else if(command.equals("/ReservationAdd.re")) {
+			System.out.println("C :"+command+" 호출");
+			action = new ReservationAddAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html class="supernova"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -11,14 +13,19 @@
 <meta property="og:description" content="Please click the link to complete this form.">
 <meta name="slack-app-id" content="AHNMASS8M">
 <meta property="og:image" content="https://cdn.jotfor.ms/assets/img/landing/opengraph.png">
-<link rel="shortcut icon" href="https://cdn.jotfor.ms/assets/img/favicons/favicon-2021-light%402x.png">
+
+<!-- 아이콘 관련 주석 처리 -->
+<!-- <link rel="shortcut icon" href="https://cdn.jotfor.ms/assets/img/favicons/favicon-2021-light%402x.png"> -->
 <script>
-          var favicon = document.querySelector('link[rel="shortcut icon"]');
-          window.isDarkMode = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-          if(favicon && window.isDarkMode) {
-              favicon.href = favicon.href.replaceAll('favicon-2021-light%402x.png', 'favicon-2021-dark%402x.png');
-          }
-      </script><link rel="canonical" href="https://form.jotform.com/230748828516465">
+// 	var favicon = document.querySelector('link[rel="shortcut icon"]');
+// 	window.isDarkMode = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+// 	if(favicon && window.isDarkMode) {
+// 	    favicon.href = favicon.href.replaceAll('favicon-2021-light%402x.png', 'favicon-2021-dark%402x.png');
+// 	}
+</script>
+<!-- 아이콘 관련 주석 처리 -->
+
+<link rel="canonical" href="https://form.jotform.com/230748828516465">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1">
 <meta name="HandheldFriendly" content="true">
 <title>음식점 예약 폼</title>
@@ -1152,7 +1159,10 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
 </script>
 </head>
 <body>
-<form class="jotform-form" action="https://submit.jotform.com/submit/230748828516465" method="post" name="form_230748828516465" id="230748828516465" accept-charset="utf-8" autocomplete="on" novalidate="true"><input type="hidden" name="formID" value="230748828516465"><input type="hidden" id="JWTContainer" value=""><input type="hidden" id="cardinalOrderNumber" value="">
+<form class="jotform-form" action="${root }/ReservationAdd.re" method="post" name="form_230748828516465" id="230748828516465" accept-charset="utf-8" autocomplete="on" novalidate="true">
+<input type="hidden" name="store_no" value="${store_no }">
+<input type="hidden" name="menu_no" value="${menu_no }">
+<input type="hidden" name="menu_amount" value="${menu_amount }">
   <div role="main" class="form-all">
     <ul class="form-section page-section">
       <li id="cid_14" class="form-input-wide" data-type="control_head">
@@ -1162,44 +1172,90 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
           </div>
         </div>
       </li>
-      <li class="form-line form-line-column form-col-1 jf-required" data-type="control_fullname" id="id_16" data-compound-hint="성함을 입력하세요," style="z-index: 0;"><label class="form-label form-label-top" id="label_16" for="first_16"> 예약자 성함<span class="form-required">*</span> </label>
+      <li class="form-line form-line-column form-col-1 jf-required" data-type="control_fullname" id="id_16" data-compound-hint="성함을 입력하세요," style="z-index: 0;"><label class="form-label form-label-top" id="label_16" for="first_16"> 
+      예약자 성함<span class="form-required">*</span> </label>
         <div id="cid_16" class="form-input-wide jf-required" data-layout="full">
-          <div data-wrapper-react="true"><span class="form-sub-label-container" style="vertical-align:top" data-input-type="first"><input type="text" id="first_16" name="q16_input16[first]" class="form-textbox validate[required]" data-defaultvalue="" autocomplete="section-input_16 given-name" size="10" value="" placeholder="성함을 입력하세요" data-component="first" aria-labelledby="label_16" required=""></span></div>
+          <div data-wrapper-react="true"><span class="form-sub-label-container" style="vertical-align:top" data-input-type="first">
+          <input type="text" id="first_16" 
+          name="rsrv_name" class="form-textbox validate[required]" data-defaultvalue="" autocomplete="section-input_16 given-name" size="10" value="" placeholder="성함을 입력하세요" data-component="first" aria-labelledby="label_16" required=""></span></div>
         </div>
       <div class="form-description" style="display: none;"><div class="form-description-arrow"></div><div class="form-description-arrow-small"></div><div class="form-description-content"><br></div></div></li>
-      <li class="form-line" data-type="control_phone" id="id_104"><label class="form-label form-label-top form-label-auto" id="label_104" for="input_104_full"> 전화번호 </label>
-        <div id="cid_104" class="form-input-wide" data-layout="half"> <span class="form-sub-label-container" style="vertical-align:top"><input type="tel" id="input_104_full" name="q104_input104[full]" data-type="mask-number" class="mask-phone-number form-textbox validate[Fill Mask]" data-defaultvalue="" autocomplete="section-input_104 tel" style="width:310px" data-masked="true" value="" placeholder="000-0000-0000" data-component="phone" aria-labelledby="label_104 sublabel_104_masked" inputmode="text" maskvalue="###-####-####"><label class="form-sub-label" for="input_104_full" id="sublabel_104_masked" style="min-height:13px" aria-hidden="false">유효한 전화번호를 입력하십시오.</label></span> </div>
+      <li class="form-line" data-type="control_phone" id="id_104"><label class="form-label form-label-top form-label-auto" id="label_104" for="input_104_full"> 
+      전화번호 </label>
+        <div id="cid_104" class="form-input-wide" data-layout="half"> <span class="form-sub-label-container" style="vertical-align:top">
+        <input type="tel" id="input_104_full" 
+        name="rsrv_phone" data-type="mask-number" class="mask-phone-number form-textbox validate[Fill Mask]" data-defaultvalue="" autocomplete="section-input_104 tel" style="width:310px" data-masked="true" 
+        value="" placeholder="000-0000-0000" data-component="phone" aria-labelledby="label_104 sublabel_104_masked" inputmode="text" maskvalue="###-####-####"><label class="form-sub-label" for="input_104_full" id="sublabel_104_masked" style="min-height:13px" aria-hidden="false">유효한 전화번호를 입력하십시오.</label></span> </div>
       </li>
-      <li class="form-line jf-required" data-type="control_spinner" id="id_18"><label class="form-label form-label-top form-label-auto" id="label_18" for="input_18"> 손님 수<span class="form-required">*</span> </label>
+      <li class="form-line jf-required" data-type="control_spinner" id="id_18"><label class="form-label form-label-top form-label-auto" id="label_18" for="input_18"> 
+      손님 수<span class="form-required">*</span> </label>
         <div id="cid_18" class="form-input-wide jf-required" data-layout="half">
-          <div data-wrapper-react="true"><div tabindex=""><div class="form-spinner" style="width: 310px;"><div class="form-spinner-input-td"><input type="number" id="input_18" name="q18_input18" data-type="input-spinner" class="form-spinner-input  form-textbox validate[required]" data-spinnermin="0" data-defaultvalue="0" value="0" data-component="spinner" aria-labelledby="label_18" required="" size="5" autocomplete="off"></div><div class="form-spinner-button-container"><div class="form-spinner-button form-spinner-up" style="cursor: default;"><img class="form-spinner-image form-spinner-up-image" src="//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg" alt="up arrow"></div><div class="form-spinner-button form-spinner-down" style="cursor: default;"><img class="form-spinner-image form-spinner-down-image" src="//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg" alt="down arrow"></div></div></div></div></div>
+          <div data-wrapper-react="true"><div tabindex=""><div class="form-spinner" style="width: 310px;"><div class="form-spinner-input-td">
+          <input type="number" id="input_18" 
+          name="people_num" data-type="input-spinner" class="form-spinner-input  form-textbox validate[required]" data-spinnermin="0" data-defaultvalue="0" 
+          value="0" data-component="spinner" aria-labelledby="label_18" required="" size="5" autocomplete="off"></div><div class="form-spinner-button-container"><div class="form-spinner-button form-spinner-up" style="cursor: default;"><img class="form-spinner-image form-spinner-up-image" src="//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg" alt="up arrow"></div><div class="form-spinner-button form-spinner-down" style="cursor: default;"><img class="form-spinner-image form-spinner-down-image" src="//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg" alt="down arrow"></div></div></div></div></div>
         </div>
       </li>
-      <li class="form-line" data-type="control_datetime" id="id_128"><label class="form-label form-label-top form-label-auto" id="label_128" for="lite_mode_128"> 예약날짜 </label>
+      <li class="form-line" data-type="control_datetime" id="id_128"><label class="form-label form-label-top form-label-auto" id="label_128" for="lite_mode_128"> 
+      예약날짜 </label>
         <div id="cid_128" class="form-input-wide" data-layout="half">
           <div data-wrapper-react="true">
-            <div style="display:none"><span class="form-sub-label-container" style="vertical-align:top"><input type="tel" class="form-textbox validate[limitDate]" id="year_128" name="q128_input128[year]" size="4" data-maxlength="4" data-age="" maxlength="4" value="2023" autocomplete="off" aria-labelledby="label_128 sublabel_128_year"><span class="date-separate" aria-hidden="true">&nbsp;-</span><label class="form-sub-label" for="year_128" id="sublabel_128_year" style="min-height:13px" aria-hidden="false">년</label></span><span class="form-sub-label-container" style="vertical-align:top"><input type="tel" class="form-textbox validate[limitDate]" id="month_128" name="q128_input128[month]" size="2" data-maxlength="2" data-age="" maxlength="2" value="03" autocomplete="off" aria-labelledby="label_128 sublabel_128_month" inputmode="numeric"><span class="date-separate" aria-hidden="true">&nbsp;-</span><label class="form-sub-label" for="month_128" id="sublabel_128_month" style="min-height:13px" aria-hidden="false">월</label></span><span class="form-sub-label-container" style="vertical-align:top"><input type="tel" class="currentDate form-textbox validate[limitDate]" id="day_128" name="q128_input128[day]" size="2" data-maxlength="2" data-age="" maxlength="2" value="16" autocomplete="off" aria-labelledby="label_128 sublabel_128_day" inputmode="numeric"><label class="form-sub-label" for="day_128" id="sublabel_128_day" style="min-height:13px" aria-hidden="false">일</label></span></div><span class="form-sub-label-container" style="vertical-align:top"><input type="text" class="form-textbox validate[limitDate, validateLiteDate]" id="lite_mode_128" size="12" data-maxlength="12" data-age="" value="2023-03-16" data-format="yyyymmdd" data-seperator="-" placeholder="YYYY-MM-DD" autocomplete="off" aria-labelledby="label_128" inputmode="numeric" date-val="1679497200000"><img class=" newDefaultTheme-dateIcon icon-liteMode" alt="Pick a Date" id="input_128_pick" src="https://cdn.jotfor.ms/images/calendar.png" data-component="datetime" aria-hidden="true" data-allow-time="No" data-version="v2"><label class="form-sub-label is-empty" for="lite_mode_128" id="sublabel_128_litemode" style="min-height:13px" aria-hidden="false"></label></span>
+            <div style="display:none"><span class="form-sub-label-container" style="vertical-align:top">
+            <input type="tel" class="form-textbox validate[limitDate]" id="year_128" 
+            name="q128_input128[year]" size="4" data-maxlength="4" data-age="" maxlength="4" value="2023" autocomplete="off" aria-labelledby="label_128 sublabel_128_year">
+            <span class="date-separate" aria-hidden="true">&nbsp;-</span><label class="form-sub-label" for="year_128" id="sublabel_128_year" style="min-height:13px" aria-hidden="false">년</label></span><span class="form-sub-label-container" style="vertical-align:top">
+            <input type="tel" class="form-textbox validate[limitDate]" id="month_128" name="q128_input128[month]" size="2" data-maxlength="2" data-age="" maxlength="2" value="03" autocomplete="off" aria-labelledby="label_128 sublabel_128_month" inputmode="numeric"><span class="date-separate" aria-hidden="true">&nbsp;-</span><label class="form-sub-label" for="month_128" id="sublabel_128_month" style="min-height:13px" aria-hidden="false">월</label></span><span class="form-sub-label-container" style="vertical-align:top"><input type="tel" class="currentDate form-textbox validate[limitDate]" id="day_128" name="q128_input128[day]" size="2" data-maxlength="2" data-age="" maxlength="2" value="16" autocomplete="off" aria-labelledby="label_128 sublabel_128_day" inputmode="numeric"><label class="form-sub-label" for="day_128" id="sublabel_128_day" style="min-height:13px" aria-hidden="false">일</label></span></div><span class="form-sub-label-container" style="vertical-align:top">
+            <input type="text" name="rsrv_dateOnly" class="form-textbox validate[limitDate, validateLiteDate]" id="lite_mode_128" size="12" data-maxlength="12" data-age="" value="2023-03-16" data-format="yyyymmdd" data-seperator="-" placeholder="YYYY-MM-DD" autocomplete="off" aria-labelledby="label_128" inputmode="numeric" date-val="1679497200000"><img class=" newDefaultTheme-dateIcon icon-liteMode" alt="Pick a Date" id="input_128_pick" src="https://cdn.jotfor.ms/images/calendar.png" data-component="datetime" aria-hidden="true" data-allow-time="No" data-version="v2"><label class="form-sub-label is-empty" for="lite_mode_128" id="sublabel_128_litemode" style="min-height:13px" aria-hidden="false"></label></span>
           </div>
         </div>
       </li>
-      <li class="form-line" data-type="control_dropdown" id="id_129"><label class="form-label form-label-top form-label-auto" id="label_129" for="input_129"> 예약 시간 </label>
-        <div id="cid_129" class="form-input-wide" data-layout="half"> <select class="form-dropdown" id="input_129" name="q129_input129" style="width:310px" data-component="dropdown" aria-label="예약 시간">
-            <option value="">선택하십시오</option>
-            
-          <option value="">선택하십시오</option><option value="">선택하십시오</option><option value="">선택하십시오</option><option value="">선택하십시오</option></select> </div>
+      <li class="form-line" data-type="control_dropdown" id="id_129"><label class="form-label form-label-top form-label-auto" id="label_129" for="input_129"> 
+      예약 시간 </label>
+        <div id="cid_129" class="form-input-wide" data-layout="half"> 
+        <select class="form-dropdown" id="input_129" 
+        name="rsrv_timeOnly" style="width:310px" data-component="dropdown" aria-label="예약 시간">
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:00">19:00</option>
+            <option value="20:00">20:00</option>
+          </select> </div>
       </li>
-      <li class="form-line" data-type="control_textarea" id="id_30"><label class="form-label form-label-top form-label-auto" id="label_30" for="input_30"> 요청사항 </label>
-        <div id="cid_30" class="form-input-wide" data-layout="full"> <textarea id="input_30" class="form-textarea custom-hint-group form-custom-hint" name="q30_input30" style="width:648px;height:163px" data-component="textarea" aria-labelledby="label_30" data-customhint="여기에 입력하세요..." customhinted="true" placeholder="여기에 입력하세요..." spellcheck="false"></textarea> </div>
+      <li class="form-line" data-type="control_textarea" id="id_30"><label class="form-label form-label-top form-label-auto" id="label_30" for="input_30"> 
+      요청사항 </label>
+        <div id="cid_30" class="form-input-wide" data-layout="full"> 
+        <textarea id="input_30" class="form-textarea custom-hint-group form-custom-hint" 
+        name="rsrv_msg" style="width:648px;height:163px" data-component="textarea" aria-labelledby="label_30" data-customhint="여기에 입력하세요..." customhinted="true" placeholder="여기에 입력하세요..." spellcheck="false"></textarea> </div>
       </li>
+      
+      <c:if test="${refund_policy == null}">
       <li class="form-line" data-type="control_button" id="id_127">
         <div id="cid_127" class="form-input-wide" data-layout="full">
-          <div data-align="center" class="form-buttons-wrapper form-buttons-center   jsTest-button-wrapperField"><button id="input_127" type="submit" class="form-submit-button submit-button jf-form-buttons jsTest-submitField" data-component="button" data-content="">예약하기</button></div>
+          <div data-align="center" class="form-buttons-wrapper form-buttons-center   jsTest-button-wrapperField"><button id="input_127" type="submit" class="form-submit-button submit-button jf-form-buttons jsTest-submitField" data-component="button" data-content="">
+          예약하기</button></div>
         </div>
       </li>
-      <li class="form-line" data-type="control_widget" id="id_121"><label class="form-label form-label-top form-label-auto" id="label_121" for="input_121"> 결제항목 </label>
+      </c:if>
+      
+      <c:if test="${refund_policy != null}">
+      <li class="form-line" data-type="control_widget" id="id_121"><label class="form-label form-label-top form-label-auto" id="label_121" for="input_121"> 
+      결제금액 </label>
         <div id="cid_121" class="form-input-wide" data-layout="full">
-          <div data-widget-name="체크리스트" style="width:100%;text-align:Left;overflow-x:auto" data-component="widget-field"><iframe data-client-id="52961c97e3e5266570000004" title="체크리스트" frameborder="0" scrolling="no" allowtransparency="true" allow="geolocation; microphone; camera; autoplay; encrypted-media; fullscreen" data-type="iframe" class="custom-field-frame custom-field-frame-rendered frame-xd-ready frame-ready" id="customFieldFrame_121" src="//widgets.jotform.io/checklist/?qid=121&amp;ref=https%3A%2F%2Fform.jotform.com&amp;injectCSS=false" style="max-width: 310px; border: none; width: 100%; height: 57px;" data-width="310" data-height="200"></iframe>
-            <div class="widget-inputs-wrapper"><input type="hidden" id="input_121" class="form-hidden form-widget  " name="q121_input121" value=""><input type="hidden" id="widget_settings_121" class="form-hidden form-widget-settings" value="%5B%7B%22name%22%3A%22items%22%2C%22value%22%3A%22%EC%98%B5%EC%85%98%201%5C%5Cn%EC%98%B5%EC%85%98%202%5C%5Cn%EC%98%B5%EC%85%98%203%22%7D%2C%7B%22name%22%3A%22hideunchecked%22%2C%22value%22%3A%22No%22%7D%2C%7B%22name%22%3A%22other%22%2C%22value%22%3A%22No%22%7D%2C%7B%22name%22%3A%22othertext%22%2C%22value%22%3A%22%EA%B8%B0%ED%83%80%22%7D%5D" data-version="2"></div>
+			<div data-widget-name="체크리스트" style="width:100%;text-align:Left;overflow-x:auto" data-component="widget-field"> 
+<!-- <iframe data-client-id="52961c97e3e5266570000004" title="체크리스트" frameborder="0" scrolling="no" allowtransparency="true" allow="geolocation; microphone; camera; autoplay; encrypted-media; fullscreen" data-type="iframe" class="custom-field-frame custom-field-frame-rendered frame-xd-ready frame-ready" id="customFieldFrame_121" src="//widgets.jotform.io/checklist/?qid=121&amp;ref=https%3A%2F%2Fform.jotform.com&amp;injectCSS=false" style="max-width: 310px; border: none; width: 100%; height: 57px;" data-width="310" data-height="200"></iframe>  -->
+            <div class="widget-inputs-wrapper">
+            <input type="hidden" name="price" value="${price }">
+            <fmt:formatNumber var="fmt_price" value="1234567" type="number"/>
+            ${fmt_price } 원
+<!--             <input type="hidden" id="input_121" class="form-hidden form-widget  " name="q121_input121" value=""><input type="hidden" id="widget_settings_121" class="form-hidden form-widget-settings" value="%5B%7B%22name%22%3A%22items%22%2C%22value%22%3A%22%EC%98%B5%EC%85%98%201%5C%5Cn%EC%98%B5%EC%85%98%202%5C%5Cn%EC%98%B5%EC%85%98%203%22%7D%2C%7B%22name%22%3A%22hideunchecked%22%2C%22value%22%3A%22No%22%7D%2C%7B%22name%22%3A%22other%22%2C%22value%22%3A%22No%22%7D%2C%7B%22name%22%3A%22othertext%22%2C%22value%22%3A%22%EA%B8%B0%ED%83%80%22%7D%5D" data-version="2"> -->
+            </div>
             <script type="text/javascript">
               setTimeout(function()
               {
@@ -1228,9 +1284,11 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
       </li>
       <li class="form-line" data-type="control_button" id="id_2">
         <div id="cid_2" class="form-input-wide" data-layout="full">
-          <div data-align="center" class="form-buttons-wrapper form-buttons-center   jsTest-button-wrapperField"><button id="input_2" type="submit" class="form-submit-button submit-button jf-form-buttons jsTest-submitField" data-component="button" data-content="">결제 및 예약하기 </button></div>
+          <div data-align="center" class="form-buttons-wrapper form-buttons-center   jsTest-button-wrapperField"><button id="input_2" type="submit" class="form-submit-button submit-button jf-form-buttons jsTest-submitField" data-component="button" data-content="">
+          결제 및 예약하기 </button></div>
         </div>
       </li>
+      </c:if>
       <li style="display:none">Should be Empty: <input type="text" name="website" value=""></li>
     </ul>
   </div>
