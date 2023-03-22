@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bobjo.store.db.StoreDTO;
 import com.bobjo.utils.db.ConnectionManager;
 
 public class MenuDAO {
@@ -54,5 +55,29 @@ public class MenuDAO {
 		
 		return menuList;
 		}
+	
+	// 다빈 - 메뉴등록
+	public void insertMenu(MenuDTO dto) {
+		try {
+			con = ConnectionManager.getConnection();
+			
+			sql = "insert into bobjo_menu values(default,?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getMenu_name());
+			pstmt.setInt(2, dto.getPrice());
+			pstmt.setString(3, dto.getMenu_info());
+			pstmt.setString(4, dto.getMenu_img());
+			pstmt.setInt(5, dto.getStore_no());
+			pstmt.setString(6, dto.getMenu_category());
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(rs, pstmt, con);
+		}
+	}
+	// 다빈 - 메뉴등록 
 	
 }	
