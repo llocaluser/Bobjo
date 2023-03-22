@@ -68,8 +68,10 @@ https://templatemo.com/tm-552-video-catalog
     
 </head>
 
-<body>
-    <div class="tm-page-wrap mx-auto mainbody">
+<body sytle="position: relative;
+    z-index: -1;">
+    <div class="tm-page-wrap mx-auto mainbody" sytle="position: relative;
+    z-index: -1;">
     
     	<!-- 헤더 -->
     
@@ -112,8 +114,8 @@ https://templatemo.com/tm-552-video-catalog
             
             <i id="tm-video-control-button" class="fas fa-pause"></i>
         </div>
-        
-        
+    </div>    
+     
         
     <!-- 모달창 -->
 	
@@ -157,55 +159,10 @@ https://templatemo.com/tm-552-video-catalog
 			<path d="M443.6,387.1L312.4,255.4l131.5-130c5.4-5.4,5.4-14.2,0-19.6l-37.4-37.6c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4  L256,197.8L124.9,68.3c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4L68,105.9c-5.4,5.4-5.4,14.2,0,19.6l131.5,130L68.4,387.1  c-2.6,2.6-4.1,6.1-4.1,9.8c0,3.7,1.4,7.2,4.1,9.8l37.4,37.6c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1L256,313.1l130.7,131.1  c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1l37.4-37.6c2.6-2.6,4.1-6.1,4.1-9.8C447.7,393.2,446.2,389.7,443.6,387.1z"/></svg>
 		</div>
 	</div>
-	
-	
-	
-	
-	<!-- API Test Code -->
-	
-<!-- Add a div to hold the map -->
-<!-- <div id="map"></div> -->
-
-<!-- Add a div to hold the static map image -->
-<!-- <div id="static-map"></div>
-
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=z0ZtWBY91E7ZvPB33PLtbQrOOngArUAmKIiHN9aN"></script>
-<script type="text/javascript">
-  // Create a map object with the desired location and zoom level
-  var map = new naver.maps.Map('map', {
-    center: new naver.maps.LatLng(37.5665, 126.9780),
-    zoom: 12
-  });
-
-  // Get the bounding box of the map
-  var bounds = map.getBounds();
-
-  // Generate a static map image with administrative boundaries
-  var staticMapUrl = 'https://navermaps.github.io/maps.js/docs/img/example/staticmap/staticmap_boundary.png?' +
-                     'w=800&h=600&bounds=' + bounds.toString();
-
-  // Set the static map image as the background of the static map div
-  var staticMapDiv = document.getElementById('static-map');
-  staticMapDiv.style.backgroundImage = 'url(' + staticMapUrl + ')';
-</script> -->
 
 	
-	<!-- API Test Code -->
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	
@@ -265,53 +222,7 @@ https://templatemo.com/tm-552-video-catalog
 
 
 
-<!-- 팝업 -->
 
-<!-- <div id="map1">
-	<img id="back-arrow" src="./img/back-arrow.png">
-    <script src="./file/TL_SCCO_SIG.json"></script>
-    <object id="seoul" type="image/svg+xml" data="./file/SEOUL_SIG.jsp" 
-    style="width: 840px; height: 700px;"></object>
-    
-</div> -->
-
-<!-- 팝업 -->
-
-
-
-<!-- <script>
-    // Wait for SVG to load before proceeding
-    document.getElementById("seoul").addEventListener("load", function () {
-        let svgDoc = document.getElementById("seoul").contentDocument;
-        let pathElements = svgDoc.getElementsByTagName("path");
-
-        // Load the JSON file and process it
-        d3.json("TL_SCCO_SIG.json").then(function (json) {
-            let seoulDistricts = [];
-
-            // Find the Seoul districts in the JSON file
-            json.features.forEach(function (feature) {
-                if (feature.properties.SIG_CD.startsWith("11")) {
-                    seoulDistricts.push(feature);
-                }
-            });
-
-            // Find the corresponding path element in the SVG file for each district
-            seoulDistricts.forEach(function (feature) {
-                let sigKorNm = feature.properties.SIG_KOR_NM;
-                let sigCd = feature.properties.SIG_CD;
-                let pathElement = Array.from(pathElements).find(function (element) {
-                    return element.id === sigCd;
-                });
-
-                // Draw the district on the SVG map
-                d3.select(pathElement)
-                    .attr("class", "seoul-district")
-                    .attr("data-name", sigKorNm);
-            });
-        });
-    });
-</script> -->
 
 
 
@@ -328,6 +239,7 @@ const elementsToHide = document.querySelectorAll(":not(#map)");
 const seoul = document.querySelector('#seoul');
 const goback = document.querySelector('#back-arrow');
 const SD = document.querySelector('svg');
+const changeText = document.getElementById('map-district');
 
 
 
@@ -343,15 +255,22 @@ seoul.addEventListener("wheel", function(event) {
 });
 
 
-const paths = document.querySelectorAll('path');
-const texts = document.querySelectorAll('text');
+var prevDisVal = '';
 
 
-var disVal = '${ disVal} ';
-var changeText = document.getElementById('map-district');
-if(disVal.length < 10 && disVal != null){
-	changeText.textContent = disVal;
-}
+window.addEventListener('message', function(event) {
+	prevDisVal = '';
+	
+  	prevDisVal = event.data.disVal;
+	if(prevDisVal.length < 10 && prevDisVal != '' && prevDisVal != ' '){
+		closeMapSearch();
+		changeText.textContent = prevDisVal;
+	}
+});
+
+
+
+
 
 
 function closeMapSearch(){
@@ -364,8 +283,18 @@ function openMapSearch(){
 	document.documentElement.classList.add("no-scroll");
 }
 
+
+
 function searchStore(){
-	location.href="./StoreList.st?srch_location='+move.value+'srch_category='+category.value+'srch_text='+name.value'";
+	var srch_location = move.textContent.trim();
+	var srch_category = category.value;
+	var srch_text = name.value;
+	
+	var url = "./StoreList.st?" +
+    "srch_location=" + encodeURIComponent(srch_location) +
+    "&srch_category=" + encodeURIComponent(srch_category) +
+    "&srch_text=" + encodeURIComponent(srch_text);
+	location.href = url;
 }
 
 
@@ -385,21 +314,14 @@ function searchStore(){
                         <div class="col-12">
                             <h2 class="tm-page-title mb-4">추천 식당</h2>
                             <div class="tm-categories-container mb-5">
-                                <!-- <h3 class="tm-text-primary tm-categories-text">Categories:</h3>
-                                <ul class="nav tm-category-list">
-                                    <li class="nav-item tm-category-item"><a href="#" class="nav-link tm-category-link active">전체</a></li>
-                                    <li class="nav-item tm-category-item"><a href="#" class="nav-link tm-category-link">예약 순</a></li>
-                                    <li class="nav-item tm-category-item"><a href="#" class="nav-link tm-category-link">Nature</a></li>
-                                    <li class="nav-item tm-category-item"><a href="#" class="nav-link tm-category-link">Actions</a></li>
-                                    <li class="nav-item tm-category-item"><a href="#" class="nav-link tm-category-link">Featured</a></li>
-                                </ul> -->
                             </div>        
                         </div>
                     </div>
-                    <%-- ${storeList } --%>
-                    <div class="row tm-catalog-item-list">
+                    
+                    <div id="rec-container">
+                    	<div id="rec-wrapper" class="row tm-catalog-item-list animated">
                     <c:forEach var="i" items="${storeList }">
-                        <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
+                        <div id="rec-store" class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                      
                             <div class="position-relative tm-thumbnail-container">
                                 <img src="img/res_img/${i.store_img }" alt="Image" class="img-fluid tm-catalog-item-img">    
@@ -409,29 +331,105 @@ function searchStore(){
                             </div>    
                             <div class="p-4 tm-bg-gray tm-catalog-item-description">
                                 <h3 class="tm-text-primary mb-3 tm-catalog-item-title">${i.store_name }</h3>
-                                <p class="tm-catalog-item-text">${i.store_content }
-                                    <!-- <span class="tm-text-secondary">소개</span> 
-                                    문구 -->안녕</p>
+                                <p class="tm-catalog-item-text">${i.store_content }</p>
                             </div>
                             
                         </div>
                     </c:forEach>
-                        
+                        </div>
                     </div>
+                    <!-- <p class="controls">
+				        <span class="prev">prev</span>
+				        <span class="next">next</span>
+				    </p> -->
+				    <p class="controls">
+				        <span id="btn-stopmove">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11 22h-4v-20h4v20zm6-20h-4v20h4v-20z"/>
+						</svg>
+						</span>
+				        <span id="btn-resumemove">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 22v-20l18 10-18 10z"/>
+						</svg>
+						</span>
+				    </p>
                     
-                    
+                    <script text="java/script">
+                    	// 버튼 클릭 이동
+	                    var wrapper = document.getElementById('rec-wrapper'),
+	                    box = document.querySelectorAll('#rec-store'),
+	                    currentIdx = 0,
+	                    count = Math.min(box.length, 10)-3,
+	                    width = 462,
+	                    margin = 22,
+	                    prevBtn = document.querySelector('.prev'),
+	                    nextBtn = document.querySelector('.next');
+	                    /*
+	                    nextBtn.addEventListener('click', () => {
+	                        if (currentIdx < count) moveSlide(currentIdx + 1);
+	                    });
+	                    prevBtn.addEventListener('click', () => {
+	                        if (currentIdx > 0) moveSlide(currentIdx - 1);
+	                    });
+	                    */
+	                    function moveSlide(num) {
+	                        wrapper.style.left = -num * (width + margin) + 'px';
+	                        currentIdx = num;
+	                    } 
+	                 	// 버튼 클릭 이동
+	                 	
+	                 	var stopmovingBtn = document.querySelector('#btn-stopmove');
+	                 	var resumemovingBtn = document.querySelector('#btn-resumemove');
+	                 	
+	                 	let timerId = null;
+						let isPaused = false;
+						
+						function startSlideShow() {
+						  	timerId = setInterval(() => {
+						    	if (currentIdx === count) {
+						      		currentIdx = 0;
+						    	} else {
+						      		currentIdx++;
+						    	}
+						    		moveSlide(currentIdx);
+						  	}, 3000);
+						}
+						
+						function stopSlideShow() {
+						  	clearInterval(timerId);
+						}
+						
+						function resumeSlideShow() {
+						  	if (!isPaused) {
+						    	startSlideShow();
+						  	}
+						}
+						
+						
+						
+						stopmovingBtn.addEventListener('click', () => {
+						  	stopSlideShow();
+						  	isPaused = true;
+						});
+						
+						resumemovingBtn.addEventListener('click', () => {
+							isPaused = false;
+							resumeSlideShow();
+						});
+						
+						
+						startSlideShow();
+	                 	
+	                 	
+	                 	
+	                 	
+	                 	
+	                 	
+	                 	
+	                 	
+                    </script>
 
 
-                    <!-- Catalog Paging Buttons -->
-                    <!-- <div>
-                        <ul class="nav tm-paging-links">
-                            <li class="nav-item active"><a href="#" class="nav-link tm-paging-link">1</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link tm-paging-link">2</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link tm-paging-link">3</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link tm-paging-link">4</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link tm-paging-link">></a></li>
-                        </ul>
-                    </div> -->
+                    
                 </main>
 			</div>
 		</div>
@@ -504,96 +502,7 @@ function searchStore(){
     
     
     
-    
-    <div class="footer">
-    <!-- info section -->
 
-  <section class="info_section layout_padding" style="display:flex; padding:50px">
-    <div class="container">
-      <div class="info_logo">
-        <h2>
-          BOBJO
-        </h2>
-      </div>
-      <div class="info_contact">
-        <div class="row">
-          <div class="col-md-4">
-            <a href="">
-              <img src="./images/location.png" alt="">
-              <span>
-                Passages of Lorem Ipsum available
-              </span>
-            </a>
-          </div>
-          <div class="col-md-4">
-            <a href="">
-              <img src="./images/call.png" alt="">
-              <span>
-                Call : +012334567890
-              </span>
-            </a>
-          </div>
-          <div class="col-md-4">
-            <a href="">
-              <img src="./images/mail.png" alt="">
-              <span>
-                demo@gmail.com
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-8 col-lg-9">
-          <div class="info_form">
-            <form action="">
-              <input type="text" placeholder="Enter your email">
-              <button>
-                subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="col-md-4 col-lg-3">
-          <div class="info_social">
-            <div>
-              <a href="">
-                <img src="./images/facebook-logo-button.png" alt="">
-              </a>
-            </div>
-            <div>
-              <a href="">
-                <img src="./images/twitter-logo-button.png" alt="">
-              </a>
-            </div>
-            <div>
-              <a href="">
-                <img src="./images/linkedin.png" alt="">
-              </a>
-            </div>
-            <div>
-              <a href="">
-                <img src="./images/instagram.png" alt="">
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- end info section -->
-
-					<!-- footer section -->
-					  <section class="container-fluid footer_section">
-					    <p>
-					      &copy; <span id="displayYear"></span> All Rights Reserved By
-					      <a href="https://html.design/">Free Html Templates</a>
-					    </p>
-					  </section>
-					  <!-- footer section -->
-					  </div>
 </body>
 
 </html>

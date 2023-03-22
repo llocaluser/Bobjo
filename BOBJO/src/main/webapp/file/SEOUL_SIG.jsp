@@ -186,9 +186,10 @@ SD.addEventListener('click', (e) => {
 	var id = e.target.id.length == 7 ? "L" + e.target.id : e.target.id;
     var district = document.getElementById(id);
     var changeText = document.getElementById('map-district');
-    if(district != null && id != "map") {
+    if(district != null) {
     	const disVal = district.textContent;
-    	window.parent.disVal = disVal;
+    	//window.parent.disVal = disVal;
+    	window.parent.postMessage({ disVal: disVal }, '*');
     	console.log(disVal);
     }
 });
