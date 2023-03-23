@@ -177,8 +177,8 @@ button.btn1 {
 	<div class="hero_area">
 		<!-- header section strats -->
 		<div class="brand_box">
-			<a class="navbar-brand" href="../mainContent/index.html"> <span>
-					BobJo! </span>
+			<a class="navbar-brand" href="./Main.me"> 
+			<span>BobJo! </span>
 			</a>
 		</div>
 		<!-- end header section -->
@@ -248,7 +248,6 @@ button.btn1 {
 			<div class="layout_padding2-top">
 				<div class="row">
 					<div class="col-lg-4 offset-lg-2 col-md-5 offset-md-1">
-						<form action="">
 							<div class="contact_form-container">
 								<div>
 									<div class="-item-rect -item-right -col6of12">
@@ -267,20 +266,22 @@ button.btn1 {
 										</ul>
 									</div>
 									<div>
-									  	<button class="btn1">
-											<a href="##"> 예약하기 
-										</button>
+									  	<form action="./ReservationAction.re" method="post" name="frm_rsrvAction">
+										<input type="hidden" name="store_no" value="${dto.store_no }">
+								  	  	<button class="btn1" type="submit">
+											예약하기
+								  	  	</button>
+									</form>
 									</div>
 								</div>
 							</div>
-						</form>
 					</div>
 					<div class="col-md-6 px-0">
 						<div class="map_container">
 							<div class="map-responsive">
 								<iframe
 									src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=
-									아이티윌"
+									${dto.store_name} ${dto.addr}"
 									width="600" height="300" frameborder="0"
 									style="border: 0; width: 100%; height: 100%" allowfullscreen></iframe>
 							</div>
@@ -297,12 +298,10 @@ button.btn1 {
 		<div class="screen-full">
 			<div class="container">
 				<ul>
-					<li><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
-					<li><a href="setting.menu.html">메뉴</a></li>
-					<li class="-current"><a
-						href="./StoreImg.st?store_no=${dto.store_no }">사진</a></li>
-					<li><a href="setting.review.html">리뷰</a></li>
-
+				<li ><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
+				<li ><a href="./StoreMenu.nu?store_no=${dto.store_no }">메뉴</a></li>
+				<li class="-current"><a href="./StoreImg.st?store_no=${dto.store_no }">사진</a></li>
+				<li ><a href="./ReviewList.rv?store_no=${dto.store_no }">리뷰</a></li>
 
 				</ul>
 

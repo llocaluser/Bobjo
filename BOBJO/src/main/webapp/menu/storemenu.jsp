@@ -309,6 +309,15 @@ width: 30px;
 height: 30px;
 background-image:url("./img/plus.png") ;
 }
+.little_price{
+display: flex;
+}
+
+input#sumPrice{
+ margin: 0 0 0 50px;
+ width: 150px; 
+ 
+}
 
 
  /* 리스트 바스켓설정  */
@@ -397,7 +406,7 @@ function minusAmount(i) {
 	<div class="hero_area">
 		<!-- header section strats -->
 		<div class="brand_box">
-			<a class="navbar-brand" href="./mainContent/index.html"> 
+			<a class="navbar-brand" href="./Main.me"> 
 			<span>BobJo! </span>
 			</a>
 		</div>
@@ -476,7 +485,7 @@ function minusAmount(i) {
 											<li><span ><img src="./img/watch.png" class="hours-icon"></span>OPEN : ${dto.open } <br>
 																											CLOSE : ${dto.close }</li>
 
-											<li><span></span><img src="./img/house.png" class="location-icon"></span> 주소 : ${dto.addr } <br>
+											<li><span><img src="./img/house.png" class="location-icon"></span> 주소 : ${dto.addr } <br>
 																												상세주소 : ${dto.addr_details }</li>
 										</ul>
 									</div>
@@ -499,7 +508,7 @@ function minusAmount(i) {
 							<div class="map-responsive">
 								<iframe
 									src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=
-									아이티윌"
+									${dto.store_name} ${dto.addr}"
 									width="600" height="300" frameborder="0"
 									style="border: 0; width: 100%; height: 100%" allowfullscreen></iframe>
 							</div>
@@ -526,7 +535,11 @@ function minusAmount(i) {
 		</form>
 		</div>
 		</div>
+		<div class="little_price">
 		<button class="clear" onclick="clearMap()">전체삭제</button>
+		<h3 style="margin: 10px 0 0 20px;"> = </h3>
+		<input id="sumPrice" type="text"  readonly/>
+		</div>
 		</div>
 		</div>
 		
@@ -540,14 +553,13 @@ function minusAmount(i) {
 	<div class="global-navigation">
 		<div class="container">
 			<ul class="listStyle">
-				<li><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
-				<li class="-current"><a href="./StoreMenu.nu?store_no=${dto.store_no }">메뉴</a></li>
-				<li><a href="./StoreImg.st?store_no=${dto.store_no }">사진</a></li>
-				<li><a href="setting.review.html">리뷰</a></li>
+				<li ><a href="./StoreInfo.st?store_no=${dto.store_no}">가게상세정보</a></li>
+				<li class="-current"><a href="./StoreMenu.nu?store_no=${dto.store_no}">메뉴</a></li>
+				<li ><a href="./StoreImg.st?store_no=${dto.store_no}">사진</a></li>
+				<li ><a href="./ReviewList.rv?store_no=${dto.store_no}">리뷰</a></li>
 
 
 			</ul>
-
 		</div>
 	</div>
 
@@ -567,9 +579,9 @@ function minusAmount(i) {
 				<div class="-item-left-col3of12">
 					<div class="figure -fit-220">
 						<a
-							href="https://gurunavi.com/ko/k774003/imgs/s_cm_01_011.jpg?dt=1678084632"
+							href="./images/${menuList[i].menu_img }"
 							class="cboxElement"> <img
-							src="https://gurunavi.com/ko/k774003/imgs/t_cm_01_011.jpg?dt=1678084632"
+							src="./images/${menuList[i].menu_img }"
 							width="220" alt="" title="${i+1}"> <span
 							class="-closeup"></span>
 						</a>
@@ -659,19 +671,24 @@ function minusAmount(i) {
 	        				const iterator1 = map[Symbol.iterator]();
 
 	        				let htmlTXT = "";
+	        				var sumPrice = 0;
 	        				for (const item of iterator1) {
 	        					htmlTXT += "<li class='basket_menu_nameli'>"+item[1].name+"</li>"
 	        							+ "<li class='basket_menu_priceli'>"+item[1].price+"</li>"
 	        							+ "<li class='basket_menu_amountli'>"+item[1].amount+"</li>";
+	        							sumPrice += Number(item[1].price);
 	        				}
 	        				document.getElementsByClassName("basket_list2")[0].innerHTML = htmlTXT;
 	        				
+	        				document.getElementById("sumPrice").value = sumPrice; 
+	
 	        			}
 	        		 }
        				
        				function clearMap(){
        					map = new Map();
        					document.getElementsByClassName("basket_list2")[0].innerHTML = "";
+       					document.getElementById("sumPrice").value = "";
        				}
        				
        				function sendRequest() {
@@ -682,16 +699,16 @@ function minusAmount(i) {
        					let menu_amount = "";
         				for (const item of iterator1) {
         					menu_no += item[0] + ",";
-        					price += Number(item[1].price);
         					menu_amount += item[1].price + ",";
         				}
         				document.getElementsByName("menu_no")[0].value = menu_no;
-        				document.getElementsByName("price")[0].value = price;
+        				document.getElementsByName("price")[0].value = document.getElementById("sumPrice").value;
         				document.getElementsByName("menu_amount")[0].value = menu_amount;
         				
         				document.frm_rsrvAction.submit();
        				}
-                  	
+       				
+       				
  				</script>
 
 		<div class="cassette triple-spacing">
