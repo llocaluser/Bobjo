@@ -11,7 +11,7 @@
 <!-- https://fonts.google.com/ -->
 <!-- <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link rel="stylesheet" href="./css/templatemo-video-catalog.css"> -->
-<link rel="stylesheet" href="./css/header.css">
+<link rel="stylesheet" href="./css/header2.css">
 </head>
 <body>
 	<div class="header">
@@ -20,34 +20,10 @@
 		<img id="logo" src="./img/bobjo.png">
 	</a>
 	</div>
-	<div class="container right">
-		<c:if test="${sessionScope.m_id == null }">
-		<div class="login_box">
-			<a href="./MemberLogin.me"
-				style="display: inline;">
-				로그인
-			</a>
-		</div>
-		<div class="login_box">
-			<a href="./MemberJoin.me"
-				style="display: inline;">
-				회원가입
-			</a>
-		</div>
-		</c:if>
-		<c:if test="${sessionScope.m_id != null }">
-		<div class="container right">
-		<div class="login_box">
-			<a href="./MemberLogoutAction.me"
-				style="display: inline;">로그아웃</a>
-		</div>
-		<div class="login_box">
-			<a href="./MemberMypage.me" style="display: inline;">마이페이지</a>
-		</div>
-		</div>
-		</c:if>
-		
-	</div>
-	</div>
+   </div>	
+
+
+
+	
 </body>
 </html>

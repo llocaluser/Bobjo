@@ -524,7 +524,11 @@ function searchStore(){
         })
     </script>
     
+      <!-- footer -->
     
+     	   <jsp:include page="../inc/footer.jsp" />
+     	
+      <!-- footer -->   
     
 
 </body>

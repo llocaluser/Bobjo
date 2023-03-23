@@ -154,8 +154,26 @@ public class MemberFrontController extends BasicFrontController {
 	    		e.printStackTrace();
 	    	}
 	    }
+	    else if(command.equals("/MemberFindpw.me"))	{
+	    	System.out.println("./MemberFindpw.me 호출");
 	    	
-	   
+	    	// 패턴1
+	    	forward = new ActionForward();
+	    	forward.setPath("./member/findpwMember.jsp");
+	    	forward.setRedirect(false);
+	    }
+	    else if(command.equals("/MemberFindpwAction.me")) {
+	    	System.out.println("/MemberFindpwAction.me 호출");
+	    	
+	    	// 패턴3
+	    	action = new MemberFindpwAction();
+	    	try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    	
+	    }
 	
 	
 	
