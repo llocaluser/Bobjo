@@ -1,10 +1,15 @@
 package com.bobjo.reservation.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bobjo.basicform.action.Action;
 import com.bobjo.basicform.action.ActionForward;
+import com.bobjo.payInfo.db.PayInfoDAO;
+import com.bobjo.payInfo.db.PayInfoDTO;
 import com.bobjo.reservation.db.ReservationDAO;
 import com.bobjo.reservation.db.ReservationDTO;
 import com.bobjo.utils.date.TimestampParser;
@@ -16,43 +21,72 @@ public class ReservationAddAction implements Action {
 		String[] classPath = this.getClass().getName().split("\\.");
 		System.out.println(" M :  "+classPath[classPath.length-1]+"_execute() 호출! ");
 		String m_id = (String)request.getSession().getAttribute("m_id");
-		ActionForward forward = new ActionForward();
 		if(m_id == null) {
+			ActionForward forward = new ActionForward();
 			forward.setPath("./MemberLogin.me");
 			forward.setRedirect(true);
 			return forward;
 		}
 
-		ReservationDTO dto = new ReservationDTO();
-		dto.setM_id(m_id);
-		dto.setRsrv_name(request.getParameter("rsrv_name"));
-		dto.setRsrv_phone(request.getParameter("rsrv_phone").replaceAll("-",""));
-		dto.setStore_no(Integer.parseInt(request.getParameter("store_no")));
-		dto.setRsrv_date(TimestampParser.stringToTimestamp(request.getParameter("rsrv_dateOnly"),request.getParameter("rsrv_timeOnly")));
-		dto.setPeople_num(Integer.parseInt(request.getParameter("people_num")));
-		dto.setRsrv_msg(request.getParameter("rsrv_msg"));
-		dto.setMenu_no(request.getParameter("menu_no"));
-		dto.setMenu_amount(request.getParameter("menu_amount"));
+		ReservationDTO rsrvDTO = new ReservationDTO();
+		rsrvDTO.setM_id(m_id);
+		rsrvDTO.setRsrv_name(request.getParameter("rsrv_name"));
+		rsrvDTO.setRsrv_phone(request.getParameter("rsrv_phone").replaceAll("-",""));
+		int store_no = Integer.parseInt(request.getParameter("store_no"));
+		rsrvDTO.setStore_no(store_no);
+		rsrvDTO.setRsrv_date(TimestampParser.stringToTimestamp(request.getParameter("rsrv_dateOnly"),request.getParameter("rsrv_timeOnly")));
+		rsrvDTO.setPeople_num(Integer.parseInt(request.getParameter("people_num")));
+		rsrvDTO.setRsrv_msg(request.getParameter("rsrv_msg"));
+		rsrvDTO.setMenu_no(request.getParameter("menu_no"));
+		rsrvDTO.setMenu_amount(request.getParameter("menu_amount"));
 
 		// 예약
 		if(request.getParameter("price") == null) {
-			dto.setStatus("예약완료");
-			new ReservationDAO().insertReservation(dto);
-			forward.setPath("./StoreInfo.st?store_no="+request.getParameter("store_no"));
-			forward.setRedirect(true);
+			rsrvDTO.setStatus("예약완료");
+			new ReservationDAO().insertReservation(rsrvDTO);
+			redirectWithJS(request, response, "예약이 완료되었습니다.", rsrvDTO.getRsrv_no(), store_no);
 		}
 		// 예약 및 결제
 		else {
-			dto.setStatus("결제대기");
-			new ReservationDAO().insertReservation(dto);
-			request.setAttribute("rsrv_no", dto.getRsrv_no());
-			request.setAttribute("price", request.getParameter("price"));
-			request.setAttribute("store_no", request.getParameter("store_no"));
-			forward.setPath("./Pay.pa");
-			forward.setRedirect(true);
+			
+			PayInfoDAO dao = new PayInfoDAO();
+			PayInfoDTO payDTO = new PayInfoDTO();
+			payDTO.setM_p_id(m_id);
+			payDTO.setM_c_id(dao.getCeoId(Integer.parseInt(request.getParameter("store_no"))));
+			payDTO.setPrice(Integer.parseInt(request.getParameter("price")));
+			payDTO.setPay_type(request.getParameter("pay_type"));
+			
+			// 결제 성공시 로직
+			if(dao.insertPayInfo(payDTO)) {
+				rsrvDTO.setStatus("예약완료");
+				rsrvDTO.setPay_no(payDTO.getPay_no());
+				new ReservationDAO().insertReservation(rsrvDTO);
+				redirectWithJS(request, response, "결제가 완료되었습니다.", rsrvDTO.getRsrv_no(), store_no);
+			}
+			// 결제 실패시 로직
+			else {
+				rsrvDTO.setStatus("결제대기");
+				new ReservationDAO().insertReservation(rsrvDTO);
+				redirectWithJS(request, response, "결제를 실패했습니다.", rsrvDTO.getRsrv_no(), store_no);
+			}
+
 		}
 		
-		return forward;
+		return null;
+	}
+	
+	private void redirectWithJS(HttpServletRequest request, HttpServletResponse response, String msg, int rsrv_no, int store_no) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.write("<script>");
+		out.write("  if(confirm('"+msg+" 예약 정보를 확인하시겠습니까?')) { ");
+		// RsrvInfo 커맨드 변경해도 됨
+		out.write("  location.href = './RsrvInfo.re?rsrv_no="+rsrv_no+"'; ");
+		out.write("  } else { ");
+		out.write("  location.href = './StoreInfo.st?store_no="+store_no+"'; ");
+		out.write("  } ");
+		out.write("</script>");
+		out.close();
 	}
 
 }
