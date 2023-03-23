@@ -292,11 +292,12 @@ public class MemberDAO {
 		
 		try {
 			con = ConnectionManager.getConnection();
-			sql = "SELECT STORE_NAME, STORE_CONTENT, STORE_IMG FROM BOBJO_STORE "
-					+ "WHERE STORE_NO IN (SELECT STORE_NO "
-					+ "FROM BOBJO_RESERVATION "
-					+ "GROUP BY STORE_NO "
-					+ "ORDER BY COUNT(STORE_NO) DESC) LIMIT 10";
+			sql = "SELECT BS.STORE_NAME, BS.STORE_CONTENT, BS.STORE_IMG "
+					+ "FROM BOBJO_STORE BS RIGHT JOIN BOBJO_RESERVATION BR "
+					+ "ON BS.STORE_NO = BR.STORE_NO "
+					+ "GROUP BY BR.STORE_NO "
+					+ "ORDER BY COUNT(BR.STORE_NO) DESC "
+					+ "LIMIT 10";
 			pstmt = con.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
