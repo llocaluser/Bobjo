@@ -35,34 +35,64 @@
 
 <!--                 수정                              -->
 <style type="text/css">
+a {
+	color: black;
+}
+
+.row-col4 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
 .global-navigation li {
 	background-color: #fff;
 	border-bottom: 1px solid #d8d8d8;
 	float: left;
 	display: block;
-	width: 188px;
-	height: 65px;
+	width: 25%;
+	height: 80px;
 	margin: 0;
 	padding: 0;
 	border: 0;
 	padding: 18px 0 15px;
-	color: #333;
+	color: black;
 	vertical-align: baseline;
-	border-bottom: 7px solid #e51f00;
-	font: inherit;
-	font-size: 18px;
+	font-size: 24px;
 	font-weight: bold;
 	text-align: center;
-	line-height: 1.33;
-	
 }
 
+.global-navigation li:hover {
+	color: blue;
+	background: beige;
+	border-bottom: 7px solid #e51f00;
+}
 
+li.-current {
+	color: blue;
+	background: beige;
+	border-bottom: 7px solid #e51f00;
+}
+
+.main -left price-jpy {
+	background: beige;
+}
+
+#h2 {
+	font-size: 3rem;
+}
 
 .container {
 	*zoom: 1;
-	width: 940px;
+	width: 1250px;
 	margin: 0 auto;
+	margin-left: 16.666667%;
+}
+
+table tr {
+	background: beige;
 }
 
 .row {
@@ -88,86 +118,26 @@ ol, ul {
 }
 
 .icon-list li {
-  text-indent: -28px;
-  margin-left: 28px;
-  margin-bottom: 8px;
-}
-
-.icon-list li [class*="icon"] {
-  margin-right: 10px;
-}
-
-.icon-list li:last-child {
-  margin-bottom: 0;
-}
-
-.icon-list.-space {
-  margin-bottom: 10px;
-}
-
-.icon-list .michelin-pc {
-  display: inline-block;
-  margin-left: 0;
-  border-radius: 2px;
-  background-color: #ad001e;
-  text-indent: 0;
-}
-
-.icon-list .michelin-pc__url {
-  text-decoration: none;
-}
-
-.icon-list .michelin-pc__container,
-.icon-list .michelin-pc__container--non-img {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.icon-list .michelin-pc__container {
-  padding: 3px 8px 3px 0;
-}
-
-.icon-list .michelin-pc__container--non-img {
-  padding: 3px 8px;
-}
-
-.icon-list .michelin-pc__box {
-  width: 54px;
-  text-align: center;
-}
-
-.icon-list .michelin-pc__img {
-  height: 16px;
-  vertical-align: middle;
-}
-
-.icon-list .michelin-pc__text {
-  color: #fff;
-  font-size: 10px;
-  line-height: 1.4;
-  word-wrap: break-word;
-}
-
-
-.menu-icon {
-	background: url('./img/storenum.png') 0 -2224px;
-	display: inline-block;
-	vertical-align: middle;
-	vertical-align: auto;
-	zoom: 1;
-	display: inline;
-	height: 18px;
-	width: 18px;
-}
-
-.icon-list li {
 	text-indent: -28px;
 	margin-left: 28px;
 	margin-bottom: 8px;
+}
+
+.icon-list li [class*="icon"] {
+	margin-right: 10px;
+}
+
+.icon-list li:last-child {
+	margin-bottom: 0;
+}
+
+.icon-list.-space {
+	margin-bottom: 10px;
+}
+
+.menu-icon, .price-icon, .tel-icon, .hours-icon, .location-icon {
+	width: 20px;
+	height: 20px;
 }
 
 .contact_form-container {
@@ -178,9 +148,17 @@ ol, ul {
 	display: list-item;
 }
 
-btn1{
-background: yellow;
-color: yellow;
+button.btn1:hover {
+	color: blue;
+	background: beige;
+	font: bold;
+	font-size: 20px;
+}
+
+button.btn1 {
+	font: bold;
+	font-size: 20px;
+	margin-left: 40px
 }
 
 </style>
@@ -193,8 +171,8 @@ color: yellow;
 	<div class="hero_area">
 		<!-- header section strats -->
 		<div class="brand_box">
-			<a class="navbar-brand" href="./mainContent/index.html"> <span>
-					BobJo! </span>
+			<a class="navbar-brand" href="./Main.me"> 
+			<span>BobJo! </span>
 			</a>
 		</div>
 		<!-- end header section -->
@@ -217,22 +195,22 @@ color: yellow;
 						<div class="d-flex  flex-column flex-lg-row align-items-center">
 							<ul class="navbar-nav  ">
 								<li class="nav-item active"><a class="nav-link"
-									href="./mainContent/index.html"> <span class="sr-only">(current)</span></a>
+									href="../mainContent/index.html"> <span class="sr-only">(current)</span></a>
 								</li>
 								<li class="nav-item"><a class="nav-link"
-									href="./mainContent/about.html"> </a></li>
+									href="../mainContent/about.html"> </a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="./mainContent/fruit.html"> </a></li>
+									href="../mainContent/fruit.html"> </a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="./mainContent/testimonial.html"></a></li>
+									href="../mainContent/testimonial.html"></a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="./mainContent/contact.html"></a></li>
-								
-								
+									href="../mainContent/contact.html"></a></li>
+
+
 							</ul>
-							
-							
-							
+
+
+
 						</div>
 					</div>
 				</nav>
@@ -246,17 +224,13 @@ color: yellow;
 	<!-- contact section -->
 
 
-
-
-
-
 	<section class="contact_section layout_padding">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="offset-lg-2 col-md-10 offset-md-1">
 					<div class="heading_container">
 						<hr>
-						<h2>가게이름</h2>
+						<h2 id="h2">${dto.store_name }</h2>
 					</div>
 				</div>
 			</div>
@@ -264,39 +238,33 @@ color: yellow;
 			<div class="layout_padding2-top">
 				<div class="row">
 					<div class="col-lg-4 offset-lg-2 col-md-5 offset-md-1">
-						<form action="">
 							<div class="contact_form-container">
 								<div>
 									<div class="-item-rect -item-right -col6of12">
 										<ul class="icon-list -space sentence">
-											<li><span class="menu-icon"></span> 
-											가게주메뉴 카테고리
-											</li>
+											<li><span><img src="./img/blackbell.png" class="menu-icon"></span> ${dto.store_category }</li>
 
-											<li><span class="price-icon"></span> 
-											가격대 
-											</li>
+											<li><span ><img src="./img/money.png" class="price-icon"></span> 가격대 ${dto.minPrice } ~ ${dto.maxPrice }</li>
 
-											<li><span class="tel-icon"></span> 
-											가게전화번호
-											</li>
+											<li><span ><img src="./img/phone.png" class="tel-icon"></span> ${dto.tel }</li>
 
-											<li><span class="hours-icon"></span>영업시간
-											Dinner: 17:00 - 22:30 Saturday &amp; Sunday &amp; Holiday
-											Lunch: 11:30 - 16:00 , Dinner: 17:00 - 22:30</li>
+											<li><span ><img src="./img/watch.png" class="hours-icon"></span>OPEN : ${dto.open } <br>
+																											CLOSE : ${dto.close }</li>
 
-											<li><span class="location-icon"></span> 주소
-												<br>상세주소</li>
+											<li><span></span><img src="./img/house.png" class="location-icon"></span> 주소 : ${dto.addr } <br>
+																												상세주소 : ${dto.addr_details }</li>
 										</ul>
 									</div>
 									<div>
-										<button name="btn1">
-											<a href="##"> 예약하기 
-										</button>
+										<form action="./ReservationAction.re" method="post" name="frm_rsrvAction">
+										<input type="hidden" name="store_no" value="${dto.store_no }">
+								  	  	<button class="btn1" type="submit">
+											예약하기
+								  	  	</button>
+									</form>
 									</div>
 								</div>
 							</div>
-						</form>
 						
 						
 					</div>
@@ -305,7 +273,7 @@ color: yellow;
 							<div class="map-responsive">
 								<iframe
 									src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=
-									서울"
+									${dto.store_name} ${dto.addr}"
 									width="600" height="300" frameborder="0"
 									style="border: 0; width: 100%; height: 100%" allowfullscreen></iframe>
 							</div>
@@ -321,10 +289,10 @@ color: yellow;
 	<div class="global-navigation">
 		<div class="container">
 			<ul>
-				<li class="-current"><a href="#">가게상세정보</a></li>
-				<li><a href="#">메뉴</a></li>
-				<li><a href="#">사진</a></li>
-				<li><a href="#">리뷰</a></li>
+				<li ><a href="./StoreInfo.st?store_no=${dto.store_no }">가게상세정보</a></li>
+				<li ><a href="./StoreMenu.nu?store_no=${dto.store_no }">메뉴</a></li>
+				<li ><a href="./StoreImg.st?store_no=${dto.store_no }">사진</a></li>
+				<li class="-current"><a href="./ReviewList.rv?store_no=${dto.store_no }">리뷰</a></li>
 
 			</ul>
 

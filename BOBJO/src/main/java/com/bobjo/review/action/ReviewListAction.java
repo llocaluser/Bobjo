@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.bobjo.basicform.action.Action;
 import com.bobjo.basicform.action.ActionForward;
 import com.bobjo.review.db.ReviewDAO;
+import com.bobjo.store.db.StoreDAO;
+import com.bobjo.store.db.StoreDTO;
 
 public class ReviewListAction implements Action {
 
@@ -81,6 +83,13 @@ public class ReviewListAction implements Action {
 		request.setAttribute("pageBlock", pageBlock);
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("pageNum", pageNum);
+		
+		
+        StoreDAO sdao = new StoreDAO();
+		
+		StoreDTO dto = sdao.getStore(store_no);
+		dto.setStore_no(store_no);
+		request.setAttribute("dto",dto);
 		
 		
 		ActionForward forward = new ActionForward();

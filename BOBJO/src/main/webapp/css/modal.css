@@ -15,8 +15,8 @@
 }
 
 .search{
-	width: 1500px;
-	height:600px;
+	width: auto;
+	height:480px;
 	position: fixed;
 	background-color: white;
 	border-radius: 3px;
@@ -54,7 +54,7 @@
 
 .search form{
 	width:auto;
-	height:380px;
+	height:auto;
 	
 }
 
@@ -149,6 +149,10 @@ html.no-scroll{
 	to {
 		opacity: 1;
 	}
+}
+
+select:focus {
+	outline: none;
 }
 
 @keyframes openMapSearch{
