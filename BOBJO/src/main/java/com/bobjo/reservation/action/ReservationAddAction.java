@@ -81,7 +81,7 @@ public class ReservationAddAction implements Action {
 		out.write("<script>");
 		out.write("  if(confirm('"+msg+" 예약 정보를 확인하시겠습니까?')) { ");
 		// RsrvInfo 커맨드 변경해도 됨
-		out.write("  location.href = './RsrvInfo.re?rsrv_no="+rsrv_no+"'; ");
+		out.write("  location.href = './MemberBook.me?rsrv_no="+rsrv_no+"'; ");
 		out.write("  } else { ");
 		out.write("  location.href = './StoreInfo.st?store_no="+store_no+"'; ");
 		out.write("  } ");

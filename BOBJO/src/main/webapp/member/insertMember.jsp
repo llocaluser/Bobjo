@@ -63,7 +63,7 @@
           </div> 
           
          <div class="info" id="info__mobile">
-          <input class="box" type="text" placeholder="휴대폰 번호 입력 (‘-’ 제외 11자리 입력)" name="phone" required="required"/>
+          <input class="box" type="text" placeholder="휴대폰 번호 입력 (‘-’ 제외 11자리 입력)" name="phone" required="required" maxlength="11"/>
           <div class="error-msg"></div>
         </div>  
         
@@ -72,29 +72,22 @@
             <input class="box" type="text" placeholder="닉네임" name="nickname"/>
            </div> 
           </div> 
-        
-        <div class="info" id="info__email">
-          <input class="box" id="email-txt" type="text" placeholder="이메일 입력" name="email"/>
-          <span>@</span>
-          <input class="box" id="domain-txt" type="text"/>
-          <select class="box" id="domain-list">
-            <option value="type">직접 입력</option>
-            <option value="naver.com">naver.com</option>
-            <option value="google.com">google.com</option>
-            <option value="nate.com">nate.com</option>
-            <option value="kakao.com">kakao.com</option>
-          </select>
-        </div>
-        
-       
+          
+        <div class="info" id="info__birth">
+          <div id="birth-flex">
+              <input class="box" type="email" placeholder="이메일" name="email"/>
+           </div> 
+        </div> 
+          
+          
        <h4>음주레벨을 선택해주세요</h4>
        <h6>선택시 어울리는 음식을 추천해드립니다.</h6>
        <div class="info" id="info__level" name="alcohol_level">
-          <input type="radio" name="level" value="1level"> 1level
-          <input type="radio" name="level" value="2level"> 2level
-          <input type="radio" name="level" value="3level"> 3level
-          <input type="radio" name="level" value="4level"> 4level
-          <input type="radio" name="level" value="5level"> 5level      
+          <input type="radio" name="alcohol_level" value="1"> 1level
+          <input type="radio" name="alcohol_level" value="2"> 2level
+          <input type="radio" name="alcohol_level" value="3"> 3level
+          <input type="radio" name="alcohol_level" value="4"> 4level
+          <input type="radio" name="alcohol_level" value="5"> 5level      
        </div>
 
 		<div class="info" id="info_ceoNum" style="display: none;">

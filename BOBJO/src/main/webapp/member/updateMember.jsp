@@ -27,7 +27,7 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                 <!--    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div> -->
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
@@ -40,8 +40,7 @@
                                 </div>
                                   
                                 <div class="form-group">
-                                    <input type="password" class="form-control form-control-user" name="pw"
-                                        placeholder="현재 비밀번호">
+                                    <input type="password" class="form-control form-control-user" name="pw" placeholder="현재 비밀번호">
                                 </div>
                                 
                                 <div class="form-group">
