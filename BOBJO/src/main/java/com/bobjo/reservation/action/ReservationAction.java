@@ -20,7 +20,7 @@ public class ReservationAction implements Action {
 			return forward;
 		}
 		 
-        // 예약 정보를 예약 전용 페이지로 전송
+           
 		ReservationDAO dao = new ReservationDAO();
 		request.setAttribute("store_no", request.getParameter("store_no"));
 		request.setAttribute("store_name", dao.getStoreName(Integer.parseInt(request.getParameter("store_no"))));

@@ -265,7 +265,9 @@ background-color: #fff;
 
 }
 
-
+button.clear{
+margin: 45px 0 0 622px;
+}
 
 .menu_header{
 padding-top: 10px;
@@ -274,13 +276,14 @@ padding-top: 10px;
 
 .basket_con li{
 float: left;
+
 }
 .basket_con{
 margin: 20px 0 -50px;
 border: 1px solid black;
 
 width: auto;
-height: 200px;
+height: 240px;
 }
 .basket_title{
 width: 700px;
@@ -344,11 +347,17 @@ width: 200px;
 }
 li.basket_menu_amountli{
 padding: 10px;
-width: 107px;
+width: 87px;
 }
 .menu_sum{
 margin-top: 10px;
 }
+input.sum_price{
+width: 130px;
+margin: 30px 0;
+
+}
+
 
 /*  바스켓설정   */
 
@@ -356,22 +365,22 @@ margin-top: 10px;
 
 <script type="text/javascript">
 
-function getMenu_amount2() {
-	var amount = document.getElementById("menu_amount").value;
-	return amount;
-}
+function plusAmount(i) { 
+	var amount = document.getElementById("menu_amount["+i+"]").value++;
+	var price = document.getElementById("sum_price["+i+"]").value;
+    document.getElementById("sum_price["+i+"]").value = price/amount*(amount+1); 
+		
+	}
 
-
-function plusAmount() { 
-	var amount = document.getElementById("menu_amount").value++;
-	
-}
-
-function minusAmount() { 
-	var amount = document.getElementById("menu_amount").value--;
+function minusAmount(i) { 
+	var amount = document.getElementById("menu_amount["+i+"]").value--;
+	var price = document.getElementById("sum_price["+i+"]").value;
 	if (amount < 2){
 		alert("갯수는 1개 이상만 가능합니다.");
-		document.getElementById("menu_amount").value = 1;
+		document.getElementById("menu_amount["+i+"]").value = 1;
+	}else {
+		document.getElementById("sum_price["+i+"]").value = price/amount*(amount-1);
+		
 	}
 	
 }
@@ -454,7 +463,6 @@ function minusAmount() {
 			<div class="layout_padding2-top">
 				<div class="row">
 					<div class="col-lg-4 offset-lg-2 col-md-5 offset-md-1">
-						<form action="">
 							<div class="contact_form-container">
 								<div>
 									<div class="-item-rect -item-right -col6of12">
@@ -472,14 +480,19 @@ function minusAmount() {
 																												상세주소 : ${dto.addr_details }</li>
 										</ul>
 									</div>
+									<form action="./ReservationAction.re" method="post" name="frm_rsrvAction">
+										<input type="hidden" name="store_no" value="${dto.store_no }">
+										<input type="hidden" name="menu_no">
+										<input type="hidden" name="menu_amount" >
+										<input type="hidden" name="price">
+									</form>
 									<div>
-									  	<button class="btn1">
-											<a href="./ReservationAction.re"> 예약하기 </a>
+									  	<button class="btn1" onclick="sendRequest()">
+											예약하기
 										</button>
 									</div>
 								</div>
 							</div>
-						</form>
 					</div>
 					<div class="col-md-6 px-0">
 						<div class="map_container">
@@ -505,17 +518,18 @@ function minusAmount() {
 		<li class="basket_menu_price"> 가격 </li> 
 		<li class="basket_menu_amount"> 갯수 </li> 
 		</ul>
-	<%-- 	<c:forEach var= i> --%>
+		<form action="./ReservationAction.re">
+		<div style="overflow:auto; width:700px; height:200px;">
 		<ul class="basket_list2">
-		<li class="basket_menu_nameli"> 메뉴명 </li> 
-		<li class="basket_menu_priceli"> 가격 </li> 
-		<li class="basket_menu_amountli"> 갯수 </li> 
 		</ul>
-	<%-- 	</c:forEach> --%>
+        </div>
+		</form>
 		</div>
 		</div>
+		<button class="clear" onclick="clearMap()">전체삭제</button>
 		</div>
 		</div>
+		
 		
 		
 		<!-- 장바구니 구현 -->
@@ -601,18 +615,19 @@ function minusAmount() {
 				<div class="basketadd-container">
 				<div class="add_info_menu">
 		       			 <div style="display:flex;vertical-align:top;">
-			      	 		 <input type="button" class="plus_btn" onclick="plusAmount()">
-			      	 		 <input type="number" id="menu_amount" value="1" class="menu_count" maxlength="10" min="1">
-			      	 		 <input type="button" class="minus_btn"  onclick="minusAmount()">
+			      	 		 <input type="button" class="plus_btn" onclick="plusAmount(${i})">
+			      	 		 <input type="number" id="menu_amount[${i}]" value="1" class="menu_count" maxlength="10" min="1">
+			      	 		 <input type="button" class="minus_btn"  onclick="minusAmount(${i})">
         				</div>
         				<div class="basket_info1"> 
-        				<p class="menu_sum">합계 : ${menuList[i].price}원</p>
+        				<input class="sum_price" type="text" id="sum_price[${i}]" value="${menuList[i].price}" readonly/>
         				</div>
     			</div>
 				
 				
 				<div>
-				<button class="basket" onclick="getMenu_amount(${menuList[i].menu_no});" >
+				<input type="hidden" id="menu_name[${i}]" value="${menuList[i].menu_name}">
+				<button class="basket" onclick="getMenu_amount(${menuList[i].menu_no}, ${i});" >
 				장바구니에 담기</button>
 				</div>
 				</div>
@@ -620,22 +635,64 @@ function minusAmount() {
 	         </c:forEach>
 
 		         <script type="text/javascript">
-	         
-	         function getMenu_amount(menu_no) { 
-	        		var amount = document.getElementById("menu_amount").value; 
-	        		if (amount < 1){ 
-	        			alert("갯수는 1개 이상만 가능합니다."); 
-	        			document.getElementById("menu_amount").value = 1; 
-	        		}else if(amount >100){ 
-	        			alert("장난치지마십쇼!!");
-	        			document.getElementById("menu_amount").value = 1; 
-	        		}else{
-	        			alert(menu_no);
-						alert(amount);
-	        		}
+       				let map = new Map();
 	        		
-     	}
- </script>
+       				function getMenu_amount(menu_no, i) { 
+	        			
+	        			var amount = document.getElementById("menu_amount["+i+"]").value; 
+	        			var price = document.getElementById("sum_price["+i+"]").value;
+	        			var name = document.getElementById("menu_name["+i+"]").value;
+	        			
+	        			if (amount < 1){ 
+	        				alert("갯수는 1개 이상만 가능합니다."); 
+	        				document.getElementById("menu_amount["+i+"]").value = 1; 
+	        			}else if(amount >100){ 
+	        				alert("장난치지마십쇼!!");
+	        				document.getElementById("menu_amount["+i+"]").value = 1; 
+	        			}else{
+	        				let obj = new Object();
+	        				obj.price = price;
+	        				obj.name = name;
+	        				obj.amount = amount;
+	        				map.set(menu_no, obj);
+	        				
+	        				const iterator1 = map[Symbol.iterator]();
+
+	        				let htmlTXT = "";
+	        				for (const item of iterator1) {
+	        					htmlTXT += "<li class='basket_menu_nameli'>"+item[1].name+"</li>"
+	        							+ "<li class='basket_menu_priceli'>"+item[1].price+"</li>"
+	        							+ "<li class='basket_menu_amountli'>"+item[1].amount+"</li>";
+	        				}
+	        				document.getElementsByClassName("basket_list2")[0].innerHTML = htmlTXT;
+	        				
+	        			}
+	        		 }
+       				
+       				function clearMap(){
+       					map = new Map();
+       					document.getElementsByClassName("basket_list2")[0].innerHTML = "";
+       				}
+       				
+       				function sendRequest() {
+       					const iterator1 = map[Symbol.iterator]();
+
+       					let menu_no = "";
+       					let price = 0;
+       					let menu_amount = "";
+        				for (const item of iterator1) {
+        					menu_no += item[0] + ",";
+        					price += Number(item[1].price);
+        					menu_amount += item[1].price + ",";
+        				}
+        				document.getElementsByName("menu_no")[0].value = menu_no;
+        				document.getElementsByName("price")[0].value = price;
+        				document.getElementsByName("menu_amount")[0].value = menu_amount;
+        				
+        				document.frm_rsrvAction.submit();
+       				}
+                  	
+ 				</script>
 
 		<div class="cassette triple-spacing">
 			<div class="row-col5">
