@@ -70,6 +70,12 @@
   </head>
 
   <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
+  
+       <!-- 헤더 -->
+    
+     	      <jsp:include page="../inc/header2.jsp" />
+     	
+     	<!-- 헤더 -->
 
 	<div class="card align-middle" style="width:25rem;">
 		<div class="card-title" style="margin-top:30px;">
@@ -78,10 +84,10 @@
 		</div>
         
 		<div class="card-body">
-      <form action="findId" class="form-signin" method="POST">
+      <form action="./MemberFindidAction.me" class="form-signin" method="POST">
   		 <p class="text2"> ${findid2}</p>
-        <input type="text" name="name" id="name" class="form-control" placeholder="이름" required autofocus><BR>
-        <input type="email" name="email" id="email" class="form-control" placeholder="이메일" required><br>
+        <input type="text" name="m_name" id="m_name" class="form-control" placeholder="이름" required autofocus><BR>
+        <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대폰 번호 입력 (‘-’ 제외 11자리 입력)" required><br>
         	<p class="check" id="check">${check}</p><br/>
         <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">아 이 디 찾 기</button>
       
@@ -89,7 +95,7 @@
         
 		</div>
         <div class="links">
-            <a href="memberPw">비밀번호 찾기</a> | <a href="memberLogin">로그인</a> | <a href="memberRegist">회원가입</a>
+            <a href="./MemberFindpw.me">비밀번호 찾기</a> | <a href="./MemberLogin.me">로그인</a> | <a href="./MemberJoin.me">회원가입</a>
 
         </div>
 	</div>

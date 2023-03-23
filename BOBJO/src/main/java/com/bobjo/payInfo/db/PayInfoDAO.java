@@ -41,6 +41,7 @@ public class PayInfoDAO {
 		return false;
 	}
 
+	// 결제 진행을 위한 추가정보 -  가게 사장 아이디
 	public String getCeoId(int store_no) {
 		String ceoId = null;
 		
@@ -65,5 +66,33 @@ public class PayInfoDAO {
 		
 		return ceoId;
 	}
+	// 결제 진행을 위한 추가정보 -  가게 사장 아이디
+	
+	// 결제 진행을 위한 추가정보 -  가게 이름
+	public String getStoreName(int store_no) {
+		String storeName = null;
+		
+		try {
+			con = ConnectionManager.getConnection();
+			
+			sql = "select store_name "
+				+ "from bobjo_store "
+				+ "where store_no = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, store_no);
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			storeName = rs.getString(1);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(rs, pstmt, con);
+		}
+		
+		return storeName;
+	}
+	// 결제 진행을 위한 추가정보 -  가게 이름
 	
 }

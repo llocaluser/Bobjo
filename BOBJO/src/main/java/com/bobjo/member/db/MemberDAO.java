@@ -216,18 +216,18 @@ public class MemberDAO {
 		}	
 		// 회원정보 수정 -  updateMember(dto)
 		
-		// 아이디 정보 조회 - getFindID
-		 public MemberDTO getFindID(String m_name, String email) {
+		// 아이디 찾기 - getFindID
+		   public MemberDTO getFindID(String m_name, String phone) {
 			 MemberDTO dto = null;
 			  try {
 				  // 1.2. 디비연결
 				 con = ConnectionManager.getConnection();
 				 
 				 // 3. sql 작성 & pstmt
-				 sql = "select m_id from bobjo_member where m_name=? and email=?";
+				 sql = "select m_id from bobjo_member where m_name=? and phone=?";
 				 pstmt = con.prepareStatement(sql);
-				 pstmt.setString(1, dto.getM_name());
-				 pstmt.setString(2, dto.getEmail());
+				 pstmt.setString(1,m_name);
+				 pstmt.setString(2,phone);
 				 
 				// 4. SQL 실행
 				rs = pstmt.executeQuery();
@@ -236,8 +236,7 @@ public class MemberDAO {
 				// 화면에 출력X -> 출력정보 저장 (리턴)
 				if (rs.next()) {
 					dto = new MemberDTO();
-					dto.setM_name("m_name");
-					dto.setEmail("email");
+				dto.setM_id(rs.getString("m_id"));
 				}
 
 				System.out.println(" DAO : 회원아이디 조회 성공! ");			 
@@ -248,7 +247,7 @@ public class MemberDAO {
 			}
 			 return dto;
 		 }
-		// 아이디 정보 조회 - getFindID
+		// 아이디 찾기 - getFindID
 
 		// 회원 정보 조회
 
@@ -322,6 +321,42 @@ public class MemberDAO {
 		return list;
 	}
 	// 메인페이지 추천식당 받기
+	
+	
+	// 비밀번호 찾기 - getFindPw
+	   public MemberDTO getFindPw(String m_id, String m_name, String phone) {
+		 MemberDTO dto = null;
+		  try {
+			  // 1.2. 디비연결
+			 con = ConnectionManager.getConnection();
+			 
+			 // 3. sql 작성 & pstmt
+			 sql = "select pw from bobjo_member where m_id=? and m_name=? and phone=?";
+			 pstmt = con.prepareStatement(sql);
+			 pstmt.setString(1, m_id);
+			 pstmt.setString(2,m_name);
+			 pstmt.setString(3,phone);
+			 
+			// 4. SQL 실행
+			rs = pstmt.executeQuery();
+			
+			// 5. 데이터 처리
+			// 화면에 출력X -> 출력정보 저장 (리턴)
+			if (rs.next()) {
+				dto = new MemberDTO();
+			    dto.setPw(rs.getString("pw"));
+			}
+
+			System.out.println(" DAO : 회원아이디 조회 성공! ");			 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			ConnectionManager.closeConnection(rs, pstmt, con);
+		}
+		 return dto;
+	 }
+	// 비밀번호 찾기 - getFindPw
+	
 	
 }
 

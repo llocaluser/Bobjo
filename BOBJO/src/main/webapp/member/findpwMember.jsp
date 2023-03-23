@@ -4,20 +4,17 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-
     
-
-   
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>로그인 폼</title>
+    <title>BOBJO</title>
     <style>
         @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
 	
@@ -46,7 +43,7 @@
         border: none;
     }
 	
-	.login .form-control {
+	.form-signin .form-control {
   		position: relative;
   		height: auto;
   		-webkit-box-sizing: border-box;
@@ -55,15 +52,10 @@
   		padding: 10px;
   		font-size: 16px;
 	}
-    .checkbox{
-        margin-right: 20px;
-        text-align: right;
-    }
     .card-title{
         margin-left: 30px;
     }
-
-    .links{
+	 .links{
         text-align: center;
         margin-bottom: 10px;
     }
@@ -71,59 +63,66 @@
     a{ 
     	color: #f58b34; text-decoration: none; 
     }
-    .check{
-    	color : red;
+    .text2{
+    	color : blue;
     }
-	 
-
-    a{
-    	color: #f58b34; text-decoration: none;
-    }
-    .check{
-    	color : red;
-    }
-	
-
     </style>
   </head>
 
   <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
   
-        <!-- 헤더 -->
+   <!-- 헤더 -->
     
-     	      <jsp:include page="../inc/header2.jsp" />
+     <jsp:include page="../inc/header2.jsp" />
      	
-     	<!-- 헤더 -->
-  
+  <!-- 헤더 -->
 
 	<div class="card align-middle" style="width:25rem;">
 		<div class="card-title" style="margin-top:30px;">
-
             
-			<h2 class="card-title" style="color:#f58b34; text-align:left;"> 로그인 </h2>
+			<h2 class="card-title" style="color:#f58b34;"> 비밀번호 찾기</h2>
 		</div>
-      <form action="./MemberLoginAction.me" class="login" method="POST">
-        <div class="checkbox">
-            <label>
-            <input type="radio" name="mode" value="admin"> 관리자
-			&nbsp;&nbsp;
-			<input type="radio" name="mode" value="member" checked> 일반회원
-            </label>
-          </div>
+        
 		<div class="card-body">
-  
-        <input type="text" name="m_id" id="m_Id" class="form-control" placeholder="아이디" autofocus required><BR>
-        <input type="password" name="pw" id="Pw" class="form-control" placeholder="비밀번호"  required><br>
-         <p id="check" class="check">${login_msg}</p><br/>
-        <input id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" value="로 그 인">
+      <form action="./MemberFindpwAction.me" class="form-signin" method="POST">
+  		 <p class="text2"> ${findid2}</p>
+        <input type="text" name="m_id" id="m_id" class="form-control" placeholder="아이디" required autofocus><BR>
+        <input type="text" name="m_name" id="m_name" class="form-control" placeholder="이름" required ><BR>
+        <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대폰 번호 입력 (‘-’ 제외 11자리 입력)" required><br>
+        	<p class="check" id="check">${check}</p><br/>
+        <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">비 밀 번 호 찾 기</button>
+      
       </form>
-    
+        
 		</div>
         <div class="links">
-            <a href="./MemberFindid.me">아이디 찾기</a> | <a href="./MemberFindpw.me">비밀번호 찾기</a> | <a href="./MemberJoin.me">회원가입</a>
-
-       
+            <a href="./MemberFindid.me">아이디 찾기</a> | <a href="./MemberLogin.me">로그인</a> | <a href="./MemberJoin.me">회원가입</a>
+        </div>
 	</div>
    
   </body>
+<!-- <script type="text/javascript">
+		
+  		$("#m_name").focusout(function(){
+  			
+	     if($('#m_name').val() == ""){
+	   		$('#check').text('이름을 입력해주세요.');
+	   	  	$('#check').css('color', 'red');
+	   
+	     }else{
+	    	 $('#check').hide();
+	     }
+	     });
+	     
+  		$("#phone").focusout(function(){
+	     if($('#phone').val() == ""){
+	   		$('#check').text('핸드폰 번호를 입력해주세요');
+	   	  	$('#check').css('color', 'red');
+	     }else{
+	    	 $('#check').hide();
+	     }
+	     });
+  
+  </script> -->
+
 </html>
