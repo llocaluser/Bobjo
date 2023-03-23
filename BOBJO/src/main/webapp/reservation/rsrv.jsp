@@ -1157,6 +1157,13 @@ if (window.JotForm && JotForm.accessible) $('input_30').setAttribute('tabindex',
    setTimeout(function() {
 JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결제 및 예약하기 ","type":"control_button"},null,null,null,null,null,null,null,null,null,null,null,{"name":"input14","qid":"14","text":"예약페이지","type":"control_head"},null,{"description":"\n","name":"input16","qid":"16","text":"예약자 성함","type":"control_fullname"},null,{"name":"input18","qid":"18","text":"손님 수","type":"control_spinner"},null,null,null,null,null,null,null,null,null,null,null,{"name":"input30","qid":"30","text":"요청사항","type":"control_textarea"},null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,{"description":"","name":"input104","qid":"104","text":"전화번호","type":"control_phone"},null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,{"name":"input121","qid":"121","text":"결제항목 ","type":"control_widget"},null,null,null,null,null,{"name":"input127","qid":"127","text":"예약하기","type":"control_button"},{"description":"","name":"input128","qid":"128","text":"예약날짜","type":"control_datetime"},{"description":"","name":"input129","qid":"129","subLabel":"","text":"예약 시간","type":"control_dropdown"}]);}, 20); 
 </script>
+
+<!-- 결제 API 관련 -->
+<!-- jQuery -->
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script> -->
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<!-- 결제 API 관련 -->
 </head>
 <body>
 <form class="jotform-form" action="${root }/ReservationAdd.re" method="post" name="form_230748828516465" id="230748828516465" accept-charset="utf-8" autocomplete="on" novalidate="true">
@@ -1251,8 +1258,10 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
 			<div data-widget-name="체크리스트" style="width:100%;text-align:Left;overflow-x:auto" data-component="widget-field"> 
 <!-- <iframe data-client-id="52961c97e3e5266570000004" title="체크리스트" frameborder="0" scrolling="no" allowtransparency="true" allow="geolocation; microphone; camera; autoplay; encrypted-media; fullscreen" data-type="iframe" class="custom-field-frame custom-field-frame-rendered frame-xd-ready frame-ready" id="customFieldFrame_121" src="//widgets.jotform.io/checklist/?qid=121&amp;ref=https%3A%2F%2Fform.jotform.com&amp;injectCSS=false" style="max-width: 310px; border: none; width: 100%; height: 57px;" data-width="310" data-height="200"></iframe>  -->
             <div class="widget-inputs-wrapper">
+            <input type="hidden" name="pay_type">
+            <input type="hidden" name="uid">
             <input type="hidden" name="price" value="${price }">
-            <fmt:formatNumber var="fmt_price" value="1234567" type="number"/>
+            <fmt:formatNumber var="fmt_price" value="${price }" type="number"/>
             ${fmt_price } 원
 <!--             <input type="hidden" id="input_121" class="form-hidden form-widget  " name="q121_input121" value=""><input type="hidden" id="widget_settings_121" class="form-hidden form-widget-settings" value="%5B%7B%22name%22%3A%22items%22%2C%22value%22%3A%22%EC%98%B5%EC%85%98%201%5C%5Cn%EC%98%B5%EC%85%98%202%5C%5Cn%EC%98%B5%EC%85%98%203%22%7D%2C%7B%22name%22%3A%22hideunchecked%22%2C%22value%22%3A%22No%22%7D%2C%7B%22name%22%3A%22other%22%2C%22value%22%3A%22No%22%7D%2C%7B%22name%22%3A%22othertext%22%2C%22value%22%3A%22%EA%B8%B0%ED%83%80%22%7D%5D" data-version="2"> -->
             </div>
@@ -1284,9 +1293,43 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
       </li>
       <li class="form-line" data-type="control_button" id="id_2">
         <div id="cid_2" class="form-input-wide" data-layout="full">
-          <div data-align="center" class="form-buttons-wrapper form-buttons-center   jsTest-button-wrapperField"><button id="input_2" type="submit" class="form-submit-button submit-button jf-form-buttons jsTest-submitField" data-component="button" data-content="">
+          <div onclick="requestPay()" data-align="center" class="form-buttons-wrapper form-buttons-center   jsTest-button-wrapperField">
+          <button id="input_2" 
+          onclick="return false;" class="form-submit-button submit-button jf-form-buttons jsTest-submitField" data-component="button" data-content="">
           결제 및 예약하기 </button></div>
         </div>
+        <script type="text/javascript">
+	        var IMP = window.IMP; 
+	        IMP.init("imp81323135"); 
+	
+	        function requestPay() {
+	        	document.getElementsByName("pay_type")[0].value = "신용카드";
+	        	let buyer_name = document.getElementsByName("rsrv_name")[0].value;
+	       		let buyer_tel = document.getElementsByName("rsrv_phone")[0].value;
+	       		let uid = Math.random().toString().substr(2);
+	        	document.getElementsByName("uid")[0].value = uid;
+	            IMP.request_pay({
+	                pg : 'kcp.{imp81323135}',
+	                pay_method : 'card',
+	                merchant_uid: uid,
+	                name : '${store_name}',
+	                amount : ${price},
+	                buyer_email : '',
+	                buyer_name : buyer_name,
+	                buyer_tel : buyer_tel,
+	                buyer_addr : '',
+	                buyer_postcode : ''
+	            }, function (rsp) { // callback
+	                if (rsp.success) {
+	                    console.log(rsp);
+	                    document.form_230748828516465.submit();
+	                } else {
+	                    console.log(rsp);
+	                    alret("결제실패");
+	                }
+	            });
+	        }
+        </script>
       </li>
       </c:if>
       <li style="display:none">Should be Empty: <input type="text" name="website" value=""></li>
