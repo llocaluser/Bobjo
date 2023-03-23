@@ -42,28 +42,28 @@
       <section>
         <div class="info" id="info__id">
           <div id="id-input">
-            <input class="box" type="text" placeholder="아이디 입력(6~20자)" autofocus name="m_id"/>
+            <input class="box" type="text" placeholder="아이디 입력(6~20자)" autofocus name="m_id" required="required"/>
             <button id="id-check">중복 확인</button>
           </div>
           <div class="error-msg"></div>
         </div>
         <div class="info" id="info__pw">
-          <input class="box" type="password" placeholder="비밀번호 입력 (문자, 숫자, 특수문자 포함 8~20자)" name="pw"/>
+          <input class="box" type="password" placeholder="비밀번호 입력 (문자, 숫자, 특수문자 포함 8~20자)" name="pw" required="required"/>
           <div class="error-msg"></div>
         </div>
         <div class="info" id="info__pwRe">
-          <input class="box" type="password" placeholder="비밀번호 재입력" name="pw"/>
+          <input class="box" type="password" placeholder="비밀번호 재입력" name="pw" required="required"/>
           <div class="error-msg"></div>
         </div>
         
         <div class="info" id="info__birth">
           <div id="birth-flex">
-            <input class="box" type="text" placeholder="이름" name="m_name"/>
+            <input class="box" type="text" placeholder="이름" name="m_name" required="required"/>
            </div> 
           </div> 
           
          <div class="info" id="info__mobile">
-          <input class="box" type="text" placeholder="휴대폰 번호 입력 (‘-’ 제외 11자리 입력)" name="phone"/>
+          <input class="box" type="text" placeholder="휴대폰 번호 입력 (‘-’ 제외 11자리 입력)" name="phone" required="required"/>
           <div class="error-msg"></div>
         </div>  
         
