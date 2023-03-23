@@ -21,7 +21,7 @@ public class ReservationDAO {
 			rs.next();
 			dto.setRsrv_no(rs.getInt(1)+1);
 			
-			sql = "insert into bobjo_reservation values(?,?,?,?,?,?,?,now(),null,?,?,?,?)";
+			sql = "insert into bobjo_reservation values(?,?,?,?,?,?,?,now(),?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, dto.getRsrv_no());
 			pstmt.setString(2, dto.getM_id());
@@ -30,10 +30,11 @@ public class ReservationDAO {
 			pstmt.setInt(5, dto.getStore_no());
 			pstmt.setTimestamp(6, dto.getRsrv_date());
 			pstmt.setInt(7, dto.getPeople_num());
-			pstmt.setString(8, dto.getStatus());
-			pstmt.setString(9, dto.getRsrv_msg());
-			pstmt.setString(10, dto.getMenu_no());
-			pstmt.setString(11, dto.getMenu_amount());
+			pstmt.setInt(8, dto.getPay_no());
+			pstmt.setString(9, dto.getStatus());
+			pstmt.setString(10, dto.getRsrv_msg());
+			pstmt.setString(11, dto.getMenu_no());
+			pstmt.setString(12, dto.getMenu_amount());
 			
 			pstmt.executeUpdate();
 			

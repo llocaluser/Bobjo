@@ -11,7 +11,7 @@
 <input type="hidden" name="store_no" value="1">
 <input type="hidden" name="menu_no" value="1,2,3,4">
 <input type="hidden" name="menu_amount" value="1,2,2,5">
-<input type="hidden" name="price" value="1000">
+<input type="hidden" name="price" value="1200">
 <input type="submit" value="예약하기">
 </form>
 </body>
