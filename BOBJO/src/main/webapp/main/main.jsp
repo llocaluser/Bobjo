@@ -34,6 +34,9 @@
 	<link href="./css/style.css" rel="stylesheet" />
 	<!-- responsive style -->
 	<link href="./css/responsive.css" rel="stylesheet" />
+	
+	
+	
     
 <!--
 
@@ -109,19 +112,53 @@ https://templatemo.com/tm-552-video-catalog
 			</div>
 			
 			
+            <i id="tm-video-control-button" class="fas fa-pause"></i>
+        </div>
+    </div>    
+    
+    		<script src="js/jquery-3.4.1.min.js"></script>
+    		<script src="js/bootstrap.min.js"></script>
 			<!-- 배경영상 랜덤재생 -->
-			<script>
+			<script type="text/javascript">
 			    var video = document.getElementById('tm-video');
 			    var source = document.getElementById('video-source');
 			    var currentVideo = "${currentVideo}";
 			    var timer;
 			    var randomCheck = "cook1";
+			    const videoBtn = document.querySelector("#tm-video-control-button");
+			    
+			    
+			    var beginTime = 0;
+			    var endTime = 0;
+			    var playedTime = 0;
+			    
+			    
+			    videoBtn.addEventListener("click", function (e) {
+			    	
+	                const video = document.getElementById("tm-video");
+	                $(this).removeClass();
+
+	                if (video.paused) {
+	                    video.play();
+	                    endTime = new Date().getMilliseconds();
+	                    playedTime = endTime - beginTime;
+	                    
+	                    timer = setInterval(playNextVideo, 30000 - playedTime * 10);
+	                    
+	                    $(this).addClass("fas fa-pause");
+	                } else {
+	                    video.pause();
+	                    beginTime = new Date().getMilliseconds();
+	                    clearInterval(timer);
+	                    
+	                    $(this).addClass("fas fa-play");
+	                }
+	            });
+			    
+			    
+			    
 			
 			    function playNextVideo() {
-			    	
-			    	if (!shouldContinue) {
-			        	return;
-			        }
 			    	
 			        clearInterval(timer);
 			        while(randomCheck == currentVideo){
@@ -146,11 +183,6 @@ https://templatemo.com/tm-552-video-catalog
 				}, false);
 			</script>
 			<!-- 배경영상 랜덤재생 -->
-			
-			
-            <i id="tm-video-control-button" class="fas fa-pause"></i>
-        </div>
-    </div>    
      
         
     <!-- 모달창 -->
@@ -482,8 +514,8 @@ function searchStore(){
 
 	
 
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <!-- <script src="js/jquery-3.4.1.min.js"></script> -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
     <script>
         function setVideoSize() {
             const vidWidth = 1920;
@@ -528,9 +560,9 @@ function searchStore(){
             };
 
             // Play/Pause button for video background      
-            const btn = $("#tm-video-control-button");
+            /* const btn = $("#tm-video-control-button"); */
 
-            btn.on("click", function (e) {
+            /* btn.on("click", function (e) {
                 const video = document.getElementById("tm-video");
                 $(this).removeClass();
 
@@ -541,7 +573,7 @@ function searchStore(){
                     video.pause();
                     $(this).addClass("fas fa-play");
                 }
-            });
+            }); */
         })
     </script>
     
