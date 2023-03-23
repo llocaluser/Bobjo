@@ -10,7 +10,7 @@
 body {
 	flex-direction: column;
 	width: 100%;
-	background-color: #e7e7e7;
+	background-color: #e9ecef!important;
 	position: relative;
 	z-index: -1;
 }
@@ -18,7 +18,7 @@ body {
 #rec-container {
 	position: relative;
 	width: -webkit-fill-available;
-	height: 320px;
+	height: 480px;
 	overflow: hidden;
 }
 
@@ -31,8 +31,13 @@ body {
 	float: left;
     position: relative;
 	margin-right: auto;
-	height: 400px;
+	height: 500px;
     padding: 0;
+}
+
+#rec_storeImg{
+	width: -webkit-fill-available;
+	height: 300px;
 }
 
 /* #rec-store:not(:last-child){

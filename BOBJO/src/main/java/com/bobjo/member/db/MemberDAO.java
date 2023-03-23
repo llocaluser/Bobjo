@@ -292,7 +292,7 @@ public class MemberDAO {
 		
 		try {
 			con = ConnectionManager.getConnection();
-			sql = "SELECT BS.STORE_NAME, BS.STORE_CONTENT, BS.STORE_IMG "
+			sql = "SELECT BS.STORE_NAME, BS.STORE_CONTENT, BS.STORE_IMG, BS.STORE_NO "
 					+ "FROM BOBJO_STORE BS RIGHT JOIN BOBJO_RESERVATION BR "
 					+ "ON BS.STORE_NO = BR.STORE_NO "
 					+ "GROUP BY BR.STORE_NO "
@@ -307,7 +307,8 @@ public class MemberDAO {
 				
 				dto.setStore_name(rs.getString(1));
 				dto.setStore_content(rs.getString(2));
-				dto.setStore_img(rs.getString(3));
+				dto.setStore_img(rs.getString(3).split(",")[0]);
+				dto.setStore_no(rs.getInt(4));
 				
 				list.add(dto);
 			}
@@ -317,7 +318,7 @@ public class MemberDAO {
 		} finally {
 			ConnectionManager.closeConnection(rs, pstmt, con);
 		}
-		System.out.println("list:" + list);
+		
 		return list;
 	}
 	// 메인페이지 추천식당 받기

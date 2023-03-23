@@ -7,18 +7,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-    <title>SulJo</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <!-- slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
 
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+	<!-- bootstrap core css -->
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
      
 
     <title>BOBJO</title>
@@ -32,9 +31,9 @@
     
     
     <!-- Custom styles for this template -->
-  <link href="./css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="./css/responsive.css" rel="stylesheet" />
+	<link href="./css/style.css" rel="stylesheet" />
+	<!-- responsive style -->
+	<link href="./css/responsive.css" rel="stylesheet" />
     
 <!--
 
@@ -47,7 +46,7 @@ https://templatemo.com/tm-552-video-catalog
 
 <!-- 지형지도 -->
 <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         .seoul-district {
             fill: #ccc;
@@ -55,17 +54,15 @@ https://templatemo.com/tm-552-video-catalog
             stroke-width: 1;
         }
 
-.seoul-district {
-  fill: #ddd;
-  stroke: #fff;
-  stroke-width: 1px;
-}
+		.seoul-district {
+		  fill: #ddd;
+		  stroke: #fff;
+		  stroke-width: 1px;
+		}
         
-    </style>
+	</style>
 <!-- 지형지도 -->
-    
-    
-    
+
 </head>
 
 <body sytle="position: relative;
@@ -111,31 +108,46 @@ https://templatemo.com/tm-552-video-catalog
 			    </video>
 			</div>
 			
+			
+			<!-- 배경영상 랜덤재생 -->
 			<script>
 			    var video = document.getElementById('tm-video');
 			    var source = document.getElementById('video-source');
 			    var currentVideo = "${currentVideo}";
 			    var timer;
+			    var randomCheck = "cook1";
 			
 			    function playNextVideo() {
+			    	
+			    	if (!shouldContinue) {
+			        	return;
+			        }
+			    	
 			        clearInterval(timer);
-			        currentVideo = "cook" + Math.ceil(Math.random()*6);
-			        source.setAttribute('src', './video/' + currentVideo + '.mp4');
-			        video.load();
-			        video.play();
-			        timer = setInterval(playNextVideo, 30000);
+			        while(randomCheck == currentVideo){
+			        	randomCheck = "cook" + Math.ceil(Math.random()*6);
+			    	}
+			    	currentVideo = randomCheck;
+			    	source.setAttribute('src', './video/' + currentVideo + '.mp4');
+			    	video.load();
+			    	video.play();
+			    	timer = setInterval(playNextVideo, 30000);
 			    }
-			
+			    
+			    
 			    timer = setInterval(playNextVideo, 30000);
 			
-			    video.addEventListener('ended', function() {
-			        clearInterval(timer);
-			        source.setAttribute('src', './video/' + currentVideo + '.mp4');
-			        video.load();
-			        timer = setInterval(playNextVideo, 30000);
-			        video.play();
-			    }, false);
+				video.addEventListener('ended', function() {
+			    	clearInterval(timer);
+			    	source.setAttribute('src', './video/' + currentVideo + '.mp4');
+			    	video.load();
+			    	timer = setInterval(playNextVideo, 30000);
+			    	video.play();
+				}, false);
 			</script>
+			<!-- 배경영상 랜덤재생 -->
+			
+			
             <i id="tm-video-control-button" class="fas fa-pause"></i>
         </div>
     </div>    
@@ -170,17 +182,20 @@ https://templatemo.com/tm-552-video-catalog
 			
 			<!-- 가게 이름 -->
 			<input id="store-name" type="text" placeholder="가게 이름">
+			<!-- 가게 이름 -->
+			<!-- 찾기 -->
 			<svg onclick="searchStore();" id="move-btn" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z"/>
+			<!-- 찾기 -->
 			
 			</svg>
-			<!-- 가게 이름 -->
-			<!-- <button>찾기</button> -->
 			</form>
 			</div>
+			<!-- 닫기 버튼 -->
 			<?xml version="1.0" ?>
 			<!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
 			<svg height="512px" id="close-btn" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<path d="M443.6,387.1L312.4,255.4l131.5-130c5.4-5.4,5.4-14.2,0-19.6l-37.4-37.6c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4  L256,197.8L124.9,68.3c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4L68,105.9c-5.4,5.4-5.4,14.2,0,19.6l131.5,130L68.4,387.1  c-2.6,2.6-4.1,6.1-4.1,9.8c0,3.7,1.4,7.2,4.1,9.8l37.4,37.6c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1L256,313.1l130.7,131.1  c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1l37.4-37.6c2.6-2.6,4.1-6.1,4.1-9.8C447.7,393.2,446.2,389.7,443.6,387.1z"/></svg>
+			<!-- 닫기 버튼 -->
 		</div>
 	</div>
 
@@ -205,7 +220,7 @@ https://templatemo.com/tm-552-video-catalog
 		close.addEventListener('click', closeModal);
 		
 		document.addEventListener('click', (event) => {
-			//console.log(event.target);
+			
 			if(bg.style.display == 'flex'){
 				bg.addEventListener('click', function(e){
 					if(e.target != bg) return false;
@@ -314,6 +329,9 @@ function searchStore(){
 	var srch_category = category.value;
 	var srch_text = name.value;
 	
+	if(srch_location == "지역 검색창 (누르면 이동)") srch_location = "";
+	if(srch_category == "카테고리") srch_category = "";
+	
 	var url = "./StoreList.st?" +
     "srch_location=" + encodeURIComponent(srch_location) +
     "&srch_category=" + encodeURIComponent(srch_category) +
@@ -335,7 +353,7 @@ function searchStore(){
             <div id="content" class="mx-auto tm-content-container">
                 <main>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12" style="height:100px;">
                             <h2 class="tm-page-title mb-4">추천 식당</h2>
                             <div class="tm-categories-container mb-5">
                             </div>        
@@ -347,14 +365,17 @@ function searchStore(){
                     <c:forEach var="i" items="${storeList }">
                         <div id="rec-store" class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                      
-                            <div class="position-relative tm-thumbnail-container">
-                                <img src="img/res_img/${i.store_img }" alt="Image" class="img-fluid tm-catalog-item-img">    
-                                <a href="video-page.html" class="position-absolute tm-img-overlay">
-                                    <i class="fas fa-play tm-overlay-icon"></i>
-                                </a>
+                            <div id="store_mainimg" class="position-relative tm-thumbnail-container">
+                            <img src="img/res_img/${i.store_img }" 
+                            onError="this.onerror=null; this.src='img/res_img/restaurant0.jpg'" class="img-fluid tm-catalog-item-img" id="rec_storeImg">    
+                            <a href="./StoreInfo.st?store_no=${i.store_no }" class="position-absolute tm-img-overlay">
+                                <!-- <i class="fas fa-play tm-overlay-icon"></i> -->
+                            </a>
                             </div>    
                             <div class="p-4 tm-bg-gray tm-catalog-item-description">
+                            	<a href="./StoreInfo.st?store_no=${i.store_no }">
                                 <h3 class="tm-text-primary mb-3 tm-catalog-item-title">${i.store_name }</h3>
+                                </a>
                                 <p class="tm-catalog-item-text">${i.store_content }</p>
                             </div>
                             
@@ -395,11 +416,11 @@ function searchStore(){
 	                        if (currentIdx > 0) moveSlide(currentIdx - 1);
 	                    });
 	                    */
+	                 	// 버튼 클릭 이동
 	                    function moveSlide(num) {
 	                        wrapper.style.left = -num * (width + margin) + 'px';
 	                        currentIdx = num;
 	                    } 
-	                 	// 버튼 클릭 이동
 	                 	
 	                 	var stopmovingBtn = document.querySelector('#btn-stopmove');
 	                 	var resumemovingBtn = document.querySelector('#btn-resumemove');

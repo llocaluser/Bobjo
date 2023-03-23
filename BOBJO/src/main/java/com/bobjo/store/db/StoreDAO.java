@@ -64,14 +64,14 @@ public class StoreDAO {
 			sqlBuilder.append("where store_name like ? ");
 
 			if(!srch_data[0].equals("")) {
-				sqlBuilder.append("and substring_index(substring_index(s.addr,' ',2),' ',-1) in(");
+				sqlBuilder.append("and substring_index(substring_index(s.addr,' ',2),' ',-1) = '");
 				sqlBuilder.append(srch_data[0]);
-				sqlBuilder.append(") ");
+				sqlBuilder.append("' ");
 			}
 			if(!srch_data[1].equals("")) {
-				sqlBuilder.append("and s.store_category in(");
+				sqlBuilder.append("and s.store_category = '");
 				sqlBuilder.append(srch_data[1]);
-				sqlBuilder.append(") ");
+				sqlBuilder.append("' ");
 			}
 			
 			pstmt = con.prepareStatement(sqlBuilder.toString());
@@ -115,14 +115,14 @@ public class StoreDAO {
 			sqlBuilder.append("where s.store_name like ? ");
 
 			if(!srch_data[0].equals("")) {
-				sqlBuilder.append("and substring_index(substring_index(s.addr,' ',2),' ',-1) in(");
+				sqlBuilder.append("and substring_index(substring_index(s.addr,' ',2),' ',-1) = '");
 				sqlBuilder.append(srch_data[0]);
-				sqlBuilder.append(") ");
+				sqlBuilder.append("' ");
 			}
 			if(!srch_data[1].equals("")) {
-				sqlBuilder.append("and s.store_category in(");
+				sqlBuilder.append("and s.store_category = '");
 				sqlBuilder.append(srch_data[1]);
-				sqlBuilder.append(") ");
+				sqlBuilder.append("' ");
 			}
 			if(!srch_data[3].equals("")) {
 				sqlBuilder.append("order by r.");

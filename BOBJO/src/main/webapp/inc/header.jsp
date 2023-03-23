@@ -42,7 +42,8 @@
 				style="display: inline;">로그아웃</a>
 		</div>
 		<div class="login_box">
-			<a href="#" style="display: inline;">마이페이지</a>
+			<a href="./MemberMypage.me" 
+				style="display: inline;">마이페이지</a>
 		</div>
 		</div>
 		</c:if>
