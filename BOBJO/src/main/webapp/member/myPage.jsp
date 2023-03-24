@@ -24,118 +24,49 @@
     
     
     </style>    
-        
-        
-        
-        
+           
     </head>
     <body>
 
-
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="./Main.me">BOBJO</a>
-        
-           
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"> </form>
-            <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="./Main.me">메인</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="./MemberLogoutAction.me">로그아웃</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        
-        <div id="layoutSidenav">
-            
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">    
-                        <c:if test="${ceo_num == null }">
-                            <div class="sb-sidenav-menu-heading">마이페이지</div>
-                            <a class="nav-link" href="./MemberMypage.me">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                마이페이지 홈
-                            </a>
-                            <!-- <div class="sb-sidenav-menu-heading">예약</div> -->
-                            <a class="nav-link collapsed" href="./MemberBook.me">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                예약관리      
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav"> </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                북마크
-                                </a>
-                            
-                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages"> </nav>
-                            </div>
-                       </c:if>
-                           
-                            <div class="sb-sidenav-menu-heading">계정</div>
-                            <a class="nav-link" href="./MemberUpdateAction.me">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                내정보수정
-                            </a>
-                            <a class="nav-link" href="./MemberDeleteAction.me">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                회원탈퇴
-                            </a>
-                            
-                            <c:if test="${ceo_num != null }">
-	                               <div class="sb-sidenav-menu-heading">사업주</div>
-	                            <a class="nav-link" href="./CeoAddStore.st">
-	                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-	                                가게등록
-	                            </a>
-	                            <a class="nav-link" href="./CeoStoreList.st">
-	                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-	                               	가게리스트
-	                            </a>
-	                            <a class="nav-link" href="./CeoMenuAdd.nu">
-	                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-	                                메뉴등록
-	                            </a>
-                            </c:if> 
-                        </div>                    
-
        <!-- inc mypage.jsp -->
-       		<jsp:include page="../inc/mypage.jsp"/>
+       		 <jsp:include page="../inc/mypage.jsp"/> 
        <!-- inc mypage.jsp -->
-                    <div class="sb-sidenav-footer">
+          
+          
+          <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-
+                        Start Bootstrap
                     </div>
                 </nav>
             </div>
-           
+       
+       
+                     
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">마이페이지</h1>
+                        <h1 class="mt-4">안녕하세요 "${m_id }"님</h1>
                         <hr>
                         
                            
-                        <div class="card mb-4">
+                        <div class="card mb-4-1">
                             <div class="card-body">
-                               <img src="./img/person.png">  <h4 class="mt-4">안녕하세요 "${m_id }"님</h4> <br>
+                               <img src="./img/person.png">  <h4 class="mt-4">내정보</h4> <br>
                                   <h6>이름 : ${dto.m_name } </h6>
                                   <h6>이메일 : ${dto.email } </h6>
-                                  <h6>휴대폰 번호 : ${dto.phone } </h6>
-                                                                             
-
+                                  <h6>휴대폰 번호 : ${dto.phone } </h6>                                                              
                             </div>
                         </div>
+                        
+                         <div class="card mb-4-1">
+                            <div class="card-body">
+                               <img src="./img/date.png">  <h4 class="mt-4">"${m_id }"님 예약내역</h4> <br>
+                                  <h5> ${count }건 </h5>      
+                                 <a href="./MemberBook.me"> <h5> 확인하기 </h5> </a>       
+                                                                                     
+                            </div>
+                        </div>
+                        
                         
                           <div style="height: 40vh"></div> 
                        <!--  <div class="card mb-4">

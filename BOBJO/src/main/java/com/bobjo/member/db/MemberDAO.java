@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.catalina.connector.Request;
+
 import com.bobjo.menu.db.MenuDTO;
 import com.bobjo.reservation.db.ReservationDTO;
 import com.bobjo.store.db.StoreDTO;
@@ -435,6 +437,35 @@ public class MemberDAO {
 	   	return 1;
 	   }
 	   //아이디 중복확인 - loginMember(dto)
+	   
+	   
+	   // 예약한 갯수 정보 확인 - countMember
+	   public int countMember(String m_id) {
+		      int cnt =0;
+		   try {
+			   // 1.2. 디비연결
+			con = ConnectionManager.getConnection();
+			
+			// 3. sql 작성 & pstmt 객체
+			sql ="select count(*) from bobjo_reservation where m_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			
+			// 4. sql 실행
+			rs = pstmt.executeQuery();
+			
+			// 5. 데이터 처리
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			ConnectionManager.closeConnection(rs, pstmt, con);
+		 }  
+		   return cnt;
+	   }
+	   // 예약한 갯수 정보 확인 - countMember
 	
 }
 

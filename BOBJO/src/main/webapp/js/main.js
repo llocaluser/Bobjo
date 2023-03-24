@@ -51,7 +51,7 @@ idCheckBtn.addEventListener('click', () => {
 		success:function(isDup) {
 			if(isDup > 0) {
 				alert("아이디 중복");
-				
+				document.fr.m_id.focus();
 			}else {
 				alert("사용가능");
 				

@@ -27,12 +27,15 @@ public class MemberMypageAction implements Action {
 			return forward;						
 	}
 		  
-		// DAO 객체 생성 - 회원정보 조회()
+		   // DAO 객체 생성 - 회원정보 조회()
 			MemberDAO dao = new MemberDAO();
 			MemberDTO dto = dao.getMemberInfo(m_id);
+			int count = dao.countMember(m_id);
+			
 			
 		// DB에서 가져온 DTO정보를 request 영역에 저장
 			request.setAttribute("dto", dto);
+			request.setAttribute("count", count);
 			
 		// 페이지 이동 -> 출력
 			forward.setPath("./member/myPage.jsp");
