@@ -15,7 +15,6 @@ public class MainAction implements Action {
 		
 		MemberDAO dao = new MemberDAO();
 		request.setAttribute("storeList", dao.getStoreList());
-		System.out.println(dao.getStoreList());
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("./main/main.jsp");
