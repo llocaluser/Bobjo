@@ -8,7 +8,7 @@ public class TimestampParser {
 
 	/**
 	 * @param dateStr yyyy-MM-dd HH:mm
-	 * @return Date
+	 * @return Timestamp
 	 */
 	public static Timestamp stringToTimestamp(String dateStr) {
 		Timestamp datetime = null;
@@ -25,7 +25,7 @@ public class TimestampParser {
 	/**
 	 * @param dateStr1 yyyy-MM-dd
 	 * @param dateStr2 HH:mm
-	 * @return Date
+	 * @return Timestamp
 	 */
 	public static Timestamp stringToTimestamp(String dateStr1, String dateStr2) {
 		Timestamp datetime = null;

@@ -1168,8 +1168,6 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
 <body>
 <form class="jotform-form" action="${root }/ReservationAdd.re" method="post" name="form_230748828516465" id="230748828516465" accept-charset="utf-8" autocomplete="on" novalidate="true">
 <input type="hidden" name="store_no" value="${store_no }">
-<input type="hidden" name="menu_no" value="${menu_no }">
-<input type="hidden" name="menu_amount" value="${menu_amount }">
   <div role="main" class="form-all">
     <ul class="form-section page-section">
       <li id="cid_14" class="form-input-wide" data-type="control_head">
@@ -1258,6 +1256,8 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
 			<div data-widget-name="체크리스트" style="width:100%;text-align:Left;overflow-x:auto" data-component="widget-field"> 
 <!-- <iframe data-client-id="52961c97e3e5266570000004" title="체크리스트" frameborder="0" scrolling="no" allowtransparency="true" allow="geolocation; microphone; camera; autoplay; encrypted-media; fullscreen" data-type="iframe" class="custom-field-frame custom-field-frame-rendered frame-xd-ready frame-ready" id="customFieldFrame_121" src="//widgets.jotform.io/checklist/?qid=121&amp;ref=https%3A%2F%2Fform.jotform.com&amp;injectCSS=false" style="max-width: 310px; border: none; width: 100%; height: 57px;" data-width="310" data-height="200"></iframe>  -->
             <div class="widget-inputs-wrapper">
+            <input type="hidden" name="menu_no" value="${menu_no }">
+			<input type="hidden" name="menu_amount" value="${menu_amount }">
             <input type="hidden" name="pay_type">
             <input type="hidden" name="uid">
             <input type="hidden" name="price" value="${price }">
