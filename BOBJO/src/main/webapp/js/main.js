@@ -15,13 +15,13 @@ const errMsg = {
 }
 
 // 계정 정보 객체
-// const account = {
-//  id: null,
-//  pw: null,
-//  email: null,
-//  birth: null,
-//  mobile: null
-// }
+ const account = {
+  id: null,
+  pw: null,
+  email: null,
+  birth: null,
+  mobile: null
+ }
 
 /*** SECTION - ID ***/
 const idInputEl = document.querySelector('#info__id input')
@@ -32,6 +32,7 @@ idInputEl.addEventListener('change', () => {
   if(idRegExp.test(idInputEl.value)) { // 정규식 조건 만족 O
     idErrorMsgEl.textContent = ""
     account.id = idInputEl.value
+  
   } else { // 정규식 조건 만족 X
     idErrorMsgEl.style.color = "red"
     idErrorMsgEl.textContent = errMsg.id.invalid
@@ -41,17 +42,37 @@ idInputEl.addEventListener('change', () => {
 });
 
 idCheckBtn.addEventListener('click', () => {
-  const randVal = Math.floor(Math.random() * 10)
-  if(account.id !== null) {
-    if(randVal < 7) {
-      idErrorMsgEl.style.color = "green"
-      idErrorMsgEl.textContent = errMsg.id.success
-    }
-    else {
-      idErrorMsgEl.style.color = "red"
-      idErrorMsgEl.textContent = errMsg.id.fail
-    }
-  }
+	if(account.id == null) return false;
+	
+	$.ajax({
+		url:"./IDDupCheckAjax.me",
+		type:"post",
+		data:{m_id:account.id},
+		success:function(isDup) {
+			if(isDup > 0) {
+				alert("아이디 중복");
+				document.fr.m_id.focus();
+			}else {
+				alert("사용가능");
+				
+			}
+		},
+		error:function(data){
+			console.log(data);
+			console.log("ajax err");
+		}
+	});
+//  const randVal = Math.floor(Math.random() * 10)
+//  if(account.id !== null) {
+//    if(randVal < 7) {
+//      idErrorMsgEl.style.color = "green"
+//      idErrorMsgEl.textContent = errMsg.id.success
+//    }
+//    else {
+//      idErrorMsgEl.style.color = "red"
+//      idErrorMsgEl.textContent = errMsg.id.fail
+//    }
+//  }
 })
 
 /*** SECTION - PASSWORD ***/

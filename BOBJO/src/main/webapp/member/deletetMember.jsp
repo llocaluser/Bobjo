@@ -97,7 +97,7 @@ a{
  
 </head>
 <body>
-
+  
      <article>
         <div class = "login_wrapper">
             <div class="login_logo">È¸¿øÅ»Åð</div>
@@ -109,10 +109,6 @@ a{
             </form>
         </div>
     </article>
-
- 
- 
- 
 
 
 

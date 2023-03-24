@@ -1,3 +1,4 @@
+<%@page import="com.bobjo.member.db.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,49 +13,70 @@
         <title>BOBJO</title>
         <link href="./css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        
+    <style type="text/css">
+     img{
+          /*   float: left; */
+            width: 200px;
+            margin: 15px;
+    }
+    
+    
+    
+    </style>    
+           
     </head>
     <body>
+
        <!-- inc mypage.jsp -->
-       		<jsp:include page="../inc/mypage.jsp"/>
+       		 <jsp:include page="../inc/mypage.jsp"/> 
        <!-- inc mypage.jsp -->
-                    <div class="sb-sidenav-footer">
+          
+          
+          <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         Start Bootstrap
                     </div>
                 </nav>
             </div>
+       
+       
+                     
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">${m_id }님</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Static Navigation</li>
-                        </ol>
-                        <div class="card mb-4">
+                        <h1 class="mt-4">안녕하세요 "${m_id }"님</h1>
+                        <hr>
+                        
+                           
+                        <div class="card mb-4-1">
                             <div class="card-body">
-                                <p class="mb-0">
-                                    This page is an example of using static navigation. By removing the
-                                    <code>.sb-nav-fixed</code>
-                                    class from the
-                                    <code>body</code>
-                                    , the top navigation and side navigation will become static on scroll. Scroll down this page to see an example.
-                                </p>
+                               <img src="./img/person.png">  <h4 class="mt-4">내정보</h4> <br>
+                                  <h6>이름 : ${dto.m_name } </h6>
+                                  <h6>이메일 : ${dto.email } </h6>
+                                  <h6>휴대폰 번호 : ${dto.phone } </h6>                                                              
                             </div>
                         </div>
-                        <div style="height: 100vh"></div>
-                        <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
+                        
+                         <div class="card mb-4-1">
+                            <div class="card-body">
+                               <img src="./img/date.png">  <h4 class="mt-4">"${m_id }"님 예약내역</h4> <br>
+                                  <h5> ${count }건 </h5>      
+                                 <a href="./MemberBook.me"> <h5> 확인하기 </h5> </a>       
+                                                                                     
+                            </div>
+                        </div>
+                        
+                        
+                          <div style="height: 40vh"></div> 
+                       <!--  <div class="card mb-4">
+                        <div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div> -->
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
+                            <div class="text-muted">Copyright &copy; Your Website 2022</div>  
                         </div>
                     </div>
                 </footer>
