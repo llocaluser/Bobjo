@@ -6,9 +6,9 @@ import java.io.IOException;
 
 import com.bobjo.store.db.StoreDTO;
 
-public class GwangjinguCSV extends StoreCSV{
+public class JungrangguCSV extends StoreCSV{
 	
-	public GwangjinguCSV(String filePath) {
+	public JungrangguCSV(String filePath) {
 		super(filePath);
 	}
 
@@ -22,13 +22,17 @@ public class GwangjinguCSV extends StoreCSV{
 		int imgNum = 0;
 		while((tmp = br.readLine()) != null) {
 			String[] data = tmp.split(",");
-			if(data.length > 8) continue;
+			if(data.length > 7) continue;
 			StoreDTO dto = new StoreDTO();
-			dto.setStore_category(data[0]);
-			dto.setStore_name(data[1]);
-			dto.setAddr("서울특별시 광진구 " + data[2].split(" ")[2]);
+			dto.setStore_category(data[6]);
+			dto.setStore_name(data[2]);
+			try {
+				dto.setAddr("서울특별시 중랑구 " + data[3].split(" ")[2]);
+			}catch (Exception e) {
+				continue;
+			}
 			String addrDetailts = "";
-			String[] addArr = data[2].split(" ");
+			String[] addArr = data[3].split(" ");
 			for(int i=3; i<addArr.length; i++) {
 				addrDetailts += addArr[i] + " ";
 			}
@@ -37,7 +41,7 @@ public class GwangjinguCSV extends StoreCSV{
 			dto.setOpen("9:00");
 			dto.setClose("21:00");
 			dto.setTotal_tables(100);
-			dto.setStore_content(data[3]);
+			dto.setStore_content(data[0]);
 			dto.setMax_rsrv((int)(Math.random()*9+2));
 			dto.setExtra_info(getExtraInfo());
 			imgNum %= 100;
