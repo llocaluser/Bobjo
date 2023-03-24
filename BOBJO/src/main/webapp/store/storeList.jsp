@@ -49,50 +49,16 @@
  	width: 80%;
  	margin: auto;
  }
- .brand_box{
- display: flex;
  
- 
- }
+
  
  </style>
 </head>
 
-<body class="sub_page">
-  <div class="hero_area">
     <!-- header section strats -->
-    <div class="brand_box">
-    <div>
-         <img style="width: 150px" height="150px" alt="" src="./img/Logo2.png">
-    </div>
-    <div>
-      <a class="navbar-brand" href="./Main.me">
-        <span>
-         <img style="width: 300px" alt="" src="./img/BOBJO!2.png">
-        </span>
-      </a>
-      </div>
-      <div>
 
-      <div>
-      <a href="./MemberLogin.me"
-				style="display: inline;">
-				로그인
-			</a>
-      </div>
-      <div>
-      <a href="./MemberJoin.me"
-				style="display: inline;">
-				회원가입
-			</a>
-      
-      </div>
-
-      </div>
-      
-    </div>
+      <jsp:include page="../inc/header3.jsp" />
     <!-- end header section -->
-  </div>
 
   <!-- nav section -->
 

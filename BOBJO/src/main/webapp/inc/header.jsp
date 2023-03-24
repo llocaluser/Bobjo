@@ -16,9 +16,16 @@
 <body>
 	<div class="header">
 	<div class="container left">
-	<a class="move" href="./Main.me">
-		<img id="logo" src="./img/bobjo.png">
+	<div>
+	<a  href="./Main.me">
+		<img style="width: 80px;" src="./img/Logo1.png">
 	</a>
+	</div>
+	<div>
+	<a  href="./Main.me">
+		<img style="width: 200px;" src="./img/BOBJO!1.png">
+	</a>
+	</div>
 	</div>
 	<div class="container right">
 		<c:if test="${sessionScope.m_id == null }">
