@@ -113,35 +113,41 @@ public class ReservationDAO {
 	// 결제 진행을 위한 추가정보 -  가게 이름
 	
 	// 다빈 - 예약자 목록 조회
-	public List<ReservationDTO> CeoRsvList(String id){
-		List<ReservationDTO> cRsvList = new ArrayList<>();
+	public List CeoRsvList(String id){
+		List cRsvList = new ArrayList<>();
 		try {
 			// 1.2 디비 연결
 			con = ConnectionManager.getConnection();
 			// 3. sql 작성
-			sql = "select * from bobjo_reservation where store_no in ("
-					+ " select store_no from bobjo_store where m_id=?)";
+			sql = "select r.reg_date,r.store_no,r.rsrv_no,r.rsrv_name,r.rsrv_phone,s.store_name,r.rsrv_date,r.people_num,r.pay_no,r.status,r.rsrv_msg,r.menu_no,r.menu_amount "
+					+ " from bobjo_reservation r join bobjo_store s on (r.store_no = s.store_no) " 
+					+ " where r.store_no in (select store_no from bobjo_store where m_id=?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			// 4. sql 실행
 			rs = pstmt.executeQuery();
 			// 5. 데이터 처리 
 			while(rs.next()) {
+				List subList = new ArrayList<>();
 				ReservationDTO dto = new ReservationDTO();
+				StoreDTO sdto = new StoreDTO();
+				
 				dto.setRsrv_no(rs.getInt("rsrv_no"));
 				dto.setRsrv_name(rs.getString("rsrv_name"));
 				dto.setRsrv_phone(rs.getString("rsrv_phone"));
 				dto.setStore_no(rs.getInt("store_no"));
 				dto.setRsrv_date(rs.getTimestamp("rsrv_date"));
 				dto.setPeople_num(rs.getInt("people_num"));
-				dto.setReg_date(rs.getTimestamp("reg_date"));
+				//dto.setReg_date(rs.getTimestamp("reg_date"));
 				dto.setPay_no(rs.getInt("pay_no"));
 				dto.setStatus(rs.getString("status"));
 				dto.setRsrv_msg(rs.getString("rsrv_msg"));
 				dto.setMenu_no(rs.getString("menu_no"));
 				dto.setMenu_amount(rs.getString("menu_amount"));
-				
-				cRsvList.add(dto);
+				sdto.setStore_name(rs.getString("store_name"));
+				subList.add(dto);
+				subList.add(sdto);
+				cRsvList.add(subList);
 			}
 			System.out.println(" DAO : 예약자 목록 조회 성공! ");
 
