@@ -17,7 +17,7 @@ public class CeoStoreListAction implements Action {
 			String[] classPath = this.getClass().getName().split("\\.");
 			System.out.println(" M :  "+classPath[classPath.length-1]+"_execute() 호출! ");
 		
-			// DAO - 등록한 상품정보 조회(페이징x)
+			// DAO - 등록한 가게정보 조회
 			StoreDAO dao = new StoreDAO();
 			List cStoreList = dao.CeoStoreList((String)request.getSession().getAttribute("m_id"));
 			
