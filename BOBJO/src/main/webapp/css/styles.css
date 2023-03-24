@@ -7388,7 +7388,17 @@ textarea.form-control-lg {
 }
 
 .mb-4 {
-  margin-bottom: 1.5rem !important;
+   margin-bottom: 1.5rem !important;
+
+}
+
+.mb-4-1 {
+  float: left;
+  margin: 1.5rem;
+  height: 80%;
+  width: 600px;
+  text-align: center;
+
 }
 
 .mb-5 {

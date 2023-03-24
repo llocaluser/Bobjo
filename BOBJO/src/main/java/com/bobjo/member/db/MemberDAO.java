@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.catalina.connector.Request;
+
+import com.bobjo.menu.db.MenuDTO;
+import com.bobjo.reservation.db.ReservationDTO;
 import com.bobjo.store.db.StoreDTO;
 import com.bobjo.utils.db.ConnectionManager;
 import com.mysql.cj.Session;
@@ -356,7 +360,112 @@ public class MemberDAO {
 		 return dto;
 	 }
 	// 비밀번호 찾기 - getFindPw
-	
+	   
+	// 예약정보 불러오기 - getMemberBookList()
+	   public List getMemberBookList(String m_id) {
+		   List totalList =  new ArrayList();
+		   
+		   try {
+			   
+			   // 1.2. 디비연결
+			con = ConnectionManager.getConnection();
+			
+			// 3. sql 연결 & pstmt
+			sql ="select r.rsrv_name,r. rsrv_phone,r.status,r.rsrv_msg,s.store_name, r.menu_no, r.menu_amount,r.rsrv_date "
+					+ "from bobjo_reservation r join bobjo_store s on (r.store_no = s.store_no) "
+					+ "where r.m_id =?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			
+
+			// 4. SQL 실행
+			  rs = pstmt.executeQuery();
+			  
+			// 5. 데이터 처리
+			 while(rs.next()) {
+				 List subList = new ArrayList();
+				 ReservationDTO dto = new ReservationDTO();
+				 StoreDTO sdto = new StoreDTO();
+				 dto.setRsrv_name(rs.getString("rsrv_name"));
+				 dto.setRsrv_phone(rs.getString("rsrv_phone"));
+				 dto.setStatus(rs.getString("status"));
+				 dto.setRsrv_msg(rs.getString("rsrv_msg"));
+				 dto.setRsrv_date(rs.getTimestamp("rsrv_date"));
+				 
+				 sdto.setStore_name(rs.getString("store_name"));
+				 
+				 subList.add(dto);
+				 subList.add(sdto);
+				 subList.add(rs.getString("menu_no")); // 메뉴이름1,메뉴이름1,메뉴이름1
+				 subList.add(rs.getString("menu_amount"));
+				 
+				 totalList.add(subList);
+			 }
+
+			 
+			 System.out.println(" DAO : 예약 정보 저장완료");
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(rs, pstmt, con);
+		}
+		   return totalList;
+	   }
+    // 예약정보 불러오기 - getMemberBookList()   
+	   
+	 //아이디 중복확인 - loginMember(dto)
+	   public int isDup(String m_id) {
+	   	try {
+	   		// 1.2. 디비연결
+	   		con = ConnectionManager.getConnection();
+	   		
+	   		// 3. sql 작성 & pstmt 객체
+	   		sql = "select count(*) from bobjo_member where m_id=?";
+	   		pstmt = con.prepareStatement(sql);
+	   		pstmt.setString(1, m_id);
+	   		
+	   		// 4. sql 실행
+	   		rs = pstmt.executeQuery();
+	   		rs.next();
+	   		return rs.getInt(1);
+	   	} catch (Exception e) {
+	   		e.printStackTrace();
+	   	}finally {
+	   		ConnectionManager.closeConnection(rs, pstmt, con);
+	   	}
+	   	return 1;
+	   }
+	   //아이디 중복확인 - loginMember(dto)
+	   
+	   
+	   // 예약한 갯수 정보 확인 - countMember
+	   public int countMember(String m_id) {
+		      int cnt =0;
+		   try {
+			   // 1.2. 디비연결
+			con = ConnectionManager.getConnection();
+			
+			// 3. sql 작성 & pstmt 객체
+			sql ="select count(*) from bobjo_reservation where m_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			
+			// 4. sql 실행
+			rs = pstmt.executeQuery();
+			
+			// 5. 데이터 처리
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			ConnectionManager.closeConnection(rs, pstmt, con);
+		 }  
+		   return cnt;
+	   }
+	   // 예약한 갯수 정보 확인 - countMember
 	
 }
 

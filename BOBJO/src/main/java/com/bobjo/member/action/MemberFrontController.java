@@ -73,11 +73,14 @@ public class MemberFrontController extends BasicFrontController {
 	    else if(command.equals("/MemberMypage.me")) {
 	      System.out.println("MemberMypage.me 호출");
 	      
-	      // 패턴1
-	      forward = new ActionForward();
-	      forward.setPath("./member/myPage.jsp");
-	      forward.setRedirect(false);
-	   }
+	      // 패턴3
+	      action = new MemberMypageAction();
+	      try {
+			forward = action.execute(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}  
+	  }
 	    else if(command.equals("/MemberDeleteAction.me")) {
 	    	System.out.println("MemberDeleteAction.me 호출");
 	    	
@@ -172,8 +175,28 @@ public class MemberFrontController extends BasicFrontController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	    	
 	    }
+	    else if(command.equals("/MemberBook.me")) {
+	    	System.out.println("/MemberBook.me 호출");
+	    	
+	    	//패턴3
+	    	action = new MemberBookAction();
+	    	try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }else if(command.equals("/IDDupCheckAjax.me")) {
+	    	System.out.println("/IDDupCheckAjax.me 호출");
+	    	
+	    	action = new IDDupCheckAjaxAction();
+	    	try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }
+
 	
 	
 	

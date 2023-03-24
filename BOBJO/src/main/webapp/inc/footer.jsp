@@ -341,7 +341,6 @@
               <a>공지사항</a>
               <a>이용약관</a>
               <a><b>개인정보 처리방침</b></a>
-              <a href="#" target="_blank">관리자</a>
             <div class="site-picker">
           </div>
          </div>

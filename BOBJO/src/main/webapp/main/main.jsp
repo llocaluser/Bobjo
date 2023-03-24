@@ -98,7 +98,7 @@ https://templatemo.com/tm-552-video-catalog
 						<!-- 검색창 구현부 -->
 					</p><br>
                     <a href="#" class="btn tm-btn-animate tm-btn-cta tm-icon-down" id="modal_btn">
-                        <span>Search</span>
+                        <span>지금 바로 예약하세요!</span>
                     </a>
                     
                     
