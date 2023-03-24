@@ -1,6 +1,8 @@
 package com.bobjo.store.action;
 
 import java.io.File;
+import java.util.Enumeration;
+import java.util.Stack;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -31,8 +33,8 @@ public class CeoStoreUpdateAction implements Action {
 				new DefaultFileRenamePolicy());
 
 		// 기존파일 -> 파일 삭제
-		File f = new File("경로+이름");
-		f.delete();
+//		File f = new File("/images"+multi.getParameter("deleteImg"));
+//		f.delete();
 		// 수정파일 -> 정보 수정
 		StoreDTO dto = new StoreDTO();
 		dto.setStore_no(Integer.parseInt(multi.getParameter("store_no")));
@@ -48,8 +50,25 @@ public class CeoStoreUpdateAction implements Action {
 		dto.setStore_content(multi.getParameter("store_content"));
 		dto.setRefund_policy(multi.getParameter("refund_policy"));
 		dto.setStore_category(multi.getParameter("store_category"));
-		String store_img = multi.getFilesystemName("store_img");
-		dto.setStore_img(store_img);
+//		String store_img = multi.getFilesystemName("store_img");
+//		dto.setStore_img(store_img);
+		 // 다중 파일 업로드 - 순서대로 나열
+				Enumeration<String> fileNames = multi.getFileNames();
+				Stack<String> st = new Stack<>();
+				while(fileNames.hasMoreElements()) {
+				    String fileName = fileNames.nextElement();
+				    String store_img = multi.getFilesystemName(fileName);
+				    st.push(store_img);
+				    st.push(",");
+				}
+				st.pop();
+				
+				StringBuilder sb = new StringBuilder();
+				while(!st.isEmpty()) {
+					sb.append(st.pop());
+				}
+				dto.setStore_img(sb.toString());
+		// 다중 파일 업로드 - 순서대로 나열
 
 		// DAO - 정보 수정 메서드
 		StoreDAO dao = new StoreDAO();

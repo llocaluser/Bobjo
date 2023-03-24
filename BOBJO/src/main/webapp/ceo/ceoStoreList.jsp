@@ -110,11 +110,48 @@ img {
   color: green;
   text-decoration: none;
 }
+input[type="button"] {
+        background-color: buttonhighlight;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-bottom: 20px;
+        cursor: pointer;
+    }
+
+    input[type="button"]:hover {
+        background-color: #3e8e41;
+    }
+    
 </style>
 <link href="./css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        
-
+<script type="text/javascript">
+	 var count = 1;
+	 var addCount;
+	 
+	//행추가
+	function addInputBox() {
+	 for(var i=1; i<=count; i++) {
+	  if(!document.getElementsByName("store_img"+i)[0]) {
+	   addCount = i;
+	   break;
+	  }
+	  else addCount = count;
+	 }
+	
+	 var addStr = "<tr><td width=140><input type=file name=store_img"+addCount+" size=40></td></tr>";
+	 var table = document.getElementById("dynamic_table");
+	 var newRow = table.insertRow();
+	 var newCell = newRow.insertCell();
+	 newCell.innerHTML = addStr;
+	 count++;
+	}
+</script>
 </head>
     <body>
         <!-- inc mypage.jsp -->
@@ -209,9 +246,21 @@ img {
 							<label for="store_content">식당 소개</label>
 							<textarea id="store_content" name="store_content" required >${cdto.store_content }</textarea><br>
 					
-							<label for="store_img">사진</label>
-							<img src="./images/${cdto.store_img}" width="60px" height="60px"> 
-							<input type="file" id="store_img" name="store_img" value="${cdto.store_img.split(',')[0] }"><br>
+							<label for="store_img">사진</label> 
+							<c:forEach var="img" items="${cdto.store_img.split(',')}">
+								<img src="./images/${img}" width="60px" height="60px">
+								<input type="checkbox" value="${img}" name="deleteImg">
+							</c:forEach>
+							
+							<input type="button" value="행 추가" onclick="javascript:addInputBox();"> 
+							<input type="hidden" name="count">
+							<table cellpadding=0 cellspacing=0  border="1">
+								<tr>
+									<table cellpadding=0 cellspacing=0 id="dynamic_table"
+										border="1">
+									</table>
+								</tr>
+							</table>
 					
 							<label for="refund_policy">환불 규정</label>
 							<textarea id="refund_policy" name="refund_policy" >${cdto.refund_policy }</textarea><br>
