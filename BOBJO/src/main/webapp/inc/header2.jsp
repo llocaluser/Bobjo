@@ -16,8 +16,8 @@
 <body>
 	<div class="header">
 	<div class="container left">
-	<a class="move" href="./Main.me">
-		<img id="logo" src="./img/bobjo.png">
+	<a style="width: 500px height: 200px;" class="move" href="./Main.me">
+		<img  id="logo" src="./img/BOBJO!1.png">
 	</a>
 	</div>
    </div>	

@@ -301,6 +301,22 @@
     </div>
     
     
+    
+    <!-- TOP BUTTON -->
+    
+    
+    <div id="gotoTop">
+    	<img style="width:80px;" src="./img/up-arrow.png">
+    </div>
+    
+    
+    
+    <!-- TOP BUTTON -->
+    
+    
+    
+    
+    
   </section>
 
   <!-- end list section -->
@@ -310,11 +326,19 @@
   	let pageNum = 1;
   	let hasNext = pageNum < ${totalPage};
   	
+	// 맨 위로 가는 버튼
+  	const gotoTopBtn = document.querySelector('#gotoTop');
+	
+	gotoTopBtn.addEventListener('click', () => {
+		window.scrollTo(0,0);
+	});
+  	
   	// 스크롤 페이징
 	function infiniteScroll () {
 		const pagination = document.querySelector('.fruit_container_end'); // 리스트 엔드 포인트
 		const fullContent = document.querySelector('.fruit_container'); // 리스트 컨테이너
 		const screenHeight = screen.height; // 화면 크기
+		
 		
 		document.addEventListener('scroll',OnScroll,{passive:true}) // 스크롤 이벤트 리스너
 		function OnScroll () { //스크롤 이벤트 함수
@@ -324,6 +348,11 @@
 				hasNext = false;
 				getList(); // 리스트 추가하는 함수
 			}
+			
+			
+			// 버튼 보이기/숨기기
+			if (pageYOffset >= 900) gotoTopBtn.style.display = 'block';
+			else gotoTopBtn.style.display = 'none';
 		}
 	}
 	infiniteScroll();
