@@ -11,10 +11,9 @@
         <meta name="author" content="" />
         <title>BOBJO</title>
         
-
-<style type="text/css">
-	
-	form {
+ 
+<style>
+form {
 	  display: flex;
 	  flex-direction: column;
 	  max-width: 600px;
@@ -68,45 +67,55 @@
 	  cursor: pointer;
 	  margin-top: 20px;
 	}
-	table {
-        border-collapse: collapse;
-        width: 100%;
-        max-width: 600px;
-        margin-bottom: 20px;
-    }
+table {
+	border-collapse: collapse;
+	width: 70%;
+	margin: auto;
+}
 
-    td {
-        padding: 10px;
-        text-align: center;
-    }
+th, td {
+	padding: 8px;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+}
 
-    input[type="text"] {
-        width: 100%;
-        padding: 10px;
-        box-sizing: border-box;
-    }
+th {
+	background-color: #f2f2f2;
+}
 
-    input[type="button"] {
-        background-color: buttonhighlight;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin-bottom: 20px;
-        cursor: pointer;
-    }
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
 
-    input[type="button"]:hover {
-        background-color: #3e8e41;
-    }
-	
- </style>
-        <link href="./css/styles.css" rel="stylesheet" />
+img {
+	max-width: 100px;
+	max-height: 100px;
+}
+
+.btn-modify, .btn-delete, .btn-addmenu {
+	display: inline-block;
+	margin-right: 10px;
+	padding: 5px 10px;
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.btn-modify:hover, .btn-delete:hover {
+	background-color: #3e8e41;
+}
+#cMenu {
+  color: green;
+  text-decoration: none;
+}
+</style>
+<link href="./css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    </head>
+        
+
+</head>
     <body>
          <!-- inc mypage.jsp -->
        		<jsp:include page="../inc/mypage.jsp"/>
@@ -119,35 +128,42 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
-                    <div class="container-fluid px-4">
-                       <h1 style="text-align: center;">메뉴 등록</h1>
-						<form method="POST" action="./CeoMenuAddAction.nu" enctype="multipart/form-data" >
-							<input type="hidden" name="store_no" value="${store_no }">
-							<label for="menu_name">메뉴 이름</label>
-							<input type="text" id="menu_name" name="menu_name" required><br>
-					
-							<label for="price">가격</label>
-							<input type="text" id="price" name="price" required><br>
-					
-							<label for="menu_info">메뉴 설명</label>
-							<input type="text" id="menu_info" name="menu_info"><br>
-							
-							<label for="menu_img">사진</label>
-							<input type="file" id="menu_img" name="menu_img"><br>
-						
-							<label for="menu_category">카테고리</label>
-							<select id="menu_category" name="menu_category" required>
-								<option value="한식">한식</option>
-								<option value="일식">일식</option>
-								<option value="중식">중식</option>
-								<option value="양식">양식</option>
-								<option value="기타">분식</option>
-							</select><br>
-							
-							<button type="submit">등록하기</button>
-					</form>
-                    </div>
-                </main>
+				<div class="container-fluid px-4">
+					<h1 style="text-align: center;">예약자 목록</h1>
+					<table border="1">
+						<thead>
+							<tr>
+								<th>예약자 이름</th>
+								<th>전화번호</th>
+								<th>식당번호</th>
+								<th>예약날짜</th>
+								<th>인원수</th>
+								<th>결제정보</th>
+								<th>결제상태</th>
+								<th>요청사항</th>
+								<th>메뉴번호</th>
+								<th>메뉴수량</th>
+							</tr>
+						</thead>
+						<tbody>
+						<c:forEach var="dto" items="${cRsvList }">
+							<tr>
+								<td>${dto.rsrv_name }</td>
+								<td>${dto.rsrv_phone }</td>
+								<td>${dto.store_no }</td>
+								<td>${dto.rsrv_date }</td>
+								<td>${dto.people_num }</td>
+								<td>${dto.pay_no }</td>
+								<td>${dto.status }</td>
+								<td>${dto.rsrv_msg }</td>
+								<td>${dto.menu_no.split(',')[0] }</td>
+								<td>${dto.menu_amount.split(',')[0] }</td>
+							</tr>
+						</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">

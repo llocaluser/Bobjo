@@ -440,12 +440,7 @@ function minusAmount(i) {
 									href="./mainContent/testimonial.html"></a></li>
 								<li class="nav-item"><a class="nav-link"
 									href="./mainContent/contact.html"></a></li>
-
-
 							</ul>
-
-
-
 						</div>
 					</div>
 				</nav>
@@ -698,12 +693,12 @@ function minusAmount(i) {
        					let price = 0;
        					let menu_amount = "";
         				for (const item of iterator1) {
-        					menu_no += item[0] + ",";
-        					menu_amount += item[1].price + ",";
+        					menu_no += item[1].name + ",";
+        					menu_amount += item[1].amount + ",";
         				}
         				document.getElementsByName("menu_no")[0].value = menu_no;
-        				document.getElementsByName("price")[0].value = document.getElementById("sumPrice").value;
         				document.getElementsByName("menu_amount")[0].value = menu_amount;
+        				document.getElementsByName("price")[0].value = document.getElementById("sumPrice").value;
         				
         				document.frm_rsrvAction.submit();
        				}

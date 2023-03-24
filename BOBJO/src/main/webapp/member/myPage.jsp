@@ -31,6 +31,7 @@
     </head>
     <body>
 
+
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="./Main.me">BOBJO</a>
@@ -107,6 +108,13 @@
 	                            </a>
                             </c:if> 
                         </div>                    
+
+       <!-- inc mypage.jsp -->
+       		<jsp:include page="../inc/mypage.jsp"/>
+       <!-- inc mypage.jsp -->
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+
                     </div>
                 </nav>
             </div>

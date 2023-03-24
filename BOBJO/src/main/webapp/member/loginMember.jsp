@@ -69,7 +69,7 @@
     }
 
     a{ 
-    	color: #f58b34; text-decoration: none; 
+    	color: #ff7331; text-decoration: none; 
     }
     .check{
     	color : red;
@@ -77,7 +77,7 @@
 	 
 
     a{
-    	color: #f58b34; text-decoration: none;
+    	color: #ff7331; text-decoration: none;
     }
     .check{
     	color : red;
@@ -100,7 +100,7 @@
 		<div class="card-title" style="margin-top:30px;">
 
             
-			<h2 class="card-title" style="color:#f58b34; text-align:left;"> 로그인 </h2>
+			<h2 class="card-title" style="color:#ff7331; text-align:left;"> 로그인 </h2>
 		</div>
       <form action="./MemberLoginAction.me" class="login" method="POST">
         <div class="checkbox">

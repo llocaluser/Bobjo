@@ -10,8 +10,6 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>BOBJO</title>
-        
- 
 <style>
 form {
 	  display: flex;
@@ -92,7 +90,7 @@ img {
 	max-height: 100px;
 }
 
-.btn-modify, .btn-delete, .btn-addmenu {
+.btn-modify, .btn-delete {
 	display: inline-block;
 	margin-right: 10px;
 	padding: 5px 10px;
@@ -106,20 +104,17 @@ img {
 .btn-modify:hover, .btn-delete:hover {
 	background-color: #3e8e41;
 }
-#cMenu {
-  color: green;
-  text-decoration: none;
-}
 </style>
 <link href="./css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        
+<script type="text/javascript">
 
+</script>
 </head>
     <body>
-        <!-- inc mypage.jsp -->
+         <!-- inc mypage.jsp -->
        		<jsp:include page="../inc/mypage.jsp"/>
-        <!-- inc mypage.jsp -->
+         <!-- inc mypage.jsp -->
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         Start Bootstrap
@@ -129,119 +124,91 @@ img {
             <div id="layoutSidenav_content">
                 <main>
 				<div class="container-fluid px-4">
-					<h1 style="text-align: center;">식당 목록</h1>
+					<h1 style="text-align: center;">메뉴 목록</h1>
 					<table border="1">
 						<thead>
 							<tr>
 								<th>사진</th>
-								<th>식당 이름</th>
-								<th>주소</th>
-								<th>전화번호</th>
+								<th>메뉴 이름</th>
+								<th>가격</th>
+								<th>메뉴 정보</th>
 								<th>카테고리</th>
-								<th>메뉴등록/수정/삭제</th>
+								<th>수정/삭제</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="dto" items="${cStoreList }"> 
-							
+							<c:forEach var="dto" items="${cMenuList }">
 								<tr>
 									<td><img
-										src="./images/${dto.store_img.split(',')[0] }"
+										src="./images/${dto.menu_img }"
 										alt="식당 이미지"></td>
-						 			<td>
-						 			<a href="./CeoMenuList.nu?store_no=${dto.store_no }" id="cMenu">${dto.store_name }</a>
-						 			</td>
-						 			
+						 			<td>${dto.menu_name }</td>
+									<td>${dto.price }</td>
+									<td>${dto.menu_info }</td>
+									<td>${dto.menu_category }</td>
 									<td>
-										${dto.addr } <br>
-										${dto.addr_details }
-									</td>
-									<td>${dto.tel }</td>
-									<td>${dto.store_category }</td>
-									<td>
-										<button class="btn-addmenu" onclick="location.href='./CeoMenuAdd.nu?store_no=${dto.store_no}'">메뉴등록</button>
-										<button class="btn-modify" onclick="location.href='./CeoStoreList.st?store_no=${dto.store_no}'">수정</button>
-										<%-- <button class="btn-delete"  onclick="location.href='./CeoStoreDelete.st?store_no=${dto.store_no}'">삭제</button> --%>
-										<button class="btn-delete"  onclick="deleteStore(${dto.store_no})">삭제</button>
+										<button class="btn-modify" onclick="location.href='./CeoMenuList.nu?store_no=${dto.store_no}&menu_no=${dto.menu_no}'">수정</button>
+										<button class="btn-delete" onclick="deleteMenu(${dto.menu_no},${dto.store_no })">삭제</button>
 									</td>
 							</tr>
 							</c:forEach>
 						</tbody>
 					</table>
+					
 					<script type="text/javascript">
-					 	function deleteStore(store_no) {
-					 		if(confirm('가게를 삭제하시겠습니까?')){
-					 			location.href="./CeoStoreDelete.st?store_no="+store_no;
+					 	function deleteMenu(menu_no,store_no) {
+					 		if(confirm('메뉴를 삭제하시겠습니까?')){
+					 			location.href="./CeoMenuDelete.nu?menu_no="+menu_no+"&store_no="+store_no;
 					 		}
 						}
 				    </script>
-					<c:if test="${cdto.store_no != null }">
-					   <h1 style="text-align: center;">식당 수정</h1>
-						<form method="post" action="./CeoStoreUpdate.st?store_no=${cdto.store_no }" enctype="multipart/form-data">
+				    
+					<c:if test="${cdto.menu_no != null }">
+					   <h1 style="text-align: center;">메뉴 수정</h1>
+						<form method="post" action="./CeoMenuUpdate.nu" enctype="multipart/form-data">
+							<input type="hidden" value="${cdto.menu_no }" name="menu_no">
+							<input type="hidden" value="${cdto.store_no }" name="store_no">
 							
-							<label for="store_name">식당 이름</label>
-							<input type="text" id="store_name" name="store_name" required value="${cdto.store_name }"><br>
+							<label for="menu_name">메뉴 이름</label>
+							<input type="text" id="menu_name" name="menu_name" required value="${cdto.menu_name }"><br>
 					
-							<label for="addr">주소</label>
-							<input type="text" id="addr" name="addr" required value="${cdto.addr }"><br>
+							<label for="price">가격</label>
+							<input type="text" id="price" name="price" required value="${cdto.price }"><br>
 					
-							<label for="addr_details">상세 주소</label>
-							<input type="text" id="addr_details" name="addr_details" value="${cdto.addr_details }"><br>
+							<label for="menu_info">메뉴 정보</label>
+							<input type="text" id="menu_info" name="menu_info" value="${cdto.menu_info }"><br>
 					
-							<label for="tel">전화번호</label>
-							<input type="text" id="tel" name="tel" required value="${cdto.tel }"><br>
 					
-							<label for="open">영업 시간</label>
-							<input type="text" id="open" name="open" required value="${cdto.open }"><br>
+							<label for="menu_img">사진</label>
+							<input type="file" id="menu_img" name="menu_img" value="${cdto.menu_img }"><br>
 					
-							<label for="close">정기 휴일</label>
-							<input type="text" id="close" name="close" required value="${cdto.close }"><br>
-					
-							<label for="total_tables">총 좌석 수</label>
-							<input type="number" id="total_tables" name="total_tables" min="0" required value="${cdto.total_tables }"><br>
-					
-							<label for="max_rsrv">최대 예약 인원</label>
-							<input type="number" id="max_rsrv" name="max_rsrv" min="1" required value="${cdto.max_rsrv }"><br>
-					
-							<label for="extra_info">편의 시설</label>
-							<input type="text" id="extra_info" name="extra_info" value="${cdto.extra_info }"><br>
-					
-							<label for="store_content">식당 소개</label>
-							<textarea id="store_content" name="store_content" required >${cdto.store_content }</textarea><br>
-					
-							<label for="store_img">사진</label>
-							<img src="./images/${cdto.store_img}" width="60px" height="60px"> 
-							<input type="file" id="store_img" name="store_img" value="${cdto.store_img.split(',')[0] }"><br>
-					
-							<label for="refund_policy">환불 규정</label>
-							<textarea id="refund_policy" name="refund_policy" >${cdto.refund_policy }</textarea><br>
-					
-							<label for="store_category">카테고리</label>
-							<select id="store_category" name="store_category" required>
+							
+							<label for="menu_category">카테고리</label>
+							<select id="menu_category" name="menu_category" required>
 						
 								<option value="한식" 
-								<c:if test="${cdto.store_category eq '한식' }">
+								<c:if test="${cdto.menu_category eq '한식' }">
 								selected
 								</c:if>
 								>한식</option>
 							
 								<option value="일식"
-								<c:if test="${cdto.store_category eq '일식' }">
+								<c:if test="${cdto.menu_category eq '일식' }">
 								selected
 								</c:if>
 								>일식</option>
 								<option value="중식"
-								<c:if test="${cdto.store_category eq '중식' }">
+								<c:if test="${cdto.menu_category eq '중식' }">
 								selected
 								</c:if>
 								>중식</option>
 								<option value="양식"
-								<c:if test="${cdto.store_category eq '양식' }">
+								<c:if test="${cdto.menu_category eq '양식' }">
 								selected
 								</c:if>
 								>양식</option>
 								<option value="기타"
-								<c:if test="${cdto.store_category eq '기타' }">
+								<c:if test="${cdto.menu_category eq '기타' }">
 								selected
 								</c:if>
 								>기타</option>
