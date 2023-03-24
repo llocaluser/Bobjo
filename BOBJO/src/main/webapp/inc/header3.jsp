@@ -64,14 +64,14 @@
     <div>
       <a  href="./Main.me">
         <span>
-          <img style="width: 100px; padding-top: 15px; margin: 0 100px" alt="" src="./img/Logo2.png">
+          <img style="width: 140px;padding-top: 0;margin: 0 100px" alt="" src="./img/Logo1.png">
         </span>
       </a>
     </div>
     <div>
       <a  href="./Main.me">
         <span>
-         <img style="width: 300px" alt="" src="./img/BOBJO!2.png">
+         <img style="width: 380px" alt="" src="./img/BOBJO!1.png">
         </span>
       </a>
       </div>

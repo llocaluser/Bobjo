@@ -16,7 +16,6 @@
 .footer_new .sns-link a,.footer_new .footer-layer2 h1 a,.footer_new .award-list li a {
     display: block;
     overflow: hidden;
-    background: url("//static.coupangcdn.com/image/coupang/common/footer_asset_v8.png") no-repeat;
     text-indent: -99em
 }
 

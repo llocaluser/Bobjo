@@ -5,9 +5,9 @@
   auth="Container"
   type="javax.sql.DataSource"
   driverClassName="com.mysql.cj.jdbc.Driver"
-  username="itwillbs15"
-  password="itwillbs8030909"
-  url="jdbc:mysql://itwillbs15.cafe24.com:3306/itwillbs15"
+  username="class6_221128_team2"
+  password="1234"
+  url="jdbc:mysql://db.itwillbs.dev:3306/class6_221128_team2"
   maxWait="5000"
  />
 </Context>
