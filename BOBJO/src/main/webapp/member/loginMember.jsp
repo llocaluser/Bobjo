@@ -42,7 +42,7 @@
 	}
 
     #btn-Yes{
-        background-color: #e4932b;
+        background-color: #ff7331;
         border: none;
     }
 	
@@ -116,7 +116,27 @@
         <input type="password" name="pw" id="Pw" class="form-control" placeholder="비밀번호"  required><br>
          <p id="check" class="check">${login_msg}</p><br/>
         <input id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" value="로 그 인">
-      </form>
+        
+        
+   <a id="kakao-login-btn"></a>
+     <a href="http://developers.kakao.com/logout">Logout</a>
+   <script type='text/javascript'>
+        //<![CDATA[
+        // 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('d48f63d9da5135c15efac2ae7eb8b7e4');
+        // 카카오 로그인 버튼을 생성합니다.
+        Kakao.Auth.createLoginButton({
+            container: '#kakao-login-btn',
+            success: function (authObj) {
+                alert(JSON.stringify(authObj));
+            },
+            fail: function (err) {
+                alert(JSON.stringify(err));
+            }
+        });
+      //]]>
+    </script>
+ </form>
     
 		</div>
         <div class="links">

@@ -16,7 +16,7 @@
         
     <style type="text/css">
      img{
-            float: left;
+          /*   float: left; */
             width: 200px;
             margin: 15px;
     }
@@ -45,27 +45,28 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="./Main.me">메인</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href=".//MemberLogoutAction.me">로그아웃</a></li>
+                        <li><a class="dropdown-item" href="./MemberLogoutAction.me">로그아웃</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
+        
         <div id="layoutSidenav">
+            
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
-                        <div class="nav">
-                        
+                        <div class="nav">    
                         <c:if test="${ceo_num == null }">
                             <div class="sb-sidenav-menu-heading">마이페이지</div>
-                            <a class="nav-link" href="./MemberBook.me">
+                            <a class="nav-link" href="./MemberMypage.me">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                예약관리
+                                마이페이지 홈
                             </a>
                             <!-- <div class="sb-sidenav-menu-heading">예약</div> -->
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <a class="nav-link collapsed" href="./MemberBook.me">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                방문기록      
+                                예약관리      
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav"> </nav>
@@ -104,17 +105,12 @@
 	                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
 	                                메뉴등록
 	                            </a>
-                            </c:if>
-                            
-                        </div>
-                    
-                    </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                            </c:if> 
+                        </div>                    
                     </div>
                 </nav>
             </div>
+           
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
@@ -129,13 +125,7 @@
                                   <h6>이메일 : ${dto.email } </h6>
                                   <h6>휴대폰 번호 : ${dto.phone } </h6>
                                                                              
-                               <%--  <p class="mb-0">
-                                    This page is an example of using static navigation. By removing the
-                                    <code>.sb-nav-fixed</code>
-                                    class from the
-                                    <code>body</code>
-                                    , the top navigation and side navigation will become static on scroll. Scroll down this page to see an example.
-                                </p> --%>
+
                             </div>
                         </div>
                         

@@ -186,6 +186,15 @@ public class MemberFrontController extends BasicFrontController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+	    }else if(command.equals("/IDDupCheckAjax.me")) {
+	    	System.out.println("/IDDupCheckAjax.me 호출");
+	    	
+	    	action = new IDDupCheckAjaxAction();
+	    	try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	    }
 
 	

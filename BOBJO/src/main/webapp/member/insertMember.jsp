@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+          <!-- 아이디 중복체크를 위한 제이쿼리 -->
+          <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+          <!-- 아이디 중복체크를 위한 제이쿼리 -->
 
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +16,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
   <link rel="stylesheet" href="./css/main.css">
   <script defer src="./js/main.js"></script>
+  
   
   <script type="text/javascript">
 	  function showCeoNoInput() {
@@ -104,9 +108,9 @@
 				</section>
       <div id="result-fail"></div>
           <button id="submit" type="submit">가입하기</button>
+</form>        
        </div>
      </div> 
-</form>        
        
    
      
