@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+
+ul{
+	list-style: none;
+	padding-left: 15px;
+}
+
+li{
+	margin: 2.125rem 5px;
+    cursor: pointer;
+}
+
+
+#m_id{
+	font-size: smaller;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+#main-nav{
+	width:140px;
+	z-index:3;
+}
+
+#sub-nav{
+	flex-direction: column;
+    position: relative;
+    width: 140px;
+    z-index: 2;
+    background-color: #343434;
+    display:none;
+}
+
+#sub-nav-title{
+	text-align: center;
+    margin: 30px 0px 20px;
+    color: #e9ecef;
+    font-size: large;
+}
+
+#rsrv-manage{
+	display:none;
+}
+
+#member-manage{
+	
+}
+
+#store_manage{
+	display:none;
+}
