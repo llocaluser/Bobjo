@@ -10,7 +10,33 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>BOBJO</title>
+        
+<script type="text/javascript">
+	 var count = 1;
+	 var addCount;
+	 
+	//행추가
+	function addInputBox() {
+	 for(var i=1; i<=count; i++) {
+	  if(!document.getElementsByName("store_img"+i)[0]) {
+	   addCount = i;
+	   break;
+	  }
+	  else addCount = count;
+	 }
+	
+	 var addStr = "<tr><td width=140><input type=file name=store_img"+addCount+" size=40></td></tr>";
+	 var table = document.getElementById("dynamic_table");
+	 var newRow = table.insertRow();
+	 var newCell = newRow.insertCell();
+	 newCell.innerHTML = addStr;
+	 count++;
+	}
+</script>
+
+        
 <style type="text/css">
+	
 	form {
 	  display: flex;
 	  flex-direction: column;
@@ -65,94 +91,49 @@
 	  cursor: pointer;
 	  margin-top: 20px;
 	}
+	table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 600px;
+        margin-bottom: 20px;
+    }
+
+    td {
+        padding: 10px;
+        text-align: center;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    input[type="button"] {
+        background-color: buttonhighlight;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-bottom: 20px;
+        cursor: pointer;
+    }
+
+    input[type="button"]:hover {
+        background-color: #3e8e41;
+    }
+	
  </style>
         <link href="./css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="./Main.me">BOBJO</a>
-        
-           
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
-            <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                        
-                        <c:if test="${ceo_num == null }">
-                            <div class="sb-sidenav-menu-heading">마이페이지</div>
-                            <a class="nav-link" href="index.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                예약관리
-                            </a>
-                            <!-- <div class="sb-sidenav-menu-heading">예약</div> -->
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                방문기록      
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav"> </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                북마크
-                                </a>
-                            
-                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages"> </nav>
-                            </div>
-                       </c:if>
-                           
-                            <div class="sb-sidenav-menu-heading">계정</div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                회원정보수정
-                            </a>
-                            <a class="nav-link" href="./MemberDeleteAction.me">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                회원탈퇴
-                            </a>
-                            
-                            <c:if test="${ceo_num != null }">
-	                               <div class="sb-sidenav-menu-heading">사업주</div>
-	                            <a class="nav-link" href="./CeoAddStore.st">
-	                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-	                                가게등록
-	                            </a>
-	                            <a class="nav-link" href="./CeoStoreList.st">
-	                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-	                               	가게리스트
-	                            </a>
-	                            <a class="nav-link" href="./CeoMenuAdd.nu">
-	                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-									메뉴등록
-	                            </a>
-                            </c:if>
-                            
-                        </div>
-                    </div>
+        <!-- inc mypage.jsp -->
+       		<jsp:include page="../inc/mypage.jsp"/>
+     	<!-- inc mypage.jsp -->
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         Start Bootstrap
@@ -163,7 +144,7 @@
                 <main>
                     <div class="container-fluid px-4">
                        <h1 style="text-align: center;">가게 등록</h1>
-						<form method="post" action="./CeoAddStoreAction.st" enctype="multipart/form-data">
+						<form method="post" action="./CeoAddStoreAction.st" enctype="multipart/form-data" >
 							<label for="store_name">식당 이름</label>
 							<input type="text" id="store_name" name="store_name" required><br>
 					
@@ -195,7 +176,16 @@
 							<textarea id="store_content" name="store_content" required></textarea><br>
 					
 							<label for="store_img">사진</label>
-							<input type="file" id="store_img" name="store_img"><br>
+							<input type="button" value="행 추가" onclick="javascript:addInputBox();"> 
+							<input type="hidden" name="count">
+							<table cellpadding=0 cellspacing=0  border="1">
+								<tr>
+									<table cellpadding=0 cellspacing=0 id="dynamic_table"
+										border="1">
+									</table>
+								</tr>
+							</table>
+								
 					
 							<label for="refund_policy">환불 규정</label>
 							<textarea id="refund_policy" name="refund_policy" ></textarea><br>
@@ -208,9 +198,8 @@
 								<option value="양식">양식</option>
 								<option value="기타">분식</option>
 							</select><br>
-					
 							<button type="submit">등록하기</button>
-						</form>
+					</form>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

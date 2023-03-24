@@ -3,7 +3,10 @@ package com.bobjo.reservation.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.bobjo.store.db.StoreDTO;
 import com.bobjo.utils.db.ConnectionManager;
 
 public class ReservationDAO {
@@ -109,4 +112,44 @@ public class ReservationDAO {
 	}
 	// 결제 진행을 위한 추가정보 -  가게 이름
 	
+	// 다빈 - 예약자 목록 조회
+	public List<ReservationDTO> CeoRsvList(String id){
+		List<ReservationDTO> cRsvList = new ArrayList<>();
+		try {
+			// 1.2 디비 연결
+			con = ConnectionManager.getConnection();
+			// 3. sql 작성
+			sql = "select * from bobjo_reservation where store_no in ("
+					+ " select store_no from bobjo_store where m_id=?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			// 4. sql 실행
+			rs = pstmt.executeQuery();
+			// 5. 데이터 처리 
+			while(rs.next()) {
+				ReservationDTO dto = new ReservationDTO();
+				dto.setRsrv_no(rs.getInt("rsrv_no"));
+				dto.setRsrv_name(rs.getString("rsrv_name"));
+				dto.setRsrv_phone(rs.getString("rsrv_phone"));
+				dto.setStore_no(rs.getInt("store_no"));
+				dto.setRsrv_date(rs.getTimestamp("rsrv_date"));
+				dto.setPeople_num(rs.getInt("people_num"));
+				dto.setReg_date(rs.getTimestamp("reg_date"));
+				dto.setPay_no(rs.getInt("pay_no"));
+				dto.setStatus(rs.getString("status"));
+				dto.setRsrv_msg(rs.getString("rsrv_msg"));
+				dto.setMenu_no(rs.getString("menu_no"));
+				dto.setMenu_amount(rs.getString("menu_amount"));
+				
+				cRsvList.add(dto);
+			}
+			System.out.println(" DAO : 예약자 목록 조회 성공! ");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			ConnectionManager.closeConnection(rs, pstmt, con);
+		}
+		return cRsvList;
+	}
 }

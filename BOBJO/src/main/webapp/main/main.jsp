@@ -112,7 +112,7 @@ https://templatemo.com/tm-552-video-catalog
 			</div>
 			
 			
-            <i id="tm-video-control-button" class="fas fa-pause"></i>
+            <!-- <i id="tm-video-control-button" class="fas fa-pause"></i> -->
         </div>
     </div>    
     
@@ -125,35 +125,25 @@ https://templatemo.com/tm-552-video-catalog
 			    var currentVideo = "${currentVideo}";
 			    var timer;
 			    var randomCheck = "cook1";
-			    const videoBtn = document.querySelector("#tm-video-control-button");
+			    //const videoBtn = document.querySelector("#tm-video-control-button");
 			    
 			    
-			    var beginTime = 0;
-			    var endTime = 0;
-			    var playedTime = 0;
 			    
-			    
-			    videoBtn.addEventListener("click", function (e) {
+			    /* videoBtn.addEventListener("click", function (e) {
 			    	
 	                const video = document.getElementById("tm-video");
 	                $(this).removeClass();
 
 	                if (video.paused) {
 	                    video.play();
-	                    endTime = new Date().getMilliseconds();
-	                    playedTime = endTime - beginTime;
-	                    
-	                    timer = setInterval(playNextVideo, 30000 - playedTime * 10);
-	                    
 	                    $(this).addClass("fas fa-pause");
 	                } else {
 	                    video.pause();
-	                    beginTime = new Date().getMilliseconds();
 	                    clearInterval(timer);
 	                    
 	                    $(this).addClass("fas fa-play");
 	                }
-	            });
+	            }); */
 			    
 			    
 			    

@@ -22,6 +22,12 @@ public class MenuFrontController extends BasicFrontController {
 			}
 		}
 		else if(command.equals("/CeoMenuAdd.nu")) {
+			forward = new ActionForward();
+			request.setAttribute("store_no", request.getParameter("store_no"));
+			forward.setPath("./ceo/ceoMenuAdd.jsp");
+			forward.setRedirect(false);
+		}
+		else if(command.equals("/CeoMenuAddAction.nu")) {
 			action = new CeoMenuAddAction();
 			try {
 				forward = action.execute(request, response);
@@ -29,8 +35,25 @@ public class MenuFrontController extends BasicFrontController {
 				e.printStackTrace();
 			}
 		}
-		else if(command.equals("/CeoMenuAddAction.nu")) {
-			action = new CeoMenuAddProAction();
+		else if(command.equals("/CeoMenuList.nu")) {
+			action = new CeoMenuListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+					
+		}
+		else if(command.equals("/CeoMenuDelete.nu")) {
+			action = new CeoMenuDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/CeoMenuUpdate.nu")) {
+			action = new CeoMenuUpdateAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

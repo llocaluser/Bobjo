@@ -32,6 +32,14 @@ public class ReservationFrontController extends BasicFrontController {
 				e.printStackTrace();
 			}
 		}
+		else if(command.equals("/CeoRsrvList.re")) {
+			action = new CeoRsrvListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 	}

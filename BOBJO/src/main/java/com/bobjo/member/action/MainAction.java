@@ -11,10 +11,11 @@ public class MainAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println();
+		System.out.println("M : MainAction 호출 ");
 		
 		MemberDAO dao = new MemberDAO();
 		request.setAttribute("storeList", dao.getStoreList());
+		System.out.println(dao.getStoreList());
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("./main/main.jsp");
