@@ -135,29 +135,29 @@ img {
 							<tr>
 								<th>예약자 이름</th>
 								<th>전화번호</th>
-								<th>식당번호</th>
+								<th>식당이름</th>
 								<th>예약날짜</th>
 								<th>인원수</th>
 								<th>결제정보</th>
 								<th>결제상태</th>
 								<th>요청사항</th>
-								<th>메뉴번호</th>
+								<th>메뉴이름</th>
 								<th>메뉴수량</th>
 							</tr>
 						</thead>
 						<tbody>
 						<c:forEach var="dto" items="${cRsvList }">
 							<tr>
-								<td>${dto.rsrv_name }</td>
-								<td>${dto.rsrv_phone }</td>
-								<td>${dto.store_no }</td>
-								<td>${dto.rsrv_date }</td>
-								<td>${dto.people_num }</td>
-								<td>${dto.pay_no }</td>
-								<td>${dto.status }</td>
-								<td>${dto.rsrv_msg }</td>
-								<td>${dto.menu_no.split(',')[0] }</td>
-								<td>${dto.menu_amount.split(',')[0] }</td>
+								<td>${dto[0].rsrv_name }</td>
+								<td>${dto[0].rsrv_phone }</td>
+								<td>${dto[1].store_name }</td>
+								<td>${dto[0].rsrv_date }</td>
+								<td>${dto[0].people_num }</td>
+								<td>${dto[0].pay_no }</td>
+								<td>${dto[0].status }</td>
+								<td>${dto[0].rsrv_msg }</td>
+								<td>${dto[0].menu_no}</td>
+								<td>${dto[0].menu_amount }</td>
 							</tr>
 						</c:forEach>
 						</tbody>
