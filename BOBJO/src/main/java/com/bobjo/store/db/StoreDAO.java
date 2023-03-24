@@ -64,12 +64,12 @@ public class StoreDAO {
 			sqlBuilder.append("where store_name like ? ");
 
 			if(!srch_data[0].equals("")) {
-				sqlBuilder.append("and substring_index(substring_index(s.addr,' ',2),' ',-1) = '");
+				sqlBuilder.append("and substring_index(substring_index(addr,' ',2),' ',-1) = '");
 				sqlBuilder.append(srch_data[0]);
 				sqlBuilder.append("' ");
 			}
 			if(!srch_data[1].equals("")) {
-				sqlBuilder.append("and s.store_category = '");
+				sqlBuilder.append("and store_category = '");
 				sqlBuilder.append(srch_data[1]);
 				sqlBuilder.append("' ");
 			}
