@@ -23,7 +23,36 @@ public class AdminFrontController extends BasicFrontController {
 	    		e.printStackTrace();
 	    	}
 		}
-		
+		else if(command.equals("/GenerateNewPw.ad")) {
+			System.out.println(" C : GenerateNewPw.ad 호출 ");
+			
+			action = new GenerateNewPwAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/LoadMemberTable.ad")) {
+			System.out.println(" C : LoadMemberTable.ad 호출 ");
+			
+			action = new LoadMemberTableAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/DeleteMember.ad")) {
+			System.out.println(" C : DeleteMember.ad 호출 ");
+			
+			action = new DeleteMemberAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

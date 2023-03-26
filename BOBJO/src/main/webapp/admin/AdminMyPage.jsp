@@ -70,13 +70,13 @@
                         
                             <div class="sb-sidenav-menu-heading">관리기능</div>
                             <a class="nav-link" 
-                            href="javascript:void(0);" onclick="openSubNav();">
+                            href="javascript:void(0);" onclick="openSubNav('rsrv-manage');">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 예약관리
                             </a>
                             <!-- <div class="sb-sidenav-menu-heading">예약</div> -->
                             <a class="nav-link collapsed" 
-                            href="javascript:void(0);" onclick="openSubNav();" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            href="javascript:void(0);" onclick="openSubNav('member-manage');" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 <div id="manageMem">회원관리</div>     
                             </a>
@@ -84,7 +84,7 @@
                                 <nav class="sb-sidenav-menu-nested nav"> </nav>
                             </div>
                             <a class="nav-link collapsed" 
-                            href="javascript:void(0);" onclick="openSubNav();" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            href="javascript:void(0);" onclick="openSubNav('store-manage');" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 가게관리
                                 </a>
@@ -136,6 +136,12 @@
                 
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sub-nav">
                 
+                <a class="btn_close">
+                <svg id="sub-nav-close" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path class="white" d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z"/>
+                <style>.white{fill:white;}</style>
+                </svg>
+                </a>
+                
                 <div id="sub-nav-title">
                 	회원관리
                 </div>
@@ -143,28 +149,27 @@
                 <!-- 예약관리 -->
                 <div id="rsrv-manage">
                 	<ul>
-                		<li>예약 추가</li>
-                		<li>예약 수정</li>
-                		<li>예약 삭제</li>                		
+                		<li id="addRsrv">예약 추가</li>
+                		<li id="modRsrv">예약 수정</li>
+                		<li id="delRsrv">예약 삭제</li>                		
                 	</ul>
                 </div>
                 
                 <!-- 회원관리 -->
                 <div id="member-manage">
                 	<ul>
-                		<li><div>사업자 허가</div></li>
-                		<li><div>회원 수정</div></li>
-                		<li><div>회원 탈퇴</div></li>
-                		<li><div>비밀번호 변경(임시)</div></li>             		
+                		<li id="adCeo">사업자 허가</li>
+                		<li id="mM">회원 수정/탈퇴</li>
+                		<li id="resetPw">비밀번호 변경</li>             		
                 	</ul>
                 </div>
                 
                 <!-- 가게관리 -->
-                <div id="store_manage">
+                <div id="store-manage">
                 	<ul>
-                		<li>식당 등록</li>
-                		<li>식당 정보 수정</li>
-                		<li>식당 삭제</li>                		
+                		<li id="regRes">식당 등록</li>
+                		<li id="modRes">식당 정보 수정</li>
+                		<li id="killRes">식당 삭제</li>                		
                 	</ul>
                 </div>
                 
@@ -174,51 +179,274 @@
             <div id="layoutSidenav_content">
                 <main>
                 
-                    <!-- <div class="container-fluid px-4">
-                        <h1 class="mt-4">${m_id }님</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Static Navigation</li>
-                        </ol>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <p class="mb-0">
-                                    This page is an example of using static navigation. By removing the
-                                    <code>.sb-nav-fixed</code>
-                                    class from the
-                                    <code>body</code>
-                                    , the top navigation and side navigation will become static on scroll. Scroll down this page to see an example.
-                                </p>
-                            </div>
-                        </div>
-                        <div style="height: 100vh"></div>
-                        <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
-                    </div> -->
+                    
+                    <div class="main_content">
                     
                     
                     
-                     
+                    <article id="show-addRsrv">
+                    	<section class="title">
+                    		<h4>예약 추가</h4>
+                    	</section>
+                    </article>
+                    
+                    
+                    
+                    
+                    <article id="show-modRsrv">
+                    	<section class="title">
+                    		<h4>예약 수정</h4>
+                    	</section>
+                    </article>
+                    
+                    
+                    
+                    
+                    <article id="show-delRsrv">
+                    	<section class="title">
+                    		<h4>예약 삭제</h4>
+                    	</section>
+                    </article>
+                    
+                    
+                    
+                    <article id="show-adCeo">
+                    	<section class="title">
+                    		<h4>사업자 허가</h4>
+                    	</section>
+                    </article>
+                    
+                    
+                    
+                    <article id="show-mM">
+                    	<section class="title">
+                    		<h4>회원 관리</h4>
+                    	</section>
+                    </article>
+                    
+                    
+                    
+                    <article id="show-resetPw">
+                    	<section class="title">
+                    		<h4>임시 비밀번호 생성</h4>
+                    	</section>
+	                    <input type="text" name="memberId" placeholder="회원 아이디 입력">
+	                    <button id="NewPw">새 비번 생성 & 보내기</button>
+                    </article>
+                    
+                    
+                    
+                    
+                    
+                    <article id="show-regRes">
+                    	<section class="title">
+                    		<h4>식당 등록</h4>
+                    	</section>
+                    </article>
+                    
+                    
+                    
+                    
+                    
+                    <article id="show-modRes">
+                    	<section class="title">
+                    		<h4>식당 정보 수정</h4>
+                    	</section>
+                    </article>
+                    
+                    
+                    
+                    
+                    
+                    <article id="show-killRes">
+                    	<section class="title">
+                    		<h4>식당 삭제</h4>
+                    	</section>
+                    </article>
+                    
+                     </div>
                 </main>
                 
                 
+                
+                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                <script type="text/javascript"
+				        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+				</script>
                 <script type="text/javascript">
                 
                 const manageMem = document.querySelector('#manageMem');
                 const subnav = document.querySelector('#sub-nav');
                 
+                const rsrvManage = document.getElementById('rsrv-manage');
+                const memberManage = document.getElementById('member-manage');
+                const storeManage = document.getElementById('store-manage');
                 
-                function openSubNav(){
+                const NewPw = document.querySelector('#NewPw');
+                const subnavclose = document.querySelector('#sub-nav-close');
+                const subnavtitle = document.querySelector('#sub-nav-title');
+                
+                const mM = document.querySelector('#mM');
+                const manageMember = document.querySelector('#manageMember');
+                
+                const resetPw = document.querySelector('#resetPw');
+                const generatePw = document.querySelector('#generatePw');
+                
+                const navItems = document.querySelectorAll('#sub-nav li');
+                const articles = document.querySelectorAll('.main_content article');
+
+                
+                
+                
+                navItems.forEach(item => {
+                	item.addEventListener('click', () => {
+	                	const articleId = 'show-' + item.id.replace('show-', '');
+	                	const articleToShow = document.getElementById(articleId);
+	
+	                	articles.forEach(article => {
+	                    	article.classList.remove('current');
+	                    	article.style.display = 'none';
+	                	});
+	
+	                	articleToShow.classList.add('current');
+	                	articleToShow.style.display = 'block';
+	                	
+	                	if(articleId == 'show-mM') {
+	                		loadMemberTable();
+	                	}
+                	});
+            	});
+                
+                
+                function loadMemberTable(){
                 	
-                	manageMem.addEventListener('click', () => {
-                		subnav.style.display = 'flex';	
+                	$.ajax({
+                		type: "POST",
+                		url: "LoadMemberTable.ad",
+                		dataType: "json",
+                		success: function(data) {
+                			console.log('ajax 부르기 성공 ');
+                			
+                			var tableHtml = '<table id="member-table"><thead><tr><th>ID</th><th>PW</th><th>Name</th><th>Phone</th><th>Nickname</th><th>Email</th><th>Point</th><th>Ceo Num</th><th>Alcohol Level</th><th>Manage</th></tr></thead><tbody>';
+
+                		    for (var i = 0; i < data.length; i++) {
+                		        var member = data[i];
+                		        tableHtml += '<tr><td>' + member.m_id + '</td><td>' + member.pw + '</td><td>' + member.m_name + '</td><td>' + member.phone + '</td><td>' + member.nickname + '</td><td>' + member.email + '</td><td>' + member.point + '</td><td>' + member.ceo_num + '</td><td>' + member.alcohol_level 
+                		        + '</td><td><button class="btn_mem" onclick="modMem(\'' + member.m_id + '\');">수정</button><button class="btn_mem" onclick="delMem(\'' + member.m_id + '\');">삭제</button></td></tr>';
+                		    }
+                		    
+                		    tableHtml += '</tbody></table>';
+                		    $('#show-mM section.title').after(tableHtml);
+						},
+                		error: function() {
+                			console.log('Error loading member table');
+                		}
                 	});
                 	
                 }
                 
                 
+                function openSubNav(id){
+                	subnav.classList.add('show');
+                	
+                	rsrvManage.style.display = id === 'rsrv-manage' ? 'flex' : 'none';
+                	memberManage.style.display = id === 'member-manage' ? 'flex' : 'none';
+                	storeManage.style.display = id === 'store-manage' ? 'flex' : 'none';
+                	
+                	if (id === 'rsrv-manage') {
+                		subnavtitle.textContent = '예약 관리';
+                	} else if (id === 'member-manage') {
+                		subnavtitle.textContent = '회원 관리';
+                	} else if (id === 'store-manage') {
+                		subnavtitle.textContent = '가게 관리';
+                	}
+                }
+                
+                
+                function modMem(id){
+                	
+                }
+                
+                function delMem(id){
+                	var check = confirm(id + "님에 대한 정보를 삭제하시겠습니까?");
+                	
+                	if(check){
+                		$.ajax({
+                			type: "POST",
+                			url: "DeleteMember.ad",
+                			dataType: "void",
+                			data: {id : id},
+                			success: function(){
+                				let table = document.getElementById("member-table");
+                				table.parentNode.removeChild(table);
+                				loadMemberTable();
+                			},
+                			error: function(req, stat, error){
+                				alert(stat + " - " + error + " [삭제 실패]");
+                			}
+                		});
+                	}
+                }
+                
+                var password;
+                var email;
+                
+                NewPw.addEventListener('click', () => {
+                	var m_id = document.querySelector('input[name="memberId"]').value;
+                	if(m_id == '') {
+                		alert("회원의 id값을 입력해야 합니다")
+                		return false;
+                	}
+                	var xhr = new XMLHttpRequest();
+                		xhr.onreadystatechange = function() {
+	                		if (xhr.readyState === XMLHttpRequest.DONE) {
+	                	    	if (xhr.status === 200) {
+		                	        var response = xhr.responseText.split("|");
+		                	        password = response[0];
+		                	        email = response[1];
+		                	        if (email == null || email == 'null') {
+		                	        	email = null;
+		                	        	alert("당 회원은 메일 주소가 없습니다");
+		                	        }
+		                	        else alert(email + "에 새로운 비밀번호 " + password + "가 송신되었습니다");
+		               			} else {
+	                	    	console.log("Error: " + xhr.status);
+	              				}
+	                		}
+	               		};
+					xhr.open("POST", "GenerateNewPw.ad?m_id=" + m_id, true);
+                	xhr.send();
+                	
+                	
+                	
+                	// 메일 보내기
+                	emailjs.init("rVmnb5Oe_svONJ5rI");
+			    	
+			    	var templateParams = {
+			    		pw: password
+			    	}
+			    	
+			    	emailjs.sendForm('gmail', 'template_dtnk9fq', templateParams)
+			         //emailjs.send('service ID', 'template ID', 보낼 내용이 담긴 객체)
+			         	    .then(function(response) {
+			         	       console.log('SUCCESS!', response.status, response.text);
+			         	    }, function(error) {
+			         	       console.log('FAILED...', error);
+			         	    });
+			    	
+			    	
+			    	
+                });
+                
+                subnavclose.addEventListener('click', () => {
+                	
+                	subnav.classList.remove('show');
+                });
+                
                 </script>
                 
                 
+				
                 
                 
                 
