@@ -11,6 +11,44 @@ li{
     cursor: pointer;
 }
 
+.main_content{
+	margin-left:20px;
+}
+
+.btn_close{
+    text-align: -webkit-right;
+    opacity: .3;
+    margin: 10px 10px 0px 0px;
+    
+}
+
+.btn_mem {
+	border: none;
+	color: white;
+	background-color: #444;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+
+.btn_mem:hover {
+	background-color: #555;
+}
+
+
+.title{
+	height: 70px;
+    align-items: center;
+    display:flex;
+}
+
+.current {
+	display: block;
+}
 
 #m_id{
 	font-size: smaller;
@@ -29,7 +67,14 @@ li{
     width: 140px;
     z-index: 2;
     background-color: #343434;
-    display:none;
+    visibility: hidden;
+    transition: transform 0.25s ease-in-out;
+    transform: translateX(-100%);
+}
+
+#sub-nav.show{
+	visibility: visible;
+	transform: translateX(0%);
 }
 
 #sub-nav-title{
@@ -39,14 +84,46 @@ li{
     font-size: large;
 }
 
+#sub-nav-close{
+	cursor:pointer;
+}
+
 #rsrv-manage{
 	display:none;
 }
 
+.main_content article{
+	display:none;
+}
+
+#manageMember{
+	display:none;
+}
+
 #member-manage{
-	
+	display:flex;
 }
 
 #store_manage{
 	display:none;
+}
+
+#member-table {
+	border-collapse: collapse;
+}
+
+#member-table th {
+	background-color: #ddd;
+	border: 1px solid #aaa;
+	padding: 0.5em;
+	text-align: left;
+}
+
+#member-table td {
+	border: 1px solid #aaa;
+	padding: 0.5em;
+}
+
+#member-table tbody tr:nth-child(even) {
+	background-color: #eee;
 }
