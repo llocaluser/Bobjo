@@ -1,5 +1,7 @@
 package com.bobjo.member.action;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -37,13 +39,25 @@ public class MemberJoinAction implements Action {
 		  // DB 저장
 		  MemberDAO dao = new MemberDAO();
 		  dao.insertMember(dto);
+		  
+		// 2. 컨트롤러 사용 X (JS)
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+						
+			out.write("<script>");
+			out.write(" alert('회원가입 성공!'); ");
+			out.write(" location.href='./MemberLogin.me'; ");
+			out.write("</script>");
+			out.close();		
+						
+			return null; 
 		
-		// 로그인 페이지로 이동티켓 생성(직접이동x)
-		 ActionForward forward = new ActionForward();
-		 forward.setPath("./MemberLogin.me");
-		 forward.setRedirect(true);	
-			
-		return forward;
+//		// 로그인 페이지로 이동티켓 생성(직접이동x)
+//		 ActionForward forward = new ActionForward();
+//		 forward.setPath("./MemberLogin.me");
+//		 forward.setRedirect(true);	
+//			
+//		return forward;
 	}
 
 }

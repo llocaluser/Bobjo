@@ -30,7 +30,6 @@ public class MemberDeleteAction implements Action {
 	
 		}	  
 		  
-    
 		MemberDAO dao = new MemberDAO();
 		MemberDTO dto = dao.getMemberInfo(m_id);
 			

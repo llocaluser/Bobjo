@@ -54,13 +54,14 @@
                                <img src="./img/person.png">  <h4 class="mt-4">내정보</h4> <br>
                                   <h6>이름 : ${dto.m_name } </h6>
                                   <h6>이메일 : ${dto.email } </h6>
-                                  <h6>휴대폰 번호 : ${dto.phone } </h6>                                                              
+                                  <h6>휴대폰 번호 : ${dto.phone } </h6>
+                                  <h6> 포인트 : ${dto.point }</h6>                                                              
                             </div>
                         </div>
                         
                          <div class="card mb-4-1">
                             <div class="card-body">
-                               <img src="./img/date.png">  <h4 class="mt-4">"${m_id }"님 예약내역</h4> <br>
+                               <img src="./img/date.png">  <h4 class="mt-4">현재 예약 건수</h4> <br>
                                   <h5> ${count }건 </h5>      
                                  <a href="./MemberBook.me"> <h5> 확인하기 </h5> </a>       
                                                                                      
