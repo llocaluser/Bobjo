@@ -69,7 +69,7 @@
                             </a>
                             
                             <c:if test="${ceo_num != null }">
-	                               <div class="sb-sidenav-menu-heading">사업주</div>
+	                               <div class="sb-sidenav-menu-heading">사업자</div>
 	                            <a class="nav-link" href="./CeoAddStore.st">
 	                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
 	                                가게등록
