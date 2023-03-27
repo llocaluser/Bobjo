@@ -1,14 +1,11 @@
 package com.bobjo.review.action;
 
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bobjo.basicform.action.Action;
 import com.bobjo.basicform.action.ActionForward;
-import com.bobjo.reservation.db.ReservationDAO;
 import com.bobjo.review.db.ReviewDAO;
 import com.bobjo.review.db.ReviewDTO;
 import com.oreilly.servlet.MultipartRequest;
@@ -47,19 +44,6 @@ public class ReviewRegAction implements Action {
 		
 		dto.setM_id(id);
 		int store_no = Integer.parseInt(multi.getParameter("store_no"));
-		
-		//리뷰 작성권한 확인
-		if(!dao.canRegReview(id, store_no)) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.write("<script>");
-			out.write(" alert('방문 1회당 1번만 리뷰를 등록할 수 있습니다 '); ");
-			out.write("</script>");
-			out.close();
-			return null;
-		}
-		//리뷰 작성권한 확인
-		
 		dto.setStore_no(store_no);
 		dto.setContent(multi.getParameter("content"));
 		dto.setScore(Float.parseFloat(multi.getParameter("score")));

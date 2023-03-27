@@ -117,8 +117,8 @@ public class ReviewDAO {
 	// 점수
 
 	// 리뷰 등록
-	public void registerReview(ReviewDTO dto) {
-		int result;
+	public int registerReview(ReviewDTO dto) {
+		int result = 0;
 		try {
 			conn = ConnectionManager.getConnection();
 			sql = "INSERT INTO BOBJO_REVIEW VALUES (DEFAULT, ?, ?, ?, NOW(), ?, ?)";
@@ -129,7 +129,7 @@ public class ReviewDAO {
 			pstmt.setFloat(4, dto.getScore());
 			pstmt.setString(5, dto.getReview_img() == null? "no_img.PNG" : dto.getReview_img() );
 			
-			result = pstmt.executeUpdate();
+			result += pstmt.executeUpdate();
 			
 			if(result == 1) {
 				System.out.println("등록 성공!");
@@ -140,7 +140,7 @@ public class ReviewDAO {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, dto.getM_id());
 				
-				pstmt.executeUpdate();
+				result += pstmt.executeUpdate();
 				// 리뷰 작성시 포인트 지급
 			}
 			else System.out.println("등록 실패!");
@@ -150,6 +150,8 @@ public class ReviewDAO {
 		} finally {
 			ConnectionManager.closeConnection(rs, pstmt, conn);
 		}
+		
+		return result;
 	}
 	// 리뷰 등록
 
