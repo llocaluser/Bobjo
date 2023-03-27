@@ -13,6 +13,7 @@
         <link href="./css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <link href="./css/adminMyPage.css" rel="stylesheet" />
+        <!-- <link href="./css/modal.css" rel="stylesheet" /> -->
     </head>
     
     
@@ -43,7 +44,7 @@
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="./MemberLogoutAction.me">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -265,6 +266,44 @@
                     </article>
                     
                      </div>
+                     
+                     
+                     <!-- 회원 수정 모달 -->
+                     <div id="update-modal" class="search_back">
+                     	<div class="search">
+                     		<form class="search_box" action="./UpdateMember.ad" method="post">
+                     		<table class="table_Mem">
+                     			<tr>
+                     				<th>id</th>
+                     				<th>pw</th>
+                     				<th>name</th>
+                     				<th>phone</th>
+                     				<th>nickname</th>
+                     				<th>email</th>
+                     				<th>point</th>
+                     				<th>ceonum</th>
+                     				<th>level</th>
+                     			</tr>
+                     			<tr>
+                     				<td><input type="text" name="m_id" style="width:110px" readonly></td>
+                     				<td><input type="text" name="pw" style="width:110px"></td>
+                     				<td><input type="text" name="m_name" style="width:110px"></td>
+                     				<td><input type="text" name="phone" style="width:125px"></td>
+                     				<td><input type="text" name="nickname" style="width:120px"></td>
+                     				<td><input type="text" name="email" style="width:200px"></td>
+                     				<td><input type="text" name="point" style="width:50px"></td>
+                     				<td><input type="text" name="ceo_num" style="width:120px"></td>
+                     				<td><input type="text" name="alcohol_level" style="width:60px"></td>
+                     			</tr>
+                     		</table>
+                     		<br>
+                     			<input type="submit" value="수정">
+                     		</form>
+                     	</div>
+                     </div>
+                     <!-- 회원 수정 모달 -->
+                     
+                     
                 </main>
                 
                 
@@ -294,7 +333,7 @@
                 
                 const navItems = document.querySelectorAll('#sub-nav li');
                 const articles = document.querySelectorAll('.main_content article');
-
+				const updatebg = document.querySelector('#update-modal');
                 
                 
                 
@@ -320,19 +359,22 @@
                 
                 function loadMemberTable(){
                 	
+                	if (document.getElementById("member-table")) {
+                    	return;
+                    }
+                	
                 	$.ajax({
                 		type: "POST",
                 		url: "LoadMemberTable.ad",
                 		dataType: "json",
                 		success: function(data) {
-                			console.log('ajax 부르기 성공 ');
                 			
-                			var tableHtml = '<table id="member-table"><thead><tr><th>ID</th><th>PW</th><th>Name</th><th>Phone</th><th>Nickname</th><th>Email</th><th>Point</th><th>Ceo Num</th><th>Alcohol Level</th><th>Manage</th></tr></thead><tbody>';
+                			var tableHtml = '<table id="member-table" class="table_Mem"><thead><tr><th>ID</th><th>PW</th><th>Name</th><th>Phone</th><th>Nickname</th><th>Email</th><th>Point</th><th>Ceo Num</th><th>Alcohol Level</th><th>Manage</th></tr></thead><tbody>';
 
                 		    for (var i = 0; i < data.length; i++) {
                 		        var member = data[i];
-                		        tableHtml += '<tr><td>' + member.m_id + '</td><td>' + member.pw + '</td><td>' + member.m_name + '</td><td>' + member.phone + '</td><td>' + member.nickname + '</td><td>' + member.email + '</td><td>' + member.point + '</td><td>' + member.ceo_num + '</td><td>' + member.alcohol_level 
-                		        + '</td><td><button class="btn_mem" onclick="modMem(\'' + member.m_id + '\');">수정</button><button class="btn_mem" onclick="delMem(\'' + member.m_id + '\');">삭제</button></td></tr>';
+tableHtml += '<tr><td>' + member.m_id + '</td><td>' + member.pw + '</td><td>' + member.m_name + '</td><td>' + member.phone + '</td><td>' + member.nickname + '</td><td>' + member.email + '</td><td>' + member.point + '</td><td>' + member.ceo_num + '</td><td>' + member.alcohol_level 
++ '</td><td><button class="btn_mem" onclick="modMem(\'' + member.m_id + '\',\'' + member.pw + '\',\'' + member.m_name + '\',\'' + member.phone + '\',\'' + member.nickname + '\',\'' + member.email + '\',\'' + member.point + '\',\'' + member.ceo_num + '\',\'' + member.alcohol_level + '\');">수정</button><button class="btn_mem" onclick="delMem(\'' + member.m_id + '\');">삭제</button></td></tr>';
                 		    }
                 		    
                 		    tableHtml += '</tbody></table>';
@@ -344,6 +386,49 @@
                 	});
                 	
                 }
+                
+                
+                
+                document.querySelector('.search_box').addEventListener('submit', function(e) {
+                    
+                    e.preventDefault();
+                    
+                    let formData = new FormData(this);
+                    	              
+                    $.ajax({
+                    	type: "POST",
+                    	url: "./UpdateMember.ad",
+                    	data: {
+                    		m_id:formData.get("m_id"),
+                    		pw:formData.get("pw"),
+                    		m_name:formData.get("m_name"),
+                    		phone:formData.get("phone"),
+                    		nickname:formData.get("nickname"),
+                    		email:formData.get("email"),
+                    		point:formData.get("point"),
+                    		ceo_num:formData.get("ceo_num"),
+                    		alcohol_level:formData.get("alcohol_level")
+                    	},
+                    	success: function(data) {
+                    	    console.log('수정 성공');
+                    	    
+                    	    updatebg.style.display = 'none';
+                            
+                            let memberTable = document.getElementById('member-table');
+                            if (memberTable) {
+                                memberTable.parentNode.removeChild(memberTable);
+                            }
+                            
+                            loadMemberTable();
+                    	},
+                    	error: function() {
+                    	    console.log('Error updating member');
+                    	}
+                    });
+                    
+                    
+                });
+                
                 
                 
                 function openSubNav(id){
@@ -363,8 +448,19 @@
                 }
                 
                 
-                function modMem(id){
+                function modMem(m_id, pw, m_name, phone, nickname, email, point, ceo_num, alcohol_level){
                 	
+                	updatebg.style.display = 'flex';
+                	
+                	document.querySelector('input[name="m_id"]').value = m_id;
+                	document.querySelector('input[name="pw"]').value = pw;
+                	document.querySelector('input[name="m_name"]').value = m_name;
+                	document.querySelector('input[name="phone"]').value = phone;
+                	document.querySelector('input[name="nickname"]').value = nickname;
+                	document.querySelector('input[name="email"]').value = email;
+                	document.querySelector('input[name="point"]').value = point;
+                	document.querySelector('input[name="ceo_num"]').value = ceo_num;
+                	document.querySelector('input[name="alcohol_level"]').value = alcohol_level;
                 }
                 
                 function delMem(id){
@@ -374,12 +470,16 @@
                 		$.ajax({
                 			type: "POST",
                 			url: "DeleteMember.ad",
-                			dataType: "void",
+                			dataType: "text",
                 			data: {id : id},
-                			success: function(){
-                				let table = document.getElementById("member-table");
-                				table.parentNode.removeChild(table);
-                				loadMemberTable();
+                			success: function(data, stat, xhr){
+                				if(xhr.status === 200){
+	                				let table = document.getElementById("member-table");
+	                				table.parentNode.removeChild(table);
+	                				loadMemberTable();
+                				}else{
+                					alert("오류가 발생했습니다");
+                				}
                 			},
                 			error: function(req, stat, error){
                 				alert(stat + " - " + error + " [삭제 실패]");

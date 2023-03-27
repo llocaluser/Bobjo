@@ -117,20 +117,66 @@ public class AdminDAO {
 	// 모든 회원정보 조회
 	
 	// 특정 회원 삭제
-	public void deleteMember(String id) {
+	public int deleteMember(String id) {
+		int result = 0;
+		
 		try {
 			conn = ConnectionManager.getConnection();
 			sql = "DELETE FROM BOBJO_MEMBER"
 					+ " WHERE M_ID = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			ConnectionManager.closeConnection(rs, pstmt, conn);
 		}
+		
+		return result;
 	}
 	// 특정 회원 삭제
+	
+	// 특정 회원 수정
+	public int updateMember(MemberDTO dto) {
+		int result = 0;
+		
+		try {
+			conn = ConnectionManager.getConnection();
+			sql = "UPDATE BOBJO_MEMBER"
+					+ " SET PW = ?, M_NAME = ?, PHONE = ?, NICKNAME = ?, EMAIL = ?,"
+					+ " POINT = ?, ALCOHOL_LEVEL = ?"
+					+ " WHERE M_ID = ?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getPw());
+			pstmt.setString(2, dto.getM_name());
+			pstmt.setString(3, dto.getPhone());
+			pstmt.setString(4, dto.getNickname());
+			pstmt.setString(5, dto.getEmail());
+			pstmt.setInt(6, dto.getPoint());
+			pstmt.setString(7, dto.getAlcohol_level());
+			pstmt.setString(8, dto.getM_id());
+			
+			result = pstmt.executeUpdate();
+			
+			if(dto.getCeo_num() != null) {
+				sql = "UPDATE BOBJO_MEMBER SET CEO_NUM = ?"
+						+ " WHERE M_ID = ?";
+				pstmt.setString(1, dto.getCeo_num());
+				pstmt.setString(2, dto.getM_id());
+				
+				pstmt.executeUpdate();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(rs, pstmt, conn);
+		}
+		
+		return result;
+	}
+	// 특정 회원 수정
 }
