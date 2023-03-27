@@ -49,7 +49,7 @@ public class CeoMenuAddAction implements Action {
 		dao.insertMenu(dto);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("./CeoMenuList.nu");
+		forward.setPath("./CeoMenuList.nu?store_no="+store_no);
 		forward.setRedirect(true);
 
 		return forward;

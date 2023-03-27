@@ -126,6 +126,13 @@ input[type="button"] {
     input[type="button"]:hover {
         background-color: #3e8e41;
     }
+input[type="checkbox"] {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 70%;
+  position: relative;
+   bottom: 40px;
+}	
     
 </style>
 <link href="./css/styles.css" rel="stylesheet" />
@@ -175,7 +182,7 @@ input[type="button"] {
 								<th>주소</th>
 								<th>전화번호</th>
 								<th>카테고리</th>
-								<th>메뉴등록/수정/삭제</th>
+								<th style="width: 250px">메뉴등록/수정/삭제</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -250,6 +257,7 @@ input[type="button"] {
 							<c:forEach var="img" items="${cdto.store_img.split(',')}">
 								<img src="./images/${img}" width="60px" height="60px">
 								<input type="checkbox" value="${img}" name="deleteImg">
+								<input type="hidden" name="existingImg" value="${img}">
 							</c:forEach>
 							
 							<input type="button" value="행 추가" onclick="javascript:addInputBox();"> 
