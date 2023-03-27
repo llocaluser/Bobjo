@@ -19,7 +19,6 @@ public class ReservationAction implements Action {
 			forward.setRedirect(true);
 			return forward;
 		}
-		 
            
 		ReservationDAO dao = new ReservationDAO();
 		request.setAttribute("store_no", request.getParameter("store_no"));
@@ -28,6 +27,10 @@ public class ReservationAction implements Action {
 		request.setAttribute("menu_no", request.getParameter("menu_no"));
 		request.setAttribute("menu_amount", request.getParameter("menu_amount"));
 		request.setAttribute("price", request.getParameter("price"));
+		
+		// 포인트 정보 추가 0327 
+		request.setAttribute("point", dao.getPoint(m_id));
+		// 포인트 정보 추가 0327 
 		
 		forward.setPath("./reservation/rsrv.jsp");
 		forward.setRedirect(false);

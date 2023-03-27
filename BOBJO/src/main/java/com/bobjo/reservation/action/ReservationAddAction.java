@@ -61,7 +61,16 @@ public class ReservationAddAction implements Action {
 			if(dao.insertPayInfo(payDTO)) {
 				rsrvDTO.setStatus("예약완료");
 				rsrvDTO.setPay_no(payDTO.getPay_no());
-				new ReservationDAO().insertReservation(rsrvDTO);
+				ReservationDAO rsrvDAO = new ReservationDAO();
+				rsrvDAO.insertReservation(rsrvDTO);
+				//포인트 사용시 포인트 차감
+				if(request.getParameter("point") != null) {
+					int point = Integer.parseInt(request.getParameter("point"));
+					if(point > 0) {
+						rsrvDAO.spentPoint(point, m_id);
+					}
+				}
+				//포인트 사용시 포인트 차감
 				redirectWithJS(request, response, "결제가 완료되었습니다.", rsrvDTO.getRsrv_no(), store_no);
 			}
 			// 결제 실패시 로직

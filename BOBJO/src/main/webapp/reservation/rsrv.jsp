@@ -1261,11 +1261,35 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
             <input type="hidden" name="pay_type">
             <input type="hidden" name="uid">
             <input type="hidden" name="price" value="${price }">
+            <c:if test="${point > price}">
+            <c:set var="point" value="${price }"/>
+          	</c:if>
+            <input type="hidden" name="priceUsingPrice" value="${price-point }">
             <fmt:formatNumber var="fmt_price" value="${price }" type="number"/>
-            ${fmt_price } 원
+            <fmt:formatNumber var="fmt_price_usingPoint" value="${price-point }" type="number"/>
+            <fmt:formatNumber var="fmt_point" value="${point }" type="number"/>
+            <p id="fmtPrice">${fmt_price } 원 </p>
+            <p id="fmtPriceUsingPoint" style="display: none">${fmt_price_usingPoint } 원 </p>
+            <c:if test="${point > 0}">
+            <input type="checkbox" id="usingPoint" value="${point }" onclick="usePoint()"> ${fmt_point } 포인트 모두 사용하기<br>
+          	</c:if>
+            <hr>
+             * 환불 규정 <br>
+             ${refund_policy }
 <!--             <input type="hidden" id="input_121" class="form-hidden form-widget  " name="q121_input121" value=""><input type="hidden" id="widget_settings_121" class="form-hidden form-widget-settings" value="%5B%7B%22name%22%3A%22items%22%2C%22value%22%3A%22%EC%98%B5%EC%85%98%201%5C%5Cn%EC%98%B5%EC%85%98%202%5C%5Cn%EC%98%B5%EC%85%98%203%22%7D%2C%7B%22name%22%3A%22hideunchecked%22%2C%22value%22%3A%22No%22%7D%2C%7B%22name%22%3A%22other%22%2C%22value%22%3A%22No%22%7D%2C%7B%22name%22%3A%22othertext%22%2C%22value%22%3A%22%EA%B8%B0%ED%83%80%22%7D%5D" data-version="2"> -->
             </div>
             <script type="text/javascript">
+            function usePoint() {
+            	if(document.getElementById("usingPoint").checked) {
+            		document.getElementById("fmtPrice").style = 'color:red; text-decoration:line-through';
+            		document.getElementById("fmtPriceUsingPoint").style = 'display: block';
+            	}else {
+            		document.getElementById("fmtPrice").style = 'color:black';
+            		document.getElementById("fmtPriceUsingPoint").style = 'display: none';
+            	}
+            }
+            
+            
               setTimeout(function()
               {
                 var _cFieldFrame = document.getElementById("customFieldFrame_121");
@@ -1301,11 +1325,17 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
         <script type="text/javascript">
 	        var IMP = window.IMP; 
 	        IMP.init("imp81323135"); 
-	
+			
 	        function requestPay() {
 	        	document.getElementsByName("pay_type")[0].value = "신용카드";
 	        	let buyer_name = document.getElementsByName("rsrv_name")[0].value;
 	       		let buyer_tel = document.getElementsByName("rsrv_phone")[0].value;
+	       		let price;
+	       		if(document.getElementById("usingPoint").checked) {
+	       			price = Number(document.getElementsByName("priceUsingPrice")[0].value);
+	       		}else {
+	       			price = Number(document.getElementsByName("price")[0].value);
+	       		}
 	       		let uid = Math.random().toString().substr(2);
 	        	document.getElementsByName("uid")[0].value = uid;
 	            IMP.request_pay({
@@ -1313,7 +1343,7 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
 	                pay_method : 'card',
 	                merchant_uid: uid,
 	                name : '${store_name}',
-	                amount : ${price},
+	                amount : price,
 	                buyer_email : '',
 	                buyer_name : buyer_name,
 	                buyer_tel : buyer_tel,
