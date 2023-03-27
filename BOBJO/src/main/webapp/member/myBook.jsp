@@ -14,6 +14,33 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        
+  <style type="text/css">
+   .btn-delete{
+    box-sizing: border-box;
+    /* margin: 20px; */
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); */
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    background-color: #ce6d39;
+    color: #ffeee4;
+   
+   }
+  
+  
+  
+  </style>      
+        
+        
+        
+        
     </head>
     <body>
    
@@ -52,6 +79,8 @@
                                             <th>메뉴이름</th>
                                             <th>수량</th>
                                             <th>예약 일시</th>
+                                            <th>예약 취소</th>
+                                            
                                         </tr>
                                     </thead>
                                     
@@ -66,12 +95,22 @@
                                             <td>${dto[2] }</td>
                                             <td>${dto[3] }</td>
                                             <td>${dto[0].rsrv_date }</td>
-                                             
+                                            <td>
+                                              <button class="btn-delete"  onclick="cancelMember(${dto[0].rsrv_no})">예약 취소</button>
+                                            </td>
                                         </tr>
-                    </c:forEach>   
+                      </c:forEach>   
                                     </tbody>
-                                  
                                 </table>
+                                
+          <script type="text/javascript">
+                     function cancelMember(rsrv_no){
+                    	 if(confirm('예약 취소하시겠습니까?')){
+                    		location.href="./MemberCancel.me?rsrv_no="+rsrv_no;
+                    	 }
+                     }
+                 </script>  
+                                                                                 
                             </div>
                         </div>
                     </div>

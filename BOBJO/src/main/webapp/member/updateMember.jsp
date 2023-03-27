@@ -40,7 +40,7 @@
                                 </div>
                                   
                                 <div class="form-group">
-                                    <input type="password" class="form-control form-control-user" name="pw" placeholder="현재 비밀번호">
+                                    <input type="password" class="form-control form-control-user" name="pw" placeholder="현재 비밀번호" required="required">
                                 </div>
                                 
                                 <div class="form-group">
@@ -77,18 +77,7 @@
 
     </div>
     
-     <script type="text/javascript">
-		function sendSubmit(){
-			if(document.fr.pw.value == ""){
-				alert("비밀번호를 입력하세요 !");
-				document.fr.pw.focus();
-				return false;				
-			}
-			
-			/////
-			alert(" 유효성 체크 완료! 페이지 이동(정보전송) ");			
-		}		
-	</script>
+ 
     
     
     

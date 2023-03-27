@@ -163,6 +163,7 @@ public class ReservationDAO {
 		return cRsvList;
 	}
 
+
 	// 예약시 포인트 가져오는 메서드
 	public int getPoint(String m_id) {
 		int point = 0;
@@ -204,5 +205,6 @@ public class ReservationDAO {
 		}
 	}
 	// 포인트 사용시 포인트 차감하는 메서드
+
 
 }

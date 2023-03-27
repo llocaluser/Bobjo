@@ -18,28 +18,32 @@ public class MemberDeleteProAction implements Action {
 		String[] classPath = this.getClass().getName().split("\\.");
 		System.out.println(" M :  "+classPath[classPath.length-1]+"_execute() 호출! ");
 		
-        HttpSession session = request.getSession();
+		// 세션제어
+		 HttpSession session = request.getSession();
+		 String m_id = (String) session.getAttribute("m_id");
+		 session.invalidate();
+						
+		 ActionForward forward = new ActionForward();
+		 if(m_id == null) {
+		 forward.setPath("./MemberLogin.me");
+		 forward.setRedirect(true);
+		 return forward;
+	}
 		
 		MemberDTO dto = new MemberDTO();
 		dto.setM_id(request.getParameter("m_id"));
 		dto.setPw(request.getParameter("pw"));
 		
-		ActionForward forward = new ActionForward();
-		
-		if(dto.getM_id() == null) {
-		  forward.setPath("./MemberLogin.me");
-		  forward.setRedirect(true);
-			
-		   return forward;
-		}
-		
 		MemberDAO dao = new MemberDAO();
 		int rs = dao.deleteMember(dto);
 		
+		// 페이지 이동(JS)
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
 		if(rs == 0) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-
+		    out = response.getWriter();
+              
 			out.write("<script>");
 			out.write("  alert('비밀번호 오류!'); ");
 			out.write("  history.back(); ");
@@ -48,27 +52,35 @@ public class MemberDeleteProAction implements Action {
 
 			return null;
 		}
-		if (rs == 1) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-
-			out.write("<script>");
-			out.write("  alert('회원탈퇴 완료!'); ");
-			out.write("  history.back(); ");
-			out.write("</script>");
-			out.close();
-			return null;
-		}
+//		if (rs == 1) {
+//			response.setContentType("text/html; charset=UTF-8");
+//			PrintWriter out = response.getWriter();
+//
+//			out.write("<script>");
+//			out.write("  alert('회원탈퇴 완료!'); ");
+//			out.write("  location.href='./Main.me'; ");
+//			out.write("</script>");
+//			out.close();
+//			return null;
+//	     }
 		
+		out.println("<script>");
+		out.println(" alert(' 회원탈퇴 완료! '); ");
+		out.println(" location.href='./Main.me'; ");
+		out.println("</script>");
+		out.close();
 		
-		request.setAttribute("dto", dto);
-		forward.setPath("./main/main.jsp");
-		forward.setRedirect(false);
-		
-		session.invalidate();
-		
-		
-		return forward;
+		return null;
 	}
-			
+	   
+		
+		
+		
+		
+		/*
+		 * request.setAttribute("dto", dto); 
+		 * forward.setPath("./main/main.jsp");
+		 * forward.setRedirect(false);
+		 */
+	
 }

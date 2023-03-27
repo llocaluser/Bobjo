@@ -371,7 +371,7 @@ public class MemberDAO {
 			con = ConnectionManager.getConnection();
 			
 			// 3. sql 연결 & pstmt
-			sql ="select r.rsrv_name,r. rsrv_phone,r.status,r.rsrv_msg,s.store_name, r.menu_no, r.menu_amount,r.rsrv_date "
+			sql ="select r.rsrv_no, r.rsrv_name,r. rsrv_phone,r.status,r.rsrv_msg,s.store_name, r.menu_no, r.menu_amount,r.rsrv_date "
 					+ "from bobjo_reservation r join bobjo_store s on (r.store_no = s.store_no) "
 					+ "where r.m_id =?";
 			pstmt = con.prepareStatement(sql);
@@ -386,6 +386,7 @@ public class MemberDAO {
 				 List subList = new ArrayList();
 				 ReservationDTO dto = new ReservationDTO();
 				 StoreDTO sdto = new StoreDTO();
+				 dto.setRsrv_no(rs.getInt("rsrv_no"));
 				 dto.setRsrv_name(rs.getString("rsrv_name"));
 				 dto.setRsrv_phone(rs.getString("rsrv_phone"));
 				 dto.setStatus(rs.getString("status"));
@@ -466,9 +467,30 @@ public class MemberDAO {
 		   return cnt;
 	   }
 	   // 예약한 갯수 정보 확인 - countMember
-	
+	   
+	   // 예약 취소 - cancelMember
+	      public void cancelMember(int rsrv_no) {
+	    	  
+	    	  try {
+	    		  // 1.2. 디비연결
+				con = ConnectionManager.getConnection();
+				
+				// 3. sql 작성 & pstmt 객체
+				sql ="delete from bobjo_reservation where rsrv_no=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, rsrv_no);
+				
+				// 4. sql 실행
+			    pstmt.executeUpdate();
+				
+				System.out.println("DAO : 예약 취소 완료!");
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				ConnectionManager.closeConnection(rs, pstmt, con);
+			}  
+	      }  
+	       // 예약 취소 - cancelMember	
 }
-
-
-
 
