@@ -24,6 +24,8 @@ public class ReviewRegAction implements Action {
 			forward.setRedirect(true);
 			return forward;
 		}
+		
+		
 		ReviewDAO dao = new ReviewDAO();
 		ReviewDTO dto = new ReviewDTO();
 		
@@ -41,15 +43,15 @@ public class ReviewRegAction implements Action {
 		
 		
 		dto.setM_id(id);
-		dto.setStore_no(Integer.parseInt(multi.getParameter("store_no")));
+		int store_no = Integer.parseInt(multi.getParameter("store_no"));
+		dto.setStore_no(store_no);
 		dto.setContent(multi.getParameter("content"));
 		dto.setScore(Float.parseFloat(multi.getParameter("score")));
 		dto.setReview_img(multi.getFilesystemName("review_img"));
 		
 		dao.registerReview(dto);
 		
-		
-		forward.setPath("./ReviewList.rv");
+		forward.setPath("./ReviewList.rv?store_no="+store_no);
 		forward.setRedirect(true);
 		return forward;
 	}

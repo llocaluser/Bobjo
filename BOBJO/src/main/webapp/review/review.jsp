@@ -194,7 +194,7 @@
             <br>
             <section class="reg">
             	<button class="btn_reg font_norm">
-            		<a href="./ReviewRegform.rv?store_no=${ReviewList[0].store_no }">리뷰 등록</a>
+            		<a href="./ReviewRegform.rv?store_no=${dto.store_no }">리뷰 등록</a>
             	</button>
             </section>
             <br><br>
@@ -206,7 +206,7 @@
                     <!-- Prev 버튼 -->
                     <div class="page_div_l">
                     <c:if test="${startPage > 1 }">
-                    <a href="./ReviewList.rv?pageNum=1" class="btn font_arr">
+                    <a href="./ReviewList.rv?pageNum=1&store_no=${dto.store_no}" class="btn font_arr">
                         1
                     </a>
                     </c:if>
@@ -220,7 +220,7 @@
                     	...
                     	</span>
                     </c:if>
-                    <a href="./ReviewList.rv?pageNum=${i }">
+                    <a href="./ReviewList.rv?pageNum=${i }&store_no=${dto.store_no}">
                     	<span class="btn font_arr">
                     		${i }
                     	</span>
@@ -236,7 +236,7 @@
                     </ul>
                     <div class="page_div_l">
                     <c:if test="${endPage < pageSize }">
-                    <a href="./ReviewList.rv?pageNum=${pageSize }" class="btn font_arr">
+                    <a href="./ReviewList.rv?pageNum=${pageSize }&store_no=${dto.store_no}" class="btn font_arr">
                         <div>${pageSize }</div>
                     </a>
                     </c:if>

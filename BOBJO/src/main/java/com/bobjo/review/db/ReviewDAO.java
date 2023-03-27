@@ -117,8 +117,8 @@ public class ReviewDAO {
 	// 점수
 
 	// 리뷰 등록
-	public void registerReview(ReviewDTO dto) {
-		int result;
+	public int registerReview(ReviewDTO dto) {
+		int result = 0;
 		try {
 			conn = ConnectionManager.getConnection();
 			sql = "INSERT INTO BOBJO_REVIEW VALUES (DEFAULT, ?, ?, ?, NOW(), ?, ?)";
@@ -127,11 +127,22 @@ public class ReviewDAO {
 			pstmt.setInt(2, dto.getStore_no());
 			pstmt.setString(3, dto.getContent());
 			pstmt.setFloat(4, dto.getScore());
-			pstmt.setString(5, dto.getReview_img());
+			pstmt.setString(5, dto.getReview_img() == null? "no_img.PNG" : dto.getReview_img() );
 			
-			result = pstmt.executeUpdate();
+			result += pstmt.executeUpdate();
 			
-			if(result == 1) System.out.println("등록 성공!");
+			if(result == 1) {
+				System.out.println("등록 성공!");
+				// 리뷰 작성시 포인트 지급
+				sql = "update bobjo_member "
+					+ "set point=point+100 "
+					+ "where m_id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, dto.getM_id());
+				
+				result += pstmt.executeUpdate();
+				// 리뷰 작성시 포인트 지급
+			}
 			else System.out.println("등록 실패!");
 			
 		} catch (Exception e) {
@@ -139,6 +150,8 @@ public class ReviewDAO {
 		} finally {
 			ConnectionManager.closeConnection(rs, pstmt, conn);
 		}
+		
+		return result;
 	}
 	// 리뷰 등록
 
@@ -189,4 +202,47 @@ public class ReviewDAO {
 		
 		return name;
 	}
+	
+	//리뷰 작성권한 확인
+	public boolean canRegReview(String id, int store_no) {
+		
+		try {
+			conn = ConnectionManager.getConnection();
+			// 식당에 방문한 횟수
+			sql = "SELECT count(*) "
+				+ "FROM bobjo_reservation "
+				+ "where rsrv_date < CURRENT_TIMESTAMP() "
+				+ "and status = '예약완료' "
+				+ "and m_id = ? "
+				+ "and store_no = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, store_no);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int visitedCnt = rs.getInt(1);
+			
+			// 방문한 식당에 리뷰를 등록한 횟수
+			sql = "SELECT count(*) "
+				+ "FROM bobjo_review "
+				+ "where m_id = ? "
+				+ "and store_no = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, store_no);
+			// 4. sql 실행
+			rs = pstmt.executeQuery();
+			rs.next();
+			int regCnt = rs.getInt(1);
+			
+			return visitedCnt > regCnt;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(rs, pstmt, conn);
+		}
+		
+		return false;
+	}
+	//리뷰 작성권한 확인
 }

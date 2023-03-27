@@ -57,14 +57,16 @@
 .footer_new .footer-layer2 h1 {
     float: left;
     width: 150px;
-    background-image: none
+    background-image: url("./img/BOBJO!Footer.png");
+    height: 50px;
+    margin-top: 10px;
 }
 
 .footer_new .footer-layer2 h1 a {
     background-position: -19px -34px;
     width: 117px;
     height: 34px;
-    margin-left: 10px
+    margin-left: 10px;
 }
 
 .footer_new .footer-layer2 .licensee,.footer_new .footer-layer2 .service-check {
@@ -102,7 +104,8 @@
 .footer_new .safe-service {
     float: left;
     width: 270px;
-    font-size: 11px
+    font-size: 11px;
+    margin-top: 10px;
 }
 
 .footer_new .footer-layer3 {
@@ -309,6 +312,7 @@
               <h1><a href="./Main.me" title="BOBJO">BOBJO</a></h1>    <!-- 쿠팡에서 그림변경하기  -->
               <div class="footer-content">
                   <address>
+                       <br>
                       상호명 및 호스팅 서비스 제공 : BOBJO(주)<br>
                       부산광역시 부산진구 동천로 109 <br>
                   </address>
@@ -320,11 +324,8 @@
                       </a>
                   </div>
                   <p class="safe-service">
-                      <strong>우리은행 채무지급보증 안내</strong><br>
-              <span>
-                  당사는 고객님이 현금 결제한 금액에 대해<br>우리은행과 채무지급보증 계약을 체결하여<br>안전거래를 보장하고 있습니다.<br>
-              </span>
-                      <a href="#" id="serviceCheck" class="service-check" title="서비스 가입사실 확인">서비스 가입사실 확인 &gt;</a>
+                      <strong> 서울 음식점 예약사이트 BobJo! </strong><br>
+                      <a href="./main.me" id="serviceCheck" class="service-check" title="음식점 예약하러가기">음식점 예약하러가기 &gt;</a>
                   </p>
               </div>
           </div>

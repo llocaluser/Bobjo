@@ -63,10 +63,19 @@
         margin-left: 30px;
     }
 
+<<<<<<< HEAD
     .links{
         text-align: center;
         margin-bottom: 10px;
     }
+=======
+.login_logo{
+    margin :30px 0 30px 0;
+    color:#262626;
+    font-size: 40px;
+    font-weight: 100px;
+}
+>>>>>>> branch 'master' of https://github.com/seonn123/Bobjo.git
 
     a{ 
     	color: #ff7331; text-decoration: none; 

@@ -33,7 +33,11 @@ public class ReservationDAO {
 			pstmt.setInt(5, dto.getStore_no());
 			pstmt.setTimestamp(6, dto.getRsrv_date());
 			pstmt.setInt(7, dto.getPeople_num());
-			pstmt.setInt(8, dto.getPay_no());
+			if(dto.getPay_no() == 0) {
+				pstmt.setObject(8, null);
+			}else {
+				pstmt.setInt(8, dto.getPay_no());
+			}
 			pstmt.setString(9, dto.getStatus());
 			pstmt.setString(10, dto.getRsrv_msg());
 			pstmt.setString(11, dto.getMenu_no());
@@ -159,4 +163,49 @@ public class ReservationDAO {
 		return cRsvList;
 	}
 
+<<<<<<< HEAD
+=======
+	// 예약시 포인트 가져오는 메서드
+	public int getPoint(String m_id) {
+		int point = 0;
+		
+		try {
+			con = ConnectionManager.getConnection();
+			sql = "select point from bobjo_member where m_id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(rs, pstmt, con);
+		}
+		
+		return point;
+	}
+	// 예약시 포인트 가져오는 메서드
+
+	// 포인트 사용시 포인트 차감하는 메서드
+	public void spentPoint(int point, String m_id) {
+		try {
+			
+			con = ConnectionManager.getConnection();
+			sql = "update bobjo_member set point = point - ? where m_id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, point);
+			pstmt.setString(2, m_id);
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.closeConnection(rs, pstmt, con);
+		}
+	}
+	// 포인트 사용시 포인트 차감하는 메서드
+
+>>>>>>> branch 'master' of https://github.com/seonn123/Bobjo.git
 }
