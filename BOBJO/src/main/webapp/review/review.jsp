@@ -194,7 +194,7 @@
             <br>
             <section class="reg">
             	<button class="btn_reg font_norm">
-            		<a href="./ReviewRegform.rv?store_no=${ReviewList[0].store_no }">리뷰 등록</a>
+            		<a href="./ReviewRegform.rv?store_no=${dto.store_no }">리뷰 등록</a>
             	</button>
             </section>
             <br><br>

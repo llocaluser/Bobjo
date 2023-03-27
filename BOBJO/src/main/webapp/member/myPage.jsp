@@ -48,7 +48,7 @@
                         <h1 class="mt-4">안녕하세요 "${m_id }"님</h1>
                         <hr>
                         
-                           
+                           <div style="display: flex; justify-content:space-evenly;">
                         <div class="card mb-4-1">
                             <div class="card-body">
                                <img src="./img/person.png">  <h4 class="mt-4">내정보</h4> <br>
@@ -66,7 +66,7 @@
                                                                                      
                             </div>
                         </div>
-                        
+                        </div>
                         
                           <div style="height: 40vh"></div> 
                        <!--  <div class="card mb-4">

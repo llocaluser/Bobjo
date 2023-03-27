@@ -33,7 +33,11 @@ public class ReservationDAO {
 			pstmt.setInt(5, dto.getStore_no());
 			pstmt.setTimestamp(6, dto.getRsrv_date());
 			pstmt.setInt(7, dto.getPeople_num());
-			pstmt.setInt(8, dto.getPay_no());
+			if(dto.getPay_no() == 0) {
+				pstmt.setObject(8, null);
+			}else {
+				pstmt.setInt(8, dto.getPay_no());
+			}
 			pstmt.setString(9, dto.getStatus());
 			pstmt.setString(10, dto.getRsrv_msg());
 			pstmt.setString(11, dto.getMenu_no());

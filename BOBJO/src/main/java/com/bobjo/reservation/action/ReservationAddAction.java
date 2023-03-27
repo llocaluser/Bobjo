@@ -41,7 +41,8 @@ public class ReservationAddAction implements Action {
 		rsrvDTO.setMenu_amount(request.getParameter("menu_amount"));
 
 		// 예약
-		if(request.getParameter("price") == null) {
+		String priceStr = request.getParameter("price");
+		if(priceStr == null || priceStr.equals("") || Integer.parseInt(priceStr) < 1) {
 			rsrvDTO.setStatus("예약완료");
 			new ReservationDAO().insertReservation(rsrvDTO);
 			redirectWithJS(request, response, "예약이 완료되었습니다.", rsrvDTO.getRsrv_no(), store_no);
@@ -80,7 +81,6 @@ public class ReservationAddAction implements Action {
 		PrintWriter out = response.getWriter();
 		out.write("<script>");
 		out.write("  if(confirm('"+msg+" 예약 정보를 확인하시겠습니까?')) { ");
-		// RsrvInfo 커맨드 변경해도 됨
 		out.write("  location.href = './MemberBook.me?rsrv_no="+rsrv_no+"'; ");
 		out.write("  } else { ");
 		out.write("  location.href = './StoreInfo.st?store_no="+store_no+"'; ");

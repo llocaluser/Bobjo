@@ -33,6 +33,7 @@ public class ReviewRegformAction implements Action {
 			PrintWriter out = response.getWriter();
 			out.write("<script>");
 			out.write(" alert('방문 1회당 1번만 리뷰를 등록할 수 있습니다 '); ");
+			out.write(" history.back(); ");
 			out.write("</script>");
 			out.close();
 			return null;

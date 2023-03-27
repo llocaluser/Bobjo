@@ -86,11 +86,9 @@ public class ReviewListAction implements Action {
 		
 		
         StoreDAO sdao = new StoreDAO();
-		
 		StoreDTO dto = sdao.getStore(store_no);
 		dto.setStore_no(store_no);
 		request.setAttribute("dto",dto);
-		
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("./store/storeReview.jsp");
