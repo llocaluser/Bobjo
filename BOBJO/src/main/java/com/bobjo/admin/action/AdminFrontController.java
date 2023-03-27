@@ -53,6 +53,17 @@ public class AdminFrontController extends BasicFrontController {
 				e.printStackTrace();
 			}
 		}
+		else if(command.equals("/UpdateMember.ad")) {
+			System.out.println(" C : UpdateMember.ad 호출 ");
+			
+			action = new UpdateMemberAction();
+			try {
+				System.out.println(request.getParameter("m_id")+"@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
