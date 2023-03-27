@@ -491,10 +491,6 @@ public class MemberDAO {
 				ConnectionManager.closeConnection(rs, pstmt, con);
 			}  
 	      }  
-	       // 예약 취소 - cancelMember
-	
+	       // 예약 취소 - cancelMember	
 }
-
-
-
 

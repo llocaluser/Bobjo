@@ -43,7 +43,7 @@
  <style type="text/css">
  .box img {
  	width: 100%;
- 	height: 100%;
+ 	height: 400px;
  }
  .container-fluid {
  	width: 80%;

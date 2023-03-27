@@ -334,13 +334,9 @@ button.btn1{
 
 							<tr>
 								<th>영업시간</th>
-								<td>${dto.open }</td>
+								<td>${dto.open }~${dto.close }</td>
 							</tr>
 
-							<tr>
-								<th>휴무일</th>
-								<td>${dto.close }</td>
-							</tr>
 							<tr>
 								<th>환불규정</th>
 								<td>${dto.refund_policy }</td>

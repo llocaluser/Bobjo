@@ -17,7 +17,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>로그인 폼</title>
+    <title>BOBJO</title>
     <style>
         @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
 	
@@ -86,13 +86,14 @@
 
     </style>
     
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>    
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>   
   <script>
         // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
         Kakao.init('d48f63d9da5135c15efac2ae7eb8b7e4'); //★ 수정 할 것
         // SDK 초기화 여부를 판단합니다.
         console.log(Kakao.isInitialized());
-  </script>
+  </script> 
+  
   </head>
 
   <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
@@ -125,46 +126,34 @@
          <p id="check" class="check">${login_msg}</p><br/>
         <input id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" value="로 그 인">
         
-        
-  <!--   <a id="kakao-login-btn"></a>
-     <a href="http://developers.kakao.com/logout"></a>
-   <script type='text/javascript'>
-        //<![CDATA[
-        // 사용할 앱의 JavaScript 키를 설정해 주세요.
-        Kakao.init('d48f63d9da5135c15efac2ae7eb8b7e4');
-        // 카카오 로그인 버튼을 생성합니다.
-        Kakao.Auth.createLoginButton({
-            container: '#kakao-login-btn',
-            success: function (authObj) {
-                alert(JSON.stringify(authObj));
-            },
-            fail: function (err) {
-                alert(JSON.stringify(err));
-            }
-        });
-      //]]>
-    </script> -->
+          
+    </form>
     
+    
+<a id="kakao-login-btn" href="javascript:loginWithKakao()"><img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222" alt="카카오 로그인 버튼"/></a>
 
-<a id="custom-login-btn" href="javascript:loginWithKakao()"><img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222" alt="카카오 로그인 버튼"/></a>
-
-<script type="text/javascript">
-function loginWithKakao() {
-    Kakao.Auth.login({
-      success: function(authObj) {
-        alert(JSON.stringify(authObj))
-      },
-      fail: function(err) {
-        alert(JSON.stringify(err))
-      },
-    })
-  }
-</script>
-    
-    
-    
- </form>
-    
+  <script type="text/javascript">
+     function loginWithKakao() {
+	   window.Kakao.Auth.login({
+        scope: 'profile_nickname, account_email', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+        success: function(response) {
+            console.log(response) // 로그인 성공하면 받아오는 데이터
+            window.Kakao.API.request({ // 사용자 정보 가져오기 
+                url: '/v2/user/me',
+                success: (res) => {
+                    const kakao_account = res.kakao_account;
+                    console.log(kakao_account)
+                }
+            });
+         //  window.location.href='./Main.me' //리다이렉트 되는 코드
+        },
+        fail: function(error) {
+            console.log(error);
+        }
+      });
+    }
+    </script>
+         
 		</div>
         <div class="links">
             <a href="./MemberFindid.me">아이디 찾기</a> | <a href="./MemberFindpw.me">비밀번호 찾기</a> | <a href="./MemberJoin.me">회원가입</a>
