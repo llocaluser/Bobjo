@@ -70,34 +70,15 @@ public class ReservationDAO {
 		}
 	}
 
-	public String getRefundPolicy(int store_no) {
-		String refundPolicy = null;
-		try {
-			con = ConnectionManager.getConnection();
-			
-			sql = "select refund_policy from bobjo_store where store_no = ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, store_no);
-			
-			rs = pstmt.executeQuery();
-			if(rs.next()) refundPolicy = rs.getString(1);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			ConnectionManager.closeConnection(rs, pstmt, con);
-		}
-		return refundPolicy;
-	}
 	
-	// 결제 진행을 위한 추가정보 -  가게 이름, 최대예약인원
+	// 결제 진행을 위한 추가정보 -  가게 이름, 최대예약인원, 영업시간, 환불정책
 	public StoreDTO getStoreInfoForRsrv(int store_no) {
 		StoreDTO dto = new StoreDTO();
 		
 		try {
 			con = ConnectionManager.getConnection();
 			
-			sql = "select store_name,max_rsrv "
+			sql = "select store_name,max_rsrv,open,close,refund_policy "
 				+ "from bobjo_store "
 				+ "where store_no = ?";
 			pstmt = con.prepareStatement(sql);
@@ -107,6 +88,9 @@ public class ReservationDAO {
 			if(rs.next()) {
 				dto.setStore_name(rs.getString(1));
 				dto.setMax_rsrv(rs.getInt(2));
+				dto.setOpen(rs.getString(3));
+				dto.setClose(rs.getString(4));
+				dto.setRefund_policy(rs.getString(5));
 			}
 			
 		} catch (Exception e) {
@@ -145,6 +129,7 @@ public class ReservationDAO {
 				dto.setStore_no(rs.getInt("store_no"));
 				dto.setRsrv_date(rs.getTimestamp("rsrv_date"));
 				dto.setPeople_num(rs.getInt("people_num"));
+				//dto.setReg_date(rs.getTimestamp("reg_date"));
 				dto.setPay_no(rs.getInt("pay_no"));
 				dto.setStatus(rs.getString("status"));
 				dto.setRsrv_msg(rs.getString("rsrv_msg"));
