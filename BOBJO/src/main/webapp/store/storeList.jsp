@@ -185,7 +185,7 @@
 
   <!-- end nav section -->
 
-
+	<img id="gotoTop" src="./img/up-arrow.png">
 
 
 
@@ -214,9 +214,14 @@
 	const goback = document.querySelector('#back-arrow');
 	const changeText = document.getElementById('map-district');
 	const category = document.querySelector('#menu-category');
-	
+	const gotoTop = document.getElementById("gotoTop");
 	
 	var input_location = document.querySelector('input[name="srch_location"]');
+	
+	
+	$('#menu-category').on('change', function() {
+		$('input[name="srch_category"]').val($(this).val());
+	});
 	
 	
 	move.addEventListener('click', openMapSearch);
@@ -225,6 +230,12 @@
 	var prevDisVal = '';
 
 
+	
+	gotoTop.addEventListener("click", () => {
+		window.scrollTo(0,0);
+	});
+	
+	
 	window.addEventListener('message', function(event) {
 		prevDisVal = '';
 		
@@ -320,6 +331,14 @@
 				hasNext = false;
 				getList(); // 리스트 추가하는 함수
 			}
+			
+			// 부활한 버튼
+			if(pageYOffset >= 1200){
+				gotoTop.style.display = "block";
+			}else{
+				gotoTop.style.display = "none";
+			}
+			
 		}
 	}
 	infiniteScroll();
