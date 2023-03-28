@@ -1261,10 +1261,11 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"ê²°ì
             <input type="hidden" name="pay_type">
             <input type="hidden" name="uid">
             <input type="hidden" name="price" value="${price }">
-            <c:if test="${point > price}">
-            <c:set var="point" value="${price }"/>
+            <c:if test="${point > price - 1000}">
+            <c:set var="point" value="${price - 1000 }"/>
           	</c:if>
-            <input type="hidden" name="priceUsingPrice" value="${price-point }">
+            <input type="hidden" name="point" value="${point }">
+            <input type="hidden" name="priceUsingPoint" value="${price-point }">
             <fmt:formatNumber var="fmt_price" value="${price }" type="number"/>
             <fmt:formatNumber var="fmt_price_usingPoint" value="${price-point }" type="number"/>
             <fmt:formatNumber var="fmt_point" value="${point }" type="number"/>
@@ -1332,7 +1333,7 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"ê²°ì
 	       		let buyer_tel = document.getElementsByName("rsrv_phone")[0].value;
 	       		let price;
 	       		if(document.getElementById("usingPoint").checked) {
-	       			price = Number(document.getElementsByName("priceUsingPrice")[0].value);
+	       			price = Number(document.getElementsByName("priceUsingPoint")[0].value);
 	       		}else {
 	       			price = Number(document.getElementsByName("price")[0].value);
 	       		}
