@@ -368,7 +368,7 @@ button.btn1{
 						</colgroup>
 						<tbody>
 							<tr>
-								<th>테이블 수</th>
+								<th>총 좌석 수</th>
 								<td>${dto.total_tables }</td>
 							</tr>
 							<tr>
