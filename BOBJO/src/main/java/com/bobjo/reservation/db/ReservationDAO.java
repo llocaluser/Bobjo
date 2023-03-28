@@ -145,7 +145,6 @@ public class ReservationDAO {
 				dto.setStore_no(rs.getInt("store_no"));
 				dto.setRsrv_date(rs.getTimestamp("rsrv_date"));
 				dto.setPeople_num(rs.getInt("people_num"));
-				//dto.setReg_date(rs.getTimestamp("reg_date"));
 				dto.setPay_no(rs.getInt("pay_no"));
 				dto.setStatus(rs.getString("status"));
 				dto.setRsrv_msg(rs.getString("rsrv_msg"));
