@@ -1197,8 +1197,8 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"ê²°ì
         <div id="cid_18" class="form-input-wide jf-required" data-layout="half">
           <div data-wrapper-react="true"><div tabindex=""><div class="form-spinner" style="width: 310px;"><div class="form-spinner-input-td">
           <input type="number" id="input_18" 
-          name="people_num" data-type="input-spinner" class="form-spinner-input  form-textbox validate[required]" data-spinnermin="0" data-defaultvalue="0" 
-          value="0" data-component="spinner" aria-labelledby="label_18" required="" size="5" autocomplete="off"></div><div class="form-spinner-button-container"><div class="form-spinner-button form-spinner-up" style="cursor: default;"><img class="form-spinner-image form-spinner-up-image" src="//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg" alt="up arrow"></div><div class="form-spinner-button form-spinner-down" style="cursor: default;"><img class="form-spinner-image form-spinner-down-image" src="//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg" alt="down arrow"></div></div></div></div></div>
+          name="people_num" data-type="input-spinner" class="form-spinner-input  form-textbox validate[required]" data-spinnermin="1" data-defaultvalue="1" data-spinnermax="${dto.max_rsrv }" 
+          value="1" data-component="spinner" aria-labelledby="label_18" required="" size="5" autocomplete="off" min="1" max="${dto.max_rsrv }"></div><div class="form-spinner-button-container"><div class="form-spinner-button form-spinner-up" style="cursor: default;"><img class="form-spinner-image form-spinner-up-image" src="//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg" alt="up arrow"></div><div class="form-spinner-button form-spinner-down" style="cursor: default;"><img class="form-spinner-image form-spinner-down-image" src="//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg" alt="down arrow"></div></div></div></div></div>
         </div>
       </li>
       <li class="form-line" data-type="control_datetime" id="id_128"><label class="form-label form-label-top form-label-auto" id="label_128" for="lite_mode_128"> 
@@ -1343,7 +1343,7 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"ê²°ì
 	                pg : 'kcp.{imp81323135}',
 	                pay_method : 'card',
 	                merchant_uid: uid,
-	                name : '${store_name}',
+	                name : '${dto.store_name}',
 	                amount : price,
 	                buyer_email : '',
 	                buyer_name : buyer_name,
