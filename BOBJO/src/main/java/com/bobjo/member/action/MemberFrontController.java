@@ -206,7 +206,26 @@ public class MemberFrontController extends BasicFrontController {
 				e.printStackTrace();
 			}
 	    }
-
+	    else if(command.equals("/MemberReview.me")) {
+	    	System.out.println("/MemberReview.me 호출");
+	    	
+	    	action = new MemberReviewAction();
+	    	try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+	    }
+	    else if(command.equals("/MemberdelReview.me")) {
+	    	System.out.println("/MemberdelReview.me 호출");
+	    	
+	        action = new MemberdelReviewAction();
+	        try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }
 	
 	
 	

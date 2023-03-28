@@ -88,7 +88,7 @@
   		 <p class="text2"> ${findid2}</p>
         <input type="text" name="m_id" id="m_id" class="form-control" placeholder="아이디" required autofocus><BR>
         <input type="text" name="m_name" id="m_name" class="form-control" placeholder="이름" required ><BR>
-        <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대폰 번호 입력 (‘-’ 제외 11자리 입력)" required><br>
+        <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대폰 번호 입력 (‘-’ 제외 11자리 입력)" maxlength="11" required><br>
         	<p class="check" id="check">${check}</p><br/>
         <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">비 밀 번 호 찾 기</button>
       
@@ -101,28 +101,5 @@
 	</div>
    
   </body>
-<!-- <script type="text/javascript">
-		
-  		$("#m_name").focusout(function(){
-  			
-	     if($('#m_name').val() == ""){
-	   		$('#check').text('이름을 입력해주세요.');
-	   	  	$('#check').css('color', 'red');
-	   
-	     }else{
-	    	 $('#check').hide();
-	     }
-	     });
-	     
-  		$("#phone").focusout(function(){
-	     if($('#phone').val() == ""){
-	   		$('#check').text('핸드폰 번호를 입력해주세요');
-	   	  	$('#check').css('color', 'red');
-	     }else{
-	    	 $('#check').hide();
-	     }
-	     });
-  
-  </script> -->
 
 </html>
