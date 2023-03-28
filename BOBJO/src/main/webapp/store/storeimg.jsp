@@ -163,7 +163,7 @@ button.btn1 {
 
 .row-col4 img {
 	vertical-align: super;
-	border-style: double;
+	border-style: hidden;
 	width: 260px;
 	height: 200px;
 }
