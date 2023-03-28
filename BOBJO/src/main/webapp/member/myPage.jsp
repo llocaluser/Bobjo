@@ -59,17 +59,6 @@
                             </div>
                         </div>
                         
-<<<<<<< HEAD
-                         <div class="card mb-4-1">
-                            <div class="card-body">
-                               <img src="./img/date.png">  <h4 class="mt-4">현재 예약 건수</h4> <br>
-                                  <h5> ${count }건 </h5>      
-                                 <a href="./MemberBook.me"> <h5> 확인하기 </h5> </a>       
-                                                                                     
-                            </div>
-                        </div>
-                        </div>
-=======
                         <c:if test="${ceo_num == null }">
 	                         <div class="card mb-4-1">
 	                            <div class="card-body">
@@ -79,7 +68,7 @@
 	                            </div>
 	                        </div>
 						</c:if>                        
->>>>>>> branch 'master' of https://github.com/seonn123/Bobjo.git
+
                         
                           <div style="height: 40vh"></div> 
                        <!--  <div class="card mb-4">

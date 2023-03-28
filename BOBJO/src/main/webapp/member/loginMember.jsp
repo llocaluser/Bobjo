@@ -142,10 +142,13 @@
                 url: '/v2/user/me',
                 success: (res) => {
                     const kakao_account = res.kakao_account;
-                    console.log(kakao_account)
+                    console.log(kakao_account.token)
+                    <%
+//                     request.getSession().setAttribute("m_id", "");
+                    %>
                 }
             });
-         //  window.location.href='./Main.me' //리다이렉트 되는 코드
+//           window.location.href='./Main.me' //리다이렉트 되는 코드
         },
         fail: function(error) {
             console.log(error);
