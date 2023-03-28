@@ -388,7 +388,7 @@ function searchStore(){
                         <div id="rec-store" class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                      
                             <div id="store_mainimg" class="position-relative tm-thumbnail-container">
-                            <img src="img/res_img/${i.store_img }" 
+                            <img src="./images/${i.store_img }" 
                             onError="this.onerror=null; this.src='img/res_img/restaurant0.jpg'" class="img-fluid tm-catalog-item-img" id="rec_storeImg">    
                             <a href="./StoreInfo.st?store_no=${i.store_no }" class="position-absolute tm-img-overlay">
                                 <!-- <i class="fas fa-play tm-overlay-icon"></i> -->

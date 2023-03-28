@@ -157,10 +157,10 @@
 							<label for="tel">전화번호</label>
 							<input type="text" id="tel" name="tel" required><br>
 					
-							<label for="open">영업 시간</label>
+							<label for="open">open</label>
 							<input type="text" id="open" name="open" required><br>
 					
-							<label for="close">정기 휴일</label>
+							<label for="close">close</label>
 							<input type="text" id="close" name="close" required><br>
 					
 							<label for="total_tables">총 좌석 수</label>

@@ -132,8 +132,8 @@ img {
 								<th>메뉴 이름</th>
 								<th>가격</th>
 								<th>메뉴 정보</th>
-								<th>카테고리</th>
-								<th>수정/삭제</th>
+								<th style="width:150px;">카테고리</th>
+								<th style="width:200px;">수정/삭제</th>
 							</tr>
 						</thead>
 						<tbody>
