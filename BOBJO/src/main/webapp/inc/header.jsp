@@ -49,7 +49,12 @@
 				style="display: inline;">로그아웃</a>
 		</div>
 		<div class="login_box">
+			<c:if test="${sessionScope.m_id eq 'admin' }">
+			<a href="./AdminMyPage.ad" style="display: inline;">마이페이지</a>
+			</c:if>
+			<c:if test="${sessionScope.m_id ne 'admin' }">
 			<a href="./MemberMypage.me" style="display: inline;">마이페이지</a>
+			</c:if>
 		</div>
 		</div>
 		</c:if>

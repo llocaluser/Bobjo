@@ -205,7 +205,6 @@ input[type="checkbox"] {
 									<td>
 										<button class="btn-addmenu" onclick="location.href='./CeoMenuAdd.nu?store_no=${dto.store_no}'">메뉴등록</button>
 										<button class="btn-modify" onclick="location.href='./CeoStoreList.st?store_no=${dto.store_no}'">수정</button>
-										<%-- <button class="btn-delete"  onclick="location.href='./CeoStoreDelete.st?store_no=${dto.store_no}'">삭제</button> --%>
 										<button class="btn-delete"  onclick="deleteStore(${dto.store_no})">삭제</button>
 									</td>
 							</tr>

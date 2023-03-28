@@ -25,7 +25,6 @@ public class CeoMenuUpdateAction implements Action {
 		// 파일업로드 접근경로
 		ServletContext ctx = request.getServletContext();
 		String realPath = ctx.getRealPath("/images");
-		// System.out.println(realPath);
 
 		int maxSize = 10 * 1024 * 1024; // 10MB
 

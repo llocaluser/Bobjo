@@ -90,21 +90,24 @@ public class ReservationDAO {
 		return refundPolicy;
 	}
 	
-	// 결제 진행을 위한 추가정보 -  가게 이름
-	public String getStoreName(int store_no) {
-		String storeName = null;
+	// 결제 진행을 위한 추가정보 -  가게 이름, 최대예약인원
+	public StoreDTO getStoreInfoForRsrv(int store_no) {
+		StoreDTO dto = new StoreDTO();
 		
 		try {
 			con = ConnectionManager.getConnection();
 			
-			sql = "select store_name "
+			sql = "select store_name,max_rsrv "
 				+ "from bobjo_store "
 				+ "where store_no = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, store_no);
 			
 			rs = pstmt.executeQuery();
-			if(rs.next()) storeName = rs.getString(1);
+			if(rs.next()) {
+				dto.setStore_name(rs.getString(1));
+				dto.setMax_rsrv(rs.getInt(2));
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,9 +115,9 @@ public class ReservationDAO {
 			ConnectionManager.closeConnection(rs, pstmt, con);
 		}
 		
-		return storeName;
+		return dto;
 	}
-	// 결제 진행을 위한 추가정보 -  가게 이름
+	// 결제 진행을 위한 추가정보 -  가게 이름, 최대예약인원
 	
 	// 다빈 - 예약자 목록 조회
 	public List CeoRsvList(String id){
@@ -142,7 +145,6 @@ public class ReservationDAO {
 				dto.setStore_no(rs.getInt("store_no"));
 				dto.setRsrv_date(rs.getTimestamp("rsrv_date"));
 				dto.setPeople_num(rs.getInt("people_num"));
-				//dto.setReg_date(rs.getTimestamp("reg_date"));
 				dto.setPay_no(rs.getInt("pay_no"));
 				dto.setStatus(rs.getString("status"));
 				dto.setRsrv_msg(rs.getString("rsrv_msg"));

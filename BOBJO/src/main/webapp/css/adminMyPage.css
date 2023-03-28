@@ -39,6 +39,41 @@ li{
 	background-color: #555;
 }
 
+.search_back{
+	width:100%;
+	height:100%;
+	background-color:rgba(0,0,0,0.5);
+	position:fixed;
+	top:0;
+	left:0;
+	justify-content:center;
+	align-items:center;
+	display:none;
+	z-index:1000;
+	animation: openModal 0.5s ease forwards;
+}
+
+.search{
+	width: auto;
+	height:320px;
+	position: fixed;
+	background-color: white;
+	border-radius: 3px;
+	z-index:1001 !important;
+	text-align:center;
+	padding: 20px;
+	display: flex;
+}
+
+.search_box{
+	margin: auto;
+	padding: 20px;
+    width: 1300px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    position: relative;
+}
 
 .title{
 	height: 70px;
@@ -108,22 +143,57 @@ li{
 	display:none;
 }
 
-#member-table {
+.table_Mem {
 	border-collapse: collapse;
 }
 
-#member-table th {
+.table_Mem th {
 	background-color: #ddd;
 	border: 1px solid #aaa;
 	padding: 0.5em;
 	text-align: left;
 }
 
-#member-table td {
+.table_Mem td {
 	border: 1px solid #aaa;
 	padding: 0.5em;
 }
 
-#member-table tbody tr:nth-child(even) {
+.table_Mem tbody tr:nth-child(even) {
 	background-color: #eee;
+}
+
+#update-modal{
+	display:none;
+}
+
+@keyframes openModal{
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+select:focus {
+	outline: none;
+}
+
+@keyframes openMapSearch{
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes closeModal{
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
 }

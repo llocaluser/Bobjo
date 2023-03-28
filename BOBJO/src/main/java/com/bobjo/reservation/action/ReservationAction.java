@@ -22,7 +22,7 @@ public class ReservationAction implements Action {
            
 		ReservationDAO dao = new ReservationDAO();
 		request.setAttribute("store_no", request.getParameter("store_no"));
-		request.setAttribute("store_name", dao.getStoreName(Integer.parseInt(request.getParameter("store_no"))));
+		request.setAttribute("dto", dao.getStoreInfoForRsrv(Integer.parseInt(request.getParameter("store_no"))));
 		request.setAttribute("refund_policy", dao.getRefundPolicy(Integer.parseInt(request.getParameter("store_no"))));
 		request.setAttribute("menu_no", request.getParameter("menu_no"));
 		request.setAttribute("menu_amount", request.getParameter("menu_amount"));

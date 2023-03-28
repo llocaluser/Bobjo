@@ -17,9 +17,23 @@ public class DeleteMemberAction implements Action {
 		
 		String id = request.getParameter("id");
 		
-		dao.deleteMember(id);
+		int result = dao.deleteMember(id);
+		
+		if(result > 0) {
+			response.setStatus(HttpServletResponse.SC_OK);
+		} else {
+			throw new DeleteMemberException("삭제 실패");
+		}
 		
 		return null;
 	}
 
+}
+
+class DeleteMemberException extends Exception{
+
+	public DeleteMemberException(String string) {
+		super(string);
+	}
+	
 }
