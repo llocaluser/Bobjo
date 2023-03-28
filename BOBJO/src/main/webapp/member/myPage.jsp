@@ -15,13 +15,24 @@
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         
     <style type="text/css">
+     
      img{
             float: left;
             width: 200px;
             margin: 15px;
     }
     
+    .card_set1{
+    display: flex;
+    flex-flow: column nowrap;
+    height: auto;
+    width: 1100px;
+    margin-left: 5rem;
     
+    }
+    .card_set2{
+   
+    }
     
     </style>    
            
@@ -48,7 +59,7 @@
                         <h1 class="mt-4">안녕하세요 "${m_id }"님</h1>
                         <hr>
                         
-                           
+                           <div class="card_set1">
                         <div class="card mb-4-1">
                             <div class="card-body">
                                <img src="./img/person.png">  <h4 class="mt-4">내정보</h4> <br>
@@ -58,6 +69,7 @@
                             </div>
                         </div>
                         
+	                         <div class="card_set2">
                        <c:if test="${ceo_num == null }">
 	                         <div class="card mb-4-1-1">
 	                            <div class="card-body">
@@ -67,7 +79,6 @@
 	                            </div>
 	                        </div>
 						</c:if>   
-						
 						  <c:if test="${ceo_num == null }">
 	                         <div class="card mb-4-1-1">
 	                            <div class="card-body">
@@ -76,7 +87,8 @@
 	                            </div>
 	                        </div>
 						</c:if>                     
-
+	                        </div>
+ 							</div>
                         
                           <div style="height: 40vh"></div> 
                        <!--  <div class="card mb-4">

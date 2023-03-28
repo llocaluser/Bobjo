@@ -7394,7 +7394,7 @@ textarea.form-control-lg {
 
 .mb-4-1 {
   float: left;
-   margin: 1rem 0rem 5rem 5rem; 
+   margin: 1rem 0rem 5rem 0; 
   height: 80%;
   width: 1100px;
   text-align: center;
@@ -7403,7 +7403,7 @@ textarea.form-control-lg {
 
 .mb-4-1-1 {
   float: left;
-   margin: 1rem 10rem 5rem 5rem; 
+   margin: 1rem 5rem 5rem 10rem; 
 /*   height: 80%;
   width: 1100px; */
   text-align: center;
