@@ -141,7 +141,7 @@ public class MemberDAO {
 				con = ConnectionManager.getConnection();
 				
 				// 3. SQL 작성(select) & pstmt 객체
-				sql = "select m_id,m_name,phone,nickname,email,alcohol_level from bobjo_member where m_id=?";
+				sql = "select m_id,m_name,phone,nickname,email,alcohol_level,point from bobjo_member where m_id=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, m_id);
 				
@@ -157,7 +157,8 @@ public class MemberDAO {
 					dto.setPhone(rs.getString("phone"));
 					dto.setNickname(rs.getString("nickname"));
 					dto.setEmail(rs.getString("email"));
-					dto.setAlcohol_level(rs.getString("alcohol_level"));	
+					dto.setAlcohol_level(rs.getString("alcohol_level"));
+					dto.setPoint(rs.getInt("point"));
 				}
 
 				System.out.println(" DAO : 회원정보 조회 성공! ");
