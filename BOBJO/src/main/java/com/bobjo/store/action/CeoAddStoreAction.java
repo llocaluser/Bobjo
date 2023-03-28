@@ -27,7 +27,7 @@ public class CeoAddStoreAction implements Action {
 		ServletContext ctx = request.getServletContext();
 		String realPath = ctx.getRealPath("/images");
 
-		int maxSize = 10 * 1024 * 1024; // 10MB
+		int maxSize = (10 * 1024 * 1024)*3; // 30MB
 
 		MultipartRequest multi = new MultipartRequest(request, realPath, maxSize, "UTF-8",
 		        new DefaultFileRenamePolicy());

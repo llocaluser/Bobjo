@@ -1166,6 +1166,25 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
 <!-- 결제 API 관련 -->
 </head>
 <body>
+<script type="text/javascript">
+function purson_plus(){
+	var num = document.getElementById("input_18").value;
+	 if(++num > ${dto.max_rsrv} ){
+	  	alert("최대 예약 인원은 ${dto.max_rsrv}명 입니다.	");
+	  	num = ${dto.max_rsrv};
+	 }
+	document.getElementById("input_18").value = num;
+    }
+    
+    function purson_minus(){
+  	 var num = document.getElementById("input_18").value;
+  	  if(--num < 1 ){
+  		  alert("고객수는 최소 1명 이상만 가능합니다.	");
+  		  num = 1;
+  	  }
+  		document.getElementById("input_18").value = num;
+    }
+</script>
 <form class="jotform-form" action="${root }/ReservationAdd.re" method="post" name="form_230748828516465" id="230748828516465" accept-charset="utf-8" autocomplete="on" novalidate="true">
 <input type="hidden" name="store_no" value="${store_no }">
   <div role="main" class="form-all">
@@ -1203,7 +1222,7 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
           <div onclick="purson_minus();" class="form-spinner-button form-spinner-down" style="cursor: default;"><img class="form-spinner-image form-spinner-down-image" src="//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg" alt="down arrow"></div></div></div></div></div>
         </div>
       </li>
-      
+     
       <li class="form-line" data-type="control_datetime" id="id_128"><label class="form-label form-label-top form-label-auto" id="label_128" for="lite_mode_128"> 
       예약날짜 </label>
         <div id="cid_128" class="form-input-wide" data-layout="half">
@@ -1222,30 +1241,23 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
         <div id="cid_129" class="form-input-wide" data-layout="half"> 
         <select class="form-dropdown" id="input_129" 
         name="rsrv_timeOnly" style="width:310px" data-component="dropdown" aria-label="예약 시간">
-        <c:forEach var="item" items="${items}" begin="${open }" end="${open }" step="1" varStatus="status">
- 
-     <p>번호 : ${status.index}</p>
- 
-     <p>책명 : ${item.name}</p>
- 
-     <p>저자 : ${item.author}</p>
- 
-     <p>출판사 : ${item.publisher}</p>
- 
-</c:forEach>
-            <option value="09:00">09:00</option>
-            <option value="10:00">10:00</option>
-            <option value="11:00">11:00</option>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
-            <option value="14:00">14:00</option>
-            <option value="15:00">15:00</option>
-            <option value="16:00">16:00</option>
-            <option value="17:00">17:00</option>
-            <option value="18:00">18:00</option>
-            <option value="19:00">19:00</option>
-            <option value="20:00">20:00</option>
-          </select> </div>
+        	<c:if test="${dto.open.split(':')[1] eq '00' }">
+			 <option value="${open }:00">${open }:00</option>
+		 	</c:if>
+        	<c:if test="${dto.open.split(':')[1] eq '30' }">
+			 <option value="${open }:30">${open }:30</option>
+		 	</c:if>
+	        <c:forEach var="time" begin="${open+1 }" end="${close-1 }" step="1" varStatus="Number">
+			 <option value="${time }:00">${time }:00</option>
+			 <option value="${time }:30">${time }:30</option>
+			</c:forEach>
+			<c:if test="${dto.close.split(':')[1] eq '00' }">
+			 <option value="${close }:00">${close }:00</option>
+		 	</c:if>
+        	<c:if test="${dto.close.split(':')[1] eq '30' }">
+			 <option value="${close }:30">${close }:30</option>
+		 	</c:if>
+        </select> </div>
       </li>
       <li class="form-line" data-type="control_textarea" id="id_30"><label class="form-label form-label-top form-label-auto" id="label_30" for="input_30"> 
       요청사항 </label>
@@ -1302,24 +1314,6 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
             		document.getElementById("fmtPrice").style = 'color:black';
             		document.getElementById("fmtPriceUsingPoint").style = 'display: none';
             	}
-            }
-            
-            function purson_plus(){
-			var num = document.getElementById("input_18").value;
-			 if(++num > ${dto.max_rsrv} ){
-			  	alert("최대 예약 인원은 ${dto.max_rsrv}명 입니다.	");
-			  	num = ${dto.max_rsrv};
-			 }
-			document.getElementById("input_18").value = num;
-            }
-            
-            function purson_minus(){
-          	 var num = document.getElementById("input_18").value;
-          	  if(--num < 1 ){
-          		  alert("고객수는 최소 1명 이상만 가능합니다.	");
-          		  num = 1;
-          	  }
-          		document.getElementById("input_18").value = num;
             }
             
               setTimeout(function()
