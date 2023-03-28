@@ -1197,10 +1197,13 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
         <div id="cid_18" class="form-input-wide jf-required" data-layout="half">
           <div data-wrapper-react="true"><div tabindex=""><div class="form-spinner" style="width: 310px;"><div class="form-spinner-input-td">
           <input type="number" id="input_18" 
-          name="people_num" data-type="input-spinner" class="form-spinner-input  form-textbox validate[required]" data-spinnermin="0" data-defaultvalue="0" 
-          value="0" data-component="spinner" aria-labelledby="label_18" required="" size="5" autocomplete="off"></div><div class="form-spinner-button-container"><div class="form-spinner-button form-spinner-up" style="cursor: default;"><img class="form-spinner-image form-spinner-up-image" src="//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg" alt="up arrow"></div><div class="form-spinner-button form-spinner-down" style="cursor: default;"><img class="form-spinner-image form-spinner-down-image" src="//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg" alt="down arrow"></div></div></div></div></div>
+          name="people_num" data-type="input-spinner" class="form-spinner-input  form-textbox validate[required]" data-spinnermin="1" data-defaultvalue="1" data-spinnermax="${dto.max_rsrv }" 
+          value="1" data-component="spinner" aria-labelledby="label_18" required="" size="5" autocomplete="off" min="1" max="${dto.max_rsrv }"></div><div class="form-spinner-button-container">
+          <div onclick="purson_plus();" class="form-spinner-button form-spinner-up" style="cursor: default;"><img class="form-spinner-image form-spinner-up-image" src="//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg" alt="up arrow"></div>
+          <div onclick="purson_minus();" class="form-spinner-button form-spinner-down" style="cursor: default;"><img class="form-spinner-image form-spinner-down-image" src="//cdn.jotfor.ms/assets/img/builder/flat_arrow.svg" alt="down arrow"></div></div></div></div></div>
         </div>
       </li>
+      
       <li class="form-line" data-type="control_datetime" id="id_128"><label class="form-label form-label-top form-label-auto" id="label_128" for="lite_mode_128"> 
       예약날짜 </label>
         <div id="cid_128" class="form-input-wide" data-layout="half">
@@ -1219,6 +1222,17 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
         <div id="cid_129" class="form-input-wide" data-layout="half"> 
         <select class="form-dropdown" id="input_129" 
         name="rsrv_timeOnly" style="width:310px" data-component="dropdown" aria-label="예약 시간">
+        <c:forEach var="item" items="${items}" begin="${open }" end="${open }" step="1" varStatus="status">
+ 
+     <p>번호 : ${status.index}</p>
+ 
+     <p>책명 : ${item.name}</p>
+ 
+     <p>저자 : ${item.author}</p>
+ 
+     <p>출판사 : ${item.publisher}</p>
+ 
+</c:forEach>
             <option value="09:00">09:00</option>
             <option value="10:00">10:00</option>
             <option value="11:00">11:00</option>
@@ -1240,7 +1254,7 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
         name="rsrv_msg" style="width:648px;height:163px" data-component="textarea" aria-labelledby="label_30" data-customhint="여기에 입력하세요..." customhinted="true" placeholder="여기에 입력하세요..." spellcheck="false"></textarea> </div>
       </li>
       
-      <c:if test="${refund_policy == null}">
+      <c:if test="${price == null || price < 1}">
       <li class="form-line" data-type="control_button" id="id_127">
         <div id="cid_127" class="form-input-wide" data-layout="full">
           <div data-align="center" class="form-buttons-wrapper form-buttons-center   jsTest-button-wrapperField"><button id="input_127" type="submit" class="form-submit-button submit-button jf-form-buttons jsTest-submitField" data-component="button" data-content="">
@@ -1249,7 +1263,7 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
       </li>
       </c:if>
       
-      <c:if test="${refund_policy != null}">
+      <c:if test="${price > 0}">
       <li class="form-line" data-type="control_widget" id="id_121"><label class="form-label form-label-top form-label-auto" id="label_121" for="input_121"> 
       결제금액 </label>
         <div id="cid_121" class="form-input-wide" data-layout="full">
@@ -1261,10 +1275,11 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
             <input type="hidden" name="pay_type">
             <input type="hidden" name="uid">
             <input type="hidden" name="price" value="${price }">
-            <c:if test="${point > price}">
-            <c:set var="point" value="${price }"/>
+            <c:if test="${point > price - 1000}">
+            <c:set var="point" value="${price - 1000 }"/>
           	</c:if>
-            <input type="hidden" name="priceUsingPrice" value="${price-point }">
+            <input type="hidden" name="point" value="${point }">
+            <input type="hidden" name="priceUsingPoint" value="${price-point }">
             <fmt:formatNumber var="fmt_price" value="${price }" type="number"/>
             <fmt:formatNumber var="fmt_price_usingPoint" value="${price-point }" type="number"/>
             <fmt:formatNumber var="fmt_point" value="${point }" type="number"/>
@@ -1275,7 +1290,7 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
           	</c:if>
             <hr>
              * 환불 규정 <br>
-             ${refund_policy }
+             ${dto.refund_policy }
 <!--             <input type="hidden" id="input_121" class="form-hidden form-widget  " name="q121_input121" value=""><input type="hidden" id="widget_settings_121" class="form-hidden form-widget-settings" value="%5B%7B%22name%22%3A%22items%22%2C%22value%22%3A%22%EC%98%B5%EC%85%98%201%5C%5Cn%EC%98%B5%EC%85%98%202%5C%5Cn%EC%98%B5%EC%85%98%203%22%7D%2C%7B%22name%22%3A%22hideunchecked%22%2C%22value%22%3A%22No%22%7D%2C%7B%22name%22%3A%22other%22%2C%22value%22%3A%22No%22%7D%2C%7B%22name%22%3A%22othertext%22%2C%22value%22%3A%22%EA%B8%B0%ED%83%80%22%7D%5D" data-version="2"> -->
             </div>
             <script type="text/javascript">
@@ -1289,6 +1304,23 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
             	}
             }
             
+            function purson_plus(){
+			var num = document.getElementById("input_18").value;
+			 if(++num > ${dto.max_rsrv} ){
+			  	alert("최대 예약 인원은 ${dto.max_rsrv}명 입니다.	");
+			  	num = ${dto.max_rsrv};
+			 }
+			document.getElementById("input_18").value = num;
+            }
+            
+            function purson_minus(){
+          	 var num = document.getElementById("input_18").value;
+          	  if(--num < 1 ){
+          		  alert("고객수는 최소 1명 이상만 가능합니다.	");
+          		  num = 1;
+          	  }
+          		document.getElementById("input_18").value = num;
+            }
             
               setTimeout(function()
               {
@@ -1332,7 +1364,7 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
 	       		let buyer_tel = document.getElementsByName("rsrv_phone")[0].value;
 	       		let price;
 	       		if(document.getElementById("usingPoint").checked) {
-	       			price = Number(document.getElementsByName("priceUsingPrice")[0].value);
+	       			price = Number(document.getElementsByName("priceUsingPoint")[0].value);
 	       		}else {
 	       			price = Number(document.getElementsByName("price")[0].value);
 	       		}
@@ -1342,7 +1374,7 @@ JotForm.paymentExtrasOnTheFly([null,null,{"name":"input2","qid":"2","text":"결�
 	                pg : 'kcp.{imp81323135}',
 	                pay_method : 'card',
 	                merchant_uid: uid,
-	                name : '${store_name}',
+	                name : '${dto.store_name}',
 	                amount : price,
 	                buyer_email : '',
 	                buyer_name : buyer_name,

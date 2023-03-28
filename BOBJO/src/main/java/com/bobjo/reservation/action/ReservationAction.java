@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bobjo.basicform.action.Action;
 import com.bobjo.basicform.action.ActionForward;
 import com.bobjo.reservation.db.ReservationDAO;
+import com.bobjo.store.db.StoreDTO;
 
 public class ReservationAction implements Action {
 
@@ -22,8 +23,10 @@ public class ReservationAction implements Action {
            
 		ReservationDAO dao = new ReservationDAO();
 		request.setAttribute("store_no", request.getParameter("store_no"));
-		request.setAttribute("store_name", dao.getStoreName(Integer.parseInt(request.getParameter("store_no"))));
-		request.setAttribute("refund_policy", dao.getRefundPolicy(Integer.parseInt(request.getParameter("store_no"))));
+		StoreDTO dto = dao.getStoreInfoForRsrv(Integer.parseInt(request.getParameter("store_no")));
+		request.setAttribute("dto", dto);
+		request.setAttribute("open", Integer.parseInt(dto.getOpen().split(":")[0]));
+		request.setAttribute("close", Integer.parseInt(dto.getClose().split(":")[0]));
 		request.setAttribute("menu_no", request.getParameter("menu_no"));
 		request.setAttribute("menu_amount", request.getParameter("menu_amount"));
 		request.setAttribute("price", request.getParameter("price"));

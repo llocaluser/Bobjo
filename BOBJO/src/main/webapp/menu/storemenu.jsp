@@ -618,7 +618,7 @@ function minusAmount(i) {
 				<div class="add_info_menu">
 		       			 <div style="display:flex;vertical-align:top;">
 			      	 		 <input type="button" class="plus_btn" onclick="plusAmount(${i})">
-			      	 		 <input type="number" id="menu_amount[${i}]" value="1" class="menu_count" maxlength="10" min="1">
+			      	 		 <input type="number" id="menu_amount[${i}]" value="1" class="menu_count" maxlength="10" min="1" readonly/>
 			      	 		 <input type="button" class="minus_btn"  onclick="minusAmount(${i})">
         				</div>
         				<div class="basket_info1"> 
