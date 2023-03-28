@@ -10,6 +10,7 @@ import org.apache.catalina.connector.Request;
 
 import com.bobjo.menu.db.MenuDTO;
 import com.bobjo.reservation.db.ReservationDTO;
+import com.bobjo.review.db.ReviewDTO;
 import com.bobjo.store.db.StoreDTO;
 import com.bobjo.utils.db.ConnectionManager;
 import com.mysql.cj.Session;
@@ -405,7 +406,7 @@ public class MemberDAO {
 			 }
 
 			 
-			 System.out.println(" DAO : 예약 정보 저장완료");
+			 System.out.println(" DAO : 예약 정보 불러오기완료");
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -493,5 +494,77 @@ public class MemberDAO {
 			}  
 	      }  
 	       // 예약 취소 - cancelMember	
+	      
+	      // 내가 작성한 리뷰확인 - reviewMember
+	        public List reviewMemberList(String m_id) {
+	        	List totalList = new ArrayList();
+	        	
+	        	try {
+	        		//1.2. 디비연결
+	        		con = ConnectionManager.getConnection();
+					
+					// 3. sql 작성 & pstmt객체
+					sql ="select r.review_no,r.content,s.store_name from bobjo_review r join bobjo_store s "
+							+ "on (r.store_no = s.store_no) where r.m_id =?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, m_id);
+					
+					// 4. SQL 실행
+					  rs = pstmt.executeQuery();
+					  
+					// 5. 데이터 처리
+					 while(rs.next()) {
+						 List subList = new ArrayList();
+						 ReviewDTO dto = new ReviewDTO();
+						 StoreDTO sdto = new StoreDTO();
+						 
+						 dto.setReview_no(rs.getInt("review_no"));
+						 dto.setContent(rs.getString("content"));
+						 
+						 sdto.setStore_name(rs.getString("store_name"));
+						 
+						 subList.add(dto);
+						 subList.add(sdto);
+						 
+						 totalList.add(subList);		 
+					 }
+					 System.out.println(" DAO : 내가 작성한 리뷰확인 완료!");
+					 
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					ConnectionManager.closeConnection(rs, pstmt, con);
+				}
+	        	return totalList;
+	        }
+	      // 내가 작성한 리뷰확인 - reviewMember
+	        
+	        // 리뷰 삭제 - deleteReviewMember
+		      public void deleteReviewMember(int review_no) {
+		    	  
+		    	  try {
+		    		  // 1.2. 디비연결
+					con = ConnectionManager.getConnection();
+					
+					// 3. sql 작성 & pstmt 객체
+					sql ="delete from bobjo_review where review_no=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setInt(1, review_no);
+					
+					// 4. sql 실행
+				    pstmt.executeUpdate();
+					
+					System.out.println("DAO : 리뷰 삭제 완료!");
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					ConnectionManager.closeConnection(rs, pstmt, con);
+				}  
+		      }  
+		       // 리뷰 삭제 - deleteReviewMember	  
+
+
+
 }
 

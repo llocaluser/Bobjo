@@ -69,6 +69,10 @@
     .check{
     	color : red;
     }
+    
+    .text{
+       text-align: center;
+    }
 	 
     </style>
   </head>
@@ -84,10 +88,11 @@
   <!--     <form action="./MemberLoginAction.me" class="login" method="POST"> -->
        
 		<div class="card-body">
+		  <div class="text">
   
-            <h4>회원님의 아이디는 <h3>"${dto.m_id }"</h3> 입니다.</h4>
-        
-        </div>
+            <h4>회원님의 아이디는 <h3><b>"${dto.m_id }"</b></h3> 입니다.</h4>
+         </div>
+       </div>
 
 <!--       </form> -->
      
