@@ -195,7 +195,6 @@ public class StoreDAO {
 					dto.setMinPrice(rs.getInt(1));
 					dto.setMaxPrice(rs.getInt(2));
 				}
-				System.out.println(" DAO : 가게 정보 조회성공!");
 
 			} catch (Exception e) {
 				e.printStackTrace();

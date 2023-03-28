@@ -1,5 +1,6 @@
 package com.bobjo.review.action;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +46,7 @@ public class ReviewListAction implements Action {
 		for(int i : map.keySet()) {
 			sum += map.getOrDefault(i, 0);
 		}
+		if (sum == 0) sum = 1;
 		double[] arr = new double[6];
 		for(int i = 0; i < 6; i++) {
 			arr[i] = map.getOrDefault(i, 0)/(double)sum;

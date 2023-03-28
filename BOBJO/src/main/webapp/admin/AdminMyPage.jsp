@@ -13,7 +13,6 @@
         <link href="./css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <link href="./css/adminMyPage.css" rel="stylesheet" />
-        <!-- <link href="./css/modal.css" rel="stylesheet" /> -->
     </head>
     
     
@@ -75,7 +74,6 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 예약관리
                             </a>
-                            <!-- <div class="sb-sidenav-menu-heading">예약</div> -->
                             <a class="nav-link collapsed" 
                             href="javascript:void(0);" onclick="openSubNav('member-manage');" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>

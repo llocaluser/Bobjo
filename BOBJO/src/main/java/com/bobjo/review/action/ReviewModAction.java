@@ -10,6 +10,8 @@ import com.bobjo.basicform.action.Action;
 import com.bobjo.basicform.action.ActionForward;
 import com.bobjo.review.db.ReviewDAO;
 import com.bobjo.review.db.ReviewDTO;
+import com.bobjo.store.db.StoreDAO;
+import com.bobjo.store.db.StoreDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -30,7 +32,7 @@ public class ReviewModAction implements Action {
 		
 		String savePath = request.getServletContext().getRealPath("img");
 		String absolutePath = new File(savePath).getAbsolutePath();
-		System.out.println(absolutePath);
+		
 		// 파일 크기 15MB로 제한
 		int sizeLimit = 1024*1024*15;
 		
@@ -42,21 +44,12 @@ public class ReviewModAction implements Action {
 						new DefaultFileRenamePolicy());
 		
 		
-		System.out.println(multi.getParameter("review_no"));
-		System.out.println(multi.getParameter("store_no"));
-		System.out.println(multi.getParameter("content"));
-		System.out.println(multi.getParameter("score"));
-		System.out.println(multi.getParameter("review_img"));
-		
-		
 		String review_img = request.getParameter("review_img") == null ? 
 				multi.getFilesystemName("review_img") : request.getParameter("review_img");
 		
-		System.out.println(review_img);
-		System.out.println(request.getParameter("review_img"));
-		System.out.println(multi.getFilesystemName("review_img"));
-		System.out.println(multi.getParameter("review_img"));
-		
+		String sno = multi.getParameter("store_no").trim();
+		if(sno.equals(null)) sno = "1";
+		int no = Integer.parseInt(sno);
 		
 		dto.setContent(multi.getParameter("content"));
 		dto.setScore(Float.parseFloat(multi.getParameter("score")));
@@ -65,7 +58,9 @@ public class ReviewModAction implements Action {
 		
 		dao.modifyReview(dto);
 		
-		forward.setPath("./ReviewList.rv");
+		request.setAttribute("store_no", no);
+		
+		forward.setPath("./ReviewList.rv?store_no="+no);
 		forward.setRedirect(true);
 		return forward;
 	}

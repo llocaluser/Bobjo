@@ -22,22 +22,9 @@
 				</c:if>
 			</c:forEach>
 		</select><br>
-		
-		<%-- 리뷰 이미지 <input type="file" name="review_img" 
-		value="${review_img }"
-		hidden><br>
-		
-		
-		
-		<script>
-	        var input = document.querySelector('input[type=file]');
-	        var reviewImg = "${review_img}";
-	        input.value = "../img/" + reviewImg;
-	    </script> --%>
-	    
 	    
 		<input type="submit" value="리뷰 수정">
-	</form>
+</form>
 	
 	
 </body>

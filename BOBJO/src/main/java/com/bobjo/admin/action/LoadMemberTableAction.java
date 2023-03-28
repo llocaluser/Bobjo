@@ -48,11 +48,8 @@ public class LoadMemberTableAction implements Action {
 		
 		String json = jsarr.toString();
 
-		// set the content type and character encoding
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-
-		// send the JSON data in the response
 		response.getWriter().write(json);
 		
 		return null;

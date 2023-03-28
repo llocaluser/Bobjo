@@ -21,11 +21,11 @@ public class AdminMyPageAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		
-//		if(!id.equals("admin")) {
-//			forward.setPath("./Main.me");
-//			forward.setRedirect(true);
-//			return forward;
-//		}
+		if(!id.equals("admin")) {
+			forward.setPath("./Main.me");
+			forward.setRedirect(true);
+			return forward;
+		}
 		
 		id = "admin";
 		
