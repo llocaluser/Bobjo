@@ -1,5 +1,7 @@
 package com.bobjo.store.action;
 
+import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +23,7 @@ public class StoreListAction implements Action {
 		srch_data[1] = request.getParameter("srch_category") == null ? "" : request.getParameter("srch_category");
 		srch_data[2] = request.getParameter("srch_text") == null ? "" : request.getParameter("srch_text");
 		srch_data[3] = request.getParameter("order_standard") == null ? "" : request.getParameter("order_standard");
+		
 		
 		StoreDAO dao = new StoreDAO();
 		request.setAttribute("list",  dao.getStoreList(pageNum, pageSize, srch_data));

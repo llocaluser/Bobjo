@@ -488,8 +488,6 @@ tableHtml += '<tr><td>' + member.m_id + '</td><td>' + member.pw + '</td><td>' + 
                 	}
                 }
                 
-                var password;
-                var email;
                 
                 NewPw.addEventListener('click', () => {
                 	var m_id = document.querySelector('input[name="memberId"]').value;
@@ -502,13 +500,31 @@ tableHtml += '<tr><td>' + member.m_id + '</td><td>' + member.pw + '</td><td>' + 
 	                		if (xhr.readyState === XMLHttpRequest.DONE) {
 	                	    	if (xhr.status === 200) {
 		                	        var response = xhr.responseText.split("|");
-		                	        password = response[0];
-		                	        email = response[1];
+		                	        var password = response[0];
+		                	        var email = response[1];
 		                	        if (email == null || email == 'null') {
 		                	        	email = null;
 		                	        	alert("당 회원은 메일 주소가 없습니다");
 		                	        }
-		                	        else alert(email + "에 새로운 비밀번호 " + password + "가 송신되었습니다");
+		                	        else {
+		                	        	alert(email + "에 새로운 비밀번호 " + password + "가 송신되었습니다");
+		                	        	
+		                	        	emailjs.init("rVmnb5Oe_svONJ5rI");
+		            			    	
+		            			    	var templateParams = {
+		            			    		pw: password
+		            			    	}
+		            			    	
+		            			    	emailjs.sendForm('gmail', 'template_dtnk9fq', templateParams)
+		            			         //emailjs.send('service ID', 'template ID', 보낼 내용이 담긴 객체)
+		            			         	    .then(function(response) {
+		            			         	       console.log('SUCCESS!', response.status, response.text);
+		            			         	    }, function(error) {
+		            			         	       console.log('FAILED...', error);
+		            			         	    });
+		                	        	//sendPasswordEmail(email, password);
+		                	        	
+		                	        }
 		               			} else {
 	                	    	console.log("Error: " + xhr.status);
 	              				}
@@ -516,27 +532,14 @@ tableHtml += '<tr><td>' + member.m_id + '</td><td>' + member.pw + '</td><td>' + 
 	               		};
 					xhr.open("POST", "GenerateNewPw.ad?m_id=" + m_id, true);
                 	xhr.send();
-                	
-                	
-                	
-                	// 메일 보내기
-                	emailjs.init("rVmnb5Oe_svONJ5rI");
-			    	
-			    	var templateParams = {
-			    		pw: password
-			    	}
-			    	
-			    	emailjs.sendForm('gmail', 'template_dtnk9fq', templateParams)
-			         //emailjs.send('service ID', 'template ID', 보낼 내용이 담긴 객체)
-			         	    .then(function(response) {
-			         	       console.log('SUCCESS!', response.status, response.text);
-			         	    }, function(error) {
-			         	       console.log('FAILED...', error);
-			         	    });
-			    	
-			    	
 			    	
                 });
+                
+                function sendPasswordEmail(memberEmail, password) {
+                	var emailBody = "Dear Member,\n\nYour new password is: " + password + "\n\nPlease use this password to log in to our website.\n\nThank you.";
+                	var emailLink = "mailto:" + memberEmail + "?subject=New Password&body=" + encodeURIComponent(emailBody);
+                	window.location.href = emailLink;
+               	}
                 
                 subnavclose.addEventListener('click', () => {
                 	
