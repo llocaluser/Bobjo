@@ -14,19 +14,7 @@
 	<script type="text/javascript">
 		var store_no = "${store_no}";
 		var pageNum = "${pageNum}";
-		function sortReview(){
-			var sort = $("#selectbox option:selected").val();
-			if(sort == high) {
-				location.href='review.jsp?store_no='+store_no+'pageNum='+pageNum+'sort=high';
-			}
-			else if(sort == low) {
-				location.href='review.jsp?store_no='+store_no+'pageNum='+pageNum+'sort=low';
-			}
-			else if(sort == recent) {
-				location.href='review.jsp?store_no='+store_no+'pageNum='+pageNum+'sort=recent';
-			}
-			return;
-		}
+		
 		
 		function report(){
     		var report = confirm("리뷰글을 신고하시겠습니까?");
@@ -107,7 +95,7 @@
             <div class="div_sort1">
                 <div class="div_sort2">
                     <select class="select_sort" id="selectbox" 
-                    onchange="location.href='./ReviewList.rv?sort='+this.value">
+                    onchange="location.href='./ReviewList.rv?sort='+this.value+'&store_no='+${dto.store_no }">
                     
                     	<option value="none" selected disabled style="display:none">
                     	정렬 기준
@@ -138,9 +126,11 @@
                     <!-- 사진, 이름 섹션 -->
                     <section class="section_profile">
                         <div class="div_img">
-	                        <a href="./img/${list.review_img }">
-	                            <img class="profile" src="./img/${list.review_img }" alt="프로필">
-	                        </a><br><br>
+	                            <img class="profile" src="./images/${list.review_img }" 
+							onError="this.onerror=null; this.src='img/profile0.jpg'">
+	                        </a>
+	                        
+	                        <br><br>
                         </div>
                         <p class="desc font_arr">${list.m_id }</p>
                     </section>
@@ -191,7 +181,7 @@
                 
             </ol>
             </c:forEach>
-            <br>
+            <br><br>
             <section class="reg">
             	<button class="btn_reg font_norm">
             		<a href="./ReviewRegform.rv?store_no=${dto.store_no }">리뷰 등록</a>
@@ -235,9 +225,9 @@
 					</c:forEach>
                     </ul>
                     <div class="page_div_l">
-                    <c:if test="${endPage < pageSize }">
-                    <a href="./ReviewList.rv?pageNum=${pageSize }&store_no=${dto.store_no}" class="btn font_arr">
-                        <div>${pageSize }</div>
+                    <c:if test="${endPage < Count/10 && endPage >= 1}">
+                    <a href="./ReviewList.rv?pageNum=${pageEnd }&store_no=${dto.store_no}" class="btn font_arr">
+                        <div>${pageEnd }</div>
                     </a>
                     </c:if>
                     </div>

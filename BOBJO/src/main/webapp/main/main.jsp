@@ -36,15 +36,6 @@
 	<link href="./css/responsive.css" rel="stylesheet" />
 	
 	
-	
-    
-<!--
-
-TemplateMo 552 Video Catalog
-
-https://templatemo.com/tm-552-video-catalog
-
--->
 
 
 <!-- 지형지도 -->
@@ -101,7 +92,6 @@ https://templatemo.com/tm-552-video-catalog
                         <span>지금 바로 예약하세요!</span>
                     </a>
                     
-                    
                 </div>
             </div>
 		  	<c:set var="currentVideo"><%= "cook" + (int)Math.ceil(Math.random()*6) %></c:set>
@@ -110,9 +100,6 @@ https://templatemo.com/tm-552-video-catalog
 			        <source id="video-source" src="./video/${currentVideo}.mp4" type="video/mp4">
 			    </video>
 			</div>
-			
-			
-            <!-- <i id="tm-video-control-button" class="fas fa-pause"></i> -->
         </div>
     </div>    
     
@@ -125,27 +112,6 @@ https://templatemo.com/tm-552-video-catalog
 			    var currentVideo = "${currentVideo}";
 			    var timer;
 			    var randomCheck = "cook1";
-			    //const videoBtn = document.querySelector("#tm-video-control-button");
-			    
-			    
-			    
-			    /* videoBtn.addEventListener("click", function (e) {
-			    	
-	                const video = document.getElementById("tm-video");
-	                $(this).removeClass();
-
-	                if (video.paused) {
-	                    video.play();
-	                    $(this).addClass("fas fa-pause");
-	                } else {
-	                    video.pause();
-	                    clearInterval(timer);
-	                    
-	                    $(this).addClass("fas fa-play");
-	                }
-	            }); */
-			    
-			    
 			    
 			
 			    function playNextVideo() {
@@ -231,12 +197,10 @@ https://templatemo.com/tm-552-video-catalog
                     
 	<script type="text/javascript">
 		
-	/* 모달창 */
 		const bg = document.querySelector('.search_back');
 		const sc = document.querySelector('.search');
 		const close = document.querySelector('#close-btn');
 		const btn = document.querySelector('#modal_btn');
-		const icon = document.querySelector('#tm-video-control-button');
 		
 		btn.addEventListener('click', openModal);
 		close.addEventListener('click', closeModal);
@@ -253,22 +217,16 @@ https://templatemo.com/tm-552-video-catalog
 		
 		function openModal(){
 			bg.style.display = 'flex';
-			icon.style.display = 'none';
 			btn.style.display = 'none';
 		}
 		
 		function closeModal(){
 			bg.style.display = 'none';
-			icon.style.display = 'block';
 			btn.style.display = 'inline-flex';
 		}
-		
-	/* 모달창 */
-		
-		
 	
 	</script>
-        
+<!-- 모달창 -->
 
 
 
@@ -287,10 +245,8 @@ https://templatemo.com/tm-552-video-catalog
 
 
 
-
-<script>
-
-/* 지역 이동 */
+<!-- 지역 이동 -->
+<script type="text/javascript">
 
 const move = document.querySelector('#map-search');
 const category = document.querySelector('#menu-category');
@@ -326,6 +282,9 @@ window.addEventListener('message', function(event) {
 	if(prevDisVal.length < 10 && prevDisVal != '' && prevDisVal != ' '){
 		closeMapSearch();
 		changeText.textContent = prevDisVal;
+	}else if(prevDisVal.length >= 270){
+		closeMapSearch();
+		changeText.textContent = '지역 검색창 (누르면 이동)';
 	}
 });
 
@@ -405,10 +364,6 @@ function searchStore(){
                     </c:forEach>
                         </div>
                     </div>
-                    <!-- <p class="controls">
-				        <span class="prev">prev</span>
-				        <span class="next">next</span>
-				    </p> -->
 				    <p class="controls">
 				        <span id="btn-stopmove">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11 22h-4v-20h4v20zm6-20h-4v20h4v-20z"/>
@@ -430,15 +385,8 @@ function searchStore(){
 	                    margin = 22,
 	                    prevBtn = document.querySelector('.prev'),
 	                    nextBtn = document.querySelector('.next');
-	                    /*
-	                    nextBtn.addEventListener('click', () => {
-	                        if (currentIdx < count) moveSlide(currentIdx + 1);
-	                    });
-	                    prevBtn.addEventListener('click', () => {
-	                        if (currentIdx > 0) moveSlide(currentIdx - 1);
-	                    });
-	                    */
-	                 	// 버튼 클릭 이동
+                    	
+                    	
 	                    function moveSlide(num) {
 	                        wrapper.style.left = -num * (width + margin) + 'px';
 	                        currentIdx = num;
@@ -471,7 +419,10 @@ function searchStore(){
 						  	}
 						}
 						
-						
+						if(box.length <= 3){
+							stopmovingBtn.style.display = 'none';
+							resumemovingBtn.style.display = 'none';
+						}
 						
 						stopmovingBtn.addEventListener('click', () => {
 						  	stopSlideShow();
@@ -487,16 +438,8 @@ function searchStore(){
 						startSlideShow();
 	                 	
 	                 	
-	                 	
-	                 	
-	                 	
-	                 	
-	                 	
-	                 	
                     </script>
 
-
-                    
                 </main>
 			</div>
 		</div>
@@ -549,21 +492,6 @@ function searchStore(){
                 timeout = setTimeout(setVideoSize, 100);
             };
 
-            // Play/Pause button for video background      
-            /* const btn = $("#tm-video-control-button"); */
-
-            /* btn.on("click", function (e) {
-                const video = document.getElementById("tm-video");
-                $(this).removeClass();
-
-                if (video.paused) {
-                    video.play();
-                    $(this).addClass("fas fa-pause");
-                } else {
-                    video.pause();
-                    $(this).addClass("fas fa-play");
-                }
-            }); */
         })
     </script>
     

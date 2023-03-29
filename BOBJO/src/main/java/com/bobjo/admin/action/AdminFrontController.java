@@ -58,7 +58,6 @@ public class AdminFrontController extends BasicFrontController {
 			
 			action = new UpdateMemberAction();
 			try {
-				System.out.println(request.getParameter("m_id")+"@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();

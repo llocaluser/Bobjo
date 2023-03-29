@@ -1,5 +1,6 @@
 package com.bobjo.review.action;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +46,7 @@ public class ReviewListAction implements Action {
 		for(int i : map.keySet()) {
 			sum += map.getOrDefault(i, 0);
 		}
+		if (sum == 0) sum = 1;
 		double[] arr = new double[6];
 		for(int i = 0; i < 6; i++) {
 			arr[i] = map.getOrDefault(i, 0)/(double)sum;
@@ -71,6 +73,8 @@ public class ReviewListAction implements Action {
 		
 		double avg = Math.round(total/cnt*100)/(double)100;
 		
+		int pageEnd = cnt % 10 == 0 ? cnt / 10 : cnt / 10 + 1; 
+		
 		request.setAttribute("store_name", dao.getStoreName(store_no));
 		request.setAttribute("ReviewList", dao.getReviewList(sort, startRow, pageSize, store_no));
 		request.setAttribute("pageCount", cnt);
@@ -83,6 +87,7 @@ public class ReviewListAction implements Action {
 		request.setAttribute("pageBlock", pageBlock);
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("pageEnd", pageEnd);
 		
 		
         StoreDAO sdao = new StoreDAO();

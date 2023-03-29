@@ -180,7 +180,6 @@
 
 <script type="text/javascript">
 const SD = document.querySelector('svg');
-// const map1 = opener.opener.document.querySelector('#map');
 
 SD.addEventListener('click', (e) => {
 	var id = e.target.id.length == 7 ? "L" + e.target.id : e.target.id;
@@ -188,9 +187,7 @@ SD.addEventListener('click', (e) => {
     var changeText = document.getElementById('map-district');
     if(district != null) {
     	const disVal = district.textContent;
-    	//window.parent.disVal = disVal;
     	window.parent.postMessage({ disVal: disVal }, '*');
-    	console.log(disVal);
     }
 });
 
