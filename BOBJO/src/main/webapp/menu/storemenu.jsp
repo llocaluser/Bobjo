@@ -356,7 +356,7 @@ width: 200px;
 }
 li.basket_menu_amountli{
 padding: 10px;
-width: 87px;
+width: 84px;
 }
 .menu_sum{
 margin-top: 10px;

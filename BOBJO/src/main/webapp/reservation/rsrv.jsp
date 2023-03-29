@@ -1357,7 +1357,7 @@ function purson_plus(){
 	        	let buyer_name = document.getElementsByName("rsrv_name")[0].value;
 	       		let buyer_tel = document.getElementsByName("rsrv_phone")[0].value;
 	       		let price;
-	       		if(document.getElementById("usingPoint").checked) {
+	       		if(document.getElementById("usingPoint") != null && document.getElementById("usingPoint").checked) {
 	       			price = Number(document.getElementsByName("priceUsingPoint")[0].value);
 	       		}else {
 	       			price = Number(document.getElementsByName("price")[0].value);
