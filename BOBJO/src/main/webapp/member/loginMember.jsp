@@ -104,13 +104,8 @@
 			<h2 class="card-title" style="color:#ff7331; text-align:left;"> 로그인 </h2>
 		</div>
       <form action="./MemberLoginAction.me" class="login" method="POST">
-        <div class="checkbox">
-            <label>
-            <input type="radio" name="mode" value="admin"> 관리자
-			&nbsp;&nbsp;
-			<input type="radio" name="mode" value="member" checked> 일반회원
-            </label>
-          </div>
+      
+      
 		<div class="card-body">
   
         <input type="text" name="m_id" id="m_Id" class="form-control" placeholder="아이디" autofocus required><BR>

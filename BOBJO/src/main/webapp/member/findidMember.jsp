@@ -39,7 +39,7 @@
 	}
 
     #btn-Yes{
-        background-color: #e4932b;
+        background-color: #ff7331;
         border: none;
     }
 	
@@ -87,7 +87,7 @@
       <form action="./MemberFindidAction.me" class="form-signin" method="POST">
   		 <p class="text2"> ${findid2}</p>
         <input type="text" name="m_name" id="m_name" class="form-control" placeholder="이름" required autofocus><BR>
-        <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대폰 번호 입력 (‘-’ 제외 11자리 입력)" required><br>
+        <input type="text" name="phone" id="phone" class="form-control" placeholder="휴대폰 번호 입력 (‘-’ 제외 11자리 입력)" required maxlength="11"><br>
         	<p class="check" id="check">${check}</p><br/>
         <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">아 이 디 찾 기</button>
       

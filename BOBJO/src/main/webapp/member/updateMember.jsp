@@ -49,11 +49,11 @@
                                 
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" name="phone" value="${dto.phone }"
-                                        placeholder="전화번호">
+                                        placeholder="전화번호" maxlength="11">
                                 </div>
                                 
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" name="nickname" value="${dto.nickname }"
+                               <input type="text" class="form-control form-control-user" name="nickname" value="${dto.nickname }"
                                         placeholder="닉네임">
                                 </div>
                                 <div class="form-group">
