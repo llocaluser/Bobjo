@@ -93,7 +93,7 @@ font-size: 3rem;
 
 
 table tr{
-    background : beige;
+    background : white;
 }
 
 .row {
