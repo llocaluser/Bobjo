@@ -39,7 +39,7 @@
 	}
 
     #btn-Yes{
-        background-color: #e4932b;
+        background-color: #ff7331;
         border: none;
     }
 	

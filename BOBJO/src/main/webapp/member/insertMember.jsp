@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>BOBJO</title>
           <!-- 아이디 중복체크를 위한 제이쿼리 -->
           <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
           <!-- 아이디 중복체크를 위한 제이쿼리 -->
