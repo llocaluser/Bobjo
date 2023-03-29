@@ -505,7 +505,7 @@ tableHtml += '<tr><td>' + member.m_id + '</td><td>' + member.pw + '</td><td>' + 
 		                	        	alert("당 회원은 메일 주소가 없습니다");
 		                	        }
 		                	        else {
-		                	        	alert(email + "에 새로운 비밀번호 " + password + "가 송신되었습니다");
+		                	        	alert(email + "에 새로운 비밀번호가 송신되었습니다");
 		                	        	
 		                	        	emailjs.init("rVmnb5Oe_svONJ5rI");
 		            			    	
