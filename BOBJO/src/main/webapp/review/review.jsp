@@ -126,7 +126,7 @@
                     <!-- 사진, 이름 섹션 -->
                     <section class="section_profile">
                         <div class="div_img">
-	                            <img class="profile" src="./img/${list.review_img }" 
+	                            <img class="profile" src="./images/${list.review_img }" 
 							onError="this.onerror=null; this.src='img/profile0.jpg'">
 	                        </a>
 	                        
@@ -225,9 +225,9 @@
 					</c:forEach>
                     </ul>
                     <div class="page_div_l">
-                    <c:if test="${endPage < pageSize && endPage >= 1}">
-                    <a href="./ReviewList.rv?pageNum=${pageSize }&store_no=${dto.store_no}" class="btn font_arr">
-                        <div>${pageSize }</div>
+                    <c:if test="${endPage < Count/10 && endPage >= 1}">
+                    <a href="./ReviewList.rv?pageNum=${pageEnd }&store_no=${dto.store_no}" class="btn font_arr">
+                        <div>${pageEnd }</div>
                     </a>
                     </c:if>
                     </div>

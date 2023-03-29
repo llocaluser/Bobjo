@@ -73,6 +73,8 @@ public class ReviewListAction implements Action {
 		
 		double avg = Math.round(total/cnt*100)/(double)100;
 		
+		int pageEnd = cnt % 10 == 0 ? cnt / 10 : cnt / 10 + 1; 
+		
 		request.setAttribute("store_name", dao.getStoreName(store_no));
 		request.setAttribute("ReviewList", dao.getReviewList(sort, startRow, pageSize, store_no));
 		request.setAttribute("pageCount", cnt);
@@ -85,6 +87,7 @@ public class ReviewListAction implements Action {
 		request.setAttribute("pageBlock", pageBlock);
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("pageEnd", pageEnd);
 		
 		
         StoreDAO sdao = new StoreDAO();
