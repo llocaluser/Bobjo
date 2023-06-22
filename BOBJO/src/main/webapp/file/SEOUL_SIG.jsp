@@ -6,6 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+#save-button {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+}
+
 .OUTLINE {
     stroke-linejoin:round;
     stroke: #ffffff;
@@ -107,6 +113,28 @@
     text-anchor: middle;
     alignment-baseline: middle;
 }
+.district-rectangle {
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    padding: 5px;
+}
+
+.delete-button {
+    background-color: #f00;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    float: right;
+}
+
 </style>
 </head>
 <body>
@@ -182,8 +210,10 @@
 <text id="LCD11740" class="TEXT" x="675" y="358">강동구</text>
 </g></svg>
 
+
+<button id="save-button">저장하기</button>
 <script type="text/javascript">
-const SD = document.querySelector('svg');
+/*const SD = document.querySelector('svg');
 
 SD.addEventListener('click', (e) => {
 	var id = e.target.id.length == 7 ? "L" + e.target.id : e.target.id;
@@ -193,8 +223,47 @@ SD.addEventListener('click', (e) => {
     	const disVal = district.textContent;
     	window.parent.postMessage({ disVal: disVal }, '*');
     }
+});*/
+
+<script type="text/javascript">
+const SD = document.querySelector('svg');
+
+var selectedDistricts = [];
+
+SD.addEventListener('click', (e) => {
+    var id = e.target.id.length == 7 ? "L" + e.target.id : e.target.id;
+    var district = document.getElementById(id);
+    if(district != null) {
+        selectedDistricts.push(district.textContent);
+        createRectangle(district.textContent);
+    }
 });
 
+function createRectangle(districtName) {
+    var rectangle = document.createElement("div");
+    rectangle.className = "district-rectangle";
+    rectangle.textContent = districtName;
+    var deleteButton = document.createElement("button");
+    deleteButton.className = "delete-button";
+    deleteButton.textContent = "x";
+    deleteButton.addEventListener("click", function() {
+        var index = selectedDistricts.indexOf(districtName);
+        if(index > -1) {
+            selectedDistricts.splice(index, 1);
+        }
+        rectangle.remove();
+    });
+    rectangle.appendChild(deleteButton);
+    document.body.appendChild(rectangle);
+}
+
+var saveButton = document.getElementById("save-button");
+saveButton.addEventListener("click", function() {
+    var districts = selectedDistricts.join(",");
+    window.parent.postMessage({ disVal: districts }, '*');
+    closeMapSearch();
+});
+</script>
 
 
 
