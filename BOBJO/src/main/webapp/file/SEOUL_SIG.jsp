@@ -11,6 +11,10 @@
     stroke: #ffffff;
     stroke-width: 2;
 }
+.OUTLINE:hover {
+    fill: black !important;
+    transition: fill 0.3s ease-in-out;
+}
 #CD11110 {
     fill: #f1c40f;
 }

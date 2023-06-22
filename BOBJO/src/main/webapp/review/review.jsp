@@ -52,42 +52,14 @@
                 </article>
                 <article class="score_section article_font">
                     <ol class="ol_graph">
+                    <c:forEach var="i" begin="0" end="5">
                         <li class="li_graph">
-                            <label class="label_score">5</label>
+                            <label class="label_score">${i }</label>
                             <meter class="meter_score">
-                                <div class="div_score" style="width:${scoreList[5]*100}%"></div>
+                                <div class="div_score" style="width:${scoreList[i]*100}%"></div>
                             </meter>
                         </li>
-                        <li class="li_graph">
-                            <label class="label_score">4</label>
-                            <meter class="meter_score">
-                                <div class="div_score" style="width:${scoreList[4]*100}%"></div>
-                            </meter>
-                        </li>
-                        <li class="li_graph">
-                            <label class="label_score">3</label>
-                            <meter class="meter_score">
-                                <div class="div_score" style="width:${scoreList[3]*100}%"></div>
-                            </meter>
-                        </li>
-                        <li class="li_graph">
-                            <label class="label_score">2</label>
-                            <meter class="meter_score">
-                                <div class="div_score" style="width:${scoreList[2]*100}%"></div>
-                            </meter>
-                        </li>
-                        <li class="li_graph">
-                            <label class="label_score">1</label>
-                            <meter class="meter_score">
-                                <div class="div_score" style="width:${scoreList[1]*100}%"></div>
-                            </meter>
-                        </li>
-                        <li class="li_graph">
-                            <label class="label_score">0</label>
-                            <meter class="meter_score">
-                                <div class="div_score" style="width:${scoreList[0]*100}%"></div>
-                            </meter>
-                        </li>
+                    </c:forEach>
                     </ol>
                 </article>
             </section>
@@ -126,7 +98,7 @@
                     <!-- 사진, 이름 섹션 -->
                     <section class="section_profile">
                         <div class="div_img">
-	                            <img class="profile" src="./images/${list.review_img }" 
+	                            <img class="profile" src="./img/${list.review_img }" 
 							onError="this.onerror=null; this.src='img/profile0.jpg'">
 	                        </a>
 	                        
@@ -140,14 +112,14 @@
                             <div class="div_star">
                             <c:forEach var="i" begin="1" end="5">
                             <c:choose>
-            					<c:when test="${i <= list.score}">
+            					<c:when test="${i lt list.score}">
             					<div class="star">
                 					<i class="star_icon">
                 						<img class="star" src="./img/star.jpg" alt="별">
                 					</i>
                 				</div>
             					</c:when>
-            					<c:when test="${i-0.5 == list.score}">
+            					<c:when test="${i-0.5 eq list.score}">
 					                <i class="star">
 					                	<img class="star" src="./img/half.jpg" alt="반 별">
 					                </i>
@@ -225,9 +197,9 @@
 					</c:forEach>
                     </ul>
                     <div class="page_div_l">
-                    <c:if test="${endPage < Count/10 && endPage >= 1}">
-                    <a href="./ReviewList.rv?pageNum=${pageEnd }&store_no=${dto.store_no}" class="btn font_arr">
-                        <div>${pageEnd }</div>
+                    <c:if test="${endPage < pageSize && endPage >= 1}">
+                    <a href="./ReviewList.rv?pageNum=${pageSize }&store_no=${dto.store_no}" class="btn font_arr">
+                        <div>${pageSize }</div>
                     </a>
                     </c:if>
                     </div>
