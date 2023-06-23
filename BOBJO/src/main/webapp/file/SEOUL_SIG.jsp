@@ -6,6 +6,41 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+#divContainer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+  }
+
+  .districtTag {
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #a0a0a0;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .districtTag span {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  .districtTag span:hover {
+    color: red;
+  }
+
+  #btnSave {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #a0a0a0;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 #save-button {
     position: fixed;
     right: 10px;
@@ -225,7 +260,6 @@ SD.addEventListener('click', (e) => {
     }
 });*/
 
-<script type="text/javascript">
 const SD = document.querySelector('svg');
 
 var selectedDistricts = [];
@@ -263,7 +297,6 @@ saveButton.addEventListener("click", function() {
     window.parent.postMessage({ disVal: districts }, '*');
     closeMapSearch();
 });
-</script>
 
 
 
