@@ -8,15 +8,15 @@
 <style>
 #divContainer {
     position: fixed;
-    bottom: 0;
-    right: 0;
+    bottom: 10px;
+    right: 10px;
     display: flex;
     flex-direction: column-reverse;
-    align-items: flex-end;
+    align-items: flex-start;
   }
 
   .districtTag {
-    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 5px;
     background-color: #a0a0a0;
     color: white;
@@ -34,18 +34,13 @@
   }
 
   #btnSave {
-    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 5px 10px;
     background-color: #a0a0a0;
     color: white;
     border-radius: 5px;
     cursor: pointer;
   }
-#save-button {
-    position: fixed;
-    right: 10px;
-    bottom: 10px;
-}
 
 .OUTLINE {
     stroke-linejoin:round;
@@ -248,17 +243,6 @@
 
 <button id="save-button">저장하기</button>
 <script type="text/javascript">
-/*const SD = document.querySelector('svg');
-
-SD.addEventListener('click', (e) => {
-	var id = e.target.id.length == 7 ? "L" + e.target.id : e.target.id;
-    var district = document.getElementById(id);
-    var changeText = document.getElementById('map-district');
-    if(district != null) {
-    	const disVal = district.textContent;
-    	window.parent.postMessage({ disVal: disVal }, '*');
-    }
-});*/
 
 const SD = document.querySelector('svg');
 
@@ -295,7 +279,6 @@ var saveButton = document.getElementById("save-button");
 saveButton.addEventListener("click", function() {
     var districts = selectedDistricts.join(",");
     window.parent.postMessage({ disVal: districts }, '*');
-    closeMapSearch();
 });
 
 
